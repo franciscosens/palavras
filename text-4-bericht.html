@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 4: Ein Jahr bei der Firma Nordlicht – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 4: Ein Jahr bei der Firma Nordlicht</h1>
+  <p>Texto de leitura em nível A2/B1 (frases curtas, presente e Perfekt) com todos os termos-chave, seguido de perguntas de compreensão com correção automática e gabarito.</p>
+</header>
+<main>
+<nav><a href="vokabular-handel.html">← Zurück zur Übersicht</a><a href="glossar.html">📘 Glossar</a></nav>
+
+<section class="lesetext">
+  <h2>Ein Jahr bei der Firma Nordlicht</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; depois responda às perguntas abaixo.</p>
+
+  <p>Die Firma Nordlicht GmbH ist in Bremen. Sie baut Pumpen für die Industrie. Die Firma hat 120 Mitarbeiter und ein großes <mark>Lager</mark> am Hafen. Seit fünf Jahren hat Nordlicht einen Partner in Brasilien: die Firma Aquasul in Curitiba. Aquasul kauft die Pumpen und verkauft sie in Südamerika.</p>
+
+  <p>Im Januar haben die zwei Firmen einen neuen <mark>Vertrag</mark> unterschrieben. Es ist eine <mark>Handelsvereinbarung</mark> für drei Jahre. In dieser <mark>kommerziellen Vereinbarung</mark> stehen die Preise, die Lieferzeiten und die Zahlungsfrist von 30 Tagen. Der Chef von Nordlicht, Herr Brandt, sagt: „Der Vertrag ist gut für beide Seiten.“ Es gibt noch eine gute Nachricht: Das <mark>Handelsabkommen</mark> zwischen der EU und dem Mercosur ist jetzt in Kraft. Dieser <mark>Handelsvertrag</mark> zwischen den zwei Wirtschaftsräumen senkt die Zölle. Die Pumpen werden in Brasilien billiger.</p>
+
+  <p>Im Frühling hatte Nordlicht ein Problem: Zwei große Kunden haben spät bezahlt. Die <mark>Liquidität</mark> war drei Monate lang schlecht. Die Finanzchefin, Frau Neumann, hat mit der Bank gesprochen. Sie hat der Bank die <mark>Kapitalfluss</mark>rechnung gezeigt. Das ist der Bericht über den <mark>Cashflow</mark>, also über das Geld, das in die Firma kommt und aus der Firma geht. Im Sommer war der Cashflow wieder gut, weil die Kunden bezahlt haben.</p>
+
+  <p>Die Firma wächst. Deshalb hat die Personalabteilung im Mai mit der <mark>Rekrutierung</mark> angefangen. Das Ziel war die <mark>Einstellung</mark> von acht neuen Mitarbeitern für das Lager und die Produktion. Alle acht haben eine feste <mark>Anstellung</mark> bekommen, keine befristete. Die Löhne stehen im <mark>Tarifvertrag</mark>. Diesen Vertrag hat die Gewerkschaft mit den Firmen der Metallindustrie gemacht. Es gab in diesem Jahr auch eine <mark>Kündigung</mark>: Ein Mitarbeiter aus dem Büro hat gekündigt, weil er nach München gezogen ist. Als <mark>Ersatz</mark> hat die Firma schnell eine neue Kollegin gefunden.</p>
+
+  <p>Herr Özdemir ist der Chef vom Einkauf. Er ist für die <mark>Beschaffung</mark> von Stahl und Motoren verantwortlich. Im März hatte er ein Problem: Ein Lieferant hat schlechte Motoren geliefert. Nordlicht hat den Vertrag mit diesem Lieferanten gekündigt. Der <mark>Austausch</mark> des Lieferanten war nicht einfach. Aber die <mark>Ersetzung</mark> war nötig, sagt Herr Özdemir. Jetzt bekommt jede Lieferung eine <mark>Qualitätsprüfung</mark>. Ein Mitarbeiter kontrolliert die Motoren, und im Labor gibt es einen <mark>Qualitätstest</mark>. Die Ergebnisse werden digital gespeichert. Jedes Dokument bekommt ein <mark>digitales Zertifikat</mark>. So kann der Kunde in Brasilien sehen, dass das Dokument echt ist.</p>
+
+  <p>Am Ende des Jahres ist der <mark>Lagerbestand</mark> hoch. Im Lager stehen 400 Pumpen. Das ist zu viel, sagt Herr Brandt. Deshalb produziert die Firma im Dezember weniger. Im Januar kommt Frau Costa von Aquasul nach Bremen. Dann sprechen die zwei Firmen über das nächste Jahr.</p>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="vokabular-handel.html">← Zurück zur Übersicht</a><a href="uebungen.html">✏️ Weitere Übungen</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH und Aquasul existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Die Firma Nordlicht ist in Hamburg.", false, "Sie ist in Bremen."],
+  ["Nordlicht baut Pumpen.", true, ""],
+  ["Der Partner Aquasul ist in Curitiba.", true, ""],
+  ["Der neue Vertrag läuft ein Jahr.", false, "Drei Jahre."],
+  ["Die Zahlungsfrist ist 30 Tage.", true, ""],
+  ["Das Handelsabkommen zwischen der EU und dem Mercosur macht die Pumpen in Brasilien teurer.", false, "Es senkt die Zölle – die Pumpen werden billiger."],
+  ["Im Frühling war die Liquidität gut.", false, "Sie war drei Monate lang schlecht, weil zwei Kunden spät bezahlt haben."],
+  ["Die Firma hat acht neue Mitarbeiter eingestellt.", true, ""],
+  ["Die neuen Mitarbeiter haben eine befristete Anstellung.", false, "Eine feste Anstellung."],
+  ["Ein Mitarbeiter hat gekündigt, weil er nach München gezogen ist.", true, ""],
+  ["Der Lieferant hat gute Motoren geliefert.", false, "Schlechte Motoren – deshalb hat Nordlicht den Vertrag gekündigt."],
+  ["Am Ende des Jahres ist der Lagerbestand niedrig.", false, "Er ist hoch: 400 Pumpen."]
+];
+const MC = [
+  ["Wie viele Mitarbeiter hat Nordlicht?", ["120", "400", "30"], 0],
+  ["Was macht Aquasul?", ["Aquasul baut Pumpen in Bremen.", "Aquasul kauft die Pumpen und verkauft sie in Südamerika.", "Aquasul ist eine Bank."], 1],
+  ["Was steht in der kommerziellen Vereinbarung?", ["Die Löhne der Mitarbeiter.", "Die Preise, die Lieferzeiten und die Zahlungsfrist.", "Die Namen der Kunden."], 1],
+  ["Wer hat das Handelsabkommen gemacht?", ["Nordlicht und Aquasul.", "Die EU und der Mercosur.", "Die Gewerkschaft und die Metallindustrie."], 1],
+  ["Was ist die Kapitalflussrechnung?", ["Der Bericht über den Cashflow.", "Der Vertrag mit der Bank.", "Die Liste der Mitarbeiter."], 0],
+  ["Warum war der Cashflow im Sommer wieder gut?", ["Die Firma hat weniger produziert.", "Die Kunden haben bezahlt.", "Die Bank hat Geld gegeben."], 1],
+  ["Wer hat den Tarifvertrag gemacht?", ["Herr Brandt und Frau Neumann.", "Die Gewerkschaft und die Firmen der Metallindustrie.", "Nordlicht und Aquasul."], 1],
+  ["Was bedeutet „Kündigung“ im Abschnitt „Die Mitarbeiter“?", ["Die Firma hat den Vertrag mit einem Lieferanten beendet.", "Ein Mitarbeiter hat seine Stelle gekündigt.", "Die Firma hat das Lager geschlossen."], 1],
+  ["Was bedeutet „gekündigt“ im Abschnitt „Einkauf und Qualität“?", ["Ein Mitarbeiter ist gegangen.", "Nordlicht hat den Vertrag mit dem Lieferanten beendet.", "Der Lieferant hat mehr Motoren geschickt."], 1],
+  ["Wofür ist Herr Özdemir verantwortlich?", ["Für die Beschaffung von Stahl und Motoren.", "Für die Finanzen.", "Für die Rekrutierung."], 0],
+  ["Wozu dient das digitale Zertifikat?", ["Der Kunde kann sehen, dass das Dokument echt ist.", "Die Motoren werden billiger.", "Die Mitarbeiter bekommen mehr Lohn."], 0],
+  ["Warum produziert die Firma im Dezember weniger?", ["Die Liquidität ist schlecht.", "Der Lagerbestand ist zu hoch.", "Ein Lieferant hat gekündigt."], 1]
+];
+const GAP = [
+  ["Nordlicht und Aquasul haben eine ______ für drei Jahre.", "Handelsvereinbarung"],
+  ["Das ______ zwischen der EU und dem Mercosur senkt die Zölle.", "Handelsabkommen"],
+  ["Im Frühling war die ______ schlecht, weil Kunden spät bezahlt haben.", "Liquidität"],
+  ["Der ______ ist das Geld, das in die Firma kommt und aus der Firma geht.", "Cashflow"],
+  ["Die Löhne stehen im ______.", "Tarifvertrag"],
+  ["Das Ziel war die ______ von acht neuen Mitarbeitern.", "Einstellung"],
+  ["Ein Mitarbeiter hat gekündigt. Als ______ kam eine neue Kollegin.", "Ersatz"],
+  ["Herr Özdemir ist für die ______ von Stahl und Motoren verantwortlich.", "Beschaffung"],
+  ["Jede Lieferung bekommt eine ______.", "Qualitätsprüfung"],
+  ["Am Ende des Jahres ist der ______ hoch: 400 Pumpen.", "Lagerbestand"]
+];
+const OFFEN = [
+  ["Wo ist die Firma Nordlicht?", "In Bremen."],
+  ["Was baut die Firma?", "Pumpen für die Industrie."],
+  ["Wie lange läuft die Handelsvereinbarung?", "Drei Jahre."],
+  ["Was hat Frau Neumann der Bank gezeigt?", "Die Kapitalflussrechnung."],
+  ["Wie viele neue Mitarbeiter hat die Firma eingestellt?", "Acht."],
+  ["Warum hat der Mitarbeiter aus dem Büro gekündigt?", "Weil er nach München gezogen ist."],
+  ["Was war das Problem mit dem Lieferanten?", "Er hat schlechte Motoren geliefert."],
+  ["Wo gibt es den Qualitätstest?", "Im Labor."],
+  ["Wie viele Pumpen stehen im Lager?", "400 Pumpen."],
+  ["Wer kommt im Januar nach Bremen?", "Frau Costa von Aquasul."]
+];
+const ERKL = [
+  ["„Die Liquidität war drei Monate lang schlecht.“", "Durante três meses a empresa ficou com pouco dinheiro em caixa (problema de liquidez), porque clientes pagaram atrasado."],
+  ["„Sie hat der Bank die Kapitalflussrechnung gezeigt.“", "Ela mostrou ao banco a demonstração do fluxo de caixa – o relatório de quanto dinheiro entrou e saiu."],
+  ["„Die Löhne stehen im Tarifvertrag.“", "Os salários são definidos na convenção coletiva, negociada entre o sindicato e as empresas do setor metalúrgico."],
+  ["„Alle acht haben eine feste Anstellung bekommen, keine befristete.“", "Todos os oito foram contratados por tempo indeterminado, não com contrato temporário."],
+  ["„Nordlicht hat den Vertrag mit diesem Lieferanten gekündigt.“", "A Nordlicht rescindiu (cancelou) o contrato com esse fornecedor – aqui Kündigung não é demissão de pessoa."],
+  ["„Jedes Dokument bekommt ein digitales Zertifikat.“", "Cada documento recebe um certificado digital, que garante que ele é autêntico."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => g[1]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${q[1]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const ok = norm(document.getElementById("gin"+i).value)===norm(q[1]); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>

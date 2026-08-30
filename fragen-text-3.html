@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fragen zum Text 3: Besprechung mit dem Partner aus Brasilien</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+</style>
+<style>
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  textarea { font:inherit; width:100%; min-height:3.5rem; padding:.4rem .6rem; border:1px solid var(--line); border-radius:6px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .hint { font-family:system-ui,sans-serif; color:var(--muted); font-size:.85rem; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Fragen zum Text 3: Besprechung mit dem Partner aus Brasilien</h1>
+  <p>Perguntas de compreensão sobre o diálogo da reunião (nível A2/B1). Leia o Text 3 primeiro; depois responda aqui. As partes A, B e C têm correção automática; D e E têm gabarito.</p>
+</header>
+<main>
+<nav><a href="vokabular-handel.html">← Zurück zur Übersicht</a><a href="text-3-besprechung.html">📖 Text 3 öffnen</a></nav>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <p class="pt">Marque se a frase está certa (richtig) ou errada (falsch) segundo o diálogo.</p>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Wer sagt das?</h2>
+  <p class="pt">Quem diz cada frase na reunião?</p>
+  <div id="wer"></div>
+  <button onclick="pruefeWer()">Prüfen</button><span class="punkte" id="p-wer"></span>
+  <details><summary>Lösung</summary><ol id="l-wer"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie auf Deutsch</h2>
+  <p class="pt">Responda em alemão com frases curtas (uma frase basta). Compare depois com o modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Sua chefe brasileira pergunta: „O que ele disse?“</h2>
+  <p class="pt">Situação real de intérprete: a diretora brasileira não entendeu e pergunta a você. Responda em português, resumindo o que o alemão disse.</p>
+  <div id="dolm"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="vokabular-handel.html">← Zurück zur Übersicht</a><a href="uebungen.html">✏️ Weitere Übungen</a></nav>
+</main>
+<footer>Fragen zum fiktiven Übungsdialog „Besprechung mit dem Partner aus Brasilien“.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Die Besprechung findet in Hamburg statt.", true, "Herr Weber sagt: „herzlich willkommen in Hamburg“."],
+  ["Es gibt heute drei Themen.", false, "Es gibt vier Themen: Vertrag, Finanzen, Personal und Einkauf."],
+  ["Der alte Vertrag läuft im Dezember aus.", true, ""],
+  ["Der neue Vertrag hat eine Laufzeit von einem Jahr.", false, "Drei Jahre statt einem Jahr."],
+  ["Das Handelsabkommen zwischen der EU und dem Mercosur macht den Import teurer.", false, "Es senkt die Zölle – der Import wird billiger."],
+  ["Im Sommer gab es ein Problem mit der Liquidität.", true, "Einige Kunden haben zu spät bezahlt."],
+  ["Die Zahlungsfrist ist sechzig Tage.", false, "Dreißig Tage."],
+  ["Die Firma plant die Einstellung von fünf neuen Mitarbeitern.", true, ""],
+  ["Die neuen Mitarbeiter bekommen eine befristete Anstellung.", false, "Eine feste Anstellung."],
+  ["Dieses Jahr gab es viele Kündigungen.", false, "Nur eine – ein Mitarbeiter hat selbst gekündigt."],
+  ["Die Firma hat den Vertrag mit einem Lieferanten gekündigt.", true, "Wegen schlechter Qualität; die Kündigung wurde im März geschickt."],
+  ["Der Lagerbestand ist im Moment niedrig.", false, "Er ist hoch – das Lager ist fast voll."]
+];
+const MC = [
+  ["Warum ist die Besprechung wichtig für die brasilianische Firma?", ["Der alte Vertrag endet bald und es soll einen neuen geben.", "Die deutsche Firma will den Vertrag beenden.", "Frau Lima sucht einen neuen Job."], 0],
+  ["Was regelt das Handelsabkommen zwischen der EU und dem Mercosur?", ["Die Preise zwischen den zwei Firmen.", "Die Zölle zwischen den zwei Wirtschaftsräumen.", "Die Löhne der Mitarbeiter."], 1],
+  ["Wo werden die Preise zwischen den beiden Firmen geregelt?", ["Im Tarifvertrag.", "In der Kapitalflussrechnung.", "In der kommerziellen Vereinbarung."], 2],
+  ["Was ist die Kapitalflussrechnung?", ["Der Bericht über den Cashflow.", "Ein Vertrag mit der Bank.", "Die Liste der Lieferanten."], 0],
+  ["Warum hatte die Firma im Sommer ein Problem mit der Liquidität?", ["Das Lager war leer.", "Einige Kunden haben zu spät bezahlt.", "Die Löhne waren zu hoch."], 1],
+  ["Wo stehen die Löhne der Mitarbeiter?", ["Im Handelsvertrag.", "Im Tarifvertrag mit der Gewerkschaft.", "Im digitalen Zertifikat."], 1],
+  ["Was bedeutet „Kündigung“ im Gespräch mit Herrn Krause?", ["Ein Mitarbeiter hat gekündigt.", "Die Firma hat den Vertrag mit einem Lieferanten beendet.", "Die Firma hat das Lager geschlossen."], 1],
+  ["Wie kontrolliert die Firma jetzt die Qualität?", ["Nur der Lieferant kontrolliert.", "Jede Lieferung bekommt eine Qualitätsprüfung und einen Test im Labor.", "Es gibt keine Kontrolle mehr."], 1],
+  ["Wofür braucht die deutsche Firma ein digitales Zertifikat?", ["Für den Zoll.", "Für die Gewerkschaft.", "Für die Rekrutierung."], 0],
+  ["Warum bestellt die Firma bis Oktober weniger?", ["Der Cashflow ist schlecht.", "Das Lager ist fast voll.", "Der Lieferant ist zu teuer."], 1],
+  ["Was schickt Frau Schulz bis Freitag?", ["Die Liste der Lieferanten.", "Die Kapitalflussrechnung und den Vertragsentwurf.", "Das digitale Zertifikat."], 1],
+  ["Wann ist der nächste Termin?", ["Am 15. Oktober um zehn Uhr, per Videoanruf.", "Im Dezember in São Paulo.", "Am Freitag in Hamburg."], 0]
+];
+const PERSONEN = ["Herr Weber", "Frau Schulz", "Herr Krause", "Ana Lima", "Silvana"];
+const WER = [
+  ["„Sagen Sie Bescheid, wenn wir zu schnell sind.“", 0],
+  ["„Bitte machen Sie nach jedem Satz eine kleine Pause.“", 4],
+  ["„Einige Kunden haben zu spät bezahlt.“", 1],
+  ["„Vou levar a proposta para a nossa diretoria.“", 3],
+  ["„Könnten Sie das bitte wiederholen?“", 4],
+  ["„Die Löhne stehen im Tarifvertrag.“", 0],
+  ["„Die Beschaffung von Rohstoffen war schwierig.“", 2],
+  ["„Was meinen Sie genau mit ‚beendet‘?“", 4],
+  ["„Nós assinamos tudo com certificado digital.“", 3],
+  ["„Das Lager ist fast voll.“", 2]
+];
+const OFFEN = [
+  ["Welche vier Themen hat die Besprechung?", "Vertrag, Finanzen, Personal und Einkauf."],
+  ["Wie lange läuft der neue Vertrag?", "Drei Jahre (statt einem Jahr)."],
+  ["Was macht das Handelsabkommen mit den Zöllen?", "Es senkt die Zölle. Der Import wird billiger."],
+  ["Was schickt Frau Schulz morgen?", "Die Kapitalflussrechnung (den Bericht über den Cashflow)."],
+  ["Wo braucht die Firma mehr Leute?", "Im Lager."],
+  ["Welche Art von Anstellung bekommen die neuen Mitarbeiter?", "Eine feste Anstellung (nicht befristet)."],
+  ["Warum hat die Firma den Vertrag mit dem Lieferanten gekündigt?", "Der Lieferant hat schlechte Qualität geliefert."],
+  ["Wann war der Austausch des alten Systems?", "Im Mai."],
+  ["Wie ist der Lagerbestand im Moment?", "Hoch – das Lager ist fast voll."],
+  ["Was macht Frau Lima in zwei Wochen?", "Sie antwortet (auf das Angebot)."]
+];
+const DOLM = [
+  ["Herr Weber: „Die Laufzeit ist länger: drei Jahre statt einem Jahr.“", "Ele disse que o prazo do contrato é mais longo: três anos em vez de um."],
+  ["Herr Weber: „Dieser Handelsvertrag senkt die Zölle. Der Import wird billiger.“", "Ele disse que o tratado entre a UE e o Mercosul reduz as tarifas e que a importação vai ficar mais barata."],
+  ["Frau Schulz: „Aber im Sommer hatten wir ein Problem mit der Liquidität. Einige Kunden haben zu spät bezahlt.“", "Ela disse que no verão tiveram um problema de liquidez porque alguns clientes pagaram atrasado."],
+  ["Frau Schulz: „Die Kapitalflussrechnung – das ist der Bericht über den Cashflow.“", "Ela explicou que a Kapitalflussrechnung é o relatório do fluxo de caixa (a DFC)."],
+  ["Herr Weber: „Die Löhne stehen im Tarifvertrag. Den haben wir mit der Gewerkschaft.“", "Ele disse que os salários estão definidos na convenção coletiva, negociada com o sindicato."],
+  ["Herr Weber: „Nur eine Kündigung. Ein Mitarbeiter hat selbst gekündigt.“", "Ele disse que houve só uma saída: um funcionário pediu demissão por conta própria (não foi demitido)."],
+  ["Herr Krause: „Ja, genau. Wir haben die Kündigung im März geschickt.“", "Ele confirmou que rescindiram o contrato com o fornecedor e enviaram a rescisão em março."],
+  ["Herr Krause: „Der Lagerbestand ist im Moment hoch. Das Lager ist fast voll. Deshalb bestellen wir bis Oktober weniger.“", "Ele disse que o estoque está alto, o armazém está quase cheio e por isso vão pedir menos até outubro."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let score = {rf:null, mc:null, wer:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  document.getElementById("wer").innerHTML = WER.map((q,i) => `<div class="aufgabe" id="wer${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <select id="wsel${i}"><option value="">– wählen –</option>${PERSONEN.map((p,j) => `<option value="${j}">${p}</option>`).join("")}</select></div>`).join("");
+  document.getElementById("l-wer").innerHTML = WER.map(q => `<li>${PERSONEN[q[1]]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort auf Deutsch …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("dolm").innerHTML = DOLM.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <p class="hint">A diretora pergunta: „O que ele/ela disse?“</p>
+    <textarea placeholder="Resposta em português …"></textarea><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), !!ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), !!ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeWer() {
+  let p=0; WER.forEach((q,i) => { const v=document.getElementById("wsel"+i).value; const ok = v!=="" && +v===q[1]; if(ok)p++; mark(document.getElementById("wer"+i), ok); });
+  score.wer=p; document.getElementById("p-wer").textContent = `${p} / ${WER.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null);
+  if (!done.length) return;
+  const sum = done.reduce((a,b)=>a+b,0);
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${sum} / ${RF.length+MC.length+WER.length}`;
+}
+render();
+</script>
+</body>
+</html>
