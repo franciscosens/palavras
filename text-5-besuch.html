@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 5: Frau Costa in Bremen – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:nowrap; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+  @media (max-width:640px) { td.de { white-space:normal; } }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 5: Frau Costa in Bremen</h1>
+  <p>Continuação do Text 4, em nível A2/B1 (frases curtas, presente e Perfekt): observar o trabalho, resolver problemas, folgas, empilhar, trabalho sem registro, apólice de seguro, resumo, pedido em reais, cancelamento de proposta, confiantes, monitorar clientes, mineração, solução, concorrentes e participação na feira.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-4-bericht.html">📄 Text 4</a><a href="uebungen.html">✏️ Übungen 1</a><a href="uebungen-2.html">✏️ Übungen 2</a><a href="gabarito-text-5.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Frau Costa in Bremen: Das Treffen im Januar</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Im Januar ist Frau Costa von der Firma Aquasul nach Bremen gekommen. Sie bleibt drei Tage bei Nordlicht. Am ersten Tag möchte sie <mark>die Arbeit beobachten</mark>. Herr Brandt zeigt ihr die Produktion und das Lager. Im Lager <mark>stapeln</mark> zwei Mitarbeiter die Kisten mit den Pumpen auf Paletten. Ein Gabelstapler fährt die Paletten zum Lkw. „Wir stapeln maximal drei Paletten“, sagt der Lagerleiter. „Das ist sicher.“</p>
+
+  <p>Frau Costa fragt: „Arbeiten Ihre Leute auch am Wochenende?“ Herr Brandt antwortet: „Manchmal, wenn ein Auftrag dringend ist. Danach bekommen die Mitarbeiter <mark>freie Tage</mark>.“ Frau Costa erzählt von Brasilien: „Bei uns hat ein <mark>Wettbewerber</mark> Probleme mit der Polizei. Seine Leute arbeiten ohne Anmeldung, das ist <mark>Schwarzarbeit</mark>. Bei Aquasul sind alle Mitarbeiter angemeldet und haben einen Arbeitsvertrag.“</p>
+
+  <p>Am zweiten Tag gibt es die Besprechung. Herr Brandt beginnt mit einer <mark>Zusammenfassung</mark> vom letzten Jahr. Er zeigt eine <mark>Übersicht</mark> mit allen Zahlen. Dann hat Frau Costa eine gute Nachricht: „Wir haben einen <mark>Auftrag über</mark> zwei Millionen <mark>Reais</mark> bekommen!“ Der Kunde ist eine Firma aus dem <mark>Bergbau</mark> in Minas Gerais. Sie braucht 40 Pumpen für das Wasser in der Mine.</p>
+
+  <p>Es gibt aber ein Problem: Das Wasser in der Mine hat viel Sand. Die normalen Pumpen gehen dann schnell kaputt. Der Ingenieur, Herr Lang, sagt: „Wir müssen dieses Problem <mark>lösen</mark>.“ Nach zwei Tagen hat er eine <mark>Lösung</mark>: ein Filter vor der Pumpe. Der Kunde ist zufrieden. Er will aber auch die <mark>Versicherungspolice</mark> sehen. Für Projekte im Bergbau braucht Nordlicht eine Umweltversicherung. Frau Neumann schickt den <mark>Versicherungsschein</mark> per E-Mail nach Brasilien.</p>
+
+  <p>Eine schlechte Nachricht gibt es auch. Ein Kunde aus São Paulo hat sein Projekt gestoppt. Deshalb hat er unser Angebot <mark>storniert</mark>. „Die <mark>Stornierung</mark> ist schade“, sagt Frau Costa, „aber wir haben andere Kunden. Wir <mark>beobachten</mark> unsere Kunden und die <mark>Konkurrenz</mark> jeden Monat. So <mark>behalten</mark> wir alles <mark>im Blick</mark>.“ Zwei <mark>Mitbewerber</mark> aus China und Italien sind billiger als Nordlicht. Aber ihre Pumpen haben keinen Filter.</p>
+
+  <p>Am dritten Tag sprechen alle über die Zukunft. Im September ist die große Bergbau-Messe in Belo Horizonte. Die <mark>Messeteilnahme</mark> kostet 30.000 Euro. Nordlicht und Aquasul zahlen zusammen. Am Ende sagt Herr Brandt: „Wir sind <mark>zuversichtlich</mark>. Das wird ein gutes Jahr.“ Frau Costa fliegt am Abend zurück nach Curitiba.</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 15 termos com as opções em alemão e uma nota de uso para a intérprete. Repare nas armadilhas: Police ≠ Polizei, zuversichtlich ≠ selbstbewusst, „Auftrag <b>über</b>“ e não „von“.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>observar o trabalho</td><td class="de">die Arbeit beobachten</td><td class="hinweis">beobachten = olhar, acompanhar. Se for fiscalizar: beaufsichtigen. „überwachen“ soa a vigilância.</td></tr>
+      <tr><td>resolver problemas</td><td class="de">Probleme lösen</td><td class="hinweis">„Wir haben das Problem gelöst.“ Substantivo: die Lösung.</td></tr>
+      <tr><td>folgas</td><td class="de">freie Tage (der freie Tag)</td><td class="hinweis">Folga por hora extra: der Freizeitausgleich / Ausgleichstag. Férias = der Urlaub. Feriado = der Feiertag.</td></tr>
+      <tr><td>empilhar</td><td class="de">stapeln (der Stapel)</td><td class="hinweis">Empilhadeira = der Gabelstapler (ou só „Stapler“). Cuidado: stempeln = carimbar.</td></tr>
+      <tr><td>trabalhar sem registro</td><td class="de">schwarzarbeiten / die Schwarzarbeit; ohne Anmeldung (nicht angemeldet) arbeiten</td><td class="hinweis">Schwarzarbeit é ilegal e pejorativo; neutro: „nicht angemeldet“. „ohne festen Vertrag“ = sem contrato fixo (temporário, freelance), é outra coisa. „ohne Einstellung“ não se usa.</td></tr>
+      <tr><td>apólice de seguro / ambiental</td><td class="de">die Versicherungspolice = der Versicherungsschein; die Umweltversicherung</td><td class="hinweis">Os dois são o documento da apólice. O seguro ambiental em alemão chama-se die Umwelthaftpflichtversicherung. Police (apólice) ≠ Polizei (polícia)!</td></tr>
+      <tr><td>resumo</td><td class="de">die Zusammenfassung / die Übersicht</td><td class="hinweis">Zusammenfassung = resumo (texto, fala). Übersicht = visão geral, quadro. Verbo: kurz zusammenfassen.</td></tr>
+      <tr><td>recebemos um pedido de R$ …</td><td class="de">Wir haben einen Auftrag <b>über</b> … Reais bekommen / erhalten.</td><td class="hinweis">Auftrag ÜBER + valor (não „von“). Auftrag = pedido, encomenda; Bestellung = pedido de mercadoria. Real: der Real, Plural Reais (diz-se „Reais“ também em alemão).</td></tr>
+      <tr><td>cancelamento de proposta</td><td class="de">die Stornierung des Angebots; das Angebot stornieren / zurückziehen / ablehnen</td><td class="hinweis">zurückziehen = quem fez a proposta retira; ablehnen = cliente recusa; die Absage = resposta negativa. Kündigung só para contrato e emprego: „Angebotskündigung“ não existe. Cancelamento do pedido = die Auftragsstornierung.</td></tr>
+      <tr><td>confiantes</td><td class="de">zuversichtlich</td><td class="hinweis">„Wir sind zuversichtlich, dass …“ = confiantes/otimistas com o futuro. selbstbewusst = autoconfiante (personalidade).</td></tr>
+      <tr><td>monitorando os clientes</td><td class="de">die Kunden beobachten / im Blick behalten; Kunden betreuen; nachfassen</td><td class="hinweis">„überwachen“ e „verfolgen“ com pessoas soam a vigilância e perseguição. verfolgen serve para coisas: Aufträge / Lieferungen verfolgen (rastrear). betreuen = atender; nachfassen = fazer follow-up.</td></tr>
+      <tr><td>mineração</td><td class="de">der Bergbau</td><td class="hinweis">Mina = die Mine / das Bergwerk. Mineradora = das Bergbauunternehmen. Minério = das Erz.</td></tr>
+      <tr><td>solução</td><td class="de">die Lösung (Plural: die Lösungen)</td><td class="hinweis">„Wir haben eine Lösung gefunden.“ Também solução química.</td></tr>
+      <tr><td>concorrentes</td><td class="de">der Wettbewerber / der Mitbewerber; der Konkurrent; die Konkurrenz</td><td class="hinweis">Em reunião, os alemães preferem Mitbewerber ou Wettbewerber (neutros). Konkurrenz = a concorrência (coletivo), mais direto.</td></tr>
+      <tr><td>participação na feira</td><td class="de">die Messeteilnahme; an der Messe teilnehmen</td><td class="hinweis">die Messe = feira de negócios; der Messestand = estande; der Messebesucher = visitante. Feira livre = der Markt.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-2.html">✏️ Übungen 2</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH und Aquasul existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Frau Costa bleibt eine Woche in Bremen.", false, "Drei Tage."],
+  ["Am ersten Tag beobachtet sie die Arbeit in der Produktion und im Lager.", true, ""],
+  ["Im Lager stapeln die Mitarbeiter maximal fünf Paletten.", false, "Maximal drei Paletten."],
+  ["Nach der Arbeit am Wochenende bekommen die Mitarbeiter freie Tage.", true, ""],
+  ["Bei Aquasul arbeiten die Leute ohne Anmeldung.", false, "Bei einem Wettbewerber. Bei Aquasul sind alle angemeldet."],
+  ["Herr Brandt beginnt die Besprechung mit einer Zusammenfassung.", true, ""],
+  ["Der neue Auftrag kommt von einer Firma aus dem Bergbau.", true, ""],
+  ["Der Kunde braucht 14 Pumpen.", false, "40 Pumpen."],
+  ["Herr Lang findet keine Lösung für das Problem mit dem Sand.", false, "Er findet eine Lösung: ein Filter vor der Pumpe."],
+  ["Frau Neumann schickt den Versicherungsschein per Post.", false, "Per E-Mail."],
+  ["Der Kunde aus São Paulo hat das Angebot storniert, weil er sein Projekt gestoppt hat.", true, ""],
+  ["Die Messeteilnahme kostet 30.000 Reais.", false, "30.000 Euro."]
+];
+const MC = [
+  ["Was möchte Frau Costa am ersten Tag machen?", ["Einen Vertrag unterschreiben.", "Die Arbeit beobachten.", "Die Messe besuchen."], 1],
+  ["Was macht der Gabelstapler?", ["Er fährt die Paletten zum Lkw.", "Er kontrolliert die Pumpen.", "Er verkauft die Kisten."], 0],
+  ["Wann bekommen die Mitarbeiter freie Tage?", ["Wenn die Messe ist.", "Wenn der Chef Geburtstag hat.", "Wenn sie am Wochenende gearbeitet haben."], 2],
+  ["Was ist Schwarzarbeit?", ["Arbeit in der Nacht.", "Arbeit ohne Anmeldung.", "Arbeit im Bergbau."], 1],
+  ["Wie hoch ist der neue Auftrag?", ["30.000 Euro.", "40.000 Reais.", "Zwei Millionen Reais."], 2],
+  ["Warum gehen die normalen Pumpen in der Mine kaputt?", ["Das Wasser hat viel Sand.", "Es ist zu kalt.", "Der Strom fällt aus."], 0],
+  ["Was ist die Lösung von Herrn Lang?", ["Eine größere Pumpe.", "Ein Filter vor der Pumpe.", "Eine neue Versicherung."], 1],
+  ["Was will der Kunde aus dem Bergbau sehen?", ["Den Tarifvertrag.", "Den Lagerbestand.", "Die Versicherungspolice."], 2],
+  ["Warum sind die Mitbewerber aus China und Italien ein Problem?", ["Sie sind billiger.", "Sie haben bessere Pumpen.", "Sie sind in Bremen."], 0],
+  ["Was bedeutet „zuversichtlich“?", ["müde", "positiv für die Zukunft, optimistisch", "unsicher"], 1]
+];
+const GAP = [
+  ["Herr Brandt beginnt mit einer ______ vom letzten Jahr.", "Zusammenfassung"],
+  ["Im Lager ______ zwei Mitarbeiter die Kisten auf Paletten.", "stapeln"],
+  ["Nach der Arbeit am Wochenende bekommen die Mitarbeiter ______.", "freie Tage"],
+  ["Arbeit ohne Anmeldung ist ______.", "Schwarzarbeit"],
+  ["Aquasul hat einen ______ über zwei Millionen Reais bekommen.", "Auftrag"],
+  ["Der Kunde ist eine Firma aus dem ______.", "Bergbau"],
+  ["Herr Lang hat eine ______: ein Filter vor der Pumpe.", "Lösung"],
+  ["Frau Neumann schickt den ______ per E-Mail.", "Versicherungsschein"],
+  ["Zwei ______ aus China und Italien sind billiger.", "Mitbewerber"],
+  ["Die ______ in Belo Horizonte kostet 30.000 Euro.", "Messeteilnahme"]
+];
+const OFFEN = [
+  ["Wie lange bleibt Frau Costa in Bremen?", "Drei Tage."],
+  ["Was fährt die Paletten zum Lkw?", "Ein Gabelstapler."],
+  ["Wie viele Paletten stapeln die Mitarbeiter maximal?", "Drei."],
+  ["Wer hat Probleme mit der Polizei?", "Ein Wettbewerber von Aquasul in Brasilien."],
+  ["Woher kommt der neue Kunde?", "Aus Minas Gerais, aus dem Bergbau."],
+  ["Wofür braucht die Mine die Pumpen?", "Für das Wasser in der Mine."],
+  ["Wer hat die Lösung gefunden?", "Herr Lang, der Ingenieur."],
+  ["Warum hat der Kunde aus São Paulo das Angebot storniert?", "Weil er sein Projekt gestoppt hat."],
+  ["Wo ist die Bergbau-Messe?", "In Belo Horizonte."],
+  ["Wer zahlt die Messeteilnahme?", "Nordlicht und Aquasul zusammen."]
+];
+const ERKL = [
+  ["„Am ersten Tag möchte sie die Arbeit beobachten.“", "No primeiro dia ela quer observar (acompanhar) o trabalho na fábrica e no depósito – não é fiscalizar."],
+  ["„Danach bekommen die Mitarbeiter freie Tage.“", "Depois disso os funcionários ganham folgas, dias livres para compensar o trabalho no fim de semana."],
+  ["„Seine Leute arbeiten ohne Anmeldung, das ist Schwarzarbeit.“", "Os funcionários dele trabalham sem registro; isso é trabalho informal, ilegal."],
+  ["„Wir haben einen Auftrag über zwei Millionen Reais bekommen.“", "Recebemos um pedido de dois milhões de reais."],
+  ["„Frau Neumann schickt den Versicherungsschein per E-Mail.“", "A Sra. Neumann envia a apólice de seguro por e-mail. Versicherungsschein e Versicherungspolice são a mesma coisa."],
+  ["„Wir sind zuversichtlich.“", "Estamos confiantes, otimistas com o próximo ano."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => g[1]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${q[1]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const ok = norm(document.getElementById("gin"+i).value)===norm(q[1]); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wirtschaftsdeutsch – Material de estudo</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  footer { text-align:center; font-family:system-ui,sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+</style>
+<style>
+  details.lektion { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:0; margin-top:1.25rem; }
+  details.lektion[open] { padding-bottom:1.5rem; }
+  .lektion-kopf { display:flex; align-items:baseline; gap:.75rem; flex-wrap:wrap; cursor:pointer; list-style:none; padding:1.1rem 1.5rem; user-select:none; }
+  .lektion-kopf::-webkit-details-marker { display:none; }
+  .lektion-kopf:hover h2 { text-decoration:underline; }
+  details.lektion[open] > .lektion-kopf { border-bottom:2px solid var(--accent); margin:0 1.5rem 1rem; padding:1.1rem 0 .5rem; }
+  .lektion-kopf h2 { margin:0; font-size:1.35rem; font-weight:normal; color:var(--accent); }
+  .lektion-kopf .thema { font-family:system-ui,sans-serif; font-size:.9rem; color:var(--muted); }
+  .lektion-kopf .pfeil { margin-left:auto; color:var(--accent); font-family:system-ui,sans-serif; font-size:1.1rem; transition:transform .15s; }
+  details.lektion[open] > .lektion-kopf .pfeil { transform:rotate(90deg); }
+  details.lektion > .karten { margin:0 1.5rem; }
+  .karten { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; }
+  .karte { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1.5rem; display:flex; flex-direction:column; }
+  .karte .emoji { font-size:1.8rem; }
+  .karte h3 { margin:.5rem 0 .4rem; color:var(--ink); font-size:1.15rem; font-weight:normal; }
+  .karte h3 a { color:var(--accent); text-decoration:none; }
+  .karte h3 a:hover { text-decoration:underline; }
+  .karte p { margin:0 0 1rem; font-family:system-ui,sans-serif; font-size:.92rem; color:var(--muted); line-height:1.5; }
+  .karte .links { margin-top:auto; display:flex; flex-wrap:wrap; gap:.5rem; font-family:system-ui,sans-serif; font-size:.9rem; }
+  .karte .links a { border-radius:999px; padding:.35rem .9rem; text-decoration:none; border:1px solid var(--accent); }
+  .karte .links a.haupt { background:var(--accent); color:#fff; }
+  .karte .links a.haupt:hover { background:#9a3625; }
+  .karte .links a.gab { color:var(--accent); background:var(--card); }
+  .karte .links a.gab:hover { background:var(--bg); }
+  .dica { font-family:system-ui,sans-serif; background:var(--card); border-left:3px solid var(--accent); padding:.9rem 1.1rem; border-radius:0 8px 8px 0; margin-top:2rem; font-size:.92rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Wirtschaftsdeutsch für Besprechungen</h1>
+  <p>Material de estudo (nível A2/B1): vocabulário de reuniões de empresa em alemão — contratos, finanças, pessoal, compras, qualidade, estoque, pedidos, seguros, concorrência e feiras.</p>
+</header>
+<main>
+  <details class="lektion">
+    <summary class="lektion-kopf"><h2>Lektion 1 · Text 4</h2><span class="thema">contratos, finanças, RH, compras, qualidade, estoque</span><span class="pfeil" aria-hidden="true">▸</span></summary>
+    <div class="karten">
+      <div class="karte">
+        <div class="emoji">📄</div>
+        <h3><a href="text-4-bericht.html">Text 4: Ein Jahr bei der Firma Nordlicht</a></h3>
+        <p>Texto de leitura com os 22 termos-chave destacados, seguido de perguntas de compreensão em abas (verdadeiro/falso, múltipla escolha, lacunas, respostas curtas) com correção automática.</p>
+        <div class="links"><a class="haupt" href="text-4-bericht.html">Ler o texto</a><a class="gab" href="gabarito-text-4.html">🖨️ Gabarito</a></div>
+      </div>
+      <div class="karte">
+        <div class="emoji">✏️</div>
+        <h3><a href="uebungen.html">Übungen 1</a></h3>
+        <p>Exercícios interativos sobre o vocabulário do Text 4: artigos e traduções, lacunas, escolha da palavra certa na interpretação, tradução DE↔PT e reconhecimento dos termos.</p>
+        <div class="links"><a class="haupt" href="uebungen.html">Fazer os exercícios</a><a class="gab" href="gabarito-uebungen-1.html">🖨️ Gabarito</a></div>
+      </div>
+    </div>
+  </details>
+
+  <details class="lektion">
+    <summary class="lektion-kopf"><h2>Lektion 2 · Text 5</h2><span class="thema">visita à fábrica, pedidos, seguros, concorrência, feira</span><span class="pfeil" aria-hidden="true">▸</span></summary>
+    <div class="karten">
+      <div class="karte">
+        <div class="emoji">📄</div>
+        <h3><a href="text-5-besuch.html">Text 5: Frau Costa in Bremen</a></h3>
+        <p>Continuação da história com 15 termos novos: observar o trabalho, resolver problemas, folgas, empilhar, trabalho sem registro, apólice de seguro, resumo, pedido em reais, cancelamento de proposta, confiantes, monitorar clientes, mineração, concorrentes, feira. Com tabela de notas de uso e perguntas.</p>
+        <div class="links"><a class="haupt" href="text-5-besuch.html">Ler o texto</a><a class="gab" href="gabarito-text-5.html">🖨️ Gabarito</a></div>
+      </div>
+      <div class="karte">
+        <div class="emoji">✏️</div>
+        <h3><a href="uebungen-2.html">Übungen 2</a></h3>
+        <p>Exercícios interativos sobre o vocabulário do Text 5, no mesmo formato das Übungen 1: artigos, lacunas, decisão da intérprete, tradução DE↔PT e reconhecimento auditivo.</p>
+        <div class="links"><a class="haupt" href="uebungen-2.html">Fazer os exercícios</a><a class="gab" href="gabarito-uebungen-2.html">🖨️ Gabarito</a></div>
+      </div>
+    </div>
+  </details>
+
+  <div class="dica"><strong>Sugestão de estudo:</strong> clique no título de uma lição para abrir o material. Em cada lição, leia o texto e responda às perguntas na própria página, depois faça as Übungen. Os gabaritos (para imprimir em A4) são para a correção em aula.</div>
+</main>
+<footer>Material didático fictício – Nordlicht GmbH e Aquasul não existem.</footer>
+</body>
+</html>

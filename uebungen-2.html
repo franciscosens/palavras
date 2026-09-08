@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Übungen: Wirtschaftsdeutsch für Besprechungen</title>
+<title>Übungen 2: Besuch, Aufträge, Messe (Wirtschaftsdeutsch A2/B1)</title>
 <style>
   :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
   * { box-sizing:border-box; }
@@ -87,15 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
 </head>
 <body>
 <header>
-  <h1>Übungen: Wirtschaftsdeutsch für Besprechungen</h1>
-  <p>Exercícios interativos (A2/B1) para interpretar reuniões entre alemães e brasileiros – vocabulário de comércio, finanças, RH, compras e qualidade.</p>
+  <h1>Übungen 2: Besuch, Aufträge, Messe</h1>
+  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 5 – observar o trabalho, resolver problemas, folgas, empilhar, trabalho sem registro, apólice, resumo, pedido em reais, cancelamento de proposta, confiantes, monitorar clientes, mineração, concorrentes e feira.</p>
 </header>
 <main>
-<nav><a href="index.html">🏠 Startseite</a><a href="text-4-bericht.html">📄 Text 4</a><a href="uebungen-2.html">✏️ Übungen 2</a><a href="gabarito-uebungen-1.html">🖨️ Gabarito</a></nav>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-5-besuch.html">📄 Text 5</a><a href="uebungen.html">✏️ Übungen 1</a><a href="gabarito-uebungen-2.html">🖨️ Gabarito</a></nav>
 
 <section id="uebung1">
   <h2>1. Zuordnung: Artikel + Bedeutung</h2>
-  <p class="pt">Para cada termo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Para termos com adjetivo (z.&nbsp;B. „digitales Zertifikat“) escolha o artigo do substantivo. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Para „freier Tag“ escolha o artigo do substantivo (Tag). Cada item só conta ponto se artigo e tradução estiverem certos.</p>
   <table>
     <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
     <tbody id="e1-body"></tbody>
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <section id="uebung2">
   <h2>2. Lückentext</h2>
-  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
+  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). Verbos e adjetivos também entram. A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
   <div class="wortkasten" id="e2-kasten"></div>
   <div id="e2-body"></div>
   <button type="button" id="e2-btn">Prüfen</button><span class="ergebnis" id="e2-erg"></span>
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <section id="uebung3">
   <h2>3. Welches Wort passt? (Dolmetscher-Entscheidung)</h2>
-  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual palavra alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
+  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual formulação alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
   <div id="e3-body"></div>
   <button type="button" id="e3-btn">Prüfen</button><span class="ergebnis" id="e3-erg"></span>
   <details><summary>Lösung</summary><ol id="e3-loesung"></ol></details>
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <p id="gesamt">Gesamt: – / 54</p>
 </section>
 </main>
-<footer>Übungen zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
+<footer>Übungen 2 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
 
 <script>
 (function () {
@@ -158,101 +158,101 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Daten ---------- */
   var TERMS = [
-    { t: "Handelsvereinbarung", a: "die", p: "acordo comercial (entre parceiros de negócio)" },
-    { t: "Handelsabkommen", a: "das", p: "acordo/tratado comercial (entre países ou blocos)" },
-    { t: "kommerzielle Vereinbarung", a: "die", l: "die kommerzielle Vereinbarung", p: "acordo de natureza comercial (formulação formal)" },
-    { t: "Vertrag", a: "der", p: "contrato" },
-    { t: "Handelsvertrag", a: "der", p: "tratado de comércio (entre Estados)" },
-    { t: "Cashflow", a: "der", p: "fluxo de caixa" },
-    { t: "Liquidität", a: "die", p: "liquidez" },
-    { t: "Kapitalfluss", a: "der", p: "fluxo de capital (quase só em „Kapitalflussrechnung“ = DFC)" },
-    { t: "Kündigung", a: "die", p: "demissão / rescisão de contrato" },
-    { t: "Tarifvertrag", a: "der", p: "convenção coletiva (sindicato + setor)" },
-    { t: "Einstellung", a: "die", p: "contratação (também: atitude, ajuste)" },
-    { t: "Anstellung", a: "die", p: "vínculo empregatício / emprego" },
-    { t: "Rekrutierung", a: "die", p: "recrutamento" },
-    { t: "Beschaffung", a: "die", p: "compras / suprimentos" },
-    { t: "Ersatz", a: "der", p: "reposição / substituição (Ersatzteil)" },
-    { t: "Austausch", a: "der", p: "troca / intercâmbio (também de ideias)" },
-    { t: "Ersetzung", a: "die", p: "substituição (formal, raro)" },
-    { t: "digitales Zertifikat", a: "das", l: "das digitale Zertifikat", p: "certificado digital" },
-    { t: "Qualitätstest", a: "der", p: "teste de qualidade" },
-    { t: "Qualitätsprüfung", a: "die", p: "inspeção / controle de qualidade (o termo mais comum)" },
-    { t: "Lager", a: "das", p: "depósito / armazém" },
-    { t: "Lagerbestand", a: "der", p: "estoque" }
+    { t: "Lösung", a: "die", p: "solução" },
+    { t: "freier Tag", a: "der", l: "der freie Tag", p: "folga / dia livre" },
+    { t: "Stapel", a: "der", p: "pilha (de caixas, papéis)" },
+    { t: "Gabelstapler", a: "der", p: "empilhadeira" },
+    { t: "Schwarzarbeit", a: "die", p: "trabalho sem registro (ilegal)" },
+    { t: "Anmeldung", a: "die", p: "registro / inscrição (do funcionário)" },
+    { t: "Versicherungspolice", a: "die", p: "apólice de seguro (documento)" },
+    { t: "Versicherungsschein", a: "der", p: "apólice de seguro (mesmo documento, outro nome)" },
+    { t: "Umweltversicherung", a: "die", p: "seguro ambiental" },
+    { t: "Zusammenfassung", a: "die", p: "resumo" },
+    { t: "Übersicht", a: "die", p: "visão geral / quadro-resumo" },
+    { t: "Auftrag", a: "der", p: "pedido / encomenda (de serviço ou fornecimento)" },
+    { t: "Bestellung", a: "die", p: "pedido de mercadoria" },
+    { t: "Angebot", a: "das", p: "proposta / orçamento / oferta" },
+    { t: "Stornierung", a: "die", p: "cancelamento (de proposta ou pedido)" },
+    { t: "Absage", a: "die", p: "resposta negativa / recusa" },
+    { t: "Bergbau", a: "der", p: "mineração" },
+    { t: "Bergwerk", a: "das", p: "mina" },
+    { t: "Wettbewerber", a: "der", p: "concorrente (neutro)" },
+    { t: "Konkurrenz", a: "die", p: "concorrência (coletivo)" },
+    { t: "Messeteilnahme", a: "die", p: "participação na feira" },
+    { t: "Messestand", a: "der", p: "estande na feira" }
   ];
 
   var GAPS = [
-    { s: "Wie hoch ist der ___ im Moment?", h: "estoque", a: "Lagerbestand" },
-    { s: "Die Ware liegt noch im ___ in Hamburg.", h: "depósito", a: "Lager" },
-    { s: "Unser ___ ist im dritten Quartal positiv.", h: "fluxo de caixa", a: "Cashflow" },
-    { s: "Die ___ der Firma ist zurzeit gut.", h: "liquidez", a: "Liquidität" },
-    { s: "Die EU und der Mercosur haben ein ___ unterzeichnet.", h: "acordo comercial entre blocos", a: "Handelsabkommen" },
-    { s: "Wir haben mit dem Lieferanten einen neuen ___ geschlossen.", h: "contrato", a: "Vertrag" },
-    { s: "Die ___ des Mitarbeiters ist zum 31. März wirksam.", h: "demissão", a: "Kündigung" },
-    { s: "Der ___ regelt die Löhne in der Metallbranche.", h: "convenção coletiva", a: "Tarifvertrag" },
-    { s: "Die ___ von zwei neuen Ingenieuren ist für Mai geplant.", h: "contratação", a: "Einstellung" },
-    { s: "Die Abteilung ___ sucht einen günstigeren Lieferanten.", h: "compras / suprimentos", a: "Beschaffung" },
-    { s: "Wir brauchen dringend ___ für die defekte Pumpe.", h: "reposição", a: "Ersatz" },
-    { s: "Die ___ im Wareneingang dauert zwei Tage.", h: "inspeção de qualidade", a: "Qualitätsprüfung" }
+    { s: "Können wir am Montag die Arbeit im Lager ___?", h: "observar", a: "beobachten" },
+    { s: "Wir müssen das Problem mit dem Filter schnell ___.", h: "resolver", a: "lösen" },
+    { s: "Nach der Messe bekommen alle Kollegen zwei ___.", h: "folgas", a: "freie Tage" },
+    { s: "Bitte die Kisten nicht höher als drei Paletten ___.", h: "empilhar", a: "stapeln" },
+    { s: "Der Kunde will vor dem Projekt die ___ sehen.", h: "apólice de seguro", a: ["Versicherungspolice", "Versicherungsschein"] },
+    { s: "Können Sie uns eine kurze ___ per E-Mail schicken?", h: "resumo", a: "Zusammenfassung" },
+    { s: "Wir haben gestern einen ___ über 500.000 Reais bekommen.", h: "pedido / encomenda", a: "Auftrag" },
+    { s: "Die ___ des Angebots kam gestern per E-Mail.", h: "cancelamento", a: "Stornierung" },
+    { s: "Wir sind ___, dass das Projekt im Mai startet.", h: "confiantes", a: "zuversichtlich" },
+    { s: "Unser wichtigster Kunde kommt aus dem ___.", h: "mineração", a: "Bergbau" },
+    { s: "Zwei ___ aus China bieten den gleichen Preis.", h: "concorrentes", a: ["Wettbewerber", "Mitbewerber", "Konkurrenten"] },
+    { s: "Die ___ in Belo Horizonte ist für September geplant.", h: "participação na feira", a: "Messeteilnahme" }
   ];
 
   var CHOICE = [
-    { q: "„Assinamos um acordo comercial com a empresa alemã.“", o: ["Vertrag / Vereinbarung", "Handelsabkommen", "Handelsvertrag"], c: 0,
-      e: "Entre duas empresas: Vertrag, Vereinbarung, Liefervertrag, Rahmenvertrag. Handelsabkommen/Handelsvertrag são acordos entre países ou blocos." },
-    { q: "„O acordo comercial entre a UE e o Mercosul vai reduzir as tarifas.“", o: ["Liefervertrag", "Handelsabkommen", "kommerzielle Vereinbarung"], c: 1,
-      e: "Acordo entre blocos econômicos = Handelsabkommen (ou Handelsvertrag)." },
-    { q: "„Demitimos dois funcionários no mês passado.“", o: ["Einstellung", "Rekrutierung", "Kündigung"], c: 2,
-      e: "Kündigung = demissão. Em alemão: „Wir haben zwei Mitarbeitern gekündigt.“" },
-    { q: "„Cancelamos o contrato com o fornecedor.“", o: ["Kündigung des Vertrags", "Ersatz des Vertrags", "Austausch des Vertrags"], c: 0,
-      e: "Kündigung também significa rescisão de contrato: „Wir haben den Vertrag gekündigt.“" },
-    { q: "„Nosso fluxo de caixa está apertado este mês.“", o: ["Kapitalfluss", "Cashflow", "Lagerbestand"], c: 1,
-      e: "Fluxo de caixa = Cashflow. Kapitalfluss aparece praticamente só em Kapitalflussrechnung (DFC)." },
-    { q: "„Quanto estoque temos na fábrica?“", o: ["Lager", "Beschaffung", "Lagerbestand"], c: 2,
-      e: "Estoque = Lagerbestand. Lager é o depósito (o lugar)." },
-    { q: "„Fazemos controle de qualidade no recebimento da mercadoria.“", o: ["Qualitätsvereinbarung", "Qualitätsprüfung", "Qualitätsaustausch"], c: 1,
-      e: "Qualitätsprüfung (im Wareneingang) é o termo usual; Qualitätstest é menos comum e mais específico." },
-    { q: "„Precisamos de uma peça de reposição para a máquina.“", o: ["Ersatzteil", "Ersetzungsteil", "Beschaffungsteil"], c: 0,
-      e: "Ersatz = reposição/substituição; Ersatzteil = peça de reposição. Ersetzung é formal e raro." },
-    { q: "„A convenção coletiva prevê um aumento de 4 %.“", o: ["Handelsvertrag", "Anstellungsvertrag", "Tarifvertrag"], c: 2,
-      e: "Tarifvertrag = convenção coletiva entre sindicato e setor/empregadores." },
-    { q: "„O departamento de compras/suprimentos vai negociar os preços.“", o: ["Rekrutierung", "Beschaffung / Einkauf", "Lager"], c: 1,
-      e: "Beschaffung ou Einkauf = compras/suprimentos." }
+    { q: "„Estamos confiantes de que vamos fechar o negócio.“", o: ["Wir sind selbstbewusst, dass …", "Wir sind zuversichtlich, dass …", "Wir sind sicherlich, dass …"], c: 1,
+      e: "zuversichtlich = confiante/otimista com o futuro. selbstbewusst = autoconfiante (traço de personalidade). „sicherlich“ é advérbio, não funciona aqui." },
+    { q: "„Recebemos um pedido de dois milhões de reais.“", o: ["einen Auftrag von zwei Millionen Reais", "einen Auftrag über zwei Millionen Reais", "eine Kündigung über zwei Millionen Reais"], c: 1,
+      e: "Auftrag / Bestellung ÜBER + valor: „Wir haben einen Auftrag über zwei Millionen Reais bekommen.“" },
+    { q: "„O cliente cancelou a proposta.“", o: ["Der Kunde hat das Angebot gekündigt.", "Der Kunde hat das Angebot storniert.", "Der Kunde hat das Angebot eingestellt."], c: 1,
+      e: "stornieren (ou: absagen, ablehnen). kündigen só para contratos e emprego – „Angebotskündigung“ não existe." },
+    { q: "„Eles trabalham sem registro.“", o: ["Sie arbeiten ohne Einstellung.", "Sie arbeiten ohne Anmeldung (schwarz).", "Sie arbeiten ohne Anstellung."], c: 1,
+      e: "Sem registro = ohne Anmeldung / nicht angemeldet / Schwarzarbeit. „ohne Einstellung“ não se diz; „ohne Anstellung“ = sem emprego." },
+    { q: "„Estamos monitorando os clientes de perto.“", o: ["Wir überwachen die Kunden.", "Wir behalten die Kunden im Blick.", "Wir verfolgen die Kunden."], c: 1,
+      e: "im Blick behalten / beobachten / betreuen. überwachen e verfolgen com pessoas soam a vigilância e perseguição." },
+    { q: "„Nossos concorrentes também estão na feira.“ (dito na frente do cliente)", o: ["Unsere Feinde", "Unsere Mitbewerber", "Unsere Kollegen"], c: 1,
+      e: "Mitbewerber / Wettbewerber são neutros e educados. Konkurrenz também serve, mas é mais direto. Feinde = inimigos!" },
+    { q: "„Ele tirou dois dias de folga.“", o: ["zwei Feiertage", "zwei freie Tage", "zwei Urlaubswochen"], c: 1,
+      e: "freie Tage = folgas. Feiertag = feriado. Urlaub = férias." },
+    { q: "„Precisamos da apólice do seguro ambiental.“", o: ["die Umweltpolizei", "die Police der Umweltversicherung", "das Umweltzertifikat"], c: 1,
+      e: "Versicherungspolice = Versicherungsschein = apólice. Police ≠ Polizei (polícia)!" },
+    { q: "„Empilhem as caixas na paleta.“", o: ["Stapeln Sie die Kisten auf die Palette.", "Stempeln Sie die Kisten auf die Palette.", "Stoppen Sie die Kisten auf der Palette."], c: 0,
+      e: "stapeln = empilhar. stempeln = carimbar. Empilhadeira = Gabelstapler." },
+    { q: "„Vou fazer um resumo rápido.“", o: ["Ich fasse kurz zusammen.", "Ich übersetze kurz.", "Ich beobachte kurz."], c: 0,
+      e: "zusammenfassen / eine kurze Zusammenfassung geben. Übersicht = visão geral (quadro, tabela)." }
   ];
 
   var DE_PT = [
-    { de: "„Wie sieht unser Cashflow im nächsten Quartal aus?“", pt: "„Como fica o nosso fluxo de caixa no próximo trimestre?“" },
-    { de: "„Wir müssen den Lagerbestand um zwanzig Prozent senken.“", pt: "„Precisamos reduzir o estoque em vinte por cento.“" },
-    { de: "„Die Kündigung des Liefervertrags ist zum Jahresende möglich.“", pt: "„A rescisão do contrato de fornecimento é possível no fim do ano.“" },
-    { de: "„Die Qualitätsprüfung im Wareneingang hat drei Mängel festgestellt.“", pt: "„A inspeção de qualidade no recebimento detectou três defeitos.“" },
-    { de: "„Laut Tarifvertrag steigen die Löhne ab Januar um drei Prozent.“", pt: "„Segundo a convenção coletiva, os salários sobem três por cento a partir de janeiro.“" },
-    { de: "„Die Beschaffung der Ersatzteile dauert etwa sechs Wochen.“", pt: "„A compra (aquisição) das peças de reposição leva cerca de seis semanas.“" },
-    { de: "„Wir planen die Einstellung von zwei Mitarbeitern für das Lager.“", pt: "„Planejamos a contratação de dois funcionários para o depósito.“" },
-    { de: "„Für die digitale Unterschrift brauchen alle Geschäftsführer ein digitales Zertifikat.“", pt: "„Para a assinatura digital, todos os diretores precisam de um certificado digital.“" }
+    { de: "„Wir sind zuversichtlich, dass wir den Auftrag bekommen.“", pt: "„Estamos confiantes de que vamos receber o pedido.“" },
+    { de: "„Der Kunde hat das Angebot storniert, weil das Projekt gestoppt wurde.“", pt: "„O cliente cancelou a proposta porque o projeto foi parado.“" },
+    { de: "„Bitte schicken Sie uns den Versicherungsschein für die Umweltversicherung.“", pt: "„Por favor, envie-nos a apólice do seguro ambiental.“" },
+    { de: "„Im Bergbau brauchen die Kunden Pumpen mit Filter.“", pt: "„Na mineração, os clientes precisam de bombas com filtro.“" },
+    { de: "„Unsere Mitbewerber sind zehn Prozent billiger.“", pt: "„Nossos concorrentes são dez por cento mais baratos.“" },
+    { de: "„Die Messeteilnahme in Belo Horizonte ist für September geplant.“", pt: "„A participação na feira em Belo Horizonte está prevista para setembro.“" },
+    { de: "„Wir müssen das Problem mit dem Sand bis Freitag lösen.“", pt: "„Precisamos resolver o problema da areia até sexta-feira.“" },
+    { de: "„Können Sie mir eine kurze Zusammenfassung der Besprechung schicken?“", pt: "„Você pode me enviar um resumo rápido da reunião?“" }
   ];
 
   var PT_DE = [
-    { pt: "„Nossa liquidez está boa, mas o fluxo de caixa cai em dezembro.“", de: "„Unsere Liquidität ist gut, aber der Cashflow sinkt im Dezember.“" },
-    { pt: "„Assinamos um contrato de fornecimento com a empresa alemã.“", de: "„Wir haben einen Liefervertrag mit der deutschen Firma unterschrieben.“", alt: "„Wir haben eine Vereinbarung mit der deutschen Firma geschlossen.“" },
-    { pt: "„O acordo entre a UE e o Mercosul reduz as tarifas de importação.“", de: "„Das Handelsabkommen zwischen der EU und dem Mercosur senkt die Einfuhrzölle.“" },
-    { pt: "„Quantas peças temos em estoque?“", de: "„Wie viele Teile haben wir auf Lager?“", alt: "„Wie hoch ist der Lagerbestand an Teilen?“" },
-    { pt: "„Demitimos o gerente de compras na semana passada.“", de: "„Wir haben dem Einkaufsleiter letzte Woche gekündigt.“", alt: "„Die Kündigung des Leiters der Beschaffung erfolgte letzte Woche.“" },
-    { pt: "„A troca das máquinas antigas está prevista para abril.“", de: "„Der Austausch der alten Maschinen ist für April geplant.“" },
-    { pt: "„O recrutamento de novos técnicos é responsabilidade do RH.“", de: "„Die Rekrutierung neuer Techniker ist Aufgabe der Personalabteilung.“" },
-    { pt: "„Ele tem vínculo empregatício fixo desde 2020.“", de: "„Er ist seit 2020 in fester Anstellung.“", alt: "„Er hat seit 2020 eine feste Anstellung.“" }
+    { pt: "„Recebemos um pedido de 500 mil reais de uma mineradora.“", de: "„Wir haben einen Auftrag über 500.000 Reais von einem Bergbauunternehmen bekommen.“" },
+    { pt: "„Amanhã vamos observar o trabalho na produção.“", de: "„Morgen beobachten wir die Arbeit in der Produktion.“", alt: "„Morgen schauen wir uns die Arbeit in der Produktion an.“" },
+    { pt: "„Os funcionários têm dois dias de folga depois da feira.“", de: "„Die Mitarbeiter haben nach der Messe zwei freie Tage.“" },
+    { pt: "„Não podemos empilhar mais de três paletes.“", de: "„Wir dürfen nicht mehr als drei Paletten stapeln.“" },
+    { pt: "„Um concorrente trabalha com pessoas sem registro.“", de: "„Ein Wettbewerber arbeitet mit Leuten ohne Anmeldung.“", alt: "„Bei einem Konkurrenten arbeiten die Leute schwarz.“" },
+    { pt: "„Estamos monitorando os clientes e a concorrência.“", de: "„Wir behalten die Kunden und die Konkurrenz im Blick.“", alt: "„Wir beobachten die Kunden und die Mitbewerber.“" },
+    { pt: "„Encontramos uma solução para o problema.“", de: "„Wir haben eine Lösung für das Problem gefunden.“" },
+    { pt: "„Estamos confiantes de que a participação na feira vai dar certo.“", de: "„Wir sind zuversichtlich, dass die Messeteilnahme ein Erfolg wird.“", alt: "„Wir sind optimistisch, dass die Messeteilnahme gut läuft.“" }
   ];
 
   var HOER = [
-    { s: "„Wir müssen den Lagerbestand bis Ende des Monats reduzieren.“", o: ["Lager", "Lagerbestand", "Liquidität", "Beschaffung"], c: [1] },
-    { s: "„Nach der Kündigung des Vertrags brauchen wir schnell Ersatz.“", o: ["Kündigung", "Vertrag", "Ersatz", "Austausch"], c: [0, 1, 2] },
-    { s: "„Der Cashflow ist stabil, aber die Liquidität bleibt knapp.“", o: ["Cashflow", "Liquidität", "Kapitalfluss", "Lagerbestand"], c: [0, 1] },
-    { s: "„Die Beschaffung hat drei Angebote für die Qualitätsprüfung eingeholt; der Qualitätstest der Muster war positiv.“", o: ["Beschaffung", "Qualitätsprüfung", "Qualitätstest", "Rekrutierung"], c: [0, 1, 2] },
-    { s: "„Nach dem Handelsabkommen zwischen der EU und dem Mercosur haben wir eine Handelsvereinbarung mit unserem Distributor unterzeichnet.“", o: ["Handelsabkommen", "Handelsvertrag", "Handelsvereinbarung", "Vertrag"], c: [0, 2] },
-    { s: "„Die Einstellung neuer Mitarbeiter läuft über die Abteilung Rekrutierung.“", o: ["Einstellung", "Anstellung", "Rekrutierung", "Kündigung"], c: [0, 2] },
-    { s: "„Für die kommerzielle Vereinbarung brauchen Sie ein digitales Zertifikat.“", o: ["digitales Zertifikat", "kommerzielle Vereinbarung", "Vertrag", "Lager"], c: [0, 1] },
-    { s: "„Der Tarifvertrag gilt für alle Beschäftigten in fester Anstellung.“", o: ["Tarifvertrag", "Anstellung", "Einstellung", "Handelsvertrag"], c: [0, 1] },
-    { s: "„Die Ware liegt im Lager; der Austausch der Teile beginnt morgen.“", o: ["Lager", "Lagerbestand", "Austausch", "Ersatz"], c: [0, 2] },
-    { s: "„In der Kapitalflussrechnung sehen Sie den Kapitalfluss des letzten Jahres; die Ersetzung des alten Systems ist noch nicht enthalten.“", o: ["Kapitalfluss", "Cashflow", "Ersetzung", "Ersatz"], c: [0, 2] }
+    { s: "„Die Zusammenfassung ist fertig, die Übersicht schicke ich morgen.“", o: ["Zusammenfassung", "Übersicht", "Übersetzung", "Auftrag"], c: [0, 1] },
+    { s: "„Wir haben einen Auftrag über eine Million Reais bekommen, und die Bestellung kommt nächste Woche.“", o: ["Auftrag", "Bestellung", "Angebot", "Stornierung"], c: [0, 1] },
+    { s: "„Das Angebot war gut, aber die Stornierung kam trotzdem.“", o: ["Stornierung", "Angebot", "Absage", "Kündigung"], c: [0, 1] },
+    { s: "„Im Bergbau sind unsere Mitbewerber sehr stark.“", o: ["Bergbau", "Bergwerk", "Mitbewerber", "Wettbewerber"], c: [0, 2] },
+    { s: "„Die Messeteilnahme ist teuer, aber der Messestand ist gut.“", o: ["Messe", "Messeteilnahme", "Messestand", "Messebesucher"], c: [1, 2] },
+    { s: "„Der Wettbewerber hat Probleme: Seine Leute machen Schwarzarbeit.“", o: ["Wettbewerber", "Schwarzarbeit", "Konkurrenz", "Anmeldung"], c: [0, 1] },
+    { s: "„Die Versicherungspolice liegt im Büro; den Versicherungsschein für die Umweltversicherung haben wir noch nicht.“", o: ["Versicherungspolice", "Versicherungsschein", "Umweltversicherung", "Versicherung"], c: [0, 1, 2] },
+    { s: "„Wir stapeln die Kisten, und der Gabelstapler bringt sie zum Lkw.“", o: ["stapeln", "Stapel", "Gabelstapler", "Lager"], c: [0, 2] },
+    { s: "„Wir sind zuversichtlich: Die Lösung funktioniert, und die Kunden bleiben.“", o: ["zuversichtlich", "Lösung", "lösen", "Kunden"], c: [0, 1, 3] },
+    { s: "„Wir beobachten die Konkurrenz und behalten die Kunden im Blick; morgen haben alle einen freien Tag.“", o: ["beobachten", "Konkurrenz", "freien Tag", "Übersicht"], c: [0, 1, 2] }
   ];
 
   var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
@@ -272,6 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
   function norm(s) { return String(s).trim().replace(/\s+/g, " ").toLowerCase(); }
+  function answers(g) { return Array.isArray(g.a) ? g.a : [g.a]; }
   function mark(node, ok) {
     node.classList.remove("richtig", "falsch");
     node.classList.add(ok ? "richtig" : "falsch");
@@ -315,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Übung 2 ---------- */
   function render2() {
-    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return g.a; }))
+    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return answers(g)[0]; }))
       .map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ");
     $("e2-body").innerHTML = GAPS.map(function (g, i) {
       var parts = g.s.split("___");
@@ -324,14 +325,17 @@ document.addEventListener("DOMContentLoaded", () => {
         esc(parts[1]) + " <span class=\"hinweis\">(" + esc(g.h) + ")</span></p></div>";
     }).join("");
     $("e2-loesung").innerHTML = GAPS.map(function (g) {
-      return "<li>" + esc(g.s.replace("___", g.a)) + "</li>";
+      var alts = answers(g);
+      return "<li>" + esc(g.s.replace("___", alts[0])) +
+        (alts.length > 1 ? " <span class=\"hinweis\">(auch: " + esc(alts.slice(1).join(", ")) + ")</span>" : "") + "</li>";
     }).join("");
   }
   function check2() {
     var ok = 0;
     GAPS.forEach(function (g, i) {
       var inp = $("e2-in-" + i);
-      var r = norm(inp.value) === norm(g.a);
+      var v = norm(inp.value);
+      var r = answers(g).some(function (a) { return norm(a) === v; });
       mark(inp, r);
       if (r) ok++;
     });
