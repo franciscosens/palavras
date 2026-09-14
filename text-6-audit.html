@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 6: Audit in Curitiba – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:nowrap; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+  @media (max-width:640px) { td.de { white-space:normal; } }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 6: Audit in Curitiba</h1>
+  <p>Continuação do Text 5, em nível A2/B1: horário de abertura, template de auditoria, aproximadamente, estimado, guincho, corretor de seguros da frota, acesso, registro, inserido no mercado, visão geral do negócio e reforma tributária.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-5-besuch.html">📄 Text 5</a><a href="uebungen-3.html">✏️ Übungen 3</a><a href="gabarito-text-6.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Audit in Curitiba: Herr Brandt bei Aquasul</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Im März fliegt Herr Brandt nach Curitiba. Frau Costa holt ihn am Flughafen ab. Am Montag um 7 Uhr sind sie bei Aquasul. Die Firma hat neue <mark>Öffnungszeiten</mark>: Das Lager ist jetzt von 7 bis 19 Uhr offen, das Büro von 8 bis 18 Uhr. „Unsere Kunden aus dem Bergbau fangen früh an“, sagt Frau Costa. Am Empfang macht Herr Brandt die <mark>Anmeldung</mark>: Name, Firma, Ausweis. Er bekommt eine Karte. Mit der Karte hat er <mark>Zutritt</mark> zum Lager und zur Produktion. Er bekommt auch einen <mark>Zugang</mark> zum WLAN.</p>
+
+  <p>Im April macht der Kunde aus dem Bergbau ein Audit bei Aquasul. Frau Costa zeigt Herrn Brandt die <mark>Auditvorlage</mark>. Das ist eine Liste mit 50 Fragen: Wie lagern Sie die Pumpen? Wer kontrolliert die Qualität? Wie lange dauert eine Lieferung? „Das <mark>Template</mark> kommt vom Kunden“, sagt Frau Costa. „Wir füllen es vor dem Audit aus.“ Herr Brandt kennt das: Bei Nordlicht gibt es auch Audits, und die Vorlage ist sehr ähnlich. Sie arbeiten den ganzen Vormittag an der Liste.</p>
+
+  <p>Am Nachmittag gibt Frau Costa einen <mark>Überblick über das Geschäft</mark>. Sie zeigt eine <mark>Gesamtübersicht</mark> mit allen Zahlen. Der Umsatz im letzten Jahr war <mark>knapp</mark> acht Millionen Reais, also etwas weniger als acht Millionen. Das sind <mark>ungefähr</mark> 30 Prozent mehr als im Jahr davor. Für dieses Jahr sind <mark>circa</mark> zehn Millionen geplant. „Das ist eine Schätzung“, sagt Frau Costa. „Die <mark>geschätzten</mark> Kosten für die neue Halle sind noch nicht dabei.“</p>
+
+  <p>Dann sprechen sie über den Fuhrpark. Aquasul hat zwölf Fahrzeuge: acht Lieferwagen und vier Lkw. Letzte Woche hatte ein Lkw eine Panne auf der Straße nach Belo Horizonte. Der <mark>Abschleppwagen</mark> hat vier Stunden gebraucht. Das hat 3.000 Reais gekostet. Der <mark>Versicherungsmakler für den Fuhrpark</mark>, Herr Almeida, hat jetzt einen neuen Vertrag gemacht. Der Abschleppdienst ist ab Mai in der Versicherung inklusive.</p>
+
+  <p>Eine gute Nachricht: Die neue Pumpe mit Filter ist seit Februar <mark>auf dem Markt</mark>. Die <mark>Markteinführung</mark> war ein Erfolg. Das Produkt ist jetzt <mark>am Markt etabliert</mark>: 15 Firmen aus dem Bergbau haben es gekauft. „Aquasul ist seit zwölf Jahren am Markt“, sagt Frau Costa. „Aber so schnell hat noch kein Produkt funktioniert.“</p>
+
+  <p>Am Ende spricht Frau Costa über die <mark>Steuerreform</mark> in Brasilien. Neue Steuern ersetzen die alten Steuern. Das dauert einige Jahre. „Wir wissen noch nicht genau, was das für unsere Preise bedeutet“, sagt sie. „Unser Steuerberater macht eine Übersicht.“ Herr Brandt lacht: „In Deutschland diskutieren wir auch seit Jahren über eine Steuerreform.“ Am Freitag fliegt er zurück nach Bremen.</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 11 termos com as opções em alemão e uma nota de uso para a intérprete. Repare nas armadilhas: knapp = pouco menos, gabarito ≠ Vorlage, Zugang ≠ Zutritt ≠ Zugriff, guincho tem dois sentidos.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>horário de abertura</td><td class="de">die Öffnungszeiten (Plural)</td><td class="hinweis">Quase sempre no plural. Loja, depósito, repartição: Öffnungszeiten. Horário comercial da empresa: die Geschäftszeiten. Horário de trabalho do funcionário: die Arbeitszeit.</td></tr>
+      <tr><td>gabaritos da auditoria</td><td class="de">die Auditvorlage / das Audit-Template / die Audit-Checkliste</td><td class="hinweis">Gabarito no sentido de modelo, formulário = Vorlage (Template é anglicismo comum nas empresas). Schablone = molde físico, estêncil. Gabarito no sentido de respostas certas = die Lösung / der Lösungsschlüssel.</td></tr>
+      <tr><td>aproximadamente</td><td class="de">ungefähr / etwa / circa (ca.) / rund</td><td class="hinweis">Todos = mais ou menos. Cuidado: <b>knapp</b> 100 = pouco menos de 100 (não chega a 100); <b>gut</b> 100 = pouco mais de 100. ca. só na escrita.</td></tr>
+      <tr><td>estimado</td><td class="de">geschätzt (die Schätzung; schätzen)</td><td class="hinweis">geschätzte Kosten = custos estimados. „Prezado Senhor“ em carta é „Sehr geehrter Herr“, não „geschätzter“. „Ich schätze, dass …“ = eu estimo / acho que.</td></tr>
+      <tr><td>guincho</td><td class="de">der Abschleppwagen (abschleppen; der Abschleppdienst)</td><td class="hinweis">Guincho que reboca veículo = Abschleppwagen. Guincho de içar carga (na fábrica) = die Seilwinde ou der Kran (guindaste). Panne = pane, avaria.</td></tr>
+      <tr><td>corretor de seguros da frota</td><td class="de">der Versicherungsmakler für den Fuhrpark (die Fahrzeugflotte)</td><td class="hinweis">Fuhrpark = frota de veículos da empresa (mais comum); Fahrzeugflotte também. Só „Flotte“ pode soar a marinha. Makler = corretor independente; Versicherungsvertreter = agente de uma seguradora só.</td></tr>
+      <tr><td>acesso</td><td class="de">der Zugang / der Zutritt / der Zugriff</td><td class="hinweis">Zutritt = entrada física num lugar („Zutritt verboten“). Zugang = acesso em geral (ao prédio, ao WLAN, ao mercado). Zugriff = acesso a dados, arquivos, sistema (TI).</td></tr>
+      <tr><td>registro</td><td class="de">die Anmeldung / die Registrierung / die Eintragung</td><td class="hinweis">Anmeldung = registro na recepção, cadastro, inscrição (também registro do funcionário, ver Text 5). Registrierung = cadastro em sistema, site. Eintragung = registro em órgão oficial (Handelsregister = Junta Comercial). Registro no sentido de anotação = die Aufzeichnung / der Eintrag.</td></tr>
+      <tr><td>inseridos no mercado</td><td class="de">auf dem Markt sein; die Markteinführung; am Markt etabliert / positioniert</td><td class="hinweis">Markteinführung = lançamento de um produto. „Wir sind seit zehn Jahren am Markt“ = estamos no mercado. „am Markt integriert“ não é idiomático; use etabliert.</td></tr>
+      <tr><td>visão geral do negócio</td><td class="de">der Überblick über das Geschäft; die Gesamtübersicht</td><td class="hinweis">„einen Überblick geben“ = dar uma visão geral (fala). Übersicht / Gesamtübersicht = o documento, a tabela. Gesamtansicht = vista geral de um desenho técnico; Gesamtblick não se usa.</td></tr>
+      <tr><td>reforma tributária</td><td class="de">die Steuerreform</td><td class="hinweis">die Steuer = imposto; die Steuern = os impostos; der Steuerberater = contador tributarista; das Finanzamt = Receita; die Steuererklärung = declaração de imposto; die Mehrwertsteuer (MwSt.) = IVA.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-3.html">✏️ Übungen 3</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH und Aquasul existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Herr Brandt fliegt im März nach Curitiba.", true, ""],
+  ["Das Lager von Aquasul ist von 8 bis 18 Uhr offen.", false, "Das Lager ist von 7 bis 19 Uhr offen; das Büro von 8 bis 18 Uhr."],
+  ["Am Empfang bekommt Herr Brandt eine Karte für den Zutritt zum Lager.", true, ""],
+  ["Das Audit macht die Firma Nordlicht.", false, "Der Kunde aus dem Bergbau macht das Audit."],
+  ["Die Auditvorlage hat 15 Fragen.", false, "50 Fragen."],
+  ["Das Template kommt vom Kunden.", true, ""],
+  ["Der Umsatz war etwas mehr als acht Millionen Reais.", false, "Knapp acht Millionen = etwas weniger als acht Millionen."],
+  ["Für dieses Jahr sind circa zehn Millionen Reais geplant.", true, ""],
+  ["Aquasul hat zwölf Fahrzeuge.", true, ""],
+  ["Der Abschleppwagen hat zwei Stunden gebraucht.", false, "Vier Stunden."],
+  ["Die neue Pumpe mit Filter ist seit Februar auf dem Markt.", true, ""],
+  ["Frau Costa weiß schon genau, was die Steuerreform für die Preise bedeutet.", false, "Sie weiß es noch nicht genau; der Steuerberater macht eine Übersicht."]
+];
+const MC = [
+  ["Warum hat Aquasul neue Öffnungszeiten?", ["Die Kunden aus dem Bergbau fangen früh an.", "Herr Brandt kommt aus Deutschland.", "Das Büro ist zu klein."], 0],
+  ["Was macht Herr Brandt am Empfang?", ["Er kauft eine Pumpe.", "Er macht die Anmeldung und bekommt eine Karte.", "Er füllt die Auditvorlage aus."], 1],
+  ["Wozu braucht Herr Brandt den Zugang zum WLAN?", ["Für den Zutritt zum Lager.", "Für den Abschleppwagen.", "Für das Internet."], 2],
+  ["Was ist die Auditvorlage?", ["Ein Vertrag mit dem Kunden.", "Eine Liste mit 50 Fragen.", "Eine Übersicht mit den Zahlen."], 1],
+  ["Was bedeutet „knapp acht Millionen“?", ["Genau acht Millionen.", "Etwas mehr als acht Millionen.", "Etwas weniger als acht Millionen."], 2],
+  ["Was gibt Frau Costa am Nachmittag?", ["Einen Überblick über das Geschäft.", "Eine Party.", "Eine Karte für den Zutritt."], 0],
+  ["Was ist letzte Woche passiert?", ["Ein Lkw hatte eine Panne.", "Ein Lieferwagen war zu spät.", "Der Fuhrpark hat zwölf neue Fahrzeuge bekommen."], 0],
+  ["Wer ist Herr Almeida?", ["Der Steuerberater.", "Der Versicherungsmakler für den Fuhrpark.", "Der Fahrer vom Abschleppwagen."], 1],
+  ["Was war ein Erfolg?", ["Die Steuerreform.", "Die Panne.", "Die Markteinführung der Pumpe mit Filter."], 2],
+  ["Was macht der Steuerberater?", ["Er macht eine Übersicht zur Steuerreform.", "Er fährt den Abschleppwagen.", "Er füllt das Audit-Template aus."], 0]
+];
+const GAP = [
+  ["Das Lager hat neue ______: von 7 bis 19 Uhr.", "Öffnungszeiten"],
+  ["Am Empfang macht Herr Brandt die ______.", "Anmeldung"],
+  ["Mit der Karte hat er ______ zum Lager und zur Produktion.", "Zutritt"],
+  ["Er bekommt auch einen ______ zum WLAN.", "Zugang"],
+  ["Die ______ ist eine Liste mit 50 Fragen.", "Auditvorlage"],
+  ["Der Umsatz war ______ acht Millionen, also etwas weniger.", "knapp"],
+  ["Die ______ Kosten für die neue Halle sind noch nicht dabei.", "geschätzten"],
+  ["Der ______ hat vier Stunden gebraucht.", "Abschleppwagen"],
+  ["Der ______ für den Fuhrpark hat einen neuen Vertrag gemacht.", "Versicherungsmakler"],
+  ["Die ______ der neuen Pumpe war ein Erfolg.", "Markteinführung"],
+  ["Frau Costa gibt einen ______ über das Geschäft.", "Überblick"],
+  ["Neue Steuern ersetzen die alten: Das ist die ______.", "Steuerreform"]
+];
+const OFFEN = [
+  ["Wer holt Herrn Brandt am Flughafen ab?", "Frau Costa."],
+  ["Von wann bis wann ist das Büro offen?", "Von 8 bis 18 Uhr."],
+  ["Was braucht Herr Brandt für die Anmeldung?", "Name, Firma, Ausweis."],
+  ["Wann ist das Audit?", "Im April."],
+  ["Wie viele Fragen hat die Auditvorlage?", "50 Fragen."],
+  ["Wie hoch war der Umsatz im letzten Jahr?", "Knapp acht Millionen Reais."],
+  ["Wie viele Lkw hat Aquasul?", "Vier Lkw (und acht Lieferwagen)."],
+  ["Was ist ab Mai in der Versicherung inklusive?", "Der Abschleppdienst."],
+  ["Wie viele Firmen haben die neue Pumpe gekauft?", "15 Firmen aus dem Bergbau."],
+  ["Seit wann ist Aquasul am Markt?", "Seit zwölf Jahren."]
+];
+const ERKL = [
+  ["„Mit der Karte hat er Zutritt zum Lager und Zugang zum WLAN.“", "Com o cartão ele pode entrar no depósito (acesso físico) e tem acesso à rede wi-fi. Zutritt é entrar num lugar; Zugang é acesso em geral."],
+  ["„Wir füllen das Template vor dem Audit aus.“", "Preenchemos o gabarito (modelo, formulário) da auditoria antes da auditoria. Aqui „gabarito“ é o template, não as respostas."],
+  ["„Der Umsatz war knapp acht Millionen Reais.“", "O faturamento foi de quase oito milhões de reais, um pouco menos de oito milhões."],
+  ["„Der Versicherungsmakler für den Fuhrpark hat einen neuen Vertrag gemacht.“", "O corretor de seguros da frota fez um contrato novo."],
+  ["„Das Produkt ist jetzt am Markt etabliert.“", "O produto já está inserido, consolidado no mercado."],
+  ["„Unser Steuerberater macht eine Übersicht zur Steuerreform.“", "Nosso contador (consultor tributário) está preparando um resumo, uma visão geral sobre a reforma tributária."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => g[1]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${q[1]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const ok = norm(document.getElementById("gin"+i).value)===norm(q[1]); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>
