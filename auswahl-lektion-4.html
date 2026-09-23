@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wortschatz Lektion 4</title>
+<style>
+  :root {
+    --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --accent-ink:#fff;
+    --mark:#fff3b0; --line:#e6e1d6; --soft:#fbfaf7; --ok:#2f7d4a; --ok-bg:#d7f5dd; --warn:#8a5a00; --warn-bg:#fff0c2;
+    --orig:#e9edf5; --orig-ink:#3b4a66;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg:#1b1f26; --card:#252a33; --ink:#e8e4dc; --muted:#a3aab5; --accent:#e0705b; --accent-ink:#1b1f26;
+      --mark:#5a4d12; --line:#3a404b; --soft:#2b313b; --ok:#8fd9a5; --ok-bg:#1f3d29; --warn:#f2c76b; --warn-bg:#3d3212;
+      --orig:#33405a; --orig-ink:#c9d4ea;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg:#1b1f26; --card:#252a33; --ink:#e8e4dc; --muted:#a3aab5; --accent:#e0705b; --accent-ink:#1b1f26;
+    --mark:#5a4d12; --line:#3a404b; --soft:#2b313b; --ok:#8fd9a5; --ok-bg:#1f3d29; --warn:#f2c76b; --warn-bg:#3d3212;
+    --orig:#33405a; --orig-ink:#c9d4ea;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:var(--bg); padding-block:2.2rem 2rem; padding-inline:1.25rem; }
+  .wrap { max-width:860px; margin:0 auto; }
+  header h1 { margin:0 0 .4rem; font-size:1.8rem; font-weight:normal; text-wrap:balance; }
+  header p { margin:0; font-family: system-ui, sans-serif; font-size:.95rem; opacity:.85; max-width:60ch; }
+  main { padding-block:1.75rem 7rem; padding-inline:1rem; }
+  .intro { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.25rem 1.5rem; margin-bottom:1.5rem; font-family: system-ui, sans-serif; font-size:.93rem; }
+  .intro ol { margin:.5rem 0 0; padding-left:1.3rem; }
+  .intro li { margin:.25rem 0; }
+  .intro p { margin:.4rem 0; }
+  .legend { display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; margin-top:.75rem; color:var(--muted); font-size:.85rem; }
+  .badge { display:inline-block; font-family: system-ui, sans-serif; font-size:.72rem; letter-spacing:.03em; text-transform:uppercase; padding:.05rem .45rem; border-radius:999px; background:var(--orig); color:var(--orig-ink); vertical-align:middle; }
+  section.term { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.25rem 1.5rem; margin-bottom:1.25rem; }
+  section.term h2 { margin:0 0 .2rem; font-size:1.3rem; font-weight:normal; color:var(--accent); display:flex; align-items:baseline; gap:.6rem; }
+  section.term h2 .num { font-family: system-ui, sans-serif; font-size:.8rem; color:var(--muted); font-variant-numeric: tabular-nums; }
+  .status { font-family: system-ui, sans-serif; font-size:.8rem; color:var(--muted); margin:0 0 .8rem; }
+  .status.done { color:var(--ok); }
+  .opts { display:grid; grid-template-columns: 4.2rem 4.2rem 1fr; font-family: system-ui, sans-serif; font-size:.95rem; }
+  .opt-head { display:contents; }
+  .opt-head span { font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); padding:.2rem .3rem .4rem; border-bottom:1px solid var(--line); }
+  .opt { display:contents; }
+  .opt > * { padding:.5rem .3rem; border-bottom:1px solid var(--line); }
+  .opt .cell { display:flex; align-items:flex-start; justify-content:center; padding-top:.62rem; }
+  .opt input[type=radio], .opt input[type=checkbox] { width:1.15rem; height:1.15rem; margin:0; accent-color:var(--accent); cursor:pointer; }
+  .opt input:disabled { opacity:.55; cursor:default; }
+  .opt .de { font-family: Georgia, serif; font-size:1.02rem; }
+  .opt .hint { display:block; font-size:.83rem; color:var(--muted); }
+  .opt.chosen .de { font-weight:bold; }
+  .opt.chosen .text { background:var(--mark); border-radius:4px; }
+  .opt .text { padding-inline:.4rem; }
+  .opt.other .text { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; }
+  input[type=text], textarea { font-family: system-ui, sans-serif; font-size:.95rem; padding:.4rem .55rem; border:1px solid var(--line); border-radius:6px; background:var(--card); color:var(--ink); }
+  input[type=text] { flex:1 1 14rem; min-width:0; }
+  textarea { width:100%; min-height:3.2rem; resize:vertical; }
+  .note { margin-top:.9rem; font-family: system-ui, sans-serif; }
+  .note label { display:block; font-size:.82rem; color:var(--muted); margin-bottom:.25rem; }
+  .story { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.25rem 1.5rem; margin-bottom:1.25rem; }
+  .story h2 { margin:0 0 .5rem; font-size:1.3rem; font-weight:normal; color:var(--accent); }
+  .story p, .story li { font-size:.98rem; }
+  .story ol { padding-left:1.3rem; margin:.4rem 0 .9rem; }
+  .choice { display:flex; flex-direction:column; gap:.4rem; font-family: system-ui, sans-serif; font-size:.95rem; margin-bottom:.8rem; }
+  .choice label { display:flex; gap:.5rem; align-items:flex-start; cursor:pointer; }
+  .choice input { accent-color:var(--accent); margin-top:.3rem; }
+  .out { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.25rem 1.5rem; }
+  .out h2 { margin:0 0 .5rem; font-size:1.3rem; font-weight:normal; color:var(--accent); }
+  .out p { font-family: system-ui, sans-serif; font-size:.93rem; color:var(--muted); margin:.3rem 0 .8rem; }
+  .warn { background:var(--warn-bg); color:var(--warn); border-radius:6px; padding:.6rem .8rem; font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:.8rem; }
+  .warn ul { margin:.3rem 0 0; padding-left:1.2rem; }
+  #json { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.82rem; min-height:16rem; white-space:pre; overflow:auto; }
+  .row { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin-top:.6rem; }
+  button { font-family: system-ui, sans-serif; font-size:.95rem; background:var(--accent); color:var(--accent-ink); border:none; border-radius:999px; padding:.55rem 1.15rem; cursor:pointer; }
+  button.quiet { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  button:focus-visible, input:focus-visible, textarea:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .toast { font-family: system-ui, sans-serif; font-size:.9rem; color:var(--ok); }
+  .bar { position:fixed; left:0; right:0; bottom:0; background:var(--card); border-top:1px solid var(--line); padding:.7rem 1rem; padding-bottom: calc(.7rem + env(safe-area-inset-bottom, 0px)); z-index:5; }
+  .bar .wrap { display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; justify-content:space-between; font-family: system-ui, sans-serif; font-size:.9rem; }
+  .bar .prog { display:flex; align-items:center; gap:.6rem; }
+  .bar meter { width:9rem; height:.7rem; }
+  .confirm { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; font-family: system-ui, sans-serif; font-size:.9rem; margin-top:.6rem; }
+  @media (max-width: 520px) {
+    .opts { grid-template-columns: 3.2rem 3.2rem 1fr; font-size:.9rem; }
+    .opt-head span { font-size:.62rem; }
+    .bar meter { width:6rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior:smooth; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Wortschatz für Lektion 4: escolha das palavras</h1>
+    <p>Dez termos em português para o próximo texto da história Nordlicht e Aquasul. Marque como cada um deve aparecer em alemão. No fim, copie o JSON e envie de volta.</p>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="intro">
+    <b>Como preencher</b>
+    <ol>
+      <li><b>Principal</b>: a forma que entra no texto em destaque e no gabarito. Só uma por termo.</li>
+      <li><b>Aceita</b>: outras formas que também valem como resposta nos exercícios. Pode marcar várias ou nenhuma.</li>
+      <li>O que ficar sem marcação vira <b>distrator</b> nos exercícios de decisão da intérprete.</li>
+      <li>Se preferir outra forma, escreva em <b>Outra forma</b> e marque o círculo ao lado.</li>
+    </ol>
+    <div class="legend">
+      <span><span class="badge">sua sugestão</span> forma enviada na lista original</span>
+      <span>As demais são propostas do material, com uma nota curta.</span>
+    </div>
+    <p style="margin-top:.7rem;color:var(--muted)">O rascunho fica salvo neste navegador enquanto você preenche.</p>
+  </div>
+
+  <div id="terms"></div>
+
+  <section class="story">
+    <h2>Enredo do Text 7</h2>
+    <p>A história parou em março do ano 2: Herr Brandt voltou de Curitiba depois de preparar o audit e ouvir sobre a reforma tributária. A proposta para o Text 7, entre abril e junho:</p>
+    <ol>
+      <li>O audit de abril passou, mas o cliente de mineração exige a certificação das mangueiras do filtro. Herr Lang define um cronograma de seis semanas.</li>
+      <li>A Aquasul abriu uma filial em Belo Horizonte. A gerente saiu, e a troca de gestão atrasa os pedidos.</li>
+      <li>Frau Costa introduziu um novo modelo de comissionamento. Os vendedores estão insatisfeitos, porque a comissão só sai quando o cliente paga, e dois clientes estão em atraso.</li>
+      <li>O audit apontou etiquetas manuscritas no depósito. A Aquasul compra impressoras de etiquetas.</li>
+      <li>Numa reunião de alinhamento por vídeo, Herr Brandt lista as oportunidades comerciais que o filtro abriu no Chile e no Peru antes da feira de setembro.</li>
+    </ol>
+    <div class="choice" role="radiogroup" aria-label="Enredo">
+      <label><input type="radio" name="enredo" id="enredo-ok" value="proposta"> <span>Pode seguir esse enredo.</span></label>
+      <label><input type="radio" name="enredo" id="enredo-ajustar" value="ajustar"> <span>Seguir o enredo com os ajustes abaixo.</span></label>
+    </div>
+    <div class="note">
+      <label for="enredo-txt">Ajustes ou ideias para a história (opcional)</label>
+      <textarea id="enredo-txt" placeholder="Ex.: trocar Belo Horizonte por Joinville, incluir a Frau Neumann na reunião…"></textarea>
+    </div>
+    <div class="note">
+      <label for="obs">Observações gerais (opcional)</label>
+      <textarea id="obs" placeholder="Nível, quantidade de exercícios, termos que faltam…"></textarea>
+    </div>
+  </section>
+
+  <section class="out" id="saida">
+    <h2>JSON para enviar</h2>
+    <p>Clique em <b>Gerar JSON</b>, depois em <b>Copiar</b>, e cole no e-mail ou na mensagem. Se o botão de copiar não funcionar, selecione o texto da caixa e copie manualmente.</p>
+    <div id="aviso" class="warn" hidden></div>
+    <textarea id="json" readonly spellcheck="false" placeholder="O JSON aparece aqui depois de clicar em „Gerar JSON“."></textarea>
+    <div class="row">
+      <button type="button" id="btn-gerar">Gerar JSON</button>
+      <button type="button" id="btn-copiar" class="quiet">Copiar</button>
+      <span class="toast" id="toast" aria-live="polite"></span>
+    </div>
+    <div class="row">
+      <button type="button" id="btn-limpar" class="quiet">Limpar tudo</button>
+    </div>
+    <div class="confirm" id="confirm" hidden>
+      <span>Apagar todas as escolhas?</span>
+      <button type="button" id="btn-limpar-sim">Sim, apagar</button>
+      <button type="button" id="btn-limpar-nao" class="quiet">Cancelar</button>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="prog"><meter id="meter" min="0" max="10" value="0"></meter><span id="prog">0 de 10 termos com forma principal</span></div>
+    <button type="button" id="btn-ir">Ir para o JSON</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var TERMS = [
+    { id: "comissoes", pt: "comissões", opts: [
+      { de: "die Provision, Pl. die Provisionen", hint: "comissão de venda; a forma padrão" },
+      { de: "die Verkaufsprovision", hint: "deixa explícito que é comissão de venda" },
+      { de: "die Gebühr, Pl. die Gebühren", orig: true, hint: "taxa cobrada por um serviço ou banco; não é a comissão do vendedor" },
+      { de: "die Kommission", hint: "falso amigo: comitê ou venda em consignação" }
+    ]},
+    { id: "modelo-comissionamento", pt: "novo modelo de comissionamento", opts: [
+      { de: "das neue Provisionsmodell", hint: "composto com Fugen-s" },
+      { de: "die neue Provisionsregelung", hint: "a regra ou o regulamento das comissões" },
+      { de: "das neue Provisionssystem", hint: "o sistema de comissões" },
+      { de: "das Provisionenmodell", orig: true, hint: "sem o Fugen-s a forma não é usual" },
+      { de: "die Provisionenvorlage", orig: true, hint: "Vorlage é modelo no sentido de template, não de sistema" }
+    ]},
+    { id: "insatisfacao", pt: "insatisfação dos funcionários", opts: [
+      { de: "die Unzufriedenheit der Mitarbeiter", hint: "forma com genitivo" },
+      { de: "die Mitarbeiterunzufriedenheit", hint: "composto, escrito junto" },
+      { de: "die Unzufriedenheit im Team", hint: "mais coloquial" },
+      { de: "Mitarbeiter Unzufriedenheit", orig: true, hint: "a grafia separada não existe em alemão" }
+    ]},
+    { id: "certificacoes", pt: "certificações das mangueiras", opts: [
+      { de: "die Zertifizierung der Schläuche", hint: "o processo de certificar" },
+      { de: "die Schlauchzertifizierung", hint: "composto" },
+      { de: "das Zertifikat für die Schläuche", hint: "o documento emitido" },
+      { de: "Schläuche Zertifizierung", orig: true, hint: "grafia separada" }
+    ]},
+    { id: "atraso-pagamento", pt: "atraso de pagamento dos clientes", opts: [
+      { de: "der Zahlungsverzug der Kunden", hint: "termo comercial e jurídico" },
+      { de: "der Zahlungsverzug bei Kunden", hint: "variante com bei" },
+      { de: "die verspätete Zahlung", hint: "mais simples, bom para A2" },
+      { de: "die Zahlungsverzögerung", hint: "o atraso como evento" },
+      { de: "Kunden Zahlungsverzug", orig: true, hint: "grafia separada" }
+    ]},
+    { id: "cronograma", pt: "cronograma", opts: [
+      { de: "der Zeitplan", hint: "a forma mais comum" },
+      { de: "der Terminplan", hint: "foco nas datas" },
+      { de: "der Ablaufplan", hint: "foco na sequência de etapas" },
+      { de: "der Plan", orig: true, hint: "genérico demais para cronograma" }
+    ]},
+    { id: "oportunidades", pt: "oportunidades comerciais", opts: [
+      { de: "die Geschäftsmöglichkeiten", hint: "a forma mais neutra" },
+      { de: "die Geschäftschancen", hint: "chances de negócio" },
+      { de: "die Verkaufschancen", hint: "oportunidades de venda" },
+      { de: "die Handelsmöglichkeiten", orig: true, hint: "pouco idiomático" },
+      { de: "die Geschäftsaussichten", orig: true, hint: "perspectivas de negócio, não oportunidades" }
+    ]},
+    { id: "impressoras-etiquetas", pt: "impressoras de etiquetas", opts: [
+      { de: "der Etikettendrucker, Pl. die Etikettendrucker", hint: "o aparelho" },
+      { de: "der Labeldrucker", hint: "anglicismo comum em logística" },
+      { de: "die Drucketiketten", orig: true, hint: "seriam etiquetas impressas, o objeto errado" },
+      { de: "die Druckaufkleber", orig: true, hint: "adesivos impressos" }
+    ]},
+    { id: "reuniao-alinhamento", pt: "reunião de alinhamento", opts: [
+      { de: "das Abstimmungsmeeting", hint: "verbo: sich abstimmen" },
+      { de: "die Abstimmungsrunde", hint: "rodada de alinhamento" },
+      { de: "der Abstimmungstermin", hint: "a data ou o compromisso de alinhamento" },
+      { de: "das Alignment-Meeting", hint: "jargão corporativo" },
+      { de: "das Angleichungsmeeting", orig: true, hint: "Angleichung é equiparação" },
+      { de: "das Anpassungsmeeting", orig: true, hint: "Anpassung é adaptação" }
+    ]},
+    { id: "troca-gestao", pt: "troca de gestão da filial", opts: [
+      { de: "der Leitungswechsel in der Niederlassung", hint: "Niederlassung é filial de empresa" },
+      { de: "der Wechsel in der Niederlassungsleitung", hint: "variante" },
+      { de: "die neue Niederlassungsleitung", hint: "foco na nova gestão" },
+      { de: "der Führungswechsel in der Filiale", hint: "Filiale é loja ou agência bancária" },
+      { de: "Niederlassung Leitungswechsel", orig: true, hint: "grafia separada" }
+    ]}
+  ];
+
+  var KEY = "lektion4-auswahl";
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  /* ---------- render ---------- */
+  function render() {
+    var html = "";
+    TERMS.forEach(function (t, n) {
+      html += "<section class=\"term\" id=\"t-" + t.id + "\">" +
+        "<h2><span class=\"num\">" + (n + 1) + " / 10</span>" + esc(t.pt) + "</h2>" +
+        "<p class=\"status\" id=\"st-" + t.id + "\">Sem forma principal</p>" +
+        "<div class=\"opts\"><div class=\"opt-head\"><span>Principal</span><span>Aceita</span><span>Forma em alemão</span></div>";
+      t.opts.forEach(function (o, k) {
+        html += "<div class=\"opt\" id=\"row-" + t.id + "-" + k + "\">" +
+          "<div class=\"cell\"><input type=\"radio\" name=\"p-" + t.id + "\" id=\"p-" + t.id + "-" + k + "\" value=\"" + k + "\" aria-label=\"Principal: " + esc(o.de) + "\"></div>" +
+          "<div class=\"cell\"><input type=\"checkbox\" id=\"a-" + t.id + "-" + k + "\" aria-label=\"Aceita: " + esc(o.de) + "\"></div>" +
+          "<div class=\"text\"><span class=\"de\">" + esc(o.de) + "</span> " + (o.orig ? "<span class=\"badge\">sua sugestão</span>" : "") +
+          "<span class=\"hint\">" + esc(o.hint) + "</span></div></div>";
+      });
+      html += "<div class=\"opt other\" id=\"row-" + t.id + "-outra\">" +
+        "<div class=\"cell\"><input type=\"radio\" name=\"p-" + t.id + "\" id=\"p-" + t.id + "-outra\" value=\"outra\" aria-label=\"Principal: outra forma\"></div>" +
+        "<div class=\"cell\"></div>" +
+        "<div class=\"text\"><input type=\"text\" id=\"o-" + t.id + "\" placeholder=\"Outra forma (com artigo)\" autocapitalize=\"off\" spellcheck=\"false\" lang=\"de\"></div></div>" +
+        "</div>" +
+        "<div class=\"note\"><label for=\"n-" + t.id + "\">Nota para a intérprete (opcional)</label>" +
+        "<textarea id=\"n-" + t.id + "\" placeholder=\"Armadilhas, contexto de uso, plural…\"></textarea></div>" +
+        "</section>";
+    });
+    $("terms").innerHTML = html;
+  }
+
+  /* ---------- state ---------- */
+  function principalOf(t) {
+    var r = document.querySelector("input[name=\"p-" + t.id + "\"]:checked");
+    if (!r) return null;
+    if (r.value === "outra") {
+      var v = $("o-" + t.id).value.trim();
+      return v ? { text: v, k: "outra" } : null;
+    }
+    return { text: t.opts[Number(r.value)].de, k: Number(r.value) };
+  }
+
+  function syncTerm(t) {
+    var p = principalOf(t);
+    var r = document.querySelector("input[name=\"p-" + t.id + "\"]:checked");
+    var pk = r ? r.value : null;
+    t.opts.forEach(function (o, k) {
+      var cb = $("a-" + t.id + "-" + k), row = $("row-" + t.id + "-" + k);
+      var isP = String(k) === pk;
+      if (isP) { cb.checked = true; cb.disabled = true; } else { cb.disabled = false; }
+      row.classList.toggle("chosen", isP);
+    });
+    $("row-" + t.id + "-outra").classList.toggle("chosen", pk === "outra");
+    var st = $("st-" + t.id);
+    if (p) { st.textContent = "Principal: " + p.text; st.classList.add("done"); }
+    else if (pk === "outra") { st.textContent = "Escreva a outra forma no campo"; st.classList.remove("done"); }
+    else { st.textContent = "Sem forma principal"; st.classList.remove("done"); }
+  }
+
+  function syncAll() {
+    var done = 0;
+    TERMS.forEach(function (t) { syncTerm(t); if (principalOf(t)) done++; });
+    $("meter").value = done;
+    $("prog").textContent = done + " de 10 termos com forma principal";
+  }
+
+  function collect() {
+    var termos = TERMS.map(function (t) {
+      var p = principalOf(t);
+      var aceitas = [], naoUsar = [];
+      t.opts.forEach(function (o, k) {
+        if (p && p.k === k) return;
+        if ($("a-" + t.id + "-" + k).checked) aceitas.push(o.de); else naoUsar.push(o.de);
+      });
+      var outra = $("o-" + t.id).value.trim();
+      if (outra && !(p && p.k === "outra")) aceitas.push(outra);
+      return { id: t.id, pt: t.pt, principal: p ? p.text : null, aceitas: aceitas, naoUsar: naoUsar, nota: $("n-" + t.id).value.trim() };
+    });
+    var e = document.querySelector("input[name=\"enredo\"]:checked");
+    return {
+      lektion: 4,
+      geradoEm: new Date().toISOString().slice(0, 16).replace("T", " "),
+      termos: termos,
+      enredo: { escolha: e ? e.value : null, ajustes: $("enredo-txt").value.trim() },
+      observacoes: $("obs").value.trim()
+    };
+  }
+
+  /* ---------- draft in this browser ---------- */
+  function snapshot() {
+    var s = { p: {}, a: {}, o: {}, n: {}, enredo: null, enredoTxt: $("enredo-txt").value, obs: $("obs").value };
+    TERMS.forEach(function (t) {
+      var r = document.querySelector("input[name=\"p-" + t.id + "\"]:checked");
+      s.p[t.id] = r ? r.value : null;
+      s.a[t.id] = t.opts.map(function (o, k) { return $("a-" + t.id + "-" + k).checked; });
+      s.o[t.id] = $("o-" + t.id).value;
+      s.n[t.id] = $("n-" + t.id).value;
+    });
+    var e = document.querySelector("input[name=\"enredo\"]:checked");
+    s.enredo = e ? e.value : null;
+    return s;
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(snapshot())); } catch (err) {} }
+  function restore() {
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (err) { s = null; }
+    if (!s) return;
+    TERMS.forEach(function (t) {
+      if (s.p && s.p[t.id] != null) { var r = $("p-" + t.id + "-" + s.p[t.id]); if (r) r.checked = true; }
+      if (s.a && s.a[t.id]) s.a[t.id].forEach(function (v, k) { var cb = $("a-" + t.id + "-" + k); if (cb) cb.checked = !!v; });
+      if (s.o && s.o[t.id] != null) $("o-" + t.id).value = s.o[t.id];
+      if (s.n && s.n[t.id] != null) $("n-" + t.id).value = s.n[t.id];
+    });
+    if (s.enredo) { var e = document.querySelector("input[name=\"enredo\"][value=\"" + s.enredo + "\"]"); if (e) e.checked = true; }
+    if (s.enredoTxt != null) $("enredo-txt").value = s.enredoTxt;
+    if (s.obs != null) $("obs").value = s.obs;
+  }
+
+  /* ---------- output ---------- */
+  function gerar() {
+    var data = collect();
+    var faltam = data.termos.filter(function (t) { return !t.principal; }).map(function (t) { return t.pt; });
+    var aviso = $("aviso");
+    if (faltam.length) {
+      aviso.innerHTML = "Ainda sem forma principal (o JSON foi gerado mesmo assim):<ul>" + faltam.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul>";
+      aviso.hidden = false;
+    } else {
+      aviso.hidden = true;
+    }
+    $("json").value = JSON.stringify(data, null, 2);
+    $("toast").textContent = "";
+    return data;
+  }
+  function copiar() {
+    if (!$("json").value) gerar();
+    var txt = $("json").value, toast = $("toast");
+    function fallback() {
+      var ta = $("json"); ta.focus(); ta.select();
+      try { document.execCommand("copy"); toast.textContent = "Copiado."; }
+      catch (err) { toast.textContent = "Texto selecionado: use Ctrl+C ou Cmd+C para copiar."; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () { toast.textContent = "Copiado. Agora é só colar na mensagem."; }, fallback);
+    } else { fallback(); }
+  }
+  function limpar() {
+    try { localStorage.removeItem(KEY); } catch (err) {}
+    TERMS.forEach(function (t) {
+      document.querySelectorAll("input[name=\"p-" + t.id + "\"]").forEach(function (r) { r.checked = false; });
+      t.opts.forEach(function (o, k) { $("a-" + t.id + "-" + k).checked = false; });
+      $("o-" + t.id).value = ""; $("n-" + t.id).value = "";
+    });
+    document.querySelectorAll("input[name=\"enredo\"]").forEach(function (r) { r.checked = false; });
+    $("enredo-txt").value = ""; $("obs").value = ""; $("json").value = ""; $("aviso").hidden = true;
+    $("confirm").hidden = true; $("toast").textContent = "";
+    syncAll();
+    window.scrollTo({ top: 0 });
+  }
+
+  /* ---------- start ---------- */
+  render();
+  restore();
+  syncAll();
+  document.addEventListener("input", function () { syncAll(); save(); });
+  document.addEventListener("change", function () { syncAll(); save(); });
+  $("btn-gerar").addEventListener("click", function () { gerar(); $("json").scrollIntoView({ block: "nearest" }); });
+  $("btn-copiar").addEventListener("click", copiar);
+  $("btn-ir").addEventListener("click", function () { gerar(); $("saida").scrollIntoView({ block: "start" }); });
+  $("btn-limpar").addEventListener("click", function () { $("confirm").hidden = false; });
+  $("btn-limpar-nao").addEventListener("click", function () { $("confirm").hidden = true; });
+  $("btn-limpar-sim").addEventListener("click", limpar);
+})();
+</script>
+</body>
+</html>
