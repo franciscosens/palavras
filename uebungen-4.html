@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Übungen 3: Audit, Fuhrpark, Markt (Wirtschaftsdeutsch A2/B1)</title>
+<title>Übungen 4: Provision, Zeitplan, Niederlassung (Wirtschaftsdeutsch A2/B1)</title>
 <style>
   :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
   * { box-sizing:border-box; }
@@ -87,15 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
 </head>
 <body>
 <header>
-  <h1>Übungen 3: Audit, Fuhrpark, Markt</h1>
-  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 6 – horário de abertura, template de auditoria, aproximadamente, estimado, guincho, corretor de seguros da frota, acesso, registro, inserido no mercado, visão geral do negócio e reforma tributária.</p>
+  <h1>Übungen 4: Provision, Zeitplan, Niederlassung</h1>
+  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 7 – comissões, modelo de comissionamento, insatisfação dos funcionários, certificação das mangueiras, atraso de pagamento, cronograma, oportunidades comerciais, impressoras de etiquetas, reunião de alinhamento e troca de gestão da filial.</p>
 </header>
 <main>
-<nav><a href="index.html">🏠 Startseite</a><a href="text-6-audit.html">📄 Text 6</a><a href="uebungen-2.html">✏️ Übungen 2</a><a href="uebungen-4.html">✏️ Übungen 4</a><a href="gabarito-uebungen-3.html">🖨️ Gabarito</a></nav>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-7-abstimmung.html">📄 Text 7</a><a href="uebungen-3.html">✏️ Übungen 3</a><a href="gabarito-uebungen-4.html">🖨️ Gabarito</a></nav>
 
 <section id="uebung1">
   <h2>1. Zuordnung: Artikel + Bedeutung</h2>
-  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Para „Öffnungszeit“ use o singular. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Para „Geschäftsaussichten“ (só existe no plural) o artigo é die. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
   <table>
     <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
     <tbody id="e1-body"></tbody>
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <p id="gesamt">Gesamt: – / 54</p>
 </section>
 </main>
-<footer>Übungen 3 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
+<footer>Übungen 4 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
 
 <script>
 (function () {
@@ -158,101 +158,101 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Daten ---------- */
   var TERMS = [
-    { t: "Öffnungszeit", a: "die", p: "horário de abertura (quase sempre plural: Öffnungszeiten)" },
-    { t: "Audit", a: "das", p: "auditoria" },
-    { t: "Auditvorlage", a: "die", p: "template / gabarito (modelo) da auditoria" },
-    { t: "Checkliste", a: "die", p: "lista de verificação" },
-    { t: "Schätzung", a: "die", p: "estimativa" },
-    { t: "Abschleppwagen", a: "der", p: "guincho (que reboca veículos)" },
-    { t: "Abschleppdienst", a: "der", p: "serviço de guincho / reboque" },
-    { t: "Panne", a: "die", p: "pane, avaria (veículo)" },
-    { t: "Versicherungsmakler", a: "der", p: "corretor de seguros" },
-    { t: "Fuhrpark", a: "der", p: "frota de veículos da empresa" },
-    { t: "Zugang", a: "der", p: "acesso (em geral: prédio, wi-fi, mercado)" },
-    { t: "Zutritt", a: "der", p: "acesso físico, entrada num local" },
-    { t: "Zugriff", a: "der", p: "acesso a dados / sistema (TI)" },
-    { t: "Anmeldung", a: "die", p: "registro na recepção, cadastro, inscrição" },
-    { t: "Registrierung", a: "die", p: "cadastro em sistema ou site" },
-    { t: "Eintragung", a: "die", p: "registro em órgão oficial (Junta Comercial)" },
-    { t: "Markteinführung", a: "die", p: "lançamento no mercado" },
-    { t: "Überblick", a: "der", p: "visão geral (dada na fala)" },
-    { t: "Gesamtübersicht", a: "die", p: "visão geral completa (documento, tabela)" },
-    { t: "Steuerreform", a: "die", p: "reforma tributária" },
-    { t: "Steuerberater", a: "der", p: "contador / consultor tributário" },
-    { t: "Steuer", a: "die", p: "imposto" }
+    { t: "Provision", a: "die", p: "comissão (de venda)" },
+    { t: "Verkaufsprovision", a: "die", p: "comissão de venda (forma explícita)" },
+    { t: "Provisionsmodell", a: "das", p: "modelo de comissionamento" },
+    { t: "Provisionsregelung", a: "die", p: "regulamento das comissões" },
+    { t: "Gebühr", a: "die", p: "taxa (de serviço, de banco)" },
+    { t: "Unzufriedenheit", a: "die", p: "insatisfação" },
+    { t: "Mitarbeiter", a: "der", p: "funcionário, colaborador" },
+    { t: "Schlauch", a: "der", p: "mangueira" },
+    { t: "Schlauchzertifizierung", a: "die", p: "certificação das mangueiras" },
+    { t: "Zertifikat", a: "das", p: "certificado (o documento)" },
+    { t: "Zahlungsverzug", a: "der", p: "atraso de pagamento" },
+    { t: "Mahnung", a: "die", p: "cobrança, aviso de atraso" },
+    { t: "Zeitplan", a: "der", p: "cronograma" },
+    { t: "Ablaufplan", a: "der", p: "plano de etapas, sequência do processo" },
+    { t: "Geschäftsmöglichkeit", a: "die", p: "oportunidade comercial" },
+    { t: "Geschäftsaussichten", a: "die", l: "die Geschäftsaussichten (Plural)", p: "perspectivas de negócio" },
+    { t: "Etikettendrucker", a: "der", p: "impressora de etiquetas" },
+    { t: "Etikett", a: "das", p: "etiqueta" },
+    { t: "Abstimmungsmeeting", a: "das", p: "reunião de alinhamento" },
+    { t: "Abstimmungsrunde", a: "die", p: "rodada de alinhamento" },
+    { t: "Niederlassung", a: "die", p: "filial (de empresa)" },
+    { t: "Leitungswechsel", a: "der", p: "troca de gestão" }
   ];
 
   var GAPS = [
-    { s: "Die ___ vom Lager sind jetzt von 7 bis 19 Uhr.", h: "horário de abertura", a: "Öffnungszeiten" },
-    { s: "Bitte schicken Sie uns die ___ für das Audit im April.", h: "template da auditoria", a: ["Auditvorlage", "Audit-Vorlage", "Audittemplate", "Audit-Template", "Checkliste"] },
-    { s: "Der Umsatz war ___ 8 Millionen, also etwas weniger.", h: "pouco menos de", a: "knapp" },
-    { s: "Wir brauchen ___ zwei Wochen für die Lieferung.", h: "aproximadamente", a: ["ungefähr", "etwa", "circa", "ca.", "rund"] },
-    { s: "Die ___ Kosten für die neue Halle sind 2 Millionen Reais.", h: "estimados", a: "geschätzten" },
-    { s: "Nach der Panne hat der ___ den Lkw nach Curitiba gebracht.", h: "guincho", a: "Abschleppwagen" },
-    { s: "Unser ___ für den Fuhrpark hat einen neuen Vertrag gemacht.", h: "corretor de seguros", a: "Versicherungsmakler" },
-    { s: "Ohne Karte gibt es keinen ___ zur Produktion.", h: "acesso físico, entrada", a: "Zutritt" },
-    { s: "Ich brauche einen ___ zum System.", h: "acesso (a dados)", a: ["Zugriff", "Zugang"] },
-    { s: "Die ___ am Empfang dauert nur zwei Minuten.", h: "registro", a: "Anmeldung" },
-    { s: "Die ___ der neuen Pumpe war im Februar.", h: "lançamento no mercado", a: "Markteinführung" },
-    { s: "Unser Steuerberater erklärt uns die ___.", h: "reforma tributária", a: "Steuerreform" }
+    { s: "Die Verkäufer bekommen fünf Prozent ___ auf jeden Auftrag.", h: "comissão", a: ["Provision", "Verkaufsprovision"] },
+    { s: "Seit Januar haben wir ein neues ___.", h: "modelo de comissionamento", a: ["Provisionsmodell", "Provisionssystem"] },
+    { s: "Die ___ der Mitarbeiter ist groß: Zwei Verkäufer wollen kündigen.", h: "insatisfação", a: "Unzufriedenheit" },
+    { s: "Ohne ___ verkaufen wir keine Pumpe im Bergbau.", h: "certificação das mangueiras", a: ["Schlauchzertifizierung", "Schlauch-Zertifizierung"] },
+    { s: "Der ___ vom Filter muss Wasser mit Sand aushalten.", h: "mangueira", a: "Schlauch" },
+    { s: "Zwei Kunden bezahlen seit drei Monaten nicht: Das ist ___.", h: "atraso de pagamento", a: "Zahlungsverzug" },
+    { s: "Wir schicken heute die zweite ___ an den Kunden.", h: "cobrança, aviso de atraso", a: "Mahnung" },
+    { s: "Herr Lang macht einen ___ für die Zertifizierung: sechs Wochen.", h: "cronograma", a: ["Zeitplan", "Terminplan", "Ablaufplan"] },
+    { s: "Firmen aus Chile fragen nach der Pumpe: neue ___!", h: "oportunidades comerciais", a: ["Geschäftsmöglichkeiten", "Handelsmöglichkeiten", "Geschäftsaussichten"] },
+    { s: "Mit dem ___ hat jede Pumpe ein Etikett mit Nummer und Datum.", h: "impressora de etiquetas", a: "Etikettendrucker" },
+    { s: "Das ___ per Video dauert nur 45 Minuten.", h: "reunião de alinhamento", a: ["Abstimmungsmeeting", "Alignment-Meeting"] },
+    { s: "Nach dem ___ in der Niederlassung hat Herr Pereira angefangen.", h: "troca de gestão", a: ["Leitungswechsel", "Wechsel in der Leitung"] }
   ];
 
   var CHOICE = [
-    { q: "„Qual é o horário de abertura do depósito?“", o: ["Wie ist die Uhrzeit vom Lager?", "Wie sind die Öffnungszeiten vom Lager?", "Wie ist die Arbeitszeit vom Lager?"], c: 1,
-      e: "Öffnungszeiten (plural). Uhrzeit = as horas no relógio; Arbeitszeit = jornada de trabalho do funcionário." },
-    { q: "„Vocês têm o gabarito da auditoria?“ (o modelo para preencher)", o: ["Haben Sie die Auditvorlage?", "Haben Sie die Audit-Lösung?", "Haben Sie die Audit-Schablone?"], c: 0,
-      e: "Vorlage / Template = modelo, formulário. Lösung = respostas certas. Schablone = molde físico." },
-    { q: "„O faturamento foi de quase 8 milhões.“ (um pouco menos)", o: ["gut 8 Millionen", "knapp 8 Millionen", "genau 8 Millionen"], c: 1,
-      e: "knapp = pouco menos de; gut = pouco mais de; genau = exatamente." },
-    { q: "„O custo estimado é de 50 mil euros.“", o: ["Die geehrten Kosten sind …", "Die geschätzten Kosten sind …", "Die geschützten Kosten sind …"], c: 1,
-      e: "geschätzt = estimado (schätzen). geehrt = prezado (em cartas); geschützt = protegido." },
-    { q: "„O caminhão quebrou, precisamos de um guincho.“", o: ["Wir brauchen einen Kran.", "Wir brauchen eine Seilwinde.", "Wir brauchen einen Abschleppwagen."], c: 2,
-      e: "Guincho para rebocar veículo = Abschleppwagen. Kran = guindaste; Seilwinde = guincho de içar carga." },
-    { q: "„Nosso corretor de seguros da frota vem amanhã.“", o: ["Unser Versicherungsmakler für den Fuhrpark", "Unser Versicherungsmakler für die Flotte", "Unser Versicherungsvertreter für die Marine"], c: 0,
-      e: "Fuhrpark = frota de veículos da empresa (ou Fahrzeugflotte). Só „Flotte“ soa a navios. Makler = corretor independente; Vertreter = agente de uma seguradora." },
-    { q: "„Visitantes não têm acesso à produção.“ (entrar no local)", o: ["Besucher haben keinen Zugriff zur Produktion.", "Besucher haben keinen Zutritt zur Produktion.", "Besucher haben keinen Eintrag zur Produktion."], c: 1,
-      e: "Zutritt = entrada física. Zugriff = acesso a dados. Eintrag = registro, anotação." },
-    { q: "„Preciso de acesso aos arquivos do projeto.“ (no computador)", o: ["Ich brauche Zutritt zu den Projektdateien.", "Ich brauche Zugriff auf die Projektdateien.", "Ich brauche Anmeldung zu den Projektdateien."], c: 1,
-      e: "Zugriff auf + Akkusativ = acesso a dados / arquivos / sistema." },
-    { q: "„A empresa foi inserida no mercado há dez anos.“", o: ["Die Firma ist seit zehn Jahren am Markt.", "Die Firma ist seit zehn Jahren am Markt integriert.", "Die Firma hat seit zehn Jahren eine Markteinführung."], c: 0,
-      e: "„am Markt sein / etabliert sein“. „am Markt integriert“ não é idiomático. Markteinführung = lançamento de um produto." },
-    { q: "„Vou dar uma visão geral do negócio.“", o: ["Ich gebe eine Gesamtansicht vom Geschäft.", "Ich gebe einen Gesamtblick vom Geschäft.", "Ich gebe einen Überblick über das Geschäft."], c: 2,
-      e: "einen Überblick geben (über + Akk.). Gesamtansicht = vista geral de um desenho técnico; Gesamtblick não se usa. Documento/tabela = Übersicht, Gesamtübersicht." }
+    { q: "„Os vendedores recebem comissão sobre cada pedido.“", o: ["Die Verkäufer bekommen eine Gebühr auf jeden Auftrag.", "Die Verkäufer bekommen eine Provision auf jeden Auftrag.", "Die Verkäufer bekommen eine Kommission auf jeden Auftrag."], c: 1,
+      e: "Provision = comissão de venda. Gebühr = taxa de serviço ou banco; Kommission = comitê ou venda em consignação (falso amigo)." },
+    { q: "„Temos um novo modelo de comissionamento.“", o: ["Wir haben ein neues Provisionsmodell.", "Wir haben eine neue Provisionenvorlage.", "Wir haben ein neues Provisionenmodell."], c: 0,
+      e: "Composto com Fugen-s: Provisions-modell. Vorlage = formulário, template; „Provisionenmodell“ não é a forma usual." },
+    { q: "„A insatisfação dos funcionários é grande.“", o: ["Die Mitarbeiter Unzufriedenheit ist groß.", "Die Unzufriedenheit der Mitarbeiter ist groß.", "Die Unfreundlichkeit der Mitarbeiter ist groß."], c: 1,
+      e: "Unzufriedenheit der Mitarbeiter ou Mitarbeiterunzufriedenheit (junto). Unfreundlichkeit = falta de simpatia. A grafia separada não existe." },
+    { q: "„Precisamos da certificação das mangueiras até junho.“", o: ["Wir brauchen die Schlauchzertifizierung bis Juni.", "Wir brauchen die Schlauchversicherung bis Juni.", "Wir brauchen die Schlauchbestellung bis Juni."], c: 0,
+      e: "Zertifizierung = certificação. Versicherung = seguro; Bestellung = pedido." },
+    { q: "„Dois clientes estão em atraso de pagamento.“", o: ["Zwei Kunden sind im Zahlungsverzug.", "Zwei Kunden sind in der Zahlungsfrist.", "Zwei Kunden haben eine Zahlung."], c: 0,
+      e: "im Zahlungsverzug sein / in Verzug sein = estar em atraso. Zahlungsfrist = prazo de pagamento (ainda dentro do prazo)." },
+    { q: "„Qual é o cronograma do projeto?“", o: ["Wie ist das Chronogramm vom Projekt?", "Wie ist der Zeitplan vom Projekt?", "Wie ist der Plan vom Projekt?"], c: 1,
+      e: "Zeitplan (ou Terminplan, Ablaufplan). „Chronogramm“ não existe nesse sentido; „Plan“ sozinho é vago demais." },
+    { q: "„Vemos novas oportunidades comerciais no Chile.“", o: ["Wir sehen neue Geschäftsmöglichkeiten in Chile.", "Wir sehen neue Geschäftsgelegenheiten in Chile.", "Wir sehen neue Verkaufsgeschäfte in Chile."], c: 0,
+      e: "Geschäftsmöglichkeiten (ou Geschäftsaussichten = perspectivas). Gelegenheit = ocasião; Verkaufsgeschäft = loja, ponto de venda." },
+    { q: "„Vamos comprar duas impressoras de etiquetas.“", o: ["Wir kaufen zwei Drucketiketten.", "Wir kaufen zwei Etikettendrucker.", "Wir kaufen zwei Etikettenkopierer."], c: 1,
+      e: "A máquina é der Etikettendrucker. Drucketiketten seriam as etiquetas impressas (o material); Kopierer = copiadora." },
+    { q: "„Amanhã temos uma reunião de alinhamento.“", o: ["Morgen haben wir ein Angleichungsmeeting.", "Morgen haben wir ein Anpassungsmeeting.", "Morgen haben wir ein Abstimmungsmeeting."], c: 2,
+      e: "sich abstimmen = alinhar-se, combinar. Angleichung = equiparação; Anpassung = adaptação." },
+    { q: "„Houve uma troca de gestão na filial.“", o: ["Es gab einen Leitungswechsel in der Niederlassung.", "Es gab einen Leitungswechsel in der Filiale.", "Es gab einen Leitungstausch in der Niederlassung."], c: 0,
+      e: "Niederlassung = filial de empresa; Filiale = loja de rede ou agência bancária. Wechsel = troca de pessoa; Tausch = troca de objetos." }
   ];
 
   var DE_PT = [
-    { de: "„Unsere Öffnungszeiten sind Montag bis Freitag von 8 bis 18 Uhr.“", pt: "„Nosso horário de abertura é de segunda a sexta, das 8 às 18 horas.“" },
-    { de: "„Bitte füllen Sie die Auditvorlage bis Ende des Monats aus.“", pt: "„Por favor, preencham o gabarito (template) da auditoria até o fim do mês.“" },
-    { de: "„Die Lieferung dauert ungefähr drei Wochen, knapp 20 Tage.“", pt: "„A entrega leva aproximadamente três semanas, pouco menos de 20 dias.“" },
-    { de: "„Die geschätzten Kosten für den Abschleppdienst sind 3.000 Reais.“", pt: "„O custo estimado do serviço de guincho é de 3.000 reais.“" },
-    { de: "„Der Versicherungsmakler hat für den Fuhrpark einen besseren Vertrag gefunden.“", pt: "„O corretor de seguros encontrou um contrato melhor para a frota.“" },
-    { de: "„Ohne Anmeldung am Empfang gibt es keinen Zutritt zum Lager.“", pt: "„Sem registro na recepção não há acesso ao depósito.“" },
-    { de: "„Die Markteinführung der neuen Pumpe war ein Erfolg; das Produkt ist jetzt am Markt etabliert.“", pt: "„O lançamento da nova bomba foi um sucesso; o produto agora está consolidado no mercado.“" },
-    { de: "„Die Steuerreform ändert die Preise; unser Steuerberater gibt uns morgen einen Überblick.“", pt: "„A reforma tributária muda os preços; nosso contador nos dá uma visão geral amanhã.“" }
+    { de: "„Die Verkäufer bekommen die Provision erst, wenn der Kunde bezahlt hat.“", pt: "„Os vendedores só recebem a comissão depois que o cliente pagou.“" },
+    { de: "„Das neue Provisionsmodell gilt seit Januar für alle Verkäufer.“", pt: "„O novo modelo de comissionamento vale desde janeiro para todos os vendedores.“" },
+    { de: "„Die Unzufriedenheit der Mitarbeiter ist groß; zwei wollen kündigen.“", pt: "„A insatisfação dos funcionários é grande; dois querem pedir demissão.“" },
+    { de: "„Ohne Schlauchzertifizierung dürfen wir die Pumpe nicht im Bergbau verkaufen.“", pt: "„Sem a certificação das mangueiras não podemos vender a bomba na mineração.“" },
+    { de: "„Wegen Zahlungsverzug schicken wir heute die zweite Mahnung.“", pt: "„Por causa do atraso de pagamento, enviamos hoje a segunda cobrança.“" },
+    { de: "„Der Zeitplan ist eng: sechs Wochen bis Ende Juni.“", pt: "„O cronograma é apertado: seis semanas até o fim de junho.“" },
+    { de: "„Die Etikettendrucker kommen nächste Woche; dann hat jede Pumpe ein Etikett.“", pt: "„As impressoras de etiquetas chegam semana que vem; então cada bomba terá uma etiqueta.“" },
+    { de: "„Nach dem Leitungswechsel in der Niederlassung sehen wir neue Geschäftsmöglichkeiten.“", pt: "„Depois da troca de gestão na filial, vemos novas oportunidades comerciais.“" }
   ];
 
   var PT_DE = [
-    { pt: "„O horário de abertura do escritório é das 8 às 17 horas.“", de: "„Die Öffnungszeiten vom Büro sind von 8 bis 17 Uhr.“", alt: "„Das Büro ist von 8 bis 17 Uhr geöffnet.“" },
-    { pt: "„O cliente mandou o gabarito da auditoria com 50 perguntas.“", de: "„Der Kunde hat die Auditvorlage mit 50 Fragen geschickt.“", alt: "„Der Kunde hat das Audit-Template mit 50 Fragen geschickt.“" },
-    { pt: "„Temos aproximadamente 300 clientes, quase 100 na mineração.“", de: "„Wir haben ungefähr 300 Kunden, knapp 100 im Bergbau.“" },
-    { pt: "„O valor estimado do pedido é de 2 milhões de reais.“", de: "„Der geschätzte Wert des Auftrags ist 2 Millionen Reais.“", alt: "„Der Auftrag hat einen geschätzten Wert von 2 Millionen Reais.“" },
-    { pt: "„O guincho levou quatro horas até chegar.“", de: "„Der Abschleppwagen hat vier Stunden gebraucht.“" },
-    { pt: "„Só funcionários têm acesso à produção; visitantes precisam de registro na recepção.“", de: "„Nur Mitarbeiter haben Zutritt zur Produktion; Besucher brauchen eine Anmeldung am Empfang.“" },
-    { pt: "„Nosso produto novo foi inserido no mercado em fevereiro.“", de: "„Unser neues Produkt ist seit Februar auf dem Markt.“", alt: "„Die Markteinführung unseres neuen Produkts war im Februar.“" },
-    { pt: "„Antes da reunião, vou dar uma visão geral do negócio.“", de: "„Vor der Besprechung gebe ich einen Überblick über das Geschäft.“" }
+    { pt: "„A comissão é de cinco por cento sobre o pedido.“", de: "„Die Provision beträgt fünf Prozent vom Auftrag.“", alt: "„Die Verkaufsprovision ist fünf Prozent vom Auftrag.“" },
+    { pt: "„Vamos mudar o modelo de comissionamento em julho.“", de: "„Wir ändern das Provisionsmodell im Juli.“", alt: "„Wir ändern die Provisionsregelung im Juli.“" },
+    { pt: "„A insatisfação dos funcionários vem do atraso de pagamento dos clientes.“", de: "„Die Unzufriedenheit der Mitarbeiter kommt vom Zahlungsverzug der Kunden.“" },
+    { pt: "„O laboratório faz a certificação das mangueiras em seis semanas.“", de: "„Das Labor macht die Schlauchzertifizierung in sechs Wochen.“", alt: "„Das Labor macht die Zertifizierung der Schläuche in sechs Wochen.“" },
+    { pt: "„Precisamos de um cronograma para a feira.“", de: "„Wir brauchen einen Zeitplan für die Messe.“", alt: "„Wir brauchen einen Terminplan für die Messe.“" },
+    { pt: "„Compramos duas impressoras de etiquetas para o depósito.“", de: "„Wir haben zwei Etikettendrucker für das Lager gekauft.“" },
+    { pt: "„A reunião de alinhamento é na segunda às nove.“", de: "„Das Abstimmungsmeeting ist am Montag um neun Uhr.“", alt: "„Die Abstimmungsrunde ist am Montag um neun Uhr.“" },
+    { pt: "„A troca de gestão da filial atrasou três pedidos.“", de: "„Der Leitungswechsel in der Niederlassung hat drei Aufträge verzögert.“", alt: "„Wegen des Wechsels in der Niederlassungsleitung sind drei Aufträge zu spät.“" }
   ];
 
   var HOER = [
-    { s: "„Die Öffnungszeiten stehen an der Tür; die Anmeldung ist am Empfang.“", o: ["Öffnungszeiten", "Anmeldung", "Registrierung", "Zutritt"], c: [0, 1] },
-    { s: "„Für das Audit brauchen wir die Auditvorlage und die Checkliste.“", o: ["Audit", "Auditvorlage", "Checkliste", "Übersicht"], c: [0, 1, 2] },
-    { s: "„Wir haben knapp 200 Kunden, also ungefähr 30 mehr als letztes Jahr.“", o: ["knapp", "ungefähr", "circa", "geschätzt"], c: [0, 1] },
-    { s: "„Die Schätzung vom Steuerberater: die geschätzten Kosten sind circa 50.000 Euro.“", o: ["Schätzung", "Steuerberater", "geschätzten", "circa"], c: [0, 1, 2, 3] },
-    { s: "„Nach der Panne hat der Abschleppdienst den Lkw geholt.“", o: ["Panne", "Abschleppwagen", "Abschleppdienst", "Fuhrpark"], c: [0, 2] },
-    { s: "„Der Versicherungsmakler kümmert sich um den Fuhrpark und die Steuer.“", o: ["Versicherungsmakler", "Fuhrpark", "Steuer", "Steuerreform"], c: [0, 1, 2] },
-    { s: "„Besucher haben Zutritt zum Büro, aber keinen Zugriff auf das System.“", o: ["Zutritt", "Zugang", "Zugriff", "Anmeldung"], c: [0, 2] },
-    { s: "„Die Eintragung im Handelsregister ist fertig; die Registrierung im Portal fehlt noch.“", o: ["Eintragung", "Registrierung", "Anmeldung", "Zugang"], c: [0, 1] },
-    { s: "„Die Markteinführung war im Februar; jetzt ist das Produkt am Markt etabliert.“", o: ["Markteinführung", "Markt", "Überblick", "Gesamtübersicht"], c: [0, 1] },
-    { s: "„Die Steuerreform kommt; der Steuerberater gibt uns einen Überblick.“", o: ["Steuerreform", "Steuerberater", "Überblick", "Gesamtübersicht"], c: [0, 1, 2] }
+    { s: "„Die Provision kommt erst nach der Zahlung, das steht im neuen Provisionsmodell.“", o: ["Provision", "Provisionsmodell", "Gebühr", "Zahlungsverzug"], c: [0, 1] },
+    { s: "„Die Unzufriedenheit der Mitarbeiter ist groß, zwei Verkäufer wollen kündigen.“", o: ["Unzufriedenheit", "Mitarbeiter", "Niederlassung", "Mahnung"], c: [0, 1] },
+    { s: "„Das Labor in Bremen macht die Schlauchzertifizierung, das Zertifikat kommt im Juni.“", o: ["Schlauchzertifizierung", "Zertifikat", "Schlauch", "Zeitplan"], c: [0, 1] },
+    { s: "„Wegen Zahlungsverzug schicken wir eine Mahnung an den Kunden.“", o: ["Zahlungsverzug", "Mahnung", "Provision", "Zahlungsfrist"], c: [0, 1] },
+    { s: "„Der Zeitplan ist fertig: Zertifizierung im Juni, Katalog im Juli.“", o: ["Zeitplan", "Terminplan", "Zertifizierung", "Messe"], c: [0, 2] },
+    { s: "„Chile und Peru sind neue Geschäftsmöglichkeiten; die Geschäftsaussichten sind gut.“", o: ["Geschäftsmöglichkeiten", "Geschäftsaussichten", "Filter", "Provision"], c: [0, 1] },
+    { s: "„Der Etikettendrucker druckt ein Etikett mit Nummer und Datum.“", o: ["Etikettendrucker", "Etikett", "Aufkleber", "Drucker"], c: [0, 1] },
+    { s: "„Das Abstimmungsmeeting dauert 45 Minuten; die nächste Abstimmungsrunde ist im Juni.“", o: ["Abstimmungsmeeting", "Abstimmungsrunde", "Besprechung", "Zusammenfassung"], c: [0, 1] },
+    { s: "„In der Niederlassung gab es einen Leitungswechsel; der neue Leiter heißt Pereira.“", o: ["Niederlassung", "Leitungswechsel", "Filiale", "Leiter"], c: [0, 1, 3] },
+    { s: "„Die Gebühr für die Bank ist keine Provision, sagt Frau Neumann.“", o: ["Gebühr", "Provision", "Kommission", "Provisionsmodell"], c: [0, 1] }
   ];
 
   var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
