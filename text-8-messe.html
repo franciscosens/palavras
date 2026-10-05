@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 8: Nach der Messe – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 8: Nach der Messe</h1>
+  <p>Continuação do Text 7, em nível A2/B1: montagem do estande, clientes estratégicos, geração de negócios, cliente que retomou os negócios, 75 novas embarcações, mapeamento das mangueiras, vantagens e erros operacionais, elogio aos serviços, contenção de vazamentos, acordo comercial, automação das requisições, previsão de faturamento, nota fiscal cancelada, treinamento da brigada de incêndio e apresentações do planejamento 2027.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-7-abstimmung.html">📄 Text 7</a><a href="uebungen-5.html">✏️ Übungen 5</a><a href="gabarito-text-8.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Nach der Messe: 75 Schiffe aus Paranaguá</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Im September ist die Messe in Belo Horizonte. Herr Lang ist schon am Montag in der Halle. Zusammen mit Herrn Pereira und zwei Kollegen von Aquasul macht er den <mark>Standaufbau</mark>. Der Stand hat 30 Quadratmeter. Am ersten Tag kommen die Wände und das Licht, am zweiten Tag die Pumpen, der Filter und der neue Katalog. Die Schläuche vom Filter haben jetzt ein Zertifikat. „Der Standaufbau ist harte Arbeit“, sagt Herr Pereira. „Aber jetzt sieht der Stand super aus.“ Am Mittwoch um zehn Uhr öffnet die Messe.</p>
+
+  <p>Frau Costa hat vor der Messe eine Liste gemacht: zehn <mark>strategische Kunden</mark>. Das sind Kunden mit großen Aufträgen und vielen Standorten, zum Beispiel der Kunde aus dem Bergbau. Acht von den zehn <mark>strategischen Kunden</mark> kommen an den Stand. Frau Costa erklärt Herrn Lang: „Auf der Messe verkaufen wir nicht sofort. Die Messe ist für uns vor allem <mark>Geschäftsanbahnung</mark>: Wir lernen Menschen kennen, und die Aufträge kommen in drei oder sechs Monaten.“ Nach drei Tagen hat das Team 60 Visitenkarten und 15 konkrete Anfragen, auch aus Chile.</p>
+
+  <p>Am letzten Tag gibt es eine Überraschung. Herr Duarte, der technische Leiter der Reederei Litoral aus Paranaguá, kommt an den Stand. Die Reederei war früher Kunde von Aquasul, aber seit zwei Jahren hat sie nichts bestellt. Jetzt hat der Kunde <mark>die Geschäfte mit Aquasul wieder aufgenommen</mark>. Der Grund: Die Reederei <mark>hat 75 neue Schiffe erworben</mark>, vor allem kleine Schiffe für die Häfen in Paraná und Santa Catarina. Auf jedem Schiff gibt es Pumpen und viele Schläuche.</p>
+
+  <p>Im Oktober fahren Herr Lang und Frau Costa nach Paranaguá. Herr Duarte zeigt ihnen die Schiffe. Herr Lang schlägt eine <mark>Erfassung der Schlauchleitungen</mark> vor: Für jedes Schiff notiert das Team, wo die Schläuche sind, wie alt sie sind und wann man sie wechseln muss. Herr Duarte sieht die <mark>Betriebsvorteile</mark> sofort: Die Mechaniker finden den richtigen Schlauch schneller, die Schiffe stehen nicht so lange still, und Aquasul hat die Ersatzteile schon im Lager. Bis jetzt gab es viele <mark>Betriebsfehler</mark>: Die Mechaniker haben falsche Schläuche bestellt oder alte Schläuche zu spät gewechselt.</p>
+
+  <p>Im August gab es auf einem alten Schiff ein Problem: Ein Schlauch ist geplatzt, und Öl ist im Maschinenraum ausgelaufen. Die <mark>Eindämmung der Leckage</mark> hat vier Stunden gedauert. „Mit der Liste geht die <mark>Eindämmung von Leckagen</mark> viel schneller“, sagt Herr Duarte. Nach einer Woche sind die ersten zehn Schiffe erfasst. Herr Duarte <mark>hat die Leistungen von Aquasul gelobt</mark>: „So eine Übersicht hatten wir noch nie.“</p>
+
+  <p>Jetzt wollen beide Firmen eine <mark>Handelsvereinbarung formalisieren</mark>: drei Jahre, feste Preise für Pumpen und Schläuche, Service in 24 Stunden. Herr Duarte hat noch einen Wunsch: Er will die <mark>Serviceanforderungen automatisieren</mark>. Wenn ein Schlauch zu alt ist, schickt das System automatisch eine Anforderung an Aquasul, ohne Telefon und ohne E-Mail. „Das ist ein großes Projekt für unsere IT“, sagt Frau Costa. „Aber es lohnt sich.“</p>
+
+  <p>Ende Oktober gibt es wieder ein Abstimmungsmeeting per Video. Frau Neumann fragt nach der <mark>Umsatzprognose zum Monatsabschluss</mark>. „Wir erwarten 950.000 Reais, mehr als geplant“, sagt Frau Costa. Aber es gab auch einen Fehler: Eine Rechnung an die Reederei, eine Nota Fiscal, <mark>wurde doppelt ausgestellt</mark>. Die zweite Rechnung hat die Buchhaltung am selben Tag <mark>storniert</mark>. Frau Neumann nickt: „Das passiert bei uns auch. Wichtig ist, dass der Kunde nicht zweimal bezahlt.“</p>
+
+  <p>Zum Schluss gibt es noch zwei Termine. Im November macht Aquasul eine <mark>Brandschutzhelfer-Schulung</mark>: Zwölf Mitarbeiter lernen, was sie bei einem Feuer im Lager machen müssen. Und im Dezember ist in Bremen das Planungsmeeting 2027. Herr Brandt sagt: „Bitte schicken Sie Ihre <mark>Präsentationen für das Planungsmeeting 2027</mark> bis zum 30. November.“ Frau Costa lacht: „Meine erste Folie ist schon fertig: 75 Schiffe.“</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 16 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso para a intérprete. Quando a forma da lista original não é usada em alemão, a nota explica por quê. Repare nas armadilhas: strategische ≠ strategischen, Geschäfts- com Fugen-s, eindämmen ≠ einschränken, automatisieren com -isieren, Umsatz ≠ Rechnung, Brandschutzhelfer ≠ Feuerwehr.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>montagem do estande (da feira)</td><td class="de">der Standaufbau; die Standmontage; den Stand aufbauen</td><td class="hinweis">der Stand = estande; die Messe = feira. aufbauen = montar; abbauen = desmontar (der Standabbau). Standaufbau é o termo mais usado; Standmontage também se entende. A empresa que monta estandes é der Messebauer.</td></tr>
+      <tr><td>clientes estratégicos</td><td class="de">die strategischen Kunden; strategische Kunden (sem artigo); die Schlüsselkunden; die Key Accounts</td><td class="hinweis">Adjetivo com minúscula, e a terminação muda: „die strategischen Kunden“, mas sem artigo „strategische Kunden“. A forma „Strategischen Kunden“ da lista só funciona depois de die, unsere, den. Schlüsselkunde = cliente-chave; Key Account Manager = gerente de contas-chave.</td></tr>
+      <tr><td>geração de negócios</td><td class="de">die Geschäftsanbahnung; Neugeschäft generieren; die Akquise</td><td class="hinweis">Geschäftsanbahnung = criar os contatos que depois viram negócios, típico de feiras. das Neugeschäft = negócios novos. die Akquise = captação de clientes. „Geschäfteerstellung“ e „Geschäfteerzeugung“ não existem: o composto usa Geschäfts-; erstellen = elaborar (um documento), erzeugen = produzir (energia, produto).</td></tr>
+      <tr><td>cliente retomou os negócios (estava inativo)</td><td class="de">Der Kunde hat die Geschäfte (mit uns) wieder aufgenommen; Der Kunde hat die Geschäftsbeziehung wieder aufgenommen; ein reaktivierter Kunde</td><td class="hinweis">wieder aufnehmen = retomar. Diga „mit uns“ ou „mit Aquasul“: sem isso, „die Geschäfte wieder aufnehmen“ também pode significar que a empresa do cliente voltou a funcionar. inaktiv = inativo; die Geschäftsbeziehung = relação comercial.</td></tr>
+      <tr><td>cliente adquiriu 75 novas embarcações</td><td class="de">Der Kunde hat 75 neue Schiffe erworben; … 75 neue Wasserfahrzeuge erworben; … gekauft / angeschafft</td><td class="hinweis">erwerben – erwarb – erworben = adquirir (formal); kaufen = comprar; anschaffen = adquirir para uso próprio. das Schiff = navio, embarcação; das Boot = barco pequeno; das Wasserfahrzeug = termo técnico e jurídico. die Reederei = empresa de navegação. Cuidado: geworben (de werben) = divulgado, recrutado.</td></tr>
+      <tr><td>delineamento de mangueiras (mapeamento)</td><td class="de">die Erfassung der Schlauchleitungen; das Schlauchmapping; die Bestandsaufnahme der Schläuche</td><td class="hinweis">erfassen = levantar, registrar dados. die Schlauchleitung = mangueira montada, com as conexões (termo técnico). Schlauchmapping é jargão do setor, do inglês „hose mapping“. „Schlauchskizzierung“ não se usa: die Skizze = esboço feito à mão.</td></tr>
+      <tr><td>vantagens operacionais</td><td class="de">die Betriebsvorteile; die operativen Vorteile; die betrieblichen Vorteile</td><td class="hinweis">der Vorteil = vantagem; der Nachteil = desvantagem. der Betrieb = operação, funcionamento, e também a empresa ou a fábrica. Na fala de reunião, „operative Vorteile“ é muito comum.</td></tr>
+      <tr><td>erros operacionais</td><td class="de">die Betriebsfehler; die operativen Fehler; die Fehler im Ablauf</td><td class="hinweis">Betriebsfehler serve para falhas na operação em geral: pedido errado, troca atrasada, nota duplicada. der Bedienfehler = o operador manuseou errado (caso específico). der Irrtum = engano de raciocínio.</td></tr>
+      <tr><td>cliente elogiou os serviços</td><td class="de">Der Kunde hat die Leistungen gelobt; Der Kunde hat unseren Service gelobt</td><td class="hinweis">loben – lobte – gelobt = elogiar; das Lob = o elogio. die Leistung = o serviço prestado, o desempenho; die Dienstleistung = serviço como produto (setor de serviços). O contrário: sich beschweren = reclamar; die Reklamation = reclamação formal.</td></tr>
+      <tr><td>contenção de vazamentos</td><td class="de">die Eindämmung von Leckagen; Leckagen eindämmen; die Begrenzung von Leckagen</td><td class="hinweis">eindämmen = conter (vazamento, incêndio, epidemia); der Damm = dique. die Leckage, Pl. die Leckagen = vazamento; undicht = que vaza; das Leck = furo, no casco do navio. „Einschränkung der Undichtigkeiten“ não serve: einschränken = restringir, limitar (uso, liberdade).</td></tr>
+      <tr><td>formalizar um acordo comercial</td><td class="de">eine Handelsvereinbarung formalisieren; eine Geschäftsvereinbarung schriftlich festhalten; einen Rahmenvertrag abschließen</td><td class="hinweis">die Vereinbarung = acordo entre empresas; der Rahmenvertrag = contrato-quadro, com preços e prazos por vários anos. Cuidado: das Handelsabkommen = acordo comercial entre países (Mercosul–UE).</td></tr>
+      <tr><td>automatizar as requisições</td><td class="de">die Serviceanforderungen automatisieren; die Anfragen automatisieren; die Bestellanforderungen automatisieren</td><td class="hinweis">Grafia: automatisieren, com -isieren, como organisieren. „automatizieren“ não existe. die Anforderung = solicitação formal de serviço ou material; die Anfrage = consulta, pedido de orçamento; die Bestellanforderung = requisição de compra (a BANF do SAP).</td></tr>
+      <tr><td>previsão de faturamento para o fechamento do mês</td><td class="de">die Umsatzprognose zum Monatsabschluss; die Umsatzprognose für den Monat; der Umsatz-Forecast zum Monatsende</td><td class="hinweis">faturamento = der Umsatz, não die Rechnung. der Monatsabschluss = fechamento contábil do mês. die Prognose = previsão; Forecast é jargão corporativo. „Monatsumsatzabschlussprognose“ é um composto longo demais: na fala, divida.</td></tr>
+      <tr><td>nota fiscal emitida em duplicidade e cancelada</td><td class="de">Die Rechnung wurde doppelt ausgestellt und storniert; die Doppelrechnung; die Stornierung</td><td class="hinweis">eine Rechnung ausstellen = emitir uma nota; stornieren = cancelar um documento ou lançamento já emitido (das Storno). absagen = cancelar um compromisso; löschen = apagar um arquivo. Para explicar: „die Nota Fiscal, die brasilianische elektronische Rechnung“. die Gutschrift = nota de crédito.</td></tr>
+      <tr><td>treinamento da brigada de incêndio</td><td class="de">die Brandschutzhelfer-Schulung; die Schulung der Brandschutzhelfer; die Brandschutzschulung</td><td class="hinweis">Brandschutzhelfer = funcionários treinados para o primeiro combate ao fogo, como a brigada no Brasil. „Feuerwehrschulung“ sugere treinamento dos bombeiros. die Betriebsfeuerwehr = corpo de bombeiros próprio de uma grande empresa. die Weiterbildung = formação continuada, mais longa.</td></tr>
+      <tr><td>apresentações para a reunião do planejamento 2027</td><td class="de">die Präsentationen für das Planungsmeeting 2027; die Präsentationen für die Jahresplanung 2027; die Folien für das Planungsmeeting</td><td class="hinweis">Em frase, use a preposição für. A forma telegráfica „Präsentationen Meeting Planung 2027“ só serve como nome de pasta ou assunto de e-mail. die Folie = slide; das Planungsmeeting / die Planungsrunde = reunião de planejamento.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-5.html">✏️ Übungen 5</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH, Aquasul und die Reederei Litoral existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Herr Lang macht den Standaufbau zusammen mit Herrn Pereira.", true, ""],
+  ["Der Standaufbau dauert eine Woche.", false, "Zwei Tage: am ersten Tag Wände und Licht, am zweiten Tag Pumpen, Filter und Katalog."],
+  ["Frau Costa hat vor der Messe eine Liste mit zehn strategischen Kunden gemacht.", true, ""],
+  ["Alle zehn strategischen Kunden kommen an den Stand.", false, "Acht von zehn kommen an den Stand."],
+  ["Auf der Messe verkauft Aquasul sofort viele Pumpen.", false, "Die Messe ist vor allem Geschäftsanbahnung; die Aufträge kommen später."],
+  ["Die Reederei Litoral hat zwei Jahre lang nichts bei Aquasul bestellt.", true, ""],
+  ["Die Reederei hat 75 neue Schiffe erworben.", true, ""],
+  ["Herr Duarte schlägt die Erfassung der Schlauchleitungen vor.", false, "Herr Lang schlägt sie vor."],
+  ["Die Mechaniker haben früher manchmal falsche Schläuche bestellt.", true, ""],
+  ["Die Eindämmung der Leckage hat vier Stunden gedauert.", true, ""],
+  ["Die Handelsvereinbarung gilt für ein Jahr.", false, "Für drei Jahre."],
+  ["Die Brandschutzhelfer-Schulung ist im Dezember in Bremen.", false, "Die Schulung ist im November bei Aquasul; im Dezember ist das Planungsmeeting in Bremen."]
+];
+const MC = [
+  ["Was macht man beim Standaufbau?", ["Man baut den Stand für die Messe auf.", "Man kauft einen Stand.", "Man baut eine neue Halle."], 0],
+  ["Wer sind die strategischen Kunden?", ["Kunden, die nur einmal bestellen.", "Kunden mit großen Aufträgen und vielen Standorten.", "Kunden aus Chile."], 1],
+  ["Was bedeutet Geschäftsanbahnung für Frau Costa?", ["Auf der Messe sofort viel verkaufen.", "Menschen kennenlernen; die Aufträge kommen später.", "Rechnungen schreiben."], 1],
+  ["Warum hat die Reederei die Geschäfte mit Aquasul wieder aufgenommen?", ["Sie hat 75 neue Schiffe erworben.", "Sie hat einen neuen Chef.", "Aquasul ist billiger geworden."], 0],
+  ["Was notiert das Team bei der Erfassung der Schlauchleitungen?", ["Nur den Preis der Schläuche.", "Wo die Schläuche sind, wie alt sie sind und wann man sie wechseln muss.", "Die Namen der Mechaniker."], 1],
+  ["Welche Betriebsvorteile sieht Herr Duarte?", ["Mehr Mitarbeiter auf den Schiffen.", "Größere Schiffe.", "Die Mechaniker finden den richtigen Schlauch schneller, und die Schiffe stehen kürzer still."], 2],
+  ["Was ist im August auf einem alten Schiff passiert?", ["Ein Schlauch ist geplatzt, und Öl ist ausgelaufen.", "Das Schiff ist gesunken.", "Die Messe hat begonnen."], 0],
+  ["Was will Herr Duarte automatisieren?", ["Die Rechnungen.", "Die Präsentationen.", "Die Serviceanforderungen."], 2],
+  ["Was ist mit der Nota Fiscal an die Reederei passiert?", ["Sie war zu teuer.", "Sie wurde doppelt ausgestellt; die zweite wurde storniert.", "Der Kunde hat sie nicht bezahlt."], 1],
+  ["Bis wann sollen die Präsentationen für das Planungsmeeting 2027 da sein?", ["Bis zum 30. November.", "Bis Ende Oktober.", "Bis Weihnachten."], 0]
+];
+const GAP = [
+  ["Herr Lang macht zusammen mit Herrn Pereira den ______.", "Standaufbau"],
+  ["Frau Costa hat eine Liste mit zehn ______ Kunden gemacht.", "strategischen"],
+  ["Die Messe ist für Aquasul vor allem ______.", "Geschäftsanbahnung"],
+  ["Die Reederei hat die Geschäfte mit Aquasul wieder ______.", "aufgenommen"],
+  ["Die Reederei hat 75 neue Schiffe ______.", "erworben"],
+  ["Herr Lang schlägt eine ______ der Schlauchleitungen vor.", "Erfassung"],
+  ["Herr Duarte sieht die ______ sofort.", "Betriebsvorteile"],
+  ["Falsche Schläuche, zu späte Wechsel: Bis jetzt gab es viele ______.", "Betriebsfehler"],
+  ["Die ______ der Leckage hat vier Stunden gedauert.", "Eindämmung"],
+  ["Herr Duarte hat die ______ von Aquasul gelobt.", "Leistungen"],
+  ["Beide Firmen wollen eine ______ formalisieren.", "Handelsvereinbarung"],
+  ["Herr Duarte will die Serviceanforderungen ______.", "automatisieren"],
+  ["Frau Neumann fragt nach der ______ zum Monatsabschluss.", "Umsatzprognose"],
+  ["Die zweite Rechnung hat die Buchhaltung am selben Tag ______.", "storniert"],
+  ["Im November macht Aquasul eine ______.", ["Brandschutzhelfer-Schulung", "Brandschutzhelferschulung"]],
+  ["Bitte schicken Sie Ihre ______ für das Planungsmeeting 2027.", "Präsentationen"]
+];
+const OFFEN = [
+  ["Wie groß ist der Stand?", "30 Quadratmeter."],
+  ["Was kommt am zweiten Tag auf den Stand?", "Die Pumpen, der Filter und der neue Katalog."],
+  ["Was hat das Team nach drei Tagen?", "60 Visitenkarten und 15 konkrete Anfragen."],
+  ["Wer ist Herr Duarte?", "Der technische Leiter der Reederei Litoral aus Paranaguá."],
+  ["Wie lange hat die Reederei nichts bei Aquasul bestellt?", "Zwei Jahre."],
+  ["Was ist im August auf einem alten Schiff passiert?", "Ein Schlauch ist geplatzt, und Öl ist im Maschinenraum ausgelaufen."],
+  ["Wie viele Schiffe sind nach einer Woche erfasst?", "Zehn Schiffe."],
+  ["Was steht in der Handelsvereinbarung?", "Drei Jahre, feste Preise für Pumpen und Schläuche, Service in 24 Stunden."],
+  ["Wie hoch ist die Umsatzprognose zum Monatsabschluss?", "950.000 Reais."],
+  ["Wie viele Mitarbeiter machen die Brandschutzhelfer-Schulung?", "Zwölf Mitarbeiter."]
+];
+const ERKL = [
+  ["„Die Messe ist für uns vor allem Geschäftsanbahnung.“", "Para nós a feira é sobretudo geração de negócios: criar contatos que depois viram pedidos. Não se espera vender na hora."],
+  ["„Jetzt hat der Kunde die Geschäfte mit Aquasul wieder aufgenommen.“", "O cliente, que estava inativo havia dois anos, voltou a fazer negócios com a Aquasul. „mit Aquasul“ deixa claro que foi a relação com a Aquasul que voltou."],
+  ["„Die Reederei hat 75 neue Schiffe erworben.“", "A empresa de navegação adquiriu 75 novas embarcações. „erworben“ = adquirido, mais formal que „gekauft“."],
+  ["„Herr Lang schlägt eine Erfassung der Schlauchleitungen vor.“", "Herr Lang propõe fazer o mapeamento das mangueiras: levantar onde está cada mangueira, a idade e quando trocar."],
+  ["„Die Eindämmung der Leckage hat vier Stunden gedauert.“", "Conter o vazamento levou quatro horas. „eindämmen“ = conter, como um dique segura a água."],
+  ["„Jetzt wollen beide Firmen eine Handelsvereinbarung formalisieren.“", "As duas empresas querem formalizar um acordo comercial, pôr no papel prazo, preços e serviço."],
+  ["„Die zweite Rechnung hat die Buchhaltung am selben Tag storniert.“", "A contabilidade cancelou a segunda nota fiscal no mesmo dia. „stornieren“ = cancelar um documento já emitido."],
+  ["„Im November macht Aquasul eine Brandschutzhelfer-Schulung.“", "Em novembro a Aquasul faz o treinamento da brigada de incêndio: os funcionários aprendem o que fazer se houver fogo no depósito."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>
