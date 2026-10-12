@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Übungen 6: Betriebsordnung, Garantie, Inventur (Wirtschaftsdeutsch A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  /* Übungen */
+  input[type=text], textarea, select { font-family: system-ui, sans-serif; font-size:.95rem; padding:.35rem .5rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); }
+  input[type=text] { width:13rem; max-width:100%; }
+  textarea { width:100%; min-height:4rem; resize:vertical; }
+  button { font-family: system-ui, sans-serif; font-size:.95rem; background:var(--accent); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin-top:.75rem; }
+  button:hover { background:#9a3625; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .ergebnis { font-family: system-ui, sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:1rem; font-family: system-ui, sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  details ul, details ol { margin:.5rem 0 0; padding-left:1.4rem; }
+  details li { margin:.25rem 0; }
+  .wortkasten { font-family: system-ui, sans-serif; background:#fbfaf7; border:1px dashed var(--muted); padding:.6rem .9rem; border-radius:8px; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--card); border:1px solid var(--line); padding:.1rem .5rem; border-radius:999px; }
+  .aufgabe { margin:.75rem 0; padding:.5rem .6rem; border-radius:6px; border-bottom:1px solid var(--line); }
+  .aufgabe p { margin:.2rem 0 .4rem; }
+  .aufgabe label { display:block; padding:.15rem .4rem; border-radius:4px; font-family: system-ui, sans-serif; font-size:.95rem; }
+  .aufgabe .satz { font-size:1.02rem; }
+  .aufgabe .pt-satz { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; }
+  .hinweis { font-family: system-ui, sans-serif; font-size:.85rem; color:var(--muted); }
+  #gesamt { font-family: system-ui, sans-serif; font-size:1.15rem; text-align:center; margin-top:1rem; }
+  td select { max-width:100%; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Übungen 6: Betriebsordnung, Garantie, Inventur</h1>
+  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 9 – alteração do regulamento interno, registro de ponto, reunião com todos os funcionários, prevenção de acidentes, redução da jornada, negociações sindicais, substituição de mangueiras em garantia, material incorreto, destinação do estoque, venda de mangueiras próximas ao vencimento, inventário das filiais e cliente com produção reduzida.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-9-planung.html">📄 Text 9</a><a href="uebungen-5.html">✏️ Übungen 5</a><a href="gabarito-uebungen-6.html">🖨️ Gabarito</a></nav>
+
+<section id="uebung1">
+  <h2>1. Zuordnung: Artikel + Bedeutung</h2>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <table>
+    <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
+    <tbody id="e1-body"></tbody>
+  </table>
+  <button type="button" id="e1-btn">Prüfen</button><span class="ergebnis" id="e1-erg"></span>
+  <details><summary>Lösung</summary><div id="e1-loesung"></div></details>
+</section>
+
+<section id="uebung2">
+  <h2>2. Lückentext</h2>
+  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). Verbos, particípios e adjetivos também entram. A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
+  <div class="wortkasten" id="e2-kasten"></div>
+  <div id="e2-body"></div>
+  <button type="button" id="e2-btn">Prüfen</button><span class="ergebnis" id="e2-erg"></span>
+  <details><summary>Lösung</summary><ol id="e2-loesung"></ol></details>
+</section>
+
+<section id="uebung3">
+  <h2>3. Welches Wort passt? (Dolmetscher-Entscheidung)</h2>
+  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual formulação alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
+  <div id="e3-body"></div>
+  <button type="button" id="e3-btn">Prüfen</button><span class="ergebnis" id="e3-erg"></span>
+  <details><summary>Lösung</summary><ol id="e3-loesung"></ol></details>
+</section>
+
+<section id="uebung4">
+  <h2>4. Dolmetschen DE → PT</h2>
+  <p class="pt">Um alemão diz a frase na reunião. Escreva a interpretação em português. Não há correção automática – compare com a tradução-modelo em „Lösung“.</p>
+  <div id="e4-body"></div>
+  <details><summary>Lösung</summary><ol id="e4-loesung"></ol></details>
+</section>
+
+<section id="uebung5">
+  <h2>5. Dolmetschen PT → DE</h2>
+  <p class="pt">Um brasileiro diz a frase na reunião. Escreva a interpretação em alemão. Compare depois com o modelo em „Lösung“ (às vezes com uma alternativa).</p>
+  <div id="e5-body"></div>
+  <details><summary>Lösung</summary><ol id="e5-loesung"></ol></details>
+</section>
+
+<section id="uebung6">
+  <h2>6. Hörverstehen-Simulation (Schnellerkennung)</h2>
+  <p class="pt">Leia (ou peça a alguém para ler em voz alta) cada frase uma única vez e marque QUAIS termos da lista aparecem nela como palavra inteira. Pode haver mais de um termo por frase. A frase só conta ponto se a seleção estiver exatamente certa.</p>
+  <div id="e6-body"></div>
+  <button type="button" id="e6-btn">Prüfen</button><span class="ergebnis" id="e6-erg"></span>
+  <details><summary>Lösung</summary><ol id="e6-loesung"></ol></details>
+</section>
+
+<section id="gesamt-sektion">
+  <h2>Gesamtergebnis</h2>
+  <p class="pt">Corrige as Übungen 1, 2, 3 e 6 de uma vez e mostra a pontuação total (as Übungen 4 e 5 são de produção livre).</p>
+  <div style="text-align:center"><button type="button" id="alle-btn">Alle Übungen prüfen</button></div>
+  <p id="gesamt">Gesamt: – / 62</p>
+</section>
+</main>
+<footer>Übungen 6 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Daten ---------- */
+  var TERMS = [
+    { t: "Betriebsordnung", a: "die", p: "regulamento interno (para os funcionários)" },
+    { t: "Geschäftsordnung", a: "die", p: "regimento (de diretoria, conselho)" },
+    { t: "Zeiterfassung", a: "die", p: "registro de ponto (o sistema)" },
+    { t: "Arbeitszeitnachweis", a: "der", p: "espelho de ponto (o documento)" },
+    { t: "Stempeluhr", a: "die", p: "relógio de ponto" },
+    { t: "Mitarbeiterversammlung", a: "die", p: "reunião com todos os funcionários" },
+    { t: "Betriebsrat", a: "der", p: "comissão de representantes dos funcionários" },
+    { t: "Unfallverhütung", a: "die", p: "prevenção de acidentes" },
+    { t: "Arbeitsschutz", a: "der", p: "segurança do trabalho" },
+    { t: "Arbeitszeitverkürzung", a: "die", p: "redução da jornada de trabalho" },
+    { t: "Kurzarbeit", a: "die", p: "jornada reduzida temporária, com subsídio" },
+    { t: "Tarifverhandlung", a: "die", p: "negociação coletiva, sindical" },
+    { t: "Gewerkschaft", a: "die", p: "sindicato" },
+    { t: "Garantie", a: "die", p: "garantia (do fabricante)" },
+    { t: "Gewährleistung", a: "die", p: "garantia legal" },
+    { t: "Austausch", a: "der", p: "substituição, troca" },
+    { t: "Falschlieferung", a: "die", p: "entrega errada" },
+    { t: "Lagerbestand", a: "der", p: "estoque" },
+    { t: "Verwendung", a: "die", p: "uso, destinação" },
+    { t: "Abverkauf", a: "der", p: "venda para liquidar o estoque" },
+    { t: "Haltbarkeitsdatum", a: "das", p: "data de validade (produto técnico)" },
+    { t: "Inventur", a: "die", p: "inventário (contagem do estoque)" },
+    { t: "Inventar", a: "das", p: "inventário (lista de bens)" },
+    { t: "Filiale", a: "die", p: "filial" }
+  ];
+
+  var GAPS = [
+    { s: "Der Betriebsrat hat die ___ der Betriebsordnung unterschrieben.", h: "alteração", a: "Änderung" },
+    { s: "Ab März haben wir eine elektronische ___; die Stempeluhr kommt weg.", h: "registro de ponto", a: ["Zeiterfassung", "Arbeitszeiterfassung"] },
+    { s: "Bitte schicken Sie mir Ihren ___ für November.", h: "espelho de ponto", a: "Arbeitszeitnachweis" },
+    { s: "Auf der ___ im Januar erklärt Frau Costa das Jahr 2027.", h: "reunião com todos os funcionários", a: ["Mitarbeiterversammlung", "Belegschaftsversammlung"] },
+    { s: "Helme, gelbe Linien, Schulungen: Das ist unser Programm für die ___.", h: "prevenção de acidentes", a: ["Unfallverhütung", "Unfallprävention"] },
+    { s: "Die Gewerkschaft fordert eine ___ auf vier Tage pro Woche.", h: "redução da jornada", a: ["Arbeitszeitverkürzung", "Arbeitszeitreduzierung"] },
+    { s: "Die ___ in der Metallindustrie beginnen im Februar.", h: "negociações sindicais", a: "Tarifverhandlungen" },
+    { s: "Nordlicht macht den ___ von Schläuchen im Rahmen der Garantie.", h: "substituição", a: "Austausch" },
+    { s: "Die Lieferung war ___ Material: Wasser statt Öl.", h: "incorreto, errado", a: "falsches" },
+    { s: "Was machen wir mit den 200 Schläuchen? Das ist die Frage der ___ des Lagerbestands.", h: "destinação", a: ["Verwendung", "Verwertung"] },
+    { s: "Im Januar machen wir einen ___ mit 30 Prozent Rabatt.", h: "venda para liquidar o estoque", a: "Abverkauf" },
+    { s: "Das ___ der Schläuche läuft im Juni ab.", h: "data de validade", a: ["Haltbarkeitsdatum", "Ablaufdatum"] },
+    { s: "Am 15. Januar ist die ___ in allen Filialen.", h: "inventário, contagem", a: ["Inventur", "Bestandsaufnahme"] },
+    { s: "Der Kunde hat die Produktion bis Dezember ___.", h: "reduziu", a: ["reduziert", "gedrosselt", "heruntergefahren"] }
+  ];
+
+  var CHOICE = [
+    { q: "„A alteração do regulamento interno vale a partir de janeiro.“", o: ["Die Änderung der Geschäftsordnung gilt ab Januar.", "Die Änderung der Betriebsordnung gilt ab Januar.", "Die Änderung der Hausordnung gilt ab Januar."], c: 1,
+      e: "Betriebsordnung (ou Arbeitsordnung) = regras internas para os funcionários. Geschäftsordnung = regimento de um órgão (diretoria, conselho); Hausordnung = regras do prédio." },
+    { q: "„Vamos implantar o registro de ponto eletrônico.“", o: ["Wir führen die elektronische Zeiterfassung ein.", "Wir führen die elektronische Punktregistrierung ein.", "Wir führen den elektronischen Zeitpunkt ein."], c: 0,
+      e: "Zeiterfassung (ou Arbeitszeiterfassung). „Punktregistrierung“ é tradução literal e não se usa; der Zeitpunkt = momento." },
+    { q: "„Me mande o seu espelho de ponto de novembro.“", o: ["Schicken Sie mir Ihren Arbeitszeitnachweis für November.", "Schicken Sie mir Ihren Zeitspiegel für November.", "Schicken Sie mir Ihre Zeiterfassung für November."], c: 0,
+      e: "Arbeitszeitnachweis = o documento com as horas. Zeiterfassung = o sistema, não o papel; „Zeitspiegel“ não existe." },
+    { q: "„Na sexta tem reunião com todos os funcionários.“", o: ["Am Freitag ist Betriebsversammlung mit allen Mitarbeitern.", "Am Freitag ist Mitarbeiterversammlung.", "Am Freitag ist Mitarbeiterbesprechung mit allen."], c: 1,
+      e: "Mitarbeiterversammlung (ou Belegschaftsversammlung). Betriebsversammlung na Alemanha é convocada pelo Betriebsrat, e „mit allen Mitarbeitern“ é redundante. Besprechung = reunião de trabalho pequena." },
+    { q: "„Prevenção de acidentes é prioridade.“", o: ["Unfallvorbeugung hat Priorität.", "Unfallverhütung hat Priorität.", "Unfallverhinderung hat Priorität."], c: 1,
+      e: "Unfallverhütung é o termo oficial (UVV). Unfallvorbeugung se entende, mas é raro; Verhinderung = impedir um evento concreto, não prevenção em geral." },
+    { q: "„O sindicato quer a redução da jornada de trabalho.“", o: ["Die Gewerkschaft will Kurzarbeit.", "Die Gewerkschaft will eine Arbeitszeitverkürzung.", "Die Gewerkschaft will eine Arbeitszeitkürzung."], c: 1,
+      e: "Arbeitszeitverkürzung (ou Verkürzung der Arbeitszeit, Arbeitszeitreduzierung). Kurzarbeit = redução temporária com subsídio do Estado; „Arbeitszeitkürzung“ soa a corte e não se usa." },
+    { q: "„As negociações sindicais começam em fevereiro.“", o: ["Die Gewerkschaftsverhandlungen beginnen im Februar.", "Die Tarifverhandlungen beginnen im Februar.", "Die Syndikatsverhandlungen beginnen im Februar."], c: 1,
+      e: "Tarifverhandlungen. Gewerkschaftsverhandlungen se entende, mas quase não se usa; das Syndikat = cartel, não sindicato." },
+    { q: "„A substituição das mangueiras é em garantia.“", o: ["Der Schläuchenaustausch läuft auf Garantie.", "Der Schlauchaustausch läuft auf Garantie.", "Der Schlauchersatz läuft auf Garantie."], c: 1,
+      e: "Schlauchaustausch: no composto, Schlauch fica no singular. „Schläuchenaustausch“ não existe; Ersatz = reposição, peça (Ersatzteil), não a ação de trocar." },
+    { q: "„Foi entregue material incorreto.“", o: ["Es wurde inkorrektes Material geliefert.", "Es wurde fehlerhaftes Material geliefert.", "Es wurde falsches Material geliefert."], c: 2,
+      e: "falsches Material = o material errado. fehlerhaft = com defeito (outra reclamação); inkorrekt se usa para dados e comportamento." },
+    { q: "„Qual é a destinação do estoque?“", o: ["Was ist der Bestimmungsort des Lagerbestands?", "Was ist die Verwendung des Lagerbestands?", "Was ist das Ziel des Lagerbestands?"], c: 1,
+      e: "Verwendung (ou Verwertung) = o que fazer com o estoque. Bestimmungsort = destino geográfico de uma remessa; Ziel = meta." },
+    { q: "„Vamos vender as mangueiras próximas ao vencimento.“", o: ["Wir verkaufen die Schläuche mit kurze Ablaufzeit.", "Wir verkaufen die Schläuche mit kurzer Restlaufzeit.", "Wir verkaufen die Schläuche mit kurzem Verfallsdatum."], c: 1,
+      e: "mit kurzer Restlaufzeit (Dativ: kurzer) ou „deren Haltbarkeitsdatum bald abläuft“. „mit kurze“ está sem declinação; Verfallsdatum é de remédio e alimento." },
+    { q: "„Em janeiro fazemos o inventário das filiais.“", o: ["Im Januar machen wir das Inventar der Filialen.", "Im Januar machen wir die Inventur in den Filialen.", "Im Januar machen wir die Inventarisierung der Filialen."], c: 1,
+      e: "Inventur = contagem do estoque. das Inventar = a lista de bens, os móveis; Inventarisierung = cadastrar bens no patrimônio." }
+  ];
+
+  var DE_PT = [
+    { de: "„Ab Januar gilt die neue Betriebsordnung; der Betriebsrat hat zugestimmt.“", pt: "„A partir de janeiro vale o novo regulamento interno; a comissão de funcionários concordou.“" },
+    { de: "„Mit der neuen Zeiterfassung sehen wir die Überstunden sofort.“", pt: "„Com o novo registro de ponto vemos as horas extras na hora.“" },
+    { de: "„Auf der Mitarbeiterversammlung erklären wir das Jahr 2027.“", pt: "„Na reunião com todos os funcionários explicamos o ano de 2027.“" },
+    { de: "„Unfallverhütung ist bei uns das Thema Nummer eins im Lager.“", pt: "„Prevenção de acidentes é para nós o assunto número um no depósito.“" },
+    { de: "„Die Gewerkschaft fordert eine Arbeitszeitverkürzung bei gleichem Lohn.“", pt: "„O sindicato reivindica a redução da jornada com o mesmo salário.“" },
+    { de: "„Die Tarifverhandlungen beginnen im Februar und dauern oft Monate.“", pt: "„As negociações sindicais começam em fevereiro e muitas vezes duram meses.“" },
+    { de: "„Die Schläuche waren falsches Material; wir tauschen sie im Rahmen der Garantie aus.“", pt: "„As mangueiras eram material incorreto; vamos substituí-las em garantia.“" },
+    { de: "„Besser verkaufen als verschrotten: Wir machen einen Abverkauf mit 30 Prozent Rabatt.“", pt: "„Melhor vender do que sucatear: fazemos uma queima de estoque com 30% de desconto.“" },
+    { de: "„Die Inventur in den Filialen ist am 15. Januar; an diesem Tag gibt es keine Lieferungen.“", pt: "„O inventário das filiais é em 15 de janeiro; nesse dia não há entregas.“" },
+    { de: "„Der Kunde hat die Produktion bis Dezember reduziert und bestellt 40 Prozent weniger.“", pt: "„O cliente reduziu a produção até dezembro e está pedindo 40% a menos.“" }
+  ];
+
+  var PT_DE = [
+    { pt: "„A alteração do regulamento interno vale a partir de janeiro.“", de: "„Die Änderung der Betriebsordnung gilt ab Januar.“", alt: "„Die neue Betriebsordnung gilt ab Januar.“" },
+    { pt: "„O registro de ponto é obrigatório no Brasil a partir de 20 funcionários.“", de: "„Die Zeiterfassung ist in Brasilien ab 20 Mitarbeitern Pflicht.“", alt: "„Die Arbeitszeiterfassung ist in Brasilien ab 20 Mitarbeitern vorgeschrieben.“" },
+    { pt: "„Em janeiro temos uma reunião com todos os funcionários.“", de: "„Im Januar haben wir eine Mitarbeiterversammlung.“", alt: "„Im Januar haben wir eine Versammlung mit allen Mitarbeitern.“" },
+    { pt: "„Fizemos um programa de prevenção de acidentes.“", de: "„Wir haben ein Programm für die Unfallverhütung gemacht.“", alt: "„Wir haben ein Unfallverhütungsprogramm aufgestellt.“" },
+    { pt: "„A redução da jornada custa caro para a empresa.“", de: "„Die Arbeitszeitverkürzung ist teuer für die Firma.“", alt: "„Die Verkürzung der Arbeitszeit kostet die Firma viel Geld.“" },
+    { pt: "„As negociações sindicais no Brasil são em maio.“", de: "„Die Tarifverhandlungen in Brasilien sind im Mai.“", alt: "„Die Verhandlungen mit der Gewerkschaft sind in Brasilien im Mai.“" },
+    { pt: "„A substituição das mangueiras em garantia não custa nada para o cliente.“", de: "„Der Austausch der Schläuche im Rahmen der Garantie kostet den Kunden nichts.“", alt: "„Der Schlauchaustausch auf Garantie ist für den Kunden kostenlos.“" },
+    { pt: "„Recebemos material incorreto: mangueiras para água em vez de óleo.“", de: "„Wir haben falsches Material bekommen: Schläuche für Wasser statt für Öl.“", alt: "„Das war eine Falschlieferung: Schläuche für Wasser statt für Öl.“" },
+    { pt: "„Precisamos decidir a destinação do estoque até sexta.“", de: "„Wir müssen die Verwendung des Lagerbestands bis Freitag entscheiden.“", alt: "„Wir müssen bis Freitag entscheiden, was mit dem Lagerbestand passiert.“" },
+    { pt: "„O inventário das filiais é dia 15 de janeiro.“", de: "„Die Inventur in den Filialen ist am 15. Januar.“", alt: "„Die Bestandsaufnahme in den Filialen ist am 15. Januar.“" }
+  ];
+
+  var HOER = [
+    { s: "„Die Änderung der Betriebsordnung gilt ab Januar, die Geschäftsordnung bleibt.“", o: ["Betriebsordnung", "Geschäftsordnung", "Hausordnung", "Änderung"], c: [0, 1, 3] },
+    { s: "„Die Zeiterfassung läuft jetzt per App; den Arbeitszeitnachweis gibt es trotzdem.“", o: ["Zeiterfassung", "Arbeitszeitnachweis", "Stempeluhr", "App"], c: [0, 1, 3] },
+    { s: "„Auf der Mitarbeiterversammlung spricht auch der Betriebsrat.“", o: ["Mitarbeiterversammlung", "Betriebsrat", "Betriebsversammlung", "Belegschaft"], c: [0, 1] },
+    { s: "„Unfallverhütung heißt: Helme, Sicherheitsschuhe und Schulungen.“", o: ["Unfallverhütung", "Arbeitsschutz", "Helme", "Schulungen"], c: [0, 2, 3] },
+    { s: "„Die Gewerkschaft fordert eine Arbeitszeitverkürzung, keine Kurzarbeit.“", o: ["Gewerkschaft", "Arbeitszeitverkürzung", "Kurzarbeit", "Lohn"], c: [0, 1, 2] },
+    { s: "„Die Tarifverhandlungen beginnen im Februar; ein Streik ist möglich.“", o: ["Tarifverhandlungen", "Streik", "Tarifvertrag", "Gewerkschaft"], c: [0, 1] },
+    { s: "„Der Austausch läuft im Rahmen der Garantie, nicht über die Gewährleistung.“", o: ["Austausch", "Garantie", "Gewährleistung", "Reklamation"], c: [0, 1, 2] },
+    { s: "„Das war falsches Material, aber kein fehlerhaftes Material.“", o: ["falsches Material", "fehlerhaftes Material", "Falschlieferung", "Werkstoff"], c: [0, 1] },
+    { s: "„Verwendung oder Abverkauf? Der Lagerbestand muss weg.“", o: ["Verwendung", "Lagerbestand", "Abverkauf", "Inventur"], c: [0, 1, 2] },
+    { s: "„Das Haltbarkeitsdatum läuft im Juni ab, deshalb der Rabatt.“", o: ["Haltbarkeitsdatum", "Verfallsdatum", "Rabatt", "Abverkauf"], c: [0, 2] },
+    { s: "„Die Inventur in den Filialen koordiniert Herr Pereira.“", o: ["Inventur", "Inventar", "Filialen", "Bestandsaufnahme"], c: [0, 2] },
+    { s: "„Der Kunde hat die Produktion bis Dezember reduziert; ab Januar läuft sie normal.“", o: ["Produktion", "reduziert", "Kurzarbeit", "Quartal"], c: [0, 1] }
+  ];
+
+  var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
+  var scores = { e1: null, e2: null, e3: null, e6: null };
+
+  /* ---------- Hilfsfunktionen ---------- */
+  function $(id) { return document.getElementById(id); }
+  function shuffle(arr) {
+    var b = arr.slice(), i, j, tmp;
+    for (i = b.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      tmp = b[i]; b[i] = b[j]; b[j] = tmp;
+    }
+    return b;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function norm(s) { return String(s).trim().replace(/\s+/g, " ").toLowerCase(); }
+  function answers(g) { return Array.isArray(g.a) ? g.a : [g.a]; }
+  function mark(node, ok) {
+    node.classList.remove("richtig", "falsch");
+    node.classList.add(ok ? "richtig" : "falsch");
+  }
+  function showResult(id, ok, max) { $(id).textContent = ok + " / " + max + " richtig"; }
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (b.indexOf(a[i]) === -1) return false; }
+    return true;
+  }
+
+  /* ---------- Übung 1 ---------- */
+  function render1() {
+    var body = $("e1-body");
+    var trans = shuffle(TERMS.map(function (x) { return x.p; }));
+    var html = "";
+    TERMS.forEach(function (x, i) {
+      html += "<tr><td>" + esc(x.t) + "</td>" +
+        "<td><select id=\"e1-art-" + i + "\"><option value=\"\">–</option><option value=\"der\">der</option><option value=\"die\">die</option><option value=\"das\">das</option></select></td>" +
+        "<td><select id=\"e1-pt-" + i + "\"><option value=\"\">–</option>" +
+        trans.map(function (p) { return "<option value=\"" + esc(p) + "\">" + esc(p) + "</option>"; }).join("") +
+        "</select></td></tr>";
+    });
+    body.innerHTML = html;
+    $("e1-loesung").innerHTML = "<ul>" + TERMS.map(function (x) {
+      return "<li><b>" + esc(x.l || (x.a + " " + x.t)) + "</b> – " + esc(x.p) + "</li>";
+    }).join("") + "</ul>";
+  }
+  function check1() {
+    var ok = 0;
+    TERMS.forEach(function (x, i) {
+      var art = $("e1-art-" + i), pt = $("e1-pt-" + i);
+      var a = art.value === x.a, p = pt.value === x.p;
+      mark(art, a); mark(pt, p);
+      if (a && p) ok++;
+    });
+    scores.e1 = ok;
+    showResult("e1-erg", ok, MAX.e1);
+    return ok;
+  }
+
+  /* ---------- Übung 2 ---------- */
+  function render2() {
+    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return answers(g)[0]; }))
+      .map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ");
+    $("e2-body").innerHTML = GAPS.map(function (g, i) {
+      var parts = g.s.split("___");
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(parts[0]) +
+        "<input type=\"text\" id=\"e2-in-" + i + "\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\">" +
+        esc(parts[1]) + " <span class=\"hinweis\">(" + esc(g.h) + ")</span></p></div>";
+    }).join("");
+    $("e2-loesung").innerHTML = GAPS.map(function (g) {
+      var alts = answers(g);
+      return "<li>" + esc(g.s.replace("___", alts[0])) +
+        (alts.length > 1 ? " <span class=\"hinweis\">(auch: " + esc(alts.slice(1).join(", ")) + ")</span>" : "") + "</li>";
+    }).join("");
+  }
+  function check2() {
+    var ok = 0;
+    GAPS.forEach(function (g, i) {
+      var inp = $("e2-in-" + i);
+      var v = norm(inp.value);
+      var r = answers(g).some(function (a) { return norm(a) === v; });
+      mark(inp, r);
+      if (r) ok++;
+    });
+    scores.e2 = ok;
+    showResult("e2-erg", ok, MAX.e2);
+    return ok;
+  }
+
+  /* ---------- Übung 3 ---------- */
+  var choiceOrder = [];
+  function render3() {
+    $("e3-body").innerHTML = CHOICE.map(function (q, i) {
+      var order = shuffle([0, 1, 2]);
+      choiceOrder[i] = order;
+      return "<div class=\"aufgabe\" id=\"e3-frage-" + i + "\"><p class=\"satz\">" + (i + 1) + ". O brasileiro diz: " + esc(q.q) + "</p>" +
+        order.map(function (k) {
+          return "<label id=\"e3-lab-" + i + "-" + k + "\"><input type=\"radio\" name=\"e3-" + i + "\" value=\"" + k + "\"> " + esc(q.o[k]) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e3-loesung").innerHTML = CHOICE.map(function (q) {
+      return "<li>" + esc(q.q) + " → <b>" + esc(q.o[q.c]) + "</b><br><span class=\"hinweis\">" + esc(q.e) + "</span></li>";
+    }).join("");
+  }
+  function check3() {
+    var ok = 0;
+    CHOICE.forEach(function (q, i) {
+      var chosen = document.querySelector("input[name=\"e3-" + i + "\"]:checked");
+      var box = $("e3-frage-" + i);
+      [0, 1, 2].forEach(function (k) { $("e3-lab-" + i + "-" + k).classList.remove("richtig", "falsch"); });
+      if (!chosen) { mark(box, false); return; }
+      box.classList.remove("richtig", "falsch");
+      var r = Number(chosen.value) === q.c;
+      mark($("e3-lab-" + i + "-" + chosen.value), r);
+      if (r) ok++;
+    });
+    scores.e3 = ok;
+    showResult("e3-erg", ok, MAX.e3);
+    return ok;
+  }
+
+  /* ---------- Übung 4 / 5 ---------- */
+  function render4() {
+    $("e4-body").innerHTML = DE_PT.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(x.de) + "</p>" +
+        "<textarea id=\"e4-ta-" + i + "\" placeholder=\"Tradução em português…\"></textarea></div>";
+    }).join("");
+    $("e4-loesung").innerHTML = DE_PT.map(function (x) {
+      return "<li>" + esc(x.de) + "<br>→ <b>" + esc(x.pt) + "</b></li>";
+    }).join("");
+  }
+  function render5() {
+    $("e5-body").innerHTML = PT_DE.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"pt-satz\">" + (i + 1) + ". " + esc(x.pt) + "</p>" +
+        "<textarea id=\"e5-ta-" + i + "\" placeholder=\"Übersetzung auf Deutsch…\" lang=\"de\"></textarea></div>";
+    }).join("");
+    $("e5-loesung").innerHTML = PT_DE.map(function (x) {
+      return "<li>" + esc(x.pt) + "<br>→ <b>" + esc(x.de) + "</b>" +
+        (x.alt ? "<br><span class=\"hinweis\">Alternative: " + esc(x.alt) + "</span>" : "") + "</li>";
+    }).join("");
+  }
+
+  /* ---------- Übung 6 ---------- */
+  function render6() {
+    $("e6-body").innerHTML = HOER.map(function (h, i) {
+      return "<div class=\"aufgabe\" id=\"e6-satz-" + i + "\"><p class=\"satz\">" + (i + 1) + ". " + esc(h.s) + "</p>" +
+        h.o.map(function (opt, j) {
+          return "<label id=\"e6-lab-" + i + "-" + j + "\"><input type=\"checkbox\" id=\"e6-cb-" + i + "-" + j + "\"> " + esc(opt) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e6-loesung").innerHTML = HOER.map(function (h) {
+      return "<li>" + esc(h.s) + "<br>→ <b>" + h.c.map(function (k) { return esc(h.o[k]); }).join(", ") + "</b></li>";
+    }).join("");
+  }
+  function check6() {
+    var ok = 0;
+    HOER.forEach(function (h, i) {
+      var checked = [];
+      h.o.forEach(function (opt, j) {
+        var cb = $("e6-cb-" + i + "-" + j), lab = $("e6-lab-" + i + "-" + j);
+        var should = h.c.indexOf(j) !== -1;
+        lab.classList.remove("richtig", "falsch");
+        if (cb.checked) checked.push(j);
+        if (cb.checked && should) mark(lab, true);
+        else if (cb.checked !== should) mark(lab, false);
+      });
+      if (sameSet(checked, h.c)) ok++;
+    });
+    scores.e6 = ok;
+    showResult("e6-erg", ok, MAX.e6);
+    return ok;
+  }
+
+  /* ---------- Gesamt ---------- */
+  function updateTotal() {
+    var sum = 0, max = 0, key;
+    for (key in MAX) {
+      if (MAX.hasOwnProperty(key)) {
+        max += MAX[key];
+        if (scores[key] !== null) sum += scores[key];
+      }
+    }
+    $("gesamt").textContent = "Gesamt: " + sum + " / " + max;
+  }
+  function checkAll() {
+    check1(); check2(); check3(); check6();
+    updateTotal();
+    $("gesamt").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* ---------- Start ---------- */
+  render1(); render2(); render3(); render4(); render5(); render6();
+  $("e1-btn").addEventListener("click", function () { check1(); updateTotal(); });
+  $("e2-btn").addEventListener("click", function () { check2(); updateTotal(); });
+  $("e3-btn").addEventListener("click", function () { check3(); updateTotal(); });
+  $("e6-btn").addEventListener("click", function () { check6(); updateTotal(); });
+  $("alle-btn").addEventListener("click", checkAll);
+})();
+</script>
+</body>
+</html>

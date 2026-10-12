@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 9: Planungsmeeting in Bremen – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 9: Planungsmeeting in Bremen</h1>
+  <p>Continuação do Text 8, em nível A2/B1: alteração do regulamento interno, registro de ponto, reunião com todos os funcionários, prevenção de acidentes, redução da jornada, negociações sindicais, substituição de mangueiras em garantia, material incorreto, destinação do estoque, venda de mangueiras próximas ao vencimento, inventário das filiais e cliente com produção reduzida até dezembro.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-8-messe.html">📄 Text 8</a><a href="uebungen-6.html">✏️ Übungen 6</a><a href="gabarito-text-9.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Planungsmeeting in Bremen: Zwei Tage, zwölf Themen</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Anfang Dezember fliegen Frau Costa und Herr Pereira nach Bremen. Es ist kalt, drei Grad, und auf dem Marktplatz steht der Weihnachtsmarkt. Im Büro von Nordlicht wartet das Planungsmeeting 2027: zwei Tage, zwölf Themen. Am ersten Tag geht es um das Personal, am zweiten Tag um das Lager und die Kunden. Herr Brandt beginnt mit einer Nachricht aus Bremen: „Ab Januar haben wir eine <mark>Änderung der Betriebsordnung</mark>. Neue Regeln für Homeoffice, für Pausen und für das Rauchen auf dem Hof.“ Der Betriebsrat hat die Änderung schon unterschrieben. Jeder Mitarbeiter bekommt die neue Betriebsordnung auf Papier und per E-Mail.</p>
+
+  <p>Das zweite Thema ist die <mark>Zeiterfassung</mark>. Bei Nordlicht gibt es seit 2025 eine App: Die Mitarbeiter stempeln mit dem Handy ein und aus. Bei Aquasul gibt es noch eine alte Stempeluhr und viel Papier. „In Brasilien ist die Zeiterfassung Pflicht ab 20 Mitarbeitern“, erklärt Frau Costa. „Wir haben 48. Ab März wollen wir auch eine elektronische Zeiterfassung. Dann sehen wir sofort die Überstunden.“ Frau Neumann nickt: „Und die Buchhaltung bekommt die Stunden direkt ins System.“</p>
+
+  <p>Im Januar macht Aquasul eine <mark>Mitarbeiterversammlung</mark>. Alle 48 Mitarbeiter aus Curitiba und Belo Horizonte kommen zusammen. Frau Costa erklärt dort das Jahr 2027: die 75 Schiffe, die neue Zeiterfassung und ein Programm für die <mark>Unfallverhütung</mark>. Der Grund: Im Oktober ist im Lager ein Gabelstapler fast gegen ein Regal gefahren. Niemand war verletzt, aber Frau Costa sagt: „Einmal Glück, das reicht.“ Das Programm hat drei Teile: Helme und Sicherheitsschuhe für alle, gelbe Linien auf dem Boden und eine Schulung pro Monat. Herr Brandt sagt: „Bei uns ist Unfallverhütung das Thema Nummer eins im Lager. Seit vier Jahren hatten wir keinen Unfall.“</p>
+
+  <p>Am Nachmittag spricht Frau Neumann über Deutschland. Im Februar beginnen die <mark>Tarifverhandlungen</mark> in der Metallindustrie. Die Gewerkschaft fordert eine <mark>Arbeitszeitverkürzung</mark>: vier Tage pro Woche bei gleichem Lohn. „Das wird teuer“, sagt Frau Neumann. „Aber die Mitarbeiter wollen es, und wir brauchen gute Leute.“ Frau Costa kennt das Thema aus Brasilien: Dort gibt es jedes Jahr im Mai Verhandlungen mit der Gewerkschaft, aber meistens geht es um mehr Lohn, nicht um weniger Stunden.</p>
+
+  <p>Am zweiten Tag geht es um das Lager. Herr Lang hat schlechte Nachrichten: Der Kunde aus dem Bergbau in Minas Gerais hat reklamiert. Nordlicht hat im Oktober 30 Schläuche geliefert, aber es war <mark>falsches Material</mark>: Schläuche für Wasser, der Kunde braucht aber Schläuche für Öl. „Der Fehler war bei uns im Lager in Bremen“, sagt Herr Lang. „Die Schläuche sind nicht kaputt, sie sind nur falsch.“ Nordlicht macht jetzt den <mark>Austausch von Schläuchen im Rahmen der Garantie</mark>: Der Kunde bekommt 30 neue Schläuche für Öl, ohne Kosten, und Nordlicht bezahlt den Transport.</p>
+
+  <p>Aber was passiert mit den 30 Schläuchen für Wasser? Und mit den 200 Schläuchen in Curitiba, deren Haltbarkeitsdatum im Juni abläuft? Das ist das Thema <mark>Verwendung des Lagerbestands</mark>. Herr Pereira hat eine Idee: „Die 30 Schläuche für Wasser gehen an die Reederei Litoral, die braucht genau diese Größe. Und für die 200 Schläuche machen wir im Januar einen <mark>Abverkauf von Schläuchen mit kurzer Restlaufzeit</mark>: 30 Prozent Rabatt für kleine Kunden.“ Frau Neumann ist einverstanden: „Besser verkaufen als verschrotten. Aber das Haltbarkeitsdatum muss auf der Rechnung stehen.“</p>
+
+  <p>Dann kommt die <mark>Inventur in den Filialen</mark>. Am 15. Januar zählen alle Filialen von Aquasul ihren Bestand: Curitiba, Belo Horizonte und auch das kleine Lager in Paranaguá. Alle am gleichen Tag, von sieben bis zwölf Uhr, und an diesem Tag gibt es keine Lieferungen. Herr Pereira koordiniert die Inventur. Die Zahlen gehen am 16. Januar an Frau Neumann nach Bremen. „Letztes Jahr hatten wir 40 Schläuche zu viel im System“, sagt Frau Costa. „Dieses Jahr wollen wir null Differenz.“</p>
+
+  <p>Das letzte Thema ist ein <mark>Kunde mit reduzierter Produktion bis Dezember</mark>: wieder der Kunde aus dem Bergbau. Der Preis für Eisenerz ist gefallen, und die Firma hat die Produktion bis Dezember reduziert. Deshalb hat sie im letzten Quartal 40 Prozent weniger bestellt. „Ab Januar läuft die Produktion wieder normal“, sagt Herr Lang. „Der Kunde hat es uns schriftlich bestätigt.“ Frau Costa zeigt ihre letzte Folie: 75 Schiffe, 48 Mitarbeiter, null Unfälle. Herr Brandt lacht: „2027 wird ein gutes Jahr. Und jetzt gehen wir auf den Weihnachtsmarkt.“</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 12 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso para a intérprete. Quando a forma da lista original não é usada em alemão, a nota explica por quê. Repare nas armadilhas: Betriebsordnung ≠ Geschäftsordnung, Mitarbeiterversammlung ≠ Betriebsversammlung, Schlauchaustausch (singular no composto), falsch ≠ fehlerhaft, Inventur ≠ Inventar, Kurzarbeit ≠ Arbeitszeitverkürzung.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>alteração do regulamento interno</td><td class="de">die Änderung der Betriebsordnung; die Änderung der Arbeitsordnung; die Betriebsordnung ändern</td><td class="hinweis">die Betriebsordnung (ou Arbeitsordnung) = regras internas para os funcionários: horários, pausas, segurança, fumo. A forma „Änderung der Geschäftsordnung“ da lista só serve para o regimento de um órgão: diretoria, conselho, Betriebsrat, parlamento. die Hausordnung = regras do prédio (visitantes, portaria). der Betriebsrat = comissão de representantes dos funcionários; na Alemanha ele precisa concordar com a Betriebsordnung.</td></tr>
+      <tr><td>registro de ponto</td><td class="de">die Zeiterfassung; die Arbeitszeiterfassung; einstempeln / ausstempeln</td><td class="hinweis">Zeiterfassung = o sistema ou o processo de registrar as horas. der Arbeitszeitnachweis (segunda forma da lista) = o documento que comprova as horas, o espelho de ponto. die Stempeluhr / Stechuhr = relógio de ponto; „bater o ponto“ = stempeln (einstempeln na entrada, ausstempeln na saída). Pflicht = obrigatório; die Überstunden = horas extras.</td></tr>
+      <tr><td>reunião com todos os funcionários</td><td class="de">die Mitarbeiterversammlung; die Belegschaftsversammlung; das All-Hands-Meeting</td><td class="hinweis">Quando a direção convoca: Mitarbeiterversammlung. „Betriebsversammlung mit allen Mitarbeitern“ é redundante e, na Alemanha, die Betriebsversammlung é a assembleia convocada pelo Betriebsrat, por lei (BetrVG). die Belegschaft = o quadro de funcionários. die Versammlung = assembleia, reunião grande; die Besprechung = reunião de trabalho pequena.</td></tr>
+      <tr><td>prevenção de acidentes</td><td class="de">die Unfallverhütung; die Unfallprävention; der Arbeitsschutz</td><td class="hinweis">Unfallverhütung é o termo oficial: die Unfallverhütungsvorschriften (UVV) da Berufsgenossenschaft. „Unfallvorbeugung“ se entende, mas é raro. der Arbeitsschutz = segurança do trabalho em geral. der Arbeitsunfall = acidente de trabalho; verhüten / vermeiden = evitar; die Sicherheitsschuhe = sapatos de segurança; der Gabelstapler = empilhadeira.</td></tr>
+      <tr><td>redução da jornada de trabalho</td><td class="de">die Arbeitszeitverkürzung; die Verkürzung der Arbeitszeit; die Arbeitszeitreduzierung</td><td class="hinweis">As três formas da lista são corretas; na negociação coletiva, a mais comum é Arbeitszeitverkürzung. Cuidado com die Kurzarbeit = redução temporária da jornada com subsídio do Estado, em crise: não é a mesma coisa. die Vier-Tage-Woche = semana de quatro dias; die Wochenarbeitszeit = jornada semanal; bei vollem Lohnausgleich = sem redução de salário.</td></tr>
+      <tr><td>negociações sindicais</td><td class="de">die Tarifverhandlungen; die Verhandlungen mit der Gewerkschaft; die Tarifrunde</td><td class="hinweis">Tarifverhandlungen = a negociação da convenção coletiva (der Tarifvertrag, do Text 4). „Gewerkschaftsverhandlungen“ se entende, mas quase não se usa. O dissídio anual no Brasil: „die jährlichen Tarifverhandlungen“ ou „die Lohnrunde“. fordern = reivindicar; die Forderung = reivindicação; der Streik = greve; die Einigung = o acordo final.</td></tr>
+      <tr><td>substituição de mangueiras em garantia</td><td class="de">der Austausch von Schläuchen im Rahmen der Garantie; der Schlauchaustausch auf Garantie; Schläuche auf Garantie austauschen</td><td class="hinweis">„Schläuchenaustausch“ não existe: no composto, Schlauch fica no singular: Schlauchaustausch, Schlauchwechsel. die Garantie = garantia que o fabricante dá; die Gewährleistung = garantia legal (dois anos na Alemanha), que também pode aparecer na reunião. im Rahmen der Garantie / auf Garantie = em garantia; der Garantiefall = caso de garantia; die Reklamation = reclamação.</td></tr>
+      <tr><td>material incorreto</td><td class="de">falsches Material; das falsche Material; die Falschlieferung</td><td class="hinweis">falsch = errado, não é o que foi pedido. „inkorrektes Material“ é raro: inkorrekt se usa para dados e comportamento. Cuidado com fehlerhaftes Material = material com defeito, que é outra reclamação. die Falschlieferung = entrega errada; das Material = material; der Werkstoff = material no sentido técnico (borracha, aço).</td></tr>
+      <tr><td>destinação do estoque</td><td class="de">die Verwendung des Lagerbestands; die Verwertung der Bestände; Was machen wir mit dem Bestand?</td><td class="hinweis">Quando a pergunta é „o que fazer com o estoque“ (vender, transferir, sucatear), use Verwendung ou Verwertung. „Bestimmungsort“ da lista é o destino geográfico de uma remessa, para onde o caminhão vai; „Ziel“ é meta. der Lagerbestand = estoque; der Restbestand = sobra; verschrotten = sucatear; entsorgen = descartar; umlagern = transferir para outro depósito.</td></tr>
+      <tr><td>venda de mangueiras próximas ao vencimento</td><td class="de">der Abverkauf von Schläuchen mit kurzer Restlaufzeit; der Verkauf von Schläuchen, deren Haltbarkeitsdatum bald abläuft; Schläuche kurz vor Ablauf</td><td class="hinweis">„mit kurze Ablaufzeit“ tem erro de declinação (mit + Dativ: mit kurzer …), e Ablaufzeit não se usa assim. das Verfallsdatum é de remédio e alimento; para borracha e mangueiras: das Haltbarkeitsdatum, das Ablaufdatum, die Haltbarkeit. ablaufen = vencer; abgelaufen = vencido; der Abverkauf = venda para liquidar o estoque; der Rabatt = desconto.</td></tr>
+      <tr><td>inventário das filiais</td><td class="de">die Inventur in den Filialen; die Bestandsaufnahme in den Filialen; die Inventur der Niederlassungen</td><td class="hinweis">Falso amigo: das Inventar = a lista de bens, os móveis e equipamentos; die Inventur = a contagem do estoque. „Fazer o inventário“ = Inventur machen / durchführen. die Bestandsaufnahme = levantamento (Text 8). die Filiale = filial; die Niederlassung = unidade da empresa (Text 7). zählen = contar; die Differenz = divergência entre sistema e contagem.</td></tr>
+      <tr><td>cliente com produção reduzida até dezembro</td><td class="de">ein Kunde mit reduzierter Produktion bis Dezember; Der Kunde hat die Produktion bis Dezember reduziert; Der Kunde fährt die Produktion bis Dezember herunter</td><td class="hinweis">A forma da lista está correta. Em frase, prefira o verbo: „hat … reduziert“, „fährt … herunter“ (reduz aos poucos), „hat … gedrosselt“ (desacelerou). mit reduzierter Produktion: particípio como adjetivo no Dativ feminino. bis Dezember = até dezembro, em geral inclusive; „bis Ende Dezember“ é mais claro. das Quartal = trimestre; das Eisenerz = minério de ferro.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-6.html">✏️ Übungen 6</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH, Aquasul und die Reederei Litoral existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Frau Costa und Herr Pereira fliegen im Dezember nach Bremen.", true, ""],
+  ["Das Planungsmeeting dauert drei Tage.", false, "Zwei Tage: am ersten Tag Personal, am zweiten Tag Lager und Kunden."],
+  ["Die Änderung der Betriebsordnung gilt ab Januar.", true, ""],
+  ["Bei Aquasul stempeln die Mitarbeiter schon mit dem Handy ein.", false, "Bei Aquasul gibt es noch eine alte Stempeluhr; die App hat Nordlicht."],
+  ["Aquasul hat 48 Mitarbeiter.", true, ""],
+  ["Im Oktober wurde ein Mitarbeiter im Lager verletzt.", false, "Niemand war verletzt; der Gabelstapler ist nur fast gegen ein Regal gefahren."],
+  ["Die Gewerkschaft fordert vier Tage pro Woche bei gleichem Lohn.", true, ""],
+  ["Die 30 Schläuche für den Kunden aus dem Bergbau waren kaputt.", false, "Sie waren nicht kaputt, nur falsch: Schläuche für Wasser statt für Öl."],
+  ["Der Kunde bezahlt den Transport für die neuen Schläuche.", false, "Nordlicht bezahlt den Transport."],
+  ["Das Haltbarkeitsdatum der 200 Schläuche in Curitiba läuft im Juni ab.", true, ""],
+  ["Die Inventur ist am 15. Januar in allen Filialen am gleichen Tag.", true, ""],
+  ["Der Kunde aus dem Bergbau hat die Produktion reduziert, weil der Ölpreis gestiegen ist.", false, "Der Preis für Eisenerz ist gefallen."]
+];
+const MC = [
+  ["Was ändert sich mit der Änderung der Betriebsordnung?", ["Neue Regeln für Homeoffice, Pausen und Rauchen.", "Neue Preise für Pumpen.", "Ein neuer Chef für das Lager."], 0],
+  ["Wie funktioniert die Zeiterfassung bei Nordlicht?", ["Mit Papier.", "Mit einer App auf dem Handy.", "Mit einer alten Stempeluhr."], 1],
+  ["Ab wie vielen Mitarbeitern ist die Zeiterfassung in Brasilien Pflicht?", ["Ab 20 Mitarbeitern.", "Ab 48 Mitarbeitern.", "Ab 100 Mitarbeitern."], 0],
+  ["Was erklärt Frau Costa auf der Mitarbeiterversammlung?", ["Nur die neue Zeiterfassung.", "Das Jahr 2027: die Schiffe, die Zeiterfassung und die Unfallverhütung.", "Die Tarifverhandlungen in Deutschland."], 1],
+  ["Warum macht Aquasul ein Programm für die Unfallverhütung?", ["Ein Gabelstapler ist fast gegen ein Regal gefahren.", "Die Gewerkschaft fordert es.", "Ein Schlauch ist geplatzt."], 0],
+  ["Was fordert die Gewerkschaft in den Tarifverhandlungen?", ["Mehr Urlaub.", "Eine Arbeitszeitverkürzung: vier Tage pro Woche bei gleichem Lohn.", "Eine neue Betriebsordnung."], 1],
+  ["Was war das Problem mit den 30 Schläuchen?", ["Sie waren zu teuer.", "Sie waren kaputt.", "Es war falsches Material: Schläuche für Wasser statt für Öl."], 2],
+  ["Was passiert mit den 30 Schläuchen für Wasser?", ["Sie gehen an die Reederei Litoral.", "Nordlicht verschrottet sie.", "Der Kunde aus dem Bergbau behält sie."], 0],
+  ["Wer koordiniert die Inventur in den Filialen?", ["Frau Neumann.", "Herr Pereira.", "Herr Lang."], 1],
+  ["Wie viel weniger hat der Kunde aus dem Bergbau im letzten Quartal bestellt?", ["10 Prozent weniger.", "40 Prozent weniger.", "75 Prozent weniger."], 1]
+];
+const GAP = [
+  ["Ab Januar gibt es bei Nordlicht eine Änderung der ______.", "Betriebsordnung"],
+  ["Bei Nordlicht gibt es seit 2025 eine App für die ______.", "Zeiterfassung"],
+  ["Im Januar macht Aquasul eine ______ mit allen 48 Mitarbeitern.", "Mitarbeiterversammlung"],
+  ["Helme, gelbe Linien und Schulungen: das Programm für die ______.", "Unfallverhütung"],
+  ["Die Gewerkschaft fordert eine ______: vier Tage pro Woche.", "Arbeitszeitverkürzung"],
+  ["Im Februar beginnen die ______ in der Metallindustrie.", "Tarifverhandlungen"],
+  ["Nordlicht macht den ______ von Schläuchen im Rahmen der Garantie.", "Austausch"],
+  ["Es war ______ Material: Schläuche für Wasser statt für Öl.", "falsches"],
+  ["Die ______ des Lagerbestands ist ein Thema am zweiten Tag.", "Verwendung"],
+  ["Für die 200 Schläuche macht Aquasul einen ______ mit 30 Prozent Rabatt.", "Abverkauf"],
+  ["Am 15. Januar ist die ______ in den Filialen.", "Inventur"],
+  ["Der Kunde aus dem Bergbau ist ein Kunde mit ______ Produktion bis Dezember.", "reduzierter"]
+];
+const OFFEN = [
+  ["Wie ist das Wetter in Bremen?", "Kalt, drei Grad."],
+  ["Wie viele Themen hat das Planungsmeeting?", "Zwölf Themen an zwei Tagen."],
+  ["Wer hat die Änderung der Betriebsordnung unterschrieben?", "Der Betriebsrat."],
+  ["Ab wann will Aquasul eine elektronische Zeiterfassung?", "Ab März."],
+  ["Was ist im Oktober im Lager von Aquasul passiert?", "Ein Gabelstapler ist fast gegen ein Regal gefahren."],
+  ["Welche drei Teile hat das Programm für die Unfallverhütung?", "Helme und Sicherheitsschuhe, gelbe Linien auf dem Boden und eine Schulung pro Monat."],
+  ["Braucht der Kunde aus dem Bergbau Schläuche für Wasser oder für Öl?", "Für Öl."],
+  ["Wie viel Rabatt gibt es beim Abverkauf?", "30 Prozent."],
+  ["Wann gehen die Zahlen der Inventur nach Bremen?", "Am 16. Januar."],
+  ["Was zeigt Frau Costa auf ihrer letzten Folie?", "75 Schiffe, 48 Mitarbeiter, null Unfälle."]
+];
+const ERKL = [
+  ["„Ab Januar haben wir eine Änderung der Betriebsordnung.“", "A partir de janeiro muda o regulamento interno da empresa: novas regras para home office, pausas e fumo. Betriebsordnung = regulamento interno para os funcionários, não o regimento da diretoria."],
+  ["„In Brasilien ist die Zeiterfassung Pflicht ab 20 Mitarbeitern.“", "No Brasil o registro de ponto é obrigatório para empresas com mais de 20 funcionários. Zeiterfassung = o controle das horas trabalhadas."],
+  ["„Im Januar macht Aquasul eine Mitarbeiterversammlung.“", "Em janeiro a Aquasul faz uma reunião com todos os funcionários, convocada pela direção."],
+  ["„Bei uns ist Unfallverhütung das Thema Nummer eins im Lager.“", "Para nós, a prevenção de acidentes é a prioridade número um no depósito."],
+  ["„Die Gewerkschaft fordert eine Arbeitszeitverkürzung.“", "O sindicato reivindica a redução da jornada de trabalho: aqui, quatro dias por semana com o mesmo salário."],
+  ["„Nordlicht macht den Austausch von Schläuchen im Rahmen der Garantie.“", "A Nordlicht faz a substituição das mangueiras em garantia: o cliente recebe mangueiras novas sem custo, porque o erro foi da Nordlicht."],
+  ["„Besser verkaufen als verschrotten.“", "Melhor vender do que sucatear: a venda com desconto das mangueiras próximas ao vencimento ainda traz receita."],
+  ["„Der Kunde hat die Produktion bis Dezember reduziert.“", "O cliente reduziu a produção até dezembro; por isso pediu 40% a menos no último trimestre. A partir de janeiro volta ao normal."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>
