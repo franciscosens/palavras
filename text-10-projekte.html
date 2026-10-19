@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 10: Neue Projekte im neuen Jahr – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 10: Neue Projekte im neuen Jahr</h1>
+  <p>Continuação do Text 9, em nível A2/B1: encerrar contrato temporário, melhorias na operação do cliente, envio de técnico para outra filial, atender um projeto nos EUA, aquisição de impressoras para o estoque central, reestruturação do catálogo on-line e visitas às filiais e aos clientes.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-9-planung.html">📄 Text 9</a><a href="uebungen-7.html">✏️ Übungen 7</a><a href="gabarito-text-10.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Neue Projekte im neuen Jahr: das erste Abstimmungsmeeting 2027</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Es ist der 28. Januar. In Bremen schneit es, in Curitiba sind es 31 Grad. Um 14 Uhr deutscher Zeit, also um 10 Uhr in Curitiba, beginnt das erste Abstimmungsmeeting 2027 per Video. In Bremen sitzen Herr Brandt, Frau Neumann und Herr Lang am Bildschirm, in Curitiba Frau Costa. Herr Pereira ist aus Belo Horizonte zugeschaltet. Zuerst kommen die Zahlen vom Januar: Bei der Inventur am 15. Januar gab es nur vier Schläuche Differenz, und beim Abverkauf hat Aquasul schon 150 von 200 Schläuchen verkauft. Frau Neumann ist zufrieden: „Vier ist nicht null, aber viel besser als 40.“</p>
+
+  <p>Das erste neue Thema ist das Personal. Für die Inventur und den Abverkauf hat Aquasul im November zwei Aushilfen eingestellt, mit befristeten Verträgen bis Ende April. Jetzt ist die Arbeit früher fertig als geplant. „Wir müssen <mark>einen befristeten Vertrag beenden</mark>, schon Ende Februar“, sagt Frau Costa. Frau Neumann fragt: „Geht das? In Deutschland kann man einen befristeten Vertrag nur früher kündigen, wenn es im Vertrag steht.“ – „In Brasilien geht es, aber wir zahlen eine Entschädigung“, antwortet Frau Costa. „Das haben wir schon gerechnet.“ Die zweite Aushilfe, Lucas, hat sehr gut gearbeitet. Sein Vertrag läuft nicht einfach aus: Ab März bekommt er einen unbefristeten Vertrag als Lagerist im Zentrallager.</p>
+
+  <p>Dann berichtet Frau Costa über die Reederei Litoral. Seit Oktober hat Aquasul die Schlauchleitungen auf 30 von 75 Schiffen erfasst. Jetzt kommt der nächste Schritt: die <mark>Verbesserung der Abläufe beim Kunden</mark>. Früher hat ein Mechaniker oft zwei Stunden einen Ersatzschlauch gesucht, heute findet er ihn mit der Liste in zehn Minuten. Aquasul schlägt zwei weitere Verbesserungen vor: ein kleines Schlauchlager direkt am Hafen und einen Wartungsplan für jedes Schiff. „Herr Duarte ist begeistert“, sagt Frau Costa. „Seit November gab es keine große Leckage mehr, und die Schiffe stehen nicht mehr so lange still.“</p>
+
+  <p>Herr Pereira hat ein Problem in Belo Horizonte. Der Kunde aus dem Bergbau produziert seit Januar wieder normal und bestellt wieder mehr, aber die Niederlassung hat nur einen Techniker. Frau Costa hat eine Lösung: die <mark>Entsendung eines Technikers in eine andere Niederlassung</mark>. Herr Rocha, Techniker aus Curitiba, arbeitet von Februar bis April in Belo Horizonte. „Ist das eine Dienstreise?“, fragt Herr Brandt. „Nein, für eine Dienstreise sind drei Monate zu lang“, sagt Frau Costa. „Und es ist auch keine Versetzung: Im Mai kommt er zurück nach Curitiba. Aquasul bezahlt das Hotel und die Spesen.“</p>
+
+  <p>Dann hat Herr Brandt eine Überraschung. Nordlicht hat einen neuen Kunden in Houston, Texas: eine Reederei mit zwölf Versorgungsschiffen für Ölplattformen. Sie will das gleiche Projekt wie die Reederei Litoral, aber Nordlicht hat kein Team in Amerika. „Kann Aquasul <mark>ein Projekt in den USA betreuen</mark>?“, fragt Herr Brandt. Frau Costa denkt kurz nach. „Betreuen ja: Wir machen die Erfassung der Schlauchleitungen und die Schulung für die Mechaniker. Aber die Montage der neuen Schläuche kann ein Partner in Houston durchführen.“ Im April fliegen Frau Costa und Herr Lang in die USA. „Herr Lang braucht kein Visum, aber ich schon“, sagt Frau Costa. „Ein Termin im Konsulat dauert oft Wochen. Ich beantrage das Visum sofort.“</p>
+
+  <p>Frau Neumann hat noch eine Frage zur Inventur: Woher kommen die vier Schläuche Differenz? Die Antwort ist einfach: aus dem Zentrallager in Curitiba. Die zwei Etikettendrucker vom letzten Mai sind immer besetzt, und die Lieferscheine druckt das Büro im ersten Stock. „Die Lageristen laufen jeden Tag zwanzigmal die Treppe hoch“, sagt Frau Costa. „Da passieren Fehler.“ Deshalb plant sie die <mark>Anschaffung von Druckern für das Zentrallager</mark>: zwei neue Etikettendrucker und einen Laserdrucker direkt im Lager, zusammen 12.000 Reais. „Anschaffung oder Leasing?“, fragt Frau Neumann. „Für Drucker? Anschaffung, das ist einfacher“, sagt Frau Costa. Frau Neumann ist einverstanden.</p>
+
+  <p>Herr Lang zeigt den nächsten Punkt: die <mark>Neugestaltung des Online-Katalogs</mark>. Der Katalog ist alt, und es gibt ihn nur auf Deutsch und Englisch. Ab Juni kommt er auch auf Portugiesisch, mit neuen Fotos und einem neuen Design. „Bitte nicht nur neue Farben“, sagt Herr Pereira. „Unsere Kunden suchen nicht nach der Artikelnummer, sie suchen nach der Anwendung: Öl, Wasser, Chemie. Wir brauchen auch eine Umstrukturierung der Kategorien.“ Herr Lang schreibt mit: neue Kategorien nach Anwendung und eine bessere Suche.</p>
+
+  <p>Zum Schluss zeigt Herr Brandt seinen Reiseplan. Im Mai kommt er nach Brasilien, für zwei Wochen <mark>Besuche in den Niederlassungen und bei Kunden</mark>. In der ersten Woche besucht er Curitiba, Belo Horizonte und das Lager in Paranaguá, in der zweiten Woche den Kunden aus dem Bergbau und die Reederei Litoral. „Dann kann ich den Kunden schon die erste Version vom neuen Katalog zeigen“, sagt er. Frau Costa schaut auf ihre Liste: sieben Themen, sieben Aufgaben. Das nächste Abstimmungsmeeting ist am 25. Februar.</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 7 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso para a intérprete. A lista trazia duas formas por termo; quando uma delas tem erro ou muda o sentido, a nota explica. Repare nas armadilhas: beenden ≠ auslaufen, Kunde → beim Kunden, Entsendung ≠ Dienstreise ≠ Versetzung, betreuen ≠ durchführen, in den USA, Anschaffung ≠ Beschaffung, Neugestaltung ≠ Umstrukturierung, in den Niederlassungen ≠ bei Kunden.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>encerrar contrato temporário</td><td class="de">einen befristeten Vertrag beenden; einen befristeten Vertrag vorzeitig kündigen; den Zeitvertrag nicht verlängern</td><td class="hinweis">befristet = por prazo determinado; o contrário é unbefristet / fest (Text 4). Atenção: no fim do prazo o contrato termina sozinho: der Vertrag läuft aus / endet, e a empresa só „verlängert nicht“. beenden ou vorzeitig kündigen = encerrar antes do prazo; na Alemanha isso só é possível se o contrato prevê. Se „temporário“ for trabalho por agência (Lei 6.019), em alemão é die Zeitarbeit / die Leiharbeit, não befristeter Vertrag. „Befristeten Vertrag beenden“, sem artigo, só serve como título ou item de pauta. die Aushilfe = ajudante temporário; die Entschädigung = indenização.</td></tr>
+      <tr><td>melhorias na operação do cliente</td><td class="de">die Verbesserung der Abläufe beim Kunden; Verbesserungen im Betrieb des Kunden; die Prozesse beim Kunden optimieren</td><td class="hinweis">der Ablauf, Pl. die Abläufe = o fluxo, a rotina de trabalho: é a palavra mais comum para „operação“ nesse sentido. „Verbesserungen im Kundenbetrieb“ (primeira forma da lista) se entende, mas o composto é pouco usado; „im Betrieb des Kunden“ é mais claro. Na segunda forma: Kunde tem declinação n: beim Kunden, vom Kunden, den Kunden; e „vom Kunden“ diria que a melhoria vem do cliente. „Arbeitsvorgänge“ se entende, mas é mais formal que Abläufe. Falso amigo: die Operation = cirurgia ou operação militar.</td></tr>
+      <tr><td>envio de técnico para outra filial</td><td class="de">die Entsendung eines Technikers in eine andere Niederlassung; einen Techniker in eine andere Niederlassung schicken; der Einsatz eines Technikers in einer anderen Niederlassung</td><td class="hinweis">entsenden / die Entsendung = enviar alguém por um período (semanas, meses), com custos pagos pela empresa; muito usado para técnicos e para o exterior. die Dienstreise (segunda forma da lista) = viagem a trabalho de poucos dias; die Versetzung = transferência definitiva. A segunda forma tem dois erros: Techniker (sem „ck“) e zu + Dativ: zu einer anderen Niederlassung. Direção × lugar: in eine andere Niederlassung (Akk., para onde) / in einer anderen Niederlassung (Dat., onde). die Spesen = despesas de viagem, diárias.</td></tr>
+      <tr><td>atender um projeto nos EUA</td><td class="de">ein Projekt in den USA betreuen; für ein Projekt in den USA zuständig sein; ein Projekt in den USA durchführen</td><td class="hinweis">As duas formas da lista estão corretas, mas não são sinônimos: betreuen = acompanhar, dar suporte, cuidar do cliente; durchführen = executar o projeto. Pergunte-se o que „atender“ quer dizer na frase. bedienen = servir (garçom) ou operar uma máquina: não serve aqui. die USA é plural: in den USA (onde), in die USA (para onde); „in USA“ é erro comum. das Visum = visto; beantragen = solicitar; das Konsulat = consulado.</td></tr>
+      <tr><td>aquisição de impressoras para o estoque central</td><td class="de">die Anschaffung von Druckern für das Zentrallager; der Kauf von Druckern für das Zentrallager; Drucker für das Zentrallager anschaffen</td><td class="hinweis">As duas formas da lista estão certas. die Anschaffung = compra de equipamento que fica na empresa (máquinas, computadores, veículos); der Kauf = compra em geral. die Beschaffung = o processo de compras, o setor (Text 4). das Zentrallager = o depósito central (o lugar); der Bestand = o estoque como quantidade. Cuidado: der Stock = andar do prédio, não estoque. der Etikettendrucker (Text 7); der Lieferschein = guia de remessa, romaneio; das Leasing = arrendamento.</td></tr>
+      <tr><td>reestruturação do catálogo on-line</td><td class="de">die Neugestaltung des Online-Katalogs; die Umstrukturierung des Online-Katalogs; die Überarbeitung des Online-Katalogs</td><td class="hinweis">As duas formas da lista estão certas, com nuance: Neugestaltung = nova cara, novo design; Umstrukturierung = nova estrutura (categorias, menus, busca). Sozinha, „die Umstrukturierung“ em reunião soa como reestruturação da empresa (com demissões); por isso diga sempre o quê: der Kategorien, des Katalogs. die Überarbeitung = revisão. Online-Katalog com hífen. die Suche = busca; die Artikelnummer = código do produto; die Anwendung = aplicação.</td></tr>
+      <tr><td>visitas às filiais e aos clientes</td><td class="de">Besuche in den Niederlassungen und bei Kunden; Niederlassungs- und Kundenbesuche; die Niederlassungen und die Kunden besuchen</td><td class="hinweis">A forma da lista „Besuche bei Filialen und Kunden“ se entende, mas a preposição muda: bei + pessoa ou empresa (bei Kunden, beim Kunden), in + lugar (in den Niederlassungen). Para as filiais de uma empresa B2B, Niederlassung (Text 7); Filiale lembra loja ou agência de banco, mas também se ouve (Text 9): „Besuche in den Filialen“ vale. der Kundenbesuch = visita a cliente; der Reiseplan = roteiro de viagem.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-7.html">✏️ Übungen 7</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH, Aquasul und die Reederei Litoral existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Das Abstimmungsmeeting ist per Video.", true, ""],
+  ["Das Meeting beginnt um 14 Uhr in Curitiba.", false, "Um 14 Uhr in Bremen, also um 10 Uhr in Curitiba."],
+  ["Bei der Inventur gab es nur vier Schläuche Differenz.", true, ""],
+  ["Aquasul hat beim Abverkauf alle 200 Schläuche verkauft.", false, "Schon 150 von 200."],
+  ["Die zwei Aushilfen haben befristete Verträge bis Ende April.", true, ""],
+  ["In Deutschland kann man einen befristeten Vertrag immer früher kündigen.", false, "Nur wenn es im Vertrag steht."],
+  ["Lucas bekommt ab März einen unbefristeten Vertrag.", true, ""],
+  ["Herr Rocha arbeitet ab Februar für immer in Belo Horizonte.", false, "Nur von Februar bis April; es ist keine Versetzung, im Mai kommt er zurück."],
+  ["Die Reederei in Houston hat zwölf Schiffe.", true, ""],
+  ["Aquasul macht in Houston auch die Montage der neuen Schläuche.", false, "Die Montage kann ein Partner in Houston durchführen."],
+  ["Die neuen Drucker kosten zusammen 12.000 Reais.", true, ""],
+  ["Herr Brandt besucht im Mai nur die Kunden.", false, "Er besucht die Niederlassungen und die Kunden."]
+];
+const MC = [
+  ["Wer ist aus Belo Horizonte zugeschaltet?", ["Herr Lang.", "Herr Pereira.", "Frau Neumann."], 1],
+  ["Warum hat Aquasul im November zwei Aushilfen eingestellt?", ["Für die Messe.", "Für die Inventur und den Abverkauf.", "Für das Projekt in den USA."], 1],
+  ["Was zahlt Aquasul, wenn sie den befristeten Vertrag früher beendet?", ["Nichts.", "Eine Entschädigung.", "Die Spesen."], 1],
+  ["Wie lange hat ein Mechaniker der Reederei Litoral früher oft einen Ersatzschlauch gesucht?", ["Zehn Minuten.", "Zwei Stunden.", "Einen Tag."], 1],
+  ["Welche zwei Verbesserungen schlägt Aquasul der Reederei Litoral vor?", ["Ein Schlauchlager am Hafen und einen Wartungsplan für jedes Schiff.", "Neue Schiffe und neue Mechaniker.", "Einen neuen Katalog und neue Drucker."], 0],
+  ["Warum ist die Entsendung von Herrn Rocha keine Dienstreise?", ["Drei Monate sind für eine Dienstreise zu lang.", "Er fliegt in die USA.", "Er bekommt kein Hotel."], 0],
+  ["Was macht Aquasul im Projekt in den USA?", ["Die Montage der neuen Schläuche.", "Die Erfassung der Schlauchleitungen und die Schulung für die Mechaniker.", "Den Verkauf von Versorgungsschiffen."], 1],
+  ["Wo druckt Aquasul heute die Lieferscheine?", ["Im Büro im ersten Stock.", "In Bremen.", "Direkt im Lager."], 0],
+  ["Was wünscht Herr Pereira für den Online-Katalog?", ["Nur neue Farben.", "Neue Kategorien nach Anwendung.", "Einen Katalog nur auf Deutsch."], 1],
+  ["Wann ist das nächste Abstimmungsmeeting?", ["Am 25. Februar.", "Im Mai.", "Im Juni."], 0]
+];
+const GAP = [
+  ["„Wir müssen einen befristeten Vertrag ______, schon Ende Februar.“", "beenden"],
+  ["Ab März bekommt Lucas einen ______ Vertrag als Lagerist.", "unbefristeten"],
+  ["Der nächste Schritt bei der Reederei Litoral ist die Verbesserung der ______ beim Kunden.", "Abläufe"],
+  ["Herr Rocha geht nach Belo Horizonte: die ______ eines Technikers in eine andere Niederlassung.", "Entsendung"],
+  ["Für eine ______ sind drei Monate zu lang.", "Dienstreise"],
+  ["„Kann Aquasul ein Projekt in den USA ______?“", "betreuen"],
+  ["Die Montage der neuen Schläuche kann ein Partner in Houston ______.", "durchführen"],
+  ["„Herr Lang braucht kein ______, aber ich schon.“", "Visum"],
+  ["Frau Costa plant die ______ von Druckern für das Zentrallager.", "Anschaffung"],
+  ["Herr Lang zeigt die ______ des Online-Katalogs.", "Neugestaltung"],
+  ["„Wir brauchen auch eine ______ der Kategorien.“", "Umstrukturierung"],
+  ["Im Mai macht Herr Brandt Besuche in den ______ und bei Kunden.", "Niederlassungen"]
+];
+const OFFEN = [
+  ["Wie spät ist es in Curitiba, wenn das Meeting beginnt?", "Zehn Uhr."],
+  ["Wie viele Schläuche Differenz gab es bei der Inventur?", "Nur vier."],
+  ["Bis wann laufen die befristeten Verträge der zwei Aushilfen?", "Bis Ende April."],
+  ["Als was arbeitet Lucas ab März?", "Als Lagerist im Zentrallager."],
+  ["Auf wie vielen Schiffen hat Aquasul die Schlauchleitungen schon erfasst?", "Auf 30 von 75 Schiffen."],
+  ["Wer bezahlt das Hotel und die Spesen von Herrn Rocha?", "Aquasul."],
+  ["Welche Schiffe hat die Reederei in Houston?", "Zwölf Versorgungsschiffe für Ölplattformen."],
+  ["Wer braucht ein Visum für die USA?", "Frau Costa; Herr Lang braucht keins."],
+  ["Warum laufen die Lageristen jeden Tag die Treppe hoch?", "Die Lieferscheine druckt das Büro im ersten Stock."],
+  ["Welche Kunden besucht Herr Brandt in der zweiten Woche?", "Den Kunden aus dem Bergbau und die Reederei Litoral."]
+];
+const ERKL = [
+  ["„Wir müssen einen befristeten Vertrag beenden, schon Ende Februar.“", "Precisamos encerrar um contrato por prazo determinado já no fim de fevereiro, antes do prazo (abril). beenden = encerrar ativamente; se o contrato terminasse no prazo, o alemão diria „läuft aus“."],
+  ["„Jetzt kommt der nächste Schritt: die Verbesserung der Abläufe beim Kunden.“", "Agora vem a próxima etapa: melhorias na operação do cliente, isto é, nos processos de trabalho da Reederei Litoral."],
+  ["„Für eine Dienstreise sind drei Monate zu lang, und es ist auch keine Versetzung.“", "Três meses é tempo demais para uma viagem a trabalho, mas também não é uma transferência definitiva: é um envio temporário do técnico para a outra filial."],
+  ["„Betreuen ja, aber die Montage kann ein Partner in Houston durchführen.“", "Atender e acompanhar o projeto, sim; mas a montagem, a execução, fica com um parceiro em Houston."],
+  ["„Anschaffung oder Leasing?“", "Vamos comprar as impressoras ou fazer leasing? Anschaffung = compra de um equipamento que fica na empresa."],
+  ["„Wir brauchen auch eine Umstrukturierung der Kategorien.“", "Não basta mudar o visual: precisamos reorganizar as categorias do catálogo, por aplicação (óleo, água, química)."],
+  ["„Im Mai kommt er nach Brasilien, für zwei Wochen Besuche in den Niederlassungen und bei Kunden.“", "Em maio ele vem ao Brasil para duas semanas de visitas às filiais e aos clientes."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>

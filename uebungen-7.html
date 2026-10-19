@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Übungen 7: Vertrag, Entsendung, Projekte (Wirtschaftsdeutsch A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  /* Übungen */
+  input[type=text], textarea, select { font-family: system-ui, sans-serif; font-size:.95rem; padding:.35rem .5rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); }
+  input[type=text] { width:13rem; max-width:100%; }
+  textarea { width:100%; min-height:4rem; resize:vertical; }
+  button { font-family: system-ui, sans-serif; font-size:.95rem; background:var(--accent); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin-top:.75rem; }
+  button:hover { background:#9a3625; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .ergebnis { font-family: system-ui, sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:1rem; font-family: system-ui, sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  details ul, details ol { margin:.5rem 0 0; padding-left:1.4rem; }
+  details li { margin:.25rem 0; }
+  .wortkasten { font-family: system-ui, sans-serif; background:#fbfaf7; border:1px dashed var(--muted); padding:.6rem .9rem; border-radius:8px; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--card); border:1px solid var(--line); padding:.1rem .5rem; border-radius:999px; }
+  .aufgabe { margin:.75rem 0; padding:.5rem .6rem; border-radius:6px; border-bottom:1px solid var(--line); }
+  .aufgabe p { margin:.2rem 0 .4rem; }
+  .aufgabe label { display:block; padding:.15rem .4rem; border-radius:4px; font-family: system-ui, sans-serif; font-size:.95rem; }
+  .aufgabe .satz { font-size:1.02rem; }
+  .aufgabe .pt-satz { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; }
+  .hinweis { font-family: system-ui, sans-serif; font-size:.85rem; color:var(--muted); }
+  #gesamt { font-family: system-ui, sans-serif; font-size:1.15rem; text-align:center; margin-top:1rem; }
+  td select { max-width:100%; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Übungen 7: Vertrag, Entsendung, Projekte</h1>
+  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 10 – encerrar contrato temporário, melhorias na operação do cliente, envio de técnico para outra filial, atender um projeto nos EUA, aquisição de impressoras para o estoque central, reestruturação do catálogo on-line e visitas às filiais e aos clientes.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-10-projekte.html">📄 Text 10</a><a href="uebungen-6.html">✏️ Übungen 6</a><a href="gabarito-uebungen-7.html">🖨️ Gabarito</a></nav>
+
+<section id="uebung1">
+  <h2>1. Zuordnung: Artikel + Bedeutung</h2>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <table>
+    <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
+    <tbody id="e1-body"></tbody>
+  </table>
+  <button type="button" id="e1-btn">Prüfen</button><span class="ergebnis" id="e1-erg"></span>
+  <details><summary>Lösung</summary><div id="e1-loesung"></div></details>
+</section>
+
+<section id="uebung2">
+  <h2>2. Lückentext</h2>
+  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). Verbos, particípios e adjetivos também entram. A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
+  <div class="wortkasten" id="e2-kasten"></div>
+  <div id="e2-body"></div>
+  <button type="button" id="e2-btn">Prüfen</button><span class="ergebnis" id="e2-erg"></span>
+  <details><summary>Lösung</summary><ol id="e2-loesung"></ol></details>
+</section>
+
+<section id="uebung3">
+  <h2>3. Welches Wort passt? (Dolmetscher-Entscheidung)</h2>
+  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual formulação alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
+  <div id="e3-body"></div>
+  <button type="button" id="e3-btn">Prüfen</button><span class="ergebnis" id="e3-erg"></span>
+  <details><summary>Lösung</summary><ol id="e3-loesung"></ol></details>
+</section>
+
+<section id="uebung4">
+  <h2>4. Dolmetschen DE → PT</h2>
+  <p class="pt">Um alemão diz a frase na reunião. Escreva a interpretação em português. Não há correção automática – compare com a tradução-modelo em „Lösung“.</p>
+  <div id="e4-body"></div>
+  <details><summary>Lösung</summary><ol id="e4-loesung"></ol></details>
+</section>
+
+<section id="uebung5">
+  <h2>5. Dolmetschen PT → DE</h2>
+  <p class="pt">Um brasileiro diz a frase na reunião. Escreva a interpretação em alemão. Compare depois com o modelo em „Lösung“ (às vezes com uma alternativa).</p>
+  <div id="e5-body"></div>
+  <details><summary>Lösung</summary><ol id="e5-loesung"></ol></details>
+</section>
+
+<section id="uebung6">
+  <h2>6. Hörverstehen-Simulation (Schnellerkennung)</h2>
+  <p class="pt">Leia (ou peça a alguém para ler em voz alta) cada frase uma única vez e marque QUAIS termos da lista aparecem nela como palavra inteira. Pode haver mais de um termo por frase. A frase só conta ponto se a seleção estiver exatamente certa.</p>
+  <div id="e6-body"></div>
+  <button type="button" id="e6-btn">Prüfen</button><span class="ergebnis" id="e6-erg"></span>
+  <details><summary>Lösung</summary><ol id="e6-loesung"></ol></details>
+</section>
+
+<section id="gesamt-sektion">
+  <h2>Gesamtergebnis</h2>
+  <p class="pt">Corrige as Übungen 1, 2, 3 e 6 de uma vez e mostra a pontuação total (as Übungen 4 e 5 são de produção livre).</p>
+  <div style="text-align:center"><button type="button" id="alle-btn">Alle Übungen prüfen</button></div>
+  <p id="gesamt">Gesamt: – / 58</p>
+</section>
+</main>
+<footer>Übungen 7 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Daten ---------- */
+  var TERMS = [
+    { t: "Zeitvertrag", a: "der", p: "contrato por prazo determinado" },
+    { t: "Aushilfe", a: "die", p: "ajudante temporário" },
+    { t: "Zeitarbeit", a: "die", p: "trabalho temporário (por agência)" },
+    { t: "Entschädigung", a: "die", p: "indenização" },
+    { t: "Ablauf", a: "der", p: "fluxo, rotina de trabalho" },
+    { t: "Betrieb", a: "der", p: "empresa, planta; operação" },
+    { t: "Operation", a: "die", p: "cirurgia; operação militar" },
+    { t: "Entsendung", a: "die", p: "envio de funcionário por um período" },
+    { t: "Dienstreise", a: "die", p: "viagem a trabalho (poucos dias)" },
+    { t: "Versetzung", a: "die", p: "transferência definitiva" },
+    { t: "Niederlassung", a: "die", p: "filial (de empresa)" },
+    { t: "Spesen", a: "die", l: "die Spesen (Pl.)", p: "despesas de viagem, diárias" },
+    { t: "Visum", a: "das", p: "visto" },
+    { t: "Anschaffung", a: "die", p: "aquisição (de equipamento)" },
+    { t: "Beschaffung", a: "die", p: "compras (o processo, o setor)" },
+    { t: "Zentrallager", a: "das", p: "depósito central" },
+    { t: "Lieferschein", a: "der", p: "guia de remessa, romaneio" },
+    { t: "Neugestaltung", a: "die", p: "reformulação, novo design" },
+    { t: "Umstrukturierung", a: "die", p: "reestruturação" },
+    { t: "Kundenbesuch", a: "der", p: "visita a cliente" }
+  ];
+
+  var GAPS = [
+    { s: "Wir ___ den befristeten Vertrag schon Ende Februar.", h: "encerramos", a: "beenden" },
+    { s: "Der Vertrag ist ___: Er endet am 30. April.", h: "por prazo determinado", a: "befristet" },
+    { s: "Wir verlängern den Vertrag nicht, er ___ Ende April aus.", h: "termina (sozinho, no prazo)", a: "läuft" },
+    { s: "Wir schlagen Verbesserungen der ___ beim Kunden vor.", h: "fluxos de trabalho", a: ["Abläufe", "Arbeitsabläufe", "Prozesse"] },
+    { s: "Die Verbesserung der Abläufe ___ Kunden ist der nächste Schritt.", h: "no (cliente)", a: "beim" },
+    { s: "Die ___ eines Technikers nach Belo Horizonte dauert drei Monate.", h: "envio", a: "Entsendung" },
+    { s: "Wir schicken einen Techniker in eine andere ___.", h: "filial", a: ["Niederlassung", "Filiale"] },
+    { s: "Aquasul bezahlt das Hotel und die ___.", h: "despesas de viagem", a: "Spesen" },
+    { s: "Kann Aquasul das Projekt in den USA ___?", h: "atender, acompanhar", a: "betreuen" },
+    { s: "Für die USA brauche ich ein ___.", h: "visto", a: "Visum" },
+    { s: "Die ___ von drei Druckern kostet 12.000 Reais.", h: "aquisição", a: "Anschaffung" },
+    { s: "Die Lieferscheine druckt bald das ___ selbst.", h: "depósito central", a: "Zentrallager" },
+    { s: "Ab Juni kommt die ___ des Online-Katalogs: neue Fotos, neues Design.", h: "reformulação", a: ["Neugestaltung", "Überarbeitung"] },
+    { s: "Im Mai macht Herr Brandt ___ in den Niederlassungen und bei Kunden.", h: "visitas", a: "Besuche" }
+  ];
+
+  var CHOICE = [
+    { q: "„Vamos encerrar o contrato temporário em fevereiro.“", o: ["Wir beenden den befristeten Vertrag im Februar.", "Wir beenden den Zeitarbeitsvertrag im Februar.", "Wir beenden den provisorischen Vertrag im Februar."], c: 0,
+      e: "befristeter Vertrag = contrato por prazo determinado. Zeitarbeit = trabalho por agência, outra relação; provisorisch = improvisado, quebra-galho." },
+    { q: "„O contrato termina no fim de abril e não vamos renovar.“", o: ["Der Vertrag kündigt Ende April, wir verlängern ihn nicht.", "Der Vertrag läuft Ende April aus, wir verlangen ihn nicht.", "Der Vertrag läuft Ende April aus, wir verlängern ihn nicht."], c: 2,
+      e: "auslaufen = terminar no prazo; verlängern = prorrogar, renovar. Quem kündigt é uma pessoa, não o contrato; verlangen = exigir (cuidado, soa parecido)." },
+    { q: "„Vamos propor melhorias na operação do cliente.“", o: ["Wir schlagen Verbesserungen in der Operation des Kunden vor.", "Wir schlagen Verbesserungen der Abläufe beim Kunden vor.", "Wir schlagen Verbesserungen der Arbeitsvorgänge vom Kunde vor."], c: 1,
+      e: "Abläufe beim Kunden. die Operation = cirurgia, operação militar. Kunde tem declinação n (beim / vom Kunden), e „vom“ diria que a melhoria vem do cliente." },
+    { q: "„O técnico vai para a filial de BH por três meses.“", o: ["Der Techniker geht für drei Monate auf Dienstreise nach Belo Horizonte.", "Der Techniker wird für drei Monate in die Niederlassung Belo Horizonte entsandt.", "Der Techniker wird nach Belo Horizonte versetzt."], c: 1,
+      e: "Entsendung = envio por um período. Dienstreise = viagem de poucos dias; versetzt = transferido de vez." },
+    { q: "„Vamos mandar um técnico para outra filial.“", o: ["Wir schicken einen Techniker zu eine andere Niederlassung.", "Wir schicken einen Techniker in eine andere Niederlassung.", "Wir schicken einen Techniker in einer anderen Niederlassung."], c: 1,
+      e: "Direção: in + Akkusativ (in eine andere). zu pede Dativ (zu einer anderen); in einer anderen = onde (lugar), não para onde." },
+    { q: "„A Aquasul pode atender um projeto nos EUA?“", o: ["Kann Aquasul ein Projekt in USA betreuen?", "Kann Aquasul ein Projekt in den USA betreuen?", "Kann Aquasul ein Projekt in den USA bedienen?"], c: 1,
+      e: "die USA é plural: in den USA. betreuen = acompanhar, dar suporte; bedienen = servir (garçom), operar uma máquina." },
+    { q: "„Nós acompanhamos o projeto, mas quem executa a montagem é um parceiro.“", o: ["Wir betreuen das Projekt, aber die Montage führt ein Partner durch.", "Wir führen das Projekt durch, aber die Montage betreut ein Partner.", "Wir betreuen das Projekt, aber die Montage macht ein Partner aus."], c: 0,
+      e: "betreuen = acompanhar; durchführen = executar. A segunda opção inverte os papéis; ausmachen = combinar ou desligar, não executar." },
+    { q: "„Precisamos comprar impressoras para o estoque central.“", o: ["Wir müssen Drucker für den Zentralbestand anschaffen.", "Wir müssen Drucker für das Zentrallager anschaffen.", "Wir müssen Drucker für den zentralen Stock anschaffen."], c: 1,
+      e: "Zentrallager = o depósito central, o lugar. der Bestand = estoque como quantidade; der Stock = andar do prédio (im ersten Stock)." },
+    { q: "„A aquisição das impressoras custa 12 mil reais.“", o: ["Die Anschaffung der Drucker kostet 12.000 Reais.", "Die Erwerbung der Drucker kostet 12.000 Reais.", "Die Akquisition der Drucker kostet 12.000 Reais."], c: 0,
+      e: "Anschaffung (ou der Kauf). „Erwerbung“ não se usa (der Erwerb / erwerben, sim: Text 8). die Akquisition = compra de empresa ou captação de clientes." },
+    { q: "„A reestruturação do catálogo on-line fica pronta em junho.“", o: ["Die Neugestaltung des Online-Katalogs ist im Juni fertig.", "Die Neubildung des Online-Katalogs ist im Juni fertig.", "Der Wiederaufbau des Online-Katalogs ist im Juni fertig."], c: 0,
+      e: "Neugestaltung (ou Umstrukturierung, quando mudam as categorias). Neubildung = formação (de governo, de células); der Wiederaufbau = reconstrução depois de uma destruição." },
+    { q: "„Precisamos de uma reestruturação, não só de um novo design.“", o: ["Wir brauchen eine Neugestaltung, nicht nur ein neues Design.", "Wir brauchen eine Umgestaltung, nicht nur ein neues Design.", "Wir brauchen eine Umstrukturierung, nicht nur ein neues Design."], c: 2,
+      e: "Aqui o contraste é estrutura × visual: Umstrukturierung = nova estrutura. Neugestaltung e Umgestaltung também falam de design, e a frase perde o sentido." },
+    { q: "„Em maio ele faz visitas às filiais e aos clientes.“", o: ["Im Mai macht er Besuche bei Filialen und Kunden.", "Im Mai macht er Besuche in den Niederlassungen und bei Kunden.", "Im Mai macht er Besuche an den Niederlassungen und an Kunden."], c: 1,
+      e: "in + lugar (in den Niederlassungen), bei + pessoa ou empresa (bei Kunden). „bei Filialen“ se entende, mas soa estranho; „an“ não serve." }
+  ];
+
+  var DE_PT = [
+    { de: "„Wir beenden den befristeten Vertrag Ende Februar; das kostet eine Entschädigung.“", pt: "„Vamos encerrar o contrato temporário no fim de fevereiro; isso custa uma indenização.“" },
+    { de: "„Der zweite Vertrag läuft nicht aus: Lucas bekommt einen unbefristeten Vertrag.“", pt: "„O segundo contrato não vai simplesmente terminar: o Lucas vai ser efetivado.“" },
+    { de: "„Mit den Verbesserungen im Betrieb des Kunden stehen die Schiffe nicht mehr so lange still.“", pt: "„Com as melhorias na operação do cliente, os navios não ficam mais tanto tempo parados.“" },
+    { de: "„Wir entsenden Herrn Rocha für drei Monate in die Niederlassung Belo Horizonte.“", pt: "„Vamos enviar o Sr. Rocha por três meses para a filial de Belo Horizonte.“" },
+    { de: "„Wir betreuen das Projekt in den USA; die Montage führt ein Partner in Houston durch.“", pt: "„Nós atendemos o projeto nos EUA; a montagem é feita por um parceiro em Houston.“" },
+    { de: "„Die Anschaffung von drei Druckern für das Zentrallager ist genehmigt.“", pt: "„A aquisição de três impressoras para o estoque central está aprovada.“" },
+    { de: "„Die Neugestaltung des Online-Katalogs ist im Juni fertig, dann auch auf Portugiesisch.“", pt: "„A reformulação do catálogo on-line fica pronta em junho, e aí também em português.“" },
+    { de: "„Im Mai mache ich zwei Wochen Besuche in den Niederlassungen und bei Kunden.“", pt: "„Em maio faço duas semanas de visitas às filiais e aos clientes.“" }
+  ];
+
+  var PT_DE = [
+    { pt: "„Precisamos encerrar um contrato temporário.“", de: "„Wir müssen einen befristeten Vertrag beenden.“", alt: "„Wir müssen einen Zeitvertrag vorzeitig kündigen.“" },
+    { pt: "„Já vemos melhorias na operação do cliente.“", de: "„Wir sehen schon Verbesserungen der Abläufe beim Kunden.“", alt: "„Die Abläufe beim Kunden sind schon besser geworden.“" },
+    { pt: "„O envio do técnico para a outra filial começa em fevereiro.“", de: "„Die Entsendung des Technikers in die andere Niederlassung beginnt im Februar.“", alt: "„Der Techniker arbeitet ab Februar in der anderen Niederlassung.“" },
+    { pt: "„Vamos atender um projeto nos EUA.“", de: "„Wir betreuen ein Projekt in den USA.“", alt: "„Wir sind für ein Projekt in den USA zuständig.“" },
+    { pt: "„Preciso de um visto para os EUA.“", de: "„Ich brauche ein Visum für die USA.“", alt: "„Ich muss ein Visum für die USA beantragen.“" },
+    { pt: "„A aquisição de impressoras para o estoque central custa 12 mil reais.“", de: "„Die Anschaffung von Druckern für das Zentrallager kostet 12.000 Reais.“", alt: "„Der Kauf von Druckern für das Zentrallager kostet 12.000 Reais.“" },
+    { pt: "„A reestruturação do catálogo on-line fica pronta em junho.“", de: "„Die Neugestaltung des Online-Katalogs ist im Juni fertig.“", alt: "„Die Umstrukturierung des Online-Katalogs ist im Juni abgeschlossen.“" },
+    { pt: "„Em maio o Sr. Brandt faz visitas às filiais e aos clientes.“", de: "„Im Mai macht Herr Brandt Besuche in den Niederlassungen und bei Kunden.“", alt: "„Im Mai besucht Herr Brandt die Niederlassungen und die Kunden.“" }
+  ];
+
+  var HOER = [
+    { s: "„Für den befristeten Vertrag der Aushilfe zahlen wir eine Entschädigung.“", o: ["Vertrag", "Aushilfe", "Entschädigung", "Zeitarbeit"], c: [0, 1, 2] },
+    { s: "„Das ist keine Zeitarbeit: Lucas bekommt einen unbefristeten Vertrag.“", o: ["Zeitarbeit", "unbefristeten", "befristeten", "Vertrag"], c: [0, 1, 3] },
+    { s: "„Die Abläufe beim Kunden sind besser, die Schiffe stehen kürzer still.“", o: ["Abläufe", "Kunden", "Operation", "Schiffe"], c: [0, 1, 3] },
+    { s: "„Die Entsendung ist keine Dienstreise und keine Versetzung.“", o: ["Entsendung", "Dienstreise", "Versetzung", "Spesen"], c: [0, 1, 2] },
+    { s: "„Hotel und Spesen zahlt die Niederlassung in Curitiba.“", o: ["Hotel", "Spesen", "Niederlassung", "Filiale"], c: [0, 1, 2] },
+    { s: "„Wir betreuen das Projekt, durchführen kann es ein Partner.“", o: ["betreuen", "durchführen", "Projekt", "bedienen"], c: [0, 1, 2] },
+    { s: "„Die Montage in Houston macht ein Partner, Aquasul macht die Schulung.“", o: ["Montage", "Partner", "Schulung", "Wartung"], c: [0, 1, 2] },
+    { s: "„Für die USA braucht Frau Costa ein Visum, Herr Lang nicht.“", o: ["USA", "Visum", "Konsulat", "Termin"], c: [0, 1] },
+    { s: "„Anschaffung oder Leasing? Für das Zentrallager kaufen wir die Drucker.“", o: ["Anschaffung", "Leasing", "Zentrallager", "Beschaffung"], c: [0, 1, 2] },
+    { s: "„Die Lieferscheine kommen jetzt direkt aus dem Lager, nicht aus dem Büro.“", o: ["Lieferscheine", "Lager", "Zentrallager", "Büro"], c: [0, 1, 3] },
+    { s: "„Neugestaltung ja, aber wir brauchen auch eine Umstrukturierung der Kategorien.“", o: ["Neugestaltung", "Umstrukturierung", "Überarbeitung", "Kategorien"], c: [0, 1, 3] },
+    { s: "„Im Mai: Besuche in den Niederlassungen und Kundenbesuche in Minas Gerais.“", o: ["Besuche", "Niederlassungen", "Kundenbesuche", "Filialen"], c: [0, 1, 2] }
+  ];
+
+  var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
+  var scores = { e1: null, e2: null, e3: null, e6: null };
+
+  /* ---------- Hilfsfunktionen ---------- */
+  function $(id) { return document.getElementById(id); }
+  function shuffle(arr) {
+    var b = arr.slice(), i, j, tmp;
+    for (i = b.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      tmp = b[i]; b[i] = b[j]; b[j] = tmp;
+    }
+    return b;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function norm(s) { return String(s).trim().replace(/\s+/g, " ").toLowerCase(); }
+  function answers(g) { return Array.isArray(g.a) ? g.a : [g.a]; }
+  function mark(node, ok) {
+    node.classList.remove("richtig", "falsch");
+    node.classList.add(ok ? "richtig" : "falsch");
+  }
+  function showResult(id, ok, max) { $(id).textContent = ok + " / " + max + " richtig"; }
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (b.indexOf(a[i]) === -1) return false; }
+    return true;
+  }
+
+  /* ---------- Übung 1 ---------- */
+  function render1() {
+    var body = $("e1-body");
+    var trans = shuffle(TERMS.map(function (x) { return x.p; }));
+    var html = "";
+    TERMS.forEach(function (x, i) {
+      html += "<tr><td>" + esc(x.t) + "</td>" +
+        "<td><select id=\"e1-art-" + i + "\"><option value=\"\">–</option><option value=\"der\">der</option><option value=\"die\">die</option><option value=\"das\">das</option></select></td>" +
+        "<td><select id=\"e1-pt-" + i + "\"><option value=\"\">–</option>" +
+        trans.map(function (p) { return "<option value=\"" + esc(p) + "\">" + esc(p) + "</option>"; }).join("") +
+        "</select></td></tr>";
+    });
+    body.innerHTML = html;
+    $("e1-loesung").innerHTML = "<ul>" + TERMS.map(function (x) {
+      return "<li><b>" + esc(x.l || (x.a + " " + x.t)) + "</b> – " + esc(x.p) + "</li>";
+    }).join("") + "</ul>";
+  }
+  function check1() {
+    var ok = 0;
+    TERMS.forEach(function (x, i) {
+      var art = $("e1-art-" + i), pt = $("e1-pt-" + i);
+      var a = art.value === x.a, p = pt.value === x.p;
+      mark(art, a); mark(pt, p);
+      if (a && p) ok++;
+    });
+    scores.e1 = ok;
+    showResult("e1-erg", ok, MAX.e1);
+    return ok;
+  }
+
+  /* ---------- Übung 2 ---------- */
+  function render2() {
+    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return answers(g)[0]; }))
+      .map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ");
+    $("e2-body").innerHTML = GAPS.map(function (g, i) {
+      var parts = g.s.split("___");
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(parts[0]) +
+        "<input type=\"text\" id=\"e2-in-" + i + "\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\">" +
+        esc(parts[1]) + " <span class=\"hinweis\">(" + esc(g.h) + ")</span></p></div>";
+    }).join("");
+    $("e2-loesung").innerHTML = GAPS.map(function (g) {
+      var alts = answers(g);
+      return "<li>" + esc(g.s.replace("___", alts[0])) +
+        (alts.length > 1 ? " <span class=\"hinweis\">(auch: " + esc(alts.slice(1).join(", ")) + ")</span>" : "") + "</li>";
+    }).join("");
+  }
+  function check2() {
+    var ok = 0;
+    GAPS.forEach(function (g, i) {
+      var inp = $("e2-in-" + i);
+      var v = norm(inp.value);
+      var r = answers(g).some(function (a) { return norm(a) === v; });
+      mark(inp, r);
+      if (r) ok++;
+    });
+    scores.e2 = ok;
+    showResult("e2-erg", ok, MAX.e2);
+    return ok;
+  }
+
+  /* ---------- Übung 3 ---------- */
+  var choiceOrder = [];
+  function render3() {
+    $("e3-body").innerHTML = CHOICE.map(function (q, i) {
+      var order = shuffle([0, 1, 2]);
+      choiceOrder[i] = order;
+      return "<div class=\"aufgabe\" id=\"e3-frage-" + i + "\"><p class=\"satz\">" + (i + 1) + ". O brasileiro diz: " + esc(q.q) + "</p>" +
+        order.map(function (k) {
+          return "<label id=\"e3-lab-" + i + "-" + k + "\"><input type=\"radio\" name=\"e3-" + i + "\" value=\"" + k + "\"> " + esc(q.o[k]) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e3-loesung").innerHTML = CHOICE.map(function (q) {
+      return "<li>" + esc(q.q) + " → <b>" + esc(q.o[q.c]) + "</b><br><span class=\"hinweis\">" + esc(q.e) + "</span></li>";
+    }).join("");
+  }
+  function check3() {
+    var ok = 0;
+    CHOICE.forEach(function (q, i) {
+      var chosen = document.querySelector("input[name=\"e3-" + i + "\"]:checked");
+      var box = $("e3-frage-" + i);
+      [0, 1, 2].forEach(function (k) { $("e3-lab-" + i + "-" + k).classList.remove("richtig", "falsch"); });
+      if (!chosen) { mark(box, false); return; }
+      box.classList.remove("richtig", "falsch");
+      var r = Number(chosen.value) === q.c;
+      mark($("e3-lab-" + i + "-" + chosen.value), r);
+      if (r) ok++;
+    });
+    scores.e3 = ok;
+    showResult("e3-erg", ok, MAX.e3);
+    return ok;
+  }
+
+  /* ---------- Übung 4 / 5 ---------- */
+  function render4() {
+    $("e4-body").innerHTML = DE_PT.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(x.de) + "</p>" +
+        "<textarea id=\"e4-ta-" + i + "\" placeholder=\"Tradução em português…\"></textarea></div>";
+    }).join("");
+    $("e4-loesung").innerHTML = DE_PT.map(function (x) {
+      return "<li>" + esc(x.de) + "<br>→ <b>" + esc(x.pt) + "</b></li>";
+    }).join("");
+  }
+  function render5() {
+    $("e5-body").innerHTML = PT_DE.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"pt-satz\">" + (i + 1) + ". " + esc(x.pt) + "</p>" +
+        "<textarea id=\"e5-ta-" + i + "\" placeholder=\"Übersetzung auf Deutsch…\" lang=\"de\"></textarea></div>";
+    }).join("");
+    $("e5-loesung").innerHTML = PT_DE.map(function (x) {
+      return "<li>" + esc(x.pt) + "<br>→ <b>" + esc(x.de) + "</b>" +
+        (x.alt ? "<br><span class=\"hinweis\">Alternative: " + esc(x.alt) + "</span>" : "") + "</li>";
+    }).join("");
+  }
+
+  /* ---------- Übung 6 ---------- */
+  function render6() {
+    $("e6-body").innerHTML = HOER.map(function (h, i) {
+      return "<div class=\"aufgabe\" id=\"e6-satz-" + i + "\"><p class=\"satz\">" + (i + 1) + ". " + esc(h.s) + "</p>" +
+        h.o.map(function (opt, j) {
+          return "<label id=\"e6-lab-" + i + "-" + j + "\"><input type=\"checkbox\" id=\"e6-cb-" + i + "-" + j + "\"> " + esc(opt) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e6-loesung").innerHTML = HOER.map(function (h) {
+      return "<li>" + esc(h.s) + "<br>→ <b>" + h.c.map(function (k) { return esc(h.o[k]); }).join(", ") + "</b></li>";
+    }).join("");
+  }
+  function check6() {
+    var ok = 0;
+    HOER.forEach(function (h, i) {
+      var checked = [];
+      h.o.forEach(function (opt, j) {
+        var cb = $("e6-cb-" + i + "-" + j), lab = $("e6-lab-" + i + "-" + j);
+        var should = h.c.indexOf(j) !== -1;
+        lab.classList.remove("richtig", "falsch");
+        if (cb.checked) checked.push(j);
+        if (cb.checked && should) mark(lab, true);
+        else if (cb.checked !== should) mark(lab, false);
+      });
+      if (sameSet(checked, h.c)) ok++;
+    });
+    scores.e6 = ok;
+    showResult("e6-erg", ok, MAX.e6);
+    return ok;
+  }
+
+  /* ---------- Gesamt ---------- */
+  function updateTotal() {
+    var sum = 0, max = 0, key;
+    for (key in MAX) {
+      if (MAX.hasOwnProperty(key)) {
+        max += MAX[key];
+        if (scores[key] !== null) sum += scores[key];
+      }
+    }
+    $("gesamt").textContent = "Gesamt: " + sum + " / " + max;
+  }
+  function checkAll() {
+    check1(); check2(); check3(); check6();
+    updateTotal();
+    $("gesamt").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* ---------- Start ---------- */
+  render1(); render2(); render3(); render4(); render5(); render6();
+  $("e1-btn").addEventListener("click", function () { check1(); updateTotal(); });
+  $("e2-btn").addEventListener("click", function () { check2(); updateTotal(); });
+  $("e3-btn").addEventListener("click", function () { check3(); updateTotal(); });
+  $("e6-btn").addEventListener("click", function () { check6(); updateTotal(); });
+  $("alle-btn").addEventListener("click", checkAll);
+})();
+</script>
+</body>
+</html>
