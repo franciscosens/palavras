@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedro und Alex: Zwei Freunde in Bremen – Geschichte mit Übungen (A2)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+<style>
+  .zuordnung select { font-family:system-ui,sans-serif; font-size:.93rem; padding:.3rem .4rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); max-width:100%; }
+  textarea { font:inherit; font-family:system-ui,sans-serif; font-size:.95rem; width:100%; min-height:3.5rem; padding:.4rem .5rem; border:1px solid var(--line); border-radius:6px; resize:vertical; }
+  .note { font-family:system-ui,sans-serif; font-size:.85rem; color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pedro und Alex: Zwei Freunde in Bremen</h1>
+  <p>História em nível A2 sobre dois amigos de 14 anos: Pedro, de Blumenau, e Alex, de Bremen. Futebol, Jiu-Jitsu, escola e amizade, com vocabulário e exercícios.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 A2 – Startseite</a><a href="gabarito-pedro-und-alex.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Pedro und Alex: Zwei Freunde in Bremen</h2>
+  <p class="pt">Leia a história. As palavras destacadas são as palavras novas; a aba „Wörter“ traz a tradução e as abas A–F, os exercícios.</p>
+
+  <p>Pedro ist 14 Jahre alt und kommt aus Blumenau in Brasilien. Blumenau ist eine Stadt im Süden von Brasilien. Viele Menschen dort haben deutsche Großeltern, und jedes Jahr gibt es ein großes Oktoberfest. Auch Pedros Oma spricht ein bisschen Deutsch. Im Sommer ist Pedros Familie nach Bremen gezogen, denn sein Vater hat dort eine neue Arbeit. Bremen ist groß, das Wetter ist oft grau, und am Anfang kennt Pedro niemanden.</p>
+
+  <p>Am ersten Tag in der neuen <mark>Schule</mark> ist Pedro nervös. In der Klasse 8b ist nur ein Platz frei: neben Alex. Alex ist auch 14, er hat blonde Haare und trägt ein grünes Trikot von Werder Bremen. „Hallo, ich bin Alex. Woher kommst du?“, fragt er. „Aus Brasilien“, sagt Pedro. Alex lacht: „Brasilien! Dann spielst du sicher Fußball.“</p>
+
+  <p>In der Pause sprechen die zwei Jungen über ihre <mark>Hobbys</mark>. Pedro erzählt: „Ich spiele Fußball, und ich mache Jiu-Jitsu. In Blumenau habe ich in einer <mark>Mannschaft</mark> gespielt. Letztes Jahr haben wir die <mark>Meisterschaft</mark> von Santa Catarina gewonnen.“ Pedro macht seit sechs Jahren Jiu-Jitsu und hat schon den grünen Gürtel. In Brasilien war er bei vielen <mark>Turnieren</mark>. Alex macht große Augen: „Jiu-Jitsu? Das kenne ich nicht. Aber Fußball spiele ich auch! Komm doch am Dienstag zum Training.“</p>
+
+  <p>Alex spielt beim SV Weserblick, einem kleinen Verein in Bremen. Der Trainer, Herr Krüger, ist streng, aber nett. Pedro ist sehr schnell und spielt gut mit dem Ball. Aber im ersten Spiel will er alles allein machen. Er gibt den Ball nie ab, und die Mannschaft verliert 1:3. Nach dem Spiel sagt Herr Krüger: „Pedro, du bist ein super Spieler. Aber Fußball ist <mark>Teamarbeit</mark>. Elf Spieler, ein <mark>Team</mark>!“ Im nächsten Spiel passt Pedro den Ball zu Alex, und Alex schießt ein Tor. Die Mannschaft gewinnt 2:0.</p>
+
+  <p>Im Dezember gibt es ein Hallenturnier mit acht Mannschaften. Das wichtigste Spiel ist gegen den TSV Nordstern. Zwischen den zwei Vereinen gibt es eine alte <mark>Rivalität</mark>: Sie kommen aus dem gleichen Stadtteil, und jedes Spiel ist wie ein Finale. Bei Nordstern spielt auch Jonas aus der 8b. In der Schule ist Jonas nett, aber auf dem Platz ist er ein Gegner. Das Spiel ist hart, aber fair. Am Ende steht es 2:2, und Pedro und Alex geben Jonas die Hand. „Rivalität ist okay“, sagt Alex, „aber nur auf dem Platz.“</p>
+
+  <p>Jetzt will Alex auch Jiu-Jitsu kennenlernen. Im Januar geht er mit Pedro zum ersten Mal ins Training. Alles ist neu für ihn: der weiße Kimono, der Gürtel, die Matte. Alex fällt oft hin, aber er lacht viel. „Das macht so viel <mark>Spaß</mark>!“, sagt er. Pedro erklärt ihm die Technik, ganz langsam, auf Deutsch und manchmal mit Händen und Füßen. Die Trainerin sagt: „Pedro, du bist ein guter Lehrer!“</p>
+
+  <p>Aber Sport ist nicht alles. Pedros Mutter sagt jeden Tag: „Erst die Hausaufgaben, dann das Training!“ Für Pedro ist das <mark>Lernen</mark> auf Deutsch noch schwer, besonders in Geschichte und Biologie. Alex hilft ihm bei den Texten. Und Pedro hilft Alex in Mathe, denn Mathe ist für Alex sehr schwer. Zweimal pro Woche lernen die zwei Freunde zusammen in der Bibliothek. Im Februar bekommt Alex in Mathe eine Zwei, und Pedro hat in Deutsch eine Drei – sein bestes Ergebnis!</p>
+
+  <p>Im März ist in Bremen eine Jiu-Jitsu-Meisterschaft für Jugendliche. Pedro kämpft in seiner Altersklasse und gewinnt Gold. Für Alex ist es das erste Turnier. Er verliert einen Kampf, aber er gewinnt zwei und bekommt Bronze. Er ist sehr stolz. Am Abend essen die zwei Familien zusammen. Pedros Mutter hat brasilianisch gekocht: Reis, Bohnen und Pão de Queijo. Alex sagt: „Gold und Bronze sind toll. Aber das Beste in diesem Jahr ist unsere <mark>Freundschaft</mark>.“ Pedro lacht: „Und nächstes Jahr kommst du mit nach Blumenau, zum Oktoberfest!“</p>
+</section>
+
+<section id="woerter">
+  <h2>Wörter</h2>
+  <p class="pt">As 11 palavras principais da história com o artigo e o plural, mais uma dica de uso. Embaixo, outras palavras úteis do texto.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Dica</th></tr></thead>
+    <tbody>
+      <tr><td>o time</td><td class="de">die Mannschaft, die Mannschaften</td><td class="hinweis">Mannschaft = time de esporte: die Fußballmannschaft. Em alemão, „Time“ não existe nesse sentido; die Zeit = tempo, hora.</td></tr>
+      <tr><td>o campeonato</td><td class="de">die Meisterschaft, die Meisterschaften</td><td class="hinweis">Quem ganha a Meisterschaft é der Meister (o campeão). eine Meisterschaft gewinnen = ganhar um campeonato.</td></tr>
+      <tr><td>o torneio</td><td class="de">das Turnier, die Turniere</td><td class="hinweis">Turnier = competição curta, de um dia ou um fim de semana. das Hallenturnier = torneio num ginásio. bei einem Turnier = num torneio.</td></tr>
+      <tr><td>o trabalho em equipe</td><td class="de">die Teamarbeit</td><td class="hinweis">Também: die Zusammenarbeit. den Ball abgeben / passen = passar a bola.</td></tr>
+      <tr><td>a rivalidade</td><td class="de">die Rivalität, die Rivalitäten</td><td class="hinweis">der Gegner = o adversário; der Rivale = o rival.</td></tr>
+      <tr><td>a equipe</td><td class="de">das Team, die Teams</td><td class="hinweis">Team e Mannschaft são quase iguais; no futebol se diz mais Mannschaft. Atenção: das Team (neutro).</td></tr>
+      <tr><td>o divertimento</td><td class="de">der Spaß</td><td class="hinweis">Das macht Spaß! = Isso é divertido! Viel Spaß! = Divirta-se! Sem plural.</td></tr>
+      <tr><td>a amizade</td><td class="de">die Freundschaft, die Freundschaften</td><td class="hinweis">der Freund / die Freundin = amigo / amiga. Cuidado: „meine Freundin“ pode ser „minha namorada“.</td></tr>
+      <tr><td>a escola</td><td class="de">die Schule, die Schulen</td><td class="hinweis">in die Schule gehen = ir à escola. die Klasse = a turma; das Fach = a matéria; die Pause = o recreio.</td></tr>
+      <tr><td>os estudos</td><td class="de">das Lernen; lernen</td><td class="hinweis">Na escola: lernen (Ich lerne für die Prüfung). das Studium / studieren é só na faculdade!</td></tr>
+      <tr><td>os hobbys</td><td class="de">das Hobby, die Hobbys</td><td class="hinweis">O plural é Hobbys, com y (não „Hobbies“). Was sind deine Hobbys? = Quais são os seus hobbys?</td></tr>
+    </tbody>
+  </table>
+  <h3>Mais palavras do texto</h3>
+  <table>
+    <tbody>
+      <tr><td>o clube</td><td class="de">der Verein, die Vereine</td><td class="hinweis">Alex spielt beim SV Weserblick (SV = Sportverein).</td></tr>
+      <tr><td>o treino / o treinador</td><td class="de">das Training; der Trainer / die Trainerin</td><td class="hinweis">zum Training gehen = ir ao treino.</td></tr>
+      <tr><td>o gol</td><td class="de">das Tor, die Tore</td><td class="hinweis">ein Tor schießen = fazer um gol.</td></tr>
+      <tr><td>ganhar / perder</td><td class="de">gewinnen / verlieren</td><td class="hinweis">Perfekt: hat gewonnen / hat verloren.</td></tr>
+      <tr><td>a faixa (do Jiu-Jitsu)</td><td class="de">der Gürtel, die Gürtel</td><td class="hinweis">der grüne Gürtel = a faixa verde. der Kimono = o kimono; die Matte = o tatame.</td></tr>
+      <tr><td>lutar / a luta</td><td class="de">kämpfen / der Kampf</td><td class="hinweis">die Altersklasse = a categoria por idade.</td></tr>
+      <tr><td>a lição de casa</td><td class="de">die Hausaufgaben (Pl.)</td><td class="hinweis">Hausaufgaben machen = fazer a lição de casa.</td></tr>
+      <tr><td>a nota</td><td class="de">die Note, die Noten</td><td class="hinweis">Na Alemanha, 1 é a melhor nota e 6 a pior: eine Zwei = nota boa; eine Drei = nota média.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <p class="pt">Verdadeiro ou falso? Marque e clique em „Prüfen“.</p>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra certa da caixa. Cada palavra entra uma vez.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Artikel und Bedeutung</h2>
+  <p class="pt">Para cada palavra, escolha o artigo (der/die/das) e a tradução. Só conta ponto se os dois estiverem certos.</p>
+  <table class="zuordnung">
+    <thead><tr><th>Wort</th><th>Artikel</th><th>Bedeutung</th></tr></thead>
+    <tbody id="zu"></tbody>
+  </table>
+  <button onclick="pruefeZu()">Prüfen</button><span class="punkte" id="p-zu"></span>
+  <details><summary>Lösung</summary><ol id="l-zu"></ol></details>
+</section>
+
+<section id="teilE">
+  <h2>E. Fragen zum Text</h2>
+  <p class="pt">Responda em alemão com uma frase curta. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilF">
+  <h2>F. Und du?</h2>
+  <p class="pt">Agora fale de você. Escreva 1 ou 2 frases em alemão para cada pergunta. O exemplo mostra uma resposta possível.</p>
+  <div id="du"></div>
+</section>
+
+<div id="gesamt"></div>
+</main>
+<footer>Fiktive Geschichte – Pedro, Alex und die Vereine SV Weserblick und TSV Nordstern sind erfunden.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Pedro kommt aus Blumenau.", true, ""],
+  ["Pedros Oma spricht kein Deutsch.", false, "Sie spricht ein bisschen Deutsch."],
+  ["Pedro und Alex sind in der gleichen Klasse.", true, ""],
+  ["Alex ist ein Fan von Werder Bremen.", true, ""],
+  ["Pedros Mannschaft hat in Brasilien keine Meisterschaft gewonnen.", false, "Sie hat die Meisterschaft von Santa Catarina gewonnen."],
+  ["Im ersten Spiel gewinnt die Mannschaft 3:1.", false, "Sie verliert 1:3."],
+  ["Jonas spielt beim TSV Nordstern.", true, ""],
+  ["Alex findet Jiu-Jitsu langweilig.", false, "Es macht ihm viel Spaß."],
+  ["Pedro hilft Alex in Mathe.", true, ""],
+  ["Alex gewinnt bei der Meisterschaft Gold.", false, "Alex bekommt Bronze; Pedro gewinnt Gold."]
+];
+const MC = [
+  ["Warum ist Pedros Familie nach Bremen gezogen?", ["Sein Vater hat dort eine neue Arbeit.", "Pedro will bei Werder Bremen spielen.", "Die Oma wohnt in Bremen."], 0],
+  ["Seit wann macht Pedro Jiu-Jitsu?", ["Seit zwei Jahren.", "Seit sechs Jahren.", "Seit einem Monat."], 1],
+  ["Was ist das Problem im ersten Spiel?", ["Pedro ist zu langsam.", "Pedro gibt den Ball nie ab.", "Alex ist krank."], 1],
+  ["Was sagt Herr Krüger nach dem Spiel?", ["Fußball ist Teamarbeit.", "Fußball ist langweilig.", "Du spielst nicht mehr."], 0],
+  ["Warum gibt es eine Rivalität zwischen Weserblick und Nordstern?", ["Sie kommen aus dem gleichen Stadtteil.", "Sie haben den gleichen Trainer.", "Sie spielen nie gegeneinander."], 0],
+  ["Wie endet das Spiel gegen Nordstern?", ["1:3", "2:0", "2:2"], 2],
+  ["Was sagt Pedros Mutter jeden Tag?", ["Erst das Training, dann die Hausaufgaben!", "Erst die Hausaufgaben, dann das Training!", "Heute gibt es kein Training!"], 1],
+  ["Was ist für Alex das Beste in diesem Jahr?", ["Die Bronzemedaille.", "Die Note in Mathe.", "Die Freundschaft mit Pedro."], 2]
+];
+const GAP = [
+  ["Am ersten Tag in der neuen ______ ist Pedro nervös.", "Schule"],
+  ["In der Pause sprechen die zwei Jungen über ihre ______.", "Hobbys"],
+  ["In Blumenau hat Pedro in einer ______ gespielt.", "Mannschaft"],
+  ["Letztes Jahr haben sie die ______ von Santa Catarina gewonnen.", "Meisterschaft"],
+  ["„Fußball ist ______“, sagt Herr Krüger.", "Teamarbeit"],
+  ["„Elf Spieler, ein ______!“", "Team"],
+  ["Im Dezember gibt es ein ______ in der Halle mit acht Mannschaften.", "Turnier"],
+  ["Zwischen Weserblick und Nordstern gibt es eine alte ______.", "Rivalität"],
+  ["„Das macht so viel ______!“, sagt Alex im Jiu-Jitsu-Training.", "Spaß"],
+  ["Für Pedro ist das ______ auf Deutsch noch schwer.", "Lernen"],
+  ["„Das Beste in diesem Jahr ist unsere ______.“", "Freundschaft"]
+];
+const ZU = [
+  ["Mannschaft", "die", "time"],
+  ["Meisterschaft", "die", "campeonato"],
+  ["Turnier", "das", "torneio"],
+  ["Teamarbeit", "die", "trabalho em equipe"],
+  ["Rivalität", "die", "rivalidade"],
+  ["Team", "das", "equipe"],
+  ["Spaß", "der", "divertimento"],
+  ["Freundschaft", "die", "amizade"],
+  ["Schule", "die", "escola"],
+  ["Lernen", "das", "estudos (o estudar)"],
+  ["Hobby", "das", "hobby"]
+];
+const OFFEN = [
+  ["Wie alt sind Pedro und Alex?", "Sie sind 14 Jahre alt."],
+  ["Was trägt Alex am ersten Schultag?", "Ein grünes Trikot von Werder Bremen."],
+  ["Welche Hobbys hat Pedro?", "Fußball und Jiu-Jitsu."],
+  ["Welchen Gürtel hat Pedro?", "Den grünen Gürtel."],
+  ["Wer ist Jonas?", "Ein Junge aus der 8b. Er spielt beim TSV Nordstern."],
+  ["Wo lernen Pedro und Alex zusammen?", "In der Bibliothek."],
+  ["Welche Note hat Pedro im Februar in Deutsch?", "Eine Drei."],
+  ["Was kocht Pedros Mutter am Abend?", "Reis, Bohnen und Pão de Queijo."]
+];
+const DU = [
+  ["Was sind deine Hobbys?", "Meine Hobbys sind Fußball und Musik."],
+  ["Spielst du in einer Mannschaft, oder machst du allein Sport?", "Ich spiele in einer Volleyballmannschaft. / Ich gehe allein joggen."],
+  ["Warst du schon einmal bei einem Turnier oder bei einer Meisterschaft?", "Ja, letztes Jahr war ich bei einem Schachturnier."],
+  ["Was macht dir in der Schule Spaß?", "Sport und Englisch machen mir Spaß."],
+  ["Wer ist dein bester Freund oder deine beste Freundin? Warum?", "Mein bester Freund heißt Lucas. Wir lachen viel zusammen."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const shuffle = a => { const b = a.slice(); for (let i = b.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+let score = {rf:null, mc:null, gap:null, zu:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  document.getElementById("kasten").innerHTML = shuffle(GAP.map(g => g[1])).map(w => `<span>${esc(w)}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}" autocomplete="off" spellcheck="false"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${esc(q[1])}</li>`).join("");
+
+  const pts = shuffle(ZU.map(z => z[2]));
+  document.getElementById("zu").innerHTML = ZU.map((z,i) => `<tr><td>${esc(z[0])}</td>
+    <td><select id="za${i}"><option value="">–</option><option>der</option><option>die</option><option>das</option></select></td>
+    <td><select id="zp${i}"><option value="">–</option>${pts.map(p => `<option>${esc(p)}</option>`).join("")}</select></td></tr>`).join("");
+  document.getElementById("l-zu").innerHTML = ZU.map(z => `<li><b>${z[1]} ${esc(z[0])}</b> – ${esc(z[2])}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Deine Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("du").innerHTML = DU.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <textarea placeholder="Schreib hier …" lang="de"></textarea><details><summary>Beispiel</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const ok = norm(document.getElementById("gin"+i).value)===norm(q[1]); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function pruefeZu() {
+  let p=0; ZU.forEach((z,i) => { const a=document.getElementById("za"+i), b=document.getElementById("zp"+i); const okA = a.value===z[1], okB = b.value===z[2]; mark(a, okA); mark(b, okB); if(okA&&okB)p++; });
+  score.zu=p; document.getElementById("p-zu").textContent = `${p} / ${ZU.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–D): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length+ZU.length}`;
+}
+render();
+</script>
+</body>
+</html>
