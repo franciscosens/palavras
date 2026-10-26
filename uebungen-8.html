@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Übungen 8: Reklamation, Bestellung, Vertrag (Wirtschaftsdeutsch A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  /* Übungen */
+  input[type=text], textarea, select { font-family: system-ui, sans-serif; font-size:.95rem; padding:.35rem .5rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); }
+  input[type=text] { width:13rem; max-width:100%; }
+  textarea { width:100%; min-height:4rem; resize:vertical; }
+  button { font-family: system-ui, sans-serif; font-size:.95rem; background:var(--accent); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin-top:.75rem; }
+  button:hover { background:#9a3625; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .ergebnis { font-family: system-ui, sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:1rem; font-family: system-ui, sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  details ul, details ol { margin:.5rem 0 0; padding-left:1.4rem; }
+  details li { margin:.25rem 0; }
+  .wortkasten { font-family: system-ui, sans-serif; background:#fbfaf7; border:1px dashed var(--muted); padding:.6rem .9rem; border-radius:8px; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--card); border:1px solid var(--line); padding:.1rem .5rem; border-radius:999px; }
+  .aufgabe { margin:.75rem 0; padding:.5rem .6rem; border-radius:6px; border-bottom:1px solid var(--line); }
+  .aufgabe p { margin:.2rem 0 .4rem; }
+  .aufgabe label { display:block; padding:.15rem .4rem; border-radius:4px; font-family: system-ui, sans-serif; font-size:.95rem; }
+  .aufgabe .satz { font-size:1.02rem; }
+  .aufgabe .pt-satz { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; }
+  .hinweis { font-family: system-ui, sans-serif; font-size:.85rem; color:var(--muted); }
+  #gesamt { font-family: system-ui, sans-serif; font-size:1.15rem; text-align:center; margin-top:1rem; }
+  td select { max-width:100%; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Übungen 8: Reklamation, Bestellung, Vertrag</h1>
+  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 11 – carta com parecer do jurídico, reclamação oficial, itens da ordem de compra, estrutura herdada do antigo fornecedor, atendimento, conjunto de máquinas, módulos de colheita florestal, eventual falta de peças, pedido de compras das juntas rotativas, inconsistência na ordem de compra, adicional de faturamento e renovação do contrato.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-11-reklamation.html">📄 Text 11</a><a href="uebungen-7.html">✏️ Übungen 7</a><a href="gabarito-uebungen-8.html">🖨️ Gabarito</a></nav>
+
+<section id="uebung1">
+  <h2>1. Zuordnung: Artikel + Bedeutung</h2>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <table>
+    <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
+    <tbody id="e1-body"></tbody>
+  </table>
+  <button type="button" id="e1-btn">Prüfen</button><span class="ergebnis" id="e1-erg"></span>
+  <details><summary>Lösung</summary><div id="e1-loesung"></div></details>
+</section>
+
+<section id="uebung2">
+  <h2>2. Lückentext</h2>
+  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). Verbos, particípios e adjetivos também entram. A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
+  <div class="wortkasten" id="e2-kasten"></div>
+  <div id="e2-body"></div>
+  <button type="button" id="e2-btn">Prüfen</button><span class="ergebnis" id="e2-erg"></span>
+  <details><summary>Lösung</summary><ol id="e2-loesung"></ol></details>
+</section>
+
+<section id="uebung3">
+  <h2>3. Welches Wort passt? (Dolmetscher-Entscheidung)</h2>
+  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual formulação alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
+  <div id="e3-body"></div>
+  <button type="button" id="e3-btn">Prüfen</button><span class="ergebnis" id="e3-erg"></span>
+  <details><summary>Lösung</summary><ol id="e3-loesung"></ol></details>
+</section>
+
+<section id="uebung4">
+  <h2>4. Dolmetschen DE → PT</h2>
+  <p class="pt">Um alemão diz a frase na reunião. Escreva a interpretação em português. Não há correção automática – compare com a tradução-modelo em „Lösung“.</p>
+  <div id="e4-body"></div>
+  <details><summary>Lösung</summary><ol id="e4-loesung"></ol></details>
+</section>
+
+<section id="uebung5">
+  <h2>5. Dolmetschen PT → DE</h2>
+  <p class="pt">Um brasileiro diz a frase na reunião. Escreva a interpretação em alemão. Compare depois com o modelo em „Lösung“ (às vezes com uma alternativa).</p>
+  <div id="e5-body"></div>
+  <details><summary>Lösung</summary><ol id="e5-loesung"></ol></details>
+</section>
+
+<section id="uebung6">
+  <h2>6. Hörverstehen-Simulation (Schnellerkennung)</h2>
+  <p class="pt">Leia (ou peça a alguém para ler em voz alta) cada frase uma única vez e marque QUAIS termos da lista aparecem nela como palavra inteira. Pode haver mais de um termo por frase. A frase só conta ponto se a seleção estiver exatamente certa.</p>
+  <div id="e6-body"></div>
+  <button type="button" id="e6-btn">Prüfen</button><span class="ergebnis" id="e6-erg"></span>
+  <details><summary>Lösung</summary><ol id="e6-loesung"></ol></details>
+</section>
+
+<section id="gesamt-sektion">
+  <h2>Gesamtergebnis</h2>
+  <p class="pt">Corrige as Übungen 1, 2, 3 e 6 de uma vez e mostra a pontuação total (as Übungen 4 e 5 são de produção livre).</p>
+  <div style="text-align:center"><button type="button" id="alle-btn">Alle Übungen prüfen</button></div>
+  <p id="gesamt">Gesamt: – / 62</p>
+</section>
+</main>
+<footer>Übungen 8 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Daten ---------- */
+  var TERMS = [
+    { t: "Schreiben", a: "das", p: "carta, ofício (documento)" },
+    { t: "Stellungnahme", a: "die", p: "parecer, posicionamento" },
+    { t: "Gutachten", a: "das", p: "laudo, parecer formal de perito" },
+    { t: "Rechtsabteilung", a: "die", p: "departamento jurídico" },
+    { t: "Kulanz", a: "die", p: "cortesia comercial (sem obrigação)" },
+    { t: "Reklamation", a: "die", p: "reclamação (sobre mercadoria ou entrega)" },
+    { t: "Beschwerde", a: "die", p: "queixa (sobre atendimento, comportamento)" },
+    { t: "Mängelrüge", a: "die", p: "notificação formal de defeito" },
+    { t: "Position", a: "die", p: "item, linha do pedido" },
+    { t: "Bestellung", a: "die", p: "pedido, ordem de compra" },
+    { t: "Bestellanforderung", a: "die", p: "requisição de compra interna" },
+    { t: "Lieferant", a: "der", p: "fornecedor" },
+    { t: "Betreuung", a: "die", p: "acompanhamento contínuo" },
+    { t: "Kundendienst", a: "der", p: "setor de atendimento, assistência técnica" },
+    { t: "Bedienung", a: "die", p: "atendimento de garçom; operação de máquina" },
+    { t: "Maschinenpark", a: "der", p: "conjunto de máquinas (de uma empresa)" },
+    { t: "Holzernte", a: "die", p: "colheita florestal" },
+    { t: "Forstwirtschaft", a: "die", p: "setor florestal" },
+    { t: "Engpass", a: "der", p: "gargalo, falta temporária" },
+    { t: "Ersatzteil", a: "das", p: "peça de reposição" },
+    { t: "Drehgelenk", a: "das", p: "junta rotativa (da mangueira hidráulica)" },
+    { t: "Unstimmigkeit", a: "die", p: "inconsistência, algo que não bate" },
+    { t: "Umsatzpotenzial", a: "das", p: "potencial de faturamento" },
+    { t: "Vertragsverlängerung", a: "die", p: "renovação (prorrogação) do contrato" }
+  ];
+
+  var GAPS = [
+    { s: "Die Rechtsabteilung hat ein ___ mit ihrer Stellungnahme geschickt.", h: "carta", a: ["Schreiben", "Brief"] },
+    { s: "Die ___ der Rechtsabteilung ist klar: Die Positionen kommen vom Kunden.", h: "parecer", a: "Stellungnahme" },
+    { s: "Der Kunde hat die offizielle Reklamation schriftlich ___.", h: "enviou, protocolou", a: ["eingereicht", "geschickt"] },
+    { s: "Bei Position 20 stand 40 statt 4: eine ___ in der Bestellung.", h: "inconsistência", a: ["Unstimmigkeit", "Abweichung"] },
+    { s: "Die ___ der Bestellung hatten alte Artikelnummern.", h: "itens", a: ["Positionen", "Bestellpositionen"] },
+    { s: "Aquasul hat die Struktur des früheren Lieferanten ___.", h: "herdou, assumiu", a: "übernommen" },
+    { s: "Wir haben die Lagerliste vom alten ___ übernommen.", h: "fornecedor", a: "Lieferanten" },
+    { s: "Der Kunde wünscht einen besseren ___: eine Antwort in zwei Stunden.", h: "atendimento", a: ["Service", "Kundendienst", "Kundenservice"] },
+    { s: "Ab Mai übernimmt Herr Rocha die ___ des Kunden.", h: "acompanhamento", a: "Betreuung" },
+    { s: "Der ___ von Serra Verde hat 60 Maschinen.", h: "conjunto de máquinas", a: ["Maschinenpark", "Maschinenflotte"] },
+    { s: "Die Drehgelenke sind für die Module für die ___.", h: "colheita florestal", a: "Holzernte" },
+    { s: "Für eventuell ___ Teile legen wir zehn Drehgelenke ins Lager.", h: "que faltem", a: "fehlende" },
+    { s: "Das zusätzliche ___ liegt bei 1,5 Millionen Reais im Jahr.", h: "potencial de faturamento", a: "Umsatzpotenzial" },
+    { s: "Der Kunde will den Vertrag um zwei Jahre ___.", h: "renovar, prorrogar", a: "verlängern" }
+  ];
+
+  var CHOICE = [
+    { q: "„Recebemos a carta com o parecer do jurídico.“", o: ["Wir haben das Schreiben mit der Stellungnahme der Rechtsabteilung bekommen.", "Wir haben das Schreiben mit dem Gutachten der Rechtsabteilung bekommen.", "Wir haben die Karte mit der Meinung der Rechtsabteilung bekommen."], c: 0,
+      e: "Stellungnahme = parecer, posicionamento. Gutachten = laudo, parecer formal e longo de perito; die Karte = cartão, mapa, não carta comercial (das Schreiben, der Brief)." },
+    { q: "„O cliente enviou a reclamação oficial.“", o: ["Der Kunde hat die offizielle Beschwerde eingereicht.", "Der Kunde hat die offizielle Reklamation schriftlich eingereicht.", "Der Kunde hat die offizielle Reklamation eingerichtet."], c: 1,
+      e: "Entre empresas, sobre mercadoria ou entrega: Reklamation (formal: Mängelrüge). Beschwerde = queixa sobre atendimento ou comportamento; einrichten = montar, instalar (soa parecido com einreichen)." },
+    { q: "„Os itens da ordem de compra estão com códigos antigos.“", o: ["Die Kaufauftragartikel haben alte Artikelnummern.", "Die Positionen der Bestellung haben alte Artikelnummern.", "Die Stellen der Bestellung haben alte Artikelnummern."], c: 1,
+      e: "Positionen der Bestellung (ou Bestellpositionen). „Kaufauftragartikel“ não existe; die Stelle = lugar, vaga de emprego." },
+    { q: "„A Aquasul herdou a estrutura do antigo fornecedor.“", o: ["Aquasul hat die Struktur des früheren Lieferanten geerbt.", "Aquasul hat die Struktur des früheren Lieferanten beibehalten.", "Aquasul hat die Struktur des früheren Lieferanten übernommen."], c: 2,
+      e: "übernehmen = assumir, adotar. erben = herdar de pessoa falecida (coloquial ou metafórico aqui); beibehalten = manter a própria estrutura, outro sentido." },
+    { q: "„O atendimento do antigo fornecedor era ruim.“", o: ["Die Bedienung des alten Lieferanten war schlecht.", "Der Service des alten Lieferanten war schlecht.", "Die Dienstleistung des alten Lieferanten war schlecht."], c: 1,
+      e: "Service (ou Betreuung, Kundendienst). Bedienung = atendimento de garçom ou operação de máquina; Dienstleistung = serviço como produto." },
+    { q: "„O cliente tem um conjunto de 60 máquinas.“", o: ["Der Kunde hat einen Maschinensatz mit 60 Maschinen.", "Der Kunde hat einen Maschinenpark mit 60 Maschinen.", "Der Kunde hat eine Maschinenpartie mit 60 Maschinen."], c: 1,
+      e: "Maschinenpark = todas as máquinas da empresa. Maschinensatz = conjunto que funciona como unidade (grupo gerador); die Partie = lote de mercadoria." },
+    { q: "„As juntas são para os módulos de colheita florestal.“", o: ["Die Drehgelenke sind für die Module für die Waldernte.", "Die Drehgelenke sind für die Module für die Holzernte.", "Die Drehgelenke sind für die Module des Ernteeinsatzes im Wald."], c: 1,
+      e: "O termo florestal é Holzernte. „Waldernte“ não se usa; „Ernteeinsatz im Wald“ é longo e pouco idiomático." },
+    { q: "„Precisamos de estoque para uma eventual falta de peças.“", o: ["Wir brauchen ein Lager für eventuell fehlende Teile.", "Wir brauchen ein Lager für einen eventuellen Teileausfall.", "Wir brauchen ein Lager für gelegentlich fehlende Teile."], c: 0,
+      e: "eventuell fehlende Teile (eventuell sem declinação). Teileausfall = falha, quebra de peças, não falta; gelegentlich = às vezes, de vez em quando." },
+    { q: "„O pedido de compra das juntas rotativas chegou em janeiro.“", o: ["Die Bestellanforderung der Drehgelenke kam im Januar.", "Die Bestellung der Drehgelenke kam im Januar.", "Die Bestellung der Drehverbindungen kam im Januar."], c: 1,
+      e: "Pedido de compra = Bestellung. Bestellanforderung (BANF) = requisição interna, ainda não é o pedido; Drehverbindung = rolamento de giro (slewing ring), outra peça." },
+    { q: "„Houve uma inconsistência na ordem de compra.“", o: ["Es gab eine Inkonsistenz im Kaufauftrag.", "Es gab eine Unstimmigkeit in der Bestellung.", "Es gab eine Unstimmigkeit in der Bestimmung."], c: 1,
+      e: "Unstimmigkeit (ou Abweichung) in der Bestellung. Inkonsistenz = linguagem de dados/TI e „Kaufauftrag“ é pouco usado; die Bestimmung = regra, determinação (soa parecido com Bestellung)." },
+    { q: "„Há um adicional de faturamento potencial de 1,5 milhão por ano.“", o: ["Es gibt einen Umsatzzusatz von 1,5 Millionen pro Jahr.", "Es gibt ein zusätzliches Umsatzpotenzial von 1,5 Millionen pro Jahr.", "Es gibt eine zusätzliche Rechnung von 1,5 Millionen pro Jahr."], c: 1,
+      e: "zusätzliches Umsatzpotenzial (ou möglicher Mehrumsatz). „Umsatzzusatz“ não existe; Rechnung = fatura, nota fiscal, não faturamento." },
+    { q: "„O cliente quer a renovação do contrato por dois anos.“", o: ["Der Kunde will eine Vertragsrenovierung um zwei Jahre.", "Der Kunde will eine Vertragsverlängerung um zwei Jahre.", "Der Kunde will eine Vertragsveränderung um zwei Jahre."], c: 1,
+      e: "Vertragsverlängerung = prorrogação, renovação. renovieren = reformar (uma casa); die Veränderung = alteração, mudança." }
+  ];
+
+  var DE_PT = [
+    { de: "„Die Rechtsabteilung hat ihre Stellungnahme geschickt; ein Gutachten brauchen wir nicht.“", pt: "„O jurídico mandou o parecer; não precisamos de um laudo.“" },
+    { de: "„Der Kunde hat die Reklamation schriftlich eingereicht und will eine Entschädigung.“", pt: "„O cliente enviou a reclamação por escrito e quer uma indenização.“" },
+    { de: "„Bitte prüfen Sie alle Positionen der Bestellung, besonders Position 20.“", pt: "„Por favor, confiram todos os itens do pedido, principalmente o item 20.“" },
+    { de: "„Wir haben die Struktur des früheren Lieferanten übernommen, aber die Listen nicht geprüft.“", pt: "„Herdamos a estrutura do antigo fornecedor, mas não conferimos as listas.“" },
+    { de: "„Der Kunde bekommt eine Hotline rund um die Uhr und eine feste Betreuung.“", pt: "„O cliente vai ter atendimento por telefone 24 horas e uma pessoa fixa para acompanhá-lo.“" },
+    { de: "„Der Maschinenpark von Serra Verde hat 40 Harvester und 20 Forwarder.“", pt: "„A Serra Verde tem um conjunto de máquinas de 40 harvesters e 20 forwarders.“" },
+    { de: "„Ohne Drehgelenk steht der Harvester still.“", pt: "„Sem a junta rotativa, o harvester fica parado.“" },
+    { de: "„Für eventuell fehlende Teile legen wir zehn Drehgelenke ins Lager.“", pt: "„Para uma eventual falta de peças, vamos deixar dez juntas rotativas em estoque.“" },
+    { de: "„Das zusätzliche Umsatzpotenzial liegt bei 1,5 Millionen Reais pro Jahr.“", pt: "„O adicional de faturamento potencial é de 1,5 milhão de reais por ano.“" },
+    { de: "„Die Vertragsverlängerung gilt für zwei Jahre, aber mit neuen Produkten im Vertrag.“", pt: "„A renovação do contrato vale por dois anos, mas com produtos novos no contrato.“" }
+  ];
+
+  var PT_DE = [
+    { pt: "„O jurídico mandou uma carta com o seu parecer.“", de: "„Die Rechtsabteilung hat ein Schreiben mit ihrer Stellungnahme geschickt.“", alt: "„Wir haben die Stellungnahme der Rechtsabteilung bekommen.“" },
+    { pt: "„O cliente quer enviar a reclamação oficial.“", de: "„Der Kunde will die offizielle Reklamation schriftlich einreichen.“", alt: "„Der Kunde will eine schriftliche Mängelrüge schicken.“" },
+    { pt: "„Três itens da ordem de compra estão errados.“", de: "„Drei Positionen der Bestellung sind falsch.“", alt: "„Drei Bestellpositionen stimmen nicht.“" },
+    { pt: "„Nós herdamos a estrutura do antigo fornecedor.“", de: "„Wir haben die Struktur des früheren Lieferanten übernommen.“", alt: "„Wir haben die Strukturen vom alten Lieferanten übernommen.“" },
+    { pt: "„O atendimento ao cliente precisa melhorar.“", de: "„Der Service für den Kunden muss besser werden.“", alt: "„Die Betreuung des Kunden muss besser werden.“" },
+    { pt: "„O conjunto de máquinas do cliente é muito grande.“", de: "„Der Maschinenpark des Kunden ist sehr groß.“", alt: "„Der Kunde hat sehr viele Maschinen.“" },
+    { pt: "„As juntas rotativas são para os módulos de colheita florestal.“", de: "„Die Drehgelenke sind für die Module für die Holzernte.“", alt: "„Die Drehgelenke sind für die Holzerntemodule.“" },
+    { pt: "„Precisamos nos preparar para uma eventual falta de peças.“", de: "„Wir müssen uns auf eventuell fehlende Teile vorbereiten.“", alt: "„Wir müssen uns auf einen möglichen Teilemangel vorbereiten.“" },
+    { pt: "„Encontramos uma inconsistência no pedido de compras das juntas rotativas.“", de: "„Wir haben eine Unstimmigkeit in der Bestellung der Drehgelenke gefunden.“", alt: "„In der Bestellung der Drehgelenke gibt es eine Abweichung.“" },
+    { pt: "„O adicional de faturamento é só potencial; primeiro precisamos da renovação do contrato.“", de: "„Das zusätzliche Umsatzpotenzial ist nur ein Potenzial; zuerst brauchen wir die Vertragsverlängerung.“", alt: "„Einen möglichen Mehrumsatz gibt es erst mit der Verlängerung des Vertrags.“" }
+  ];
+
+  var HOER = [
+    { s: "„Das Schreiben der Rechtsabteilung ist eine Stellungnahme, kein Gutachten.“", o: ["Schreiben", "Stellungnahme", "Gutachten", "Anwältin"], c: [0, 1, 2] },
+    { s: "„Die Reklamation kam per Post, nicht als Beschwerde am Telefon.“", o: ["Reklamation", "Beschwerde", "Mängelrüge", "Post"], c: [0, 1, 3] },
+    { s: "„Position 20 der Bestellung: 40 statt 4 Drehgelenke.“", o: ["Position", "Bestellung", "Drehgelenke", "Bestellanforderung"], c: [0, 1, 2] },
+    { s: "„Wir haben die Struktur des früheren Lieferanten übernommen.“", o: ["Struktur", "Lieferanten", "übernommen", "geerbt"], c: [0, 1, 2] },
+    { s: "„Service rund um die Uhr und eine feste Betreuung ab Mai.“", o: ["Service", "Betreuung", "Bedienung", "Mai"], c: [0, 1, 3] },
+    { s: "„Der Maschinenpark hat 40 Harvester und 20 Forwarder.“", o: ["Maschinenpark", "Harvester", "Forwarder", "Maschinensatz"], c: [0, 1, 2] },
+    { s: "„Die Module für die Holzernte arbeiten mit Eukalyptus und Kiefer.“", o: ["Module", "Holzernte", "Eukalyptus", "Waldernte"], c: [0, 1, 2] },
+    { s: "„Eventuell fehlende Teile sind für den Kunden ein Engpass.“", o: ["fehlende", "Teile", "Engpass", "Ersatzteile"], c: [0, 1, 2] },
+    { s: "„Das Drehgelenk ist keine Drehdurchführung, sagt der Techniker.“", o: ["Drehgelenk", "Drehdurchführung", "Drehverbindung", "Techniker"], c: [0, 1, 3] },
+    { s: "„Eine Unstimmigkeit in der Bestellung ist noch keine Reklamation.“", o: ["Unstimmigkeit", "Abweichung", "Bestellung", "Reklamation"], c: [0, 2, 3] },
+    { s: "„Das zusätzliche Umsatzpotenzial ist noch kein Umsatz.“", o: ["Umsatzpotenzial", "Umsatz", "Rechnung", "zusätzliche"], c: [0, 1, 3] },
+    { s: "„Die Vertragsverlängerung bringt neue Produkte in den Vertrag.“", o: ["Vertragsverlängerung", "Vertrag", "Produkte", "Verlängerung"], c: [0, 1, 2] }
+  ];
+
+  var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
+  var scores = { e1: null, e2: null, e3: null, e6: null };
+
+  /* ---------- Hilfsfunktionen ---------- */
+  function $(id) { return document.getElementById(id); }
+  function shuffle(arr) {
+    var b = arr.slice(), i, j, tmp;
+    for (i = b.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      tmp = b[i]; b[i] = b[j]; b[j] = tmp;
+    }
+    return b;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function norm(s) { return String(s).trim().replace(/\s+/g, " ").toLowerCase(); }
+  function answers(g) { return Array.isArray(g.a) ? g.a : [g.a]; }
+  function mark(node, ok) {
+    node.classList.remove("richtig", "falsch");
+    node.classList.add(ok ? "richtig" : "falsch");
+  }
+  function showResult(id, ok, max) { $(id).textContent = ok + " / " + max + " richtig"; }
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (b.indexOf(a[i]) === -1) return false; }
+    return true;
+  }
+
+  /* ---------- Übung 1 ---------- */
+  function render1() {
+    var body = $("e1-body");
+    var trans = shuffle(TERMS.map(function (x) { return x.p; }));
+    var html = "";
+    TERMS.forEach(function (x, i) {
+      html += "<tr><td>" + esc(x.t) + "</td>" +
+        "<td><select id=\"e1-art-" + i + "\"><option value=\"\">–</option><option value=\"der\">der</option><option value=\"die\">die</option><option value=\"das\">das</option></select></td>" +
+        "<td><select id=\"e1-pt-" + i + "\"><option value=\"\">–</option>" +
+        trans.map(function (p) { return "<option value=\"" + esc(p) + "\">" + esc(p) + "</option>"; }).join("") +
+        "</select></td></tr>";
+    });
+    body.innerHTML = html;
+    $("e1-loesung").innerHTML = "<ul>" + TERMS.map(function (x) {
+      return "<li><b>" + esc(x.l || (x.a + " " + x.t)) + "</b> – " + esc(x.p) + "</li>";
+    }).join("") + "</ul>";
+  }
+  function check1() {
+    var ok = 0;
+    TERMS.forEach(function (x, i) {
+      var art = $("e1-art-" + i), pt = $("e1-pt-" + i);
+      var a = art.value === x.a, p = pt.value === x.p;
+      mark(art, a); mark(pt, p);
+      if (a && p) ok++;
+    });
+    scores.e1 = ok;
+    showResult("e1-erg", ok, MAX.e1);
+    return ok;
+  }
+
+  /* ---------- Übung 2 ---------- */
+  function render2() {
+    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return answers(g)[0]; }))
+      .map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ");
+    $("e2-body").innerHTML = GAPS.map(function (g, i) {
+      var parts = g.s.split("___");
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(parts[0]) +
+        "<input type=\"text\" id=\"e2-in-" + i + "\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\">" +
+        esc(parts[1]) + " <span class=\"hinweis\">(" + esc(g.h) + ")</span></p></div>";
+    }).join("");
+    $("e2-loesung").innerHTML = GAPS.map(function (g) {
+      var alts = answers(g);
+      return "<li>" + esc(g.s.replace("___", alts[0])) +
+        (alts.length > 1 ? " <span class=\"hinweis\">(auch: " + esc(alts.slice(1).join(", ")) + ")</span>" : "") + "</li>";
+    }).join("");
+  }
+  function check2() {
+    var ok = 0;
+    GAPS.forEach(function (g, i) {
+      var inp = $("e2-in-" + i);
+      var v = norm(inp.value);
+      var r = answers(g).some(function (a) { return norm(a) === v; });
+      mark(inp, r);
+      if (r) ok++;
+    });
+    scores.e2 = ok;
+    showResult("e2-erg", ok, MAX.e2);
+    return ok;
+  }
+
+  /* ---------- Übung 3 ---------- */
+  var choiceOrder = [];
+  function render3() {
+    $("e3-body").innerHTML = CHOICE.map(function (q, i) {
+      var order = shuffle([0, 1, 2]);
+      choiceOrder[i] = order;
+      return "<div class=\"aufgabe\" id=\"e3-frage-" + i + "\"><p class=\"satz\">" + (i + 1) + ". O brasileiro diz: " + esc(q.q) + "</p>" +
+        order.map(function (k) {
+          return "<label id=\"e3-lab-" + i + "-" + k + "\"><input type=\"radio\" name=\"e3-" + i + "\" value=\"" + k + "\"> " + esc(q.o[k]) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e3-loesung").innerHTML = CHOICE.map(function (q) {
+      return "<li>" + esc(q.q) + " → <b>" + esc(q.o[q.c]) + "</b><br><span class=\"hinweis\">" + esc(q.e) + "</span></li>";
+    }).join("");
+  }
+  function check3() {
+    var ok = 0;
+    CHOICE.forEach(function (q, i) {
+      var chosen = document.querySelector("input[name=\"e3-" + i + "\"]:checked");
+      var box = $("e3-frage-" + i);
+      [0, 1, 2].forEach(function (k) { $("e3-lab-" + i + "-" + k).classList.remove("richtig", "falsch"); });
+      if (!chosen) { mark(box, false); return; }
+      box.classList.remove("richtig", "falsch");
+      var r = Number(chosen.value) === q.c;
+      mark($("e3-lab-" + i + "-" + chosen.value), r);
+      if (r) ok++;
+    });
+    scores.e3 = ok;
+    showResult("e3-erg", ok, MAX.e3);
+    return ok;
+  }
+
+  /* ---------- Übung 4 / 5 ---------- */
+  function render4() {
+    $("e4-body").innerHTML = DE_PT.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(x.de) + "</p>" +
+        "<textarea id=\"e4-ta-" + i + "\" placeholder=\"Tradução em português…\"></textarea></div>";
+    }).join("");
+    $("e4-loesung").innerHTML = DE_PT.map(function (x) {
+      return "<li>" + esc(x.de) + "<br>→ <b>" + esc(x.pt) + "</b></li>";
+    }).join("");
+  }
+  function render5() {
+    $("e5-body").innerHTML = PT_DE.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"pt-satz\">" + (i + 1) + ". " + esc(x.pt) + "</p>" +
+        "<textarea id=\"e5-ta-" + i + "\" placeholder=\"Übersetzung auf Deutsch…\" lang=\"de\"></textarea></div>";
+    }).join("");
+    $("e5-loesung").innerHTML = PT_DE.map(function (x) {
+      return "<li>" + esc(x.pt) + "<br>→ <b>" + esc(x.de) + "</b>" +
+        (x.alt ? "<br><span class=\"hinweis\">Alternative: " + esc(x.alt) + "</span>" : "") + "</li>";
+    }).join("");
+  }
+
+  /* ---------- Übung 6 ---------- */
+  function render6() {
+    $("e6-body").innerHTML = HOER.map(function (h, i) {
+      return "<div class=\"aufgabe\" id=\"e6-satz-" + i + "\"><p class=\"satz\">" + (i + 1) + ". " + esc(h.s) + "</p>" +
+        h.o.map(function (opt, j) {
+          return "<label id=\"e6-lab-" + i + "-" + j + "\"><input type=\"checkbox\" id=\"e6-cb-" + i + "-" + j + "\"> " + esc(opt) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e6-loesung").innerHTML = HOER.map(function (h) {
+      return "<li>" + esc(h.s) + "<br>→ <b>" + h.c.map(function (k) { return esc(h.o[k]); }).join(", ") + "</b></li>";
+    }).join("");
+  }
+  function check6() {
+    var ok = 0;
+    HOER.forEach(function (h, i) {
+      var checked = [];
+      h.o.forEach(function (opt, j) {
+        var cb = $("e6-cb-" + i + "-" + j), lab = $("e6-lab-" + i + "-" + j);
+        var should = h.c.indexOf(j) !== -1;
+        lab.classList.remove("richtig", "falsch");
+        if (cb.checked) checked.push(j);
+        if (cb.checked && should) mark(lab, true);
+        else if (cb.checked !== should) mark(lab, false);
+      });
+      if (sameSet(checked, h.c)) ok++;
+    });
+    scores.e6 = ok;
+    showResult("e6-erg", ok, MAX.e6);
+    return ok;
+  }
+
+  /* ---------- Gesamt ---------- */
+  function updateTotal() {
+    var sum = 0, max = 0, key;
+    for (key in MAX) {
+      if (MAX.hasOwnProperty(key)) {
+        max += MAX[key];
+        if (scores[key] !== null) sum += scores[key];
+      }
+    }
+    $("gesamt").textContent = "Gesamt: " + sum + " / " + max;
+  }
+  function checkAll() {
+    check1(); check2(); check3(); check6();
+    updateTotal();
+    $("gesamt").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* ---------- Start ---------- */
+  render1(); render2(); render3(); render4(); render5(); render6();
+  $("e1-btn").addEventListener("click", function () { check1(); updateTotal(); });
+  $("e2-btn").addEventListener("click", function () { check2(); updateTotal(); });
+  $("e3-btn").addEventListener("click", function () { check3(); updateTotal(); });
+  $("e6-btn").addEventListener("click", function () { check6(); updateTotal(); });
+  $("alle-btn").addEventListener("click", checkAll);
+})();
+</script>
+</body>
+</html>

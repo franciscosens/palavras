@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 11: Die Reklamation aus dem Wald – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 11: Die Reklamation aus dem Wald</h1>
+  <p>Continuação do Text 10, em nível A2/B1: carta com parecer do jurídico, reclamação oficial, itens da ordem de compra, estrutura herdada do antigo fornecedor, atendimento, conjunto de máquinas, módulos de colheita florestal, eventual falta de peças, pedido de compras das juntas rotativas, inconsistência na ordem de compra, adicional de faturamento e renovação do contrato.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-10-projekte.html">📄 Text 10</a><a href="uebungen-8.html">✏️ Übungen 8</a><a href="gabarito-text-11.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Die Reklamation aus dem Wald: Abstimmungsmeeting im Februar</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Es ist Donnerstag, der 25. Februar. In Bremen regnet es, in Curitiba sind es 29 Grad. Um 14 Uhr deutscher Zeit, also um 10 Uhr in Curitiba, beginnt das Abstimmungsmeeting per Video. In Bremen sitzen Herr Brandt, Frau Neumann und Herr Lang am Bildschirm. Heute ist auch Frau Albers dabei: Sie ist Anwältin in der Rechtsabteilung von Nordlicht. In Curitiba sitzt Frau Costa, und Herr Pereira ist aus Belo Horizonte zugeschaltet. Zuerst kommen kurz die Neuigkeiten: Herr Rocha arbeitet seit dem 1. Februar in Belo Horizonte, die neuen Drucker stehen seit letzter Woche im Zentrallager, und Lucas bekommt am 1. März seinen unbefristeten Vertrag. Frau Costa hat am 18. März ihren Termin im Konsulat.</p>
+
+  <p>Dann kommt das wichtigste Thema: Serra Verde Florestal, ein neuer Kunde aus Santa Catarina. Das Forstunternehmen erntet Eukalyptus und Kiefern für die Papierindustrie. Es hat einen großen <mark>Maschinenpark</mark>: 40 Harvester und 20 Forwarder, zusammen 60 Maschinen. Bis Dezember hat Serra Verde bei einem anderen Lieferanten gekauft. Dieser Lieferant hat sein Büro in Brasilien Ende 2026 geschlossen, und im Januar ist Serra Verde zu Aquasul gekommen. „Wir hatten nur vier Wochen Zeit“, sagt Frau Costa. „Aquasul <mark>hat die Struktur des früheren Lieferanten übernommen</mark>: seine Artikelnummern, seine Lagerliste und seine Servicetouren. Das war schnell, aber jetzt sehen wir die Probleme.“</p>
+
+  <p>Im Januar kam die <mark>Bestellung der Drehgelenke</mark> für die <mark>Module für die Holzernte</mark>. Das Drehgelenk ist ein kleines, aber wichtiges Teil: Es verbindet den Hydraulikschlauch mit dem Harvesterkopf. Der Kopf kann sich drehen, und der Schlauch verdreht sich nicht. Aber es gab <mark>eine Unstimmigkeit in der Bestellung</mark>. Die <mark>Positionen der Bestellung</mark> hatten Artikelnummern aus einer alten Liste von 2024, und diese Nummern gehören heute zu anderen Teilen. Bei Position 20 stand außerdem 40 statt 4. Aquasul hat genau das geliefert: 40 Drehgelenke, aber für Forwarder, nicht für Harvester. Herr Lang sagt: „Wir prüfen die Teile jetzt zusammen mit den Technikern von Serra Verde: Typ, Größe und Artikelnummer.“</p>
+
+  <p>Serra Verde war sehr unzufrieden, denn zwei Harvester standen zwei Tage still. Der Einkaufsleiter hat am 15. Februar angerufen, aber ein Anruf war ihm nicht genug. Er wollte <mark>die offizielle Reklamation schriftlich einreichen</mark>, und am 16. Februar kam der Brief per E-Mail und per Post. Der Kunde will die richtigen Teile sofort und eine Entschädigung für die zwei Tage Stillstand. Frau Costa hat die Reklamation sofort nach Bremen geschickt, denn die Drehgelenke kommen von Nordlicht.</p>
+
+  <p>Frau Albers hat alle Dokumente geprüft. Am 23. Februar hat Nordlicht das <mark>Schreiben mit der Stellungnahme der Rechtsabteilung</mark> an Serra Verde geschickt. Darin steht: Die Positionen der Bestellung kommen vom Kunden, und Aquasul hat genau diese Positionen geliefert. Eine Entschädigung zahlt Nordlicht deshalb nicht. Aber 40 Drehgelenke sind sehr ungewöhnlich, und Aquasul hat nicht nachgefragt. Deshalb steht im Schreiben auch: Aus Kulanz nimmt Aquasul die 40 Teile zurück und liefert die vier richtigen Drehgelenke kostenlos. „Brauchen wir ein Gutachten?“, fragt Frau Neumann. „Nein“, sagt Frau Albers. „Ein Gutachten ist lang und teuer. Für diesen Fall reicht eine Stellungnahme.“</p>
+
+  <p>Herr Pereira kennt das Problem aus dem Bergbau: „Eine Maschine ohne Ersatzteil steht still, und jeder Tag Stillstand kostet viel Geld.“ Bei Serra Verde sind es 20.000 Reais pro Tag und Harvester. Ab April hat der Kunde viele Aufträge von der Papierindustrie, dann arbeiten die Maschinen in zwei Schichten. Für <mark>eventuell fehlende Teile</mark> plant Aquasul deshalb ein kleines Lager in Curitiba: zehn Drehgelenke und 50 Filter. Beim alten Lieferanten musste Serra Verde oft drei Tage auf eine Antwort warten. Jetzt bekommt der Kunde einen besseren <mark>Service</mark>: eine Hotline rund um die Uhr und ab Mai eine feste Betreuung durch Herrn Rocha, wenn er aus Belo Horizonte zurückkommt.</p>
+
+  <p>Dann spricht Frau Costa über Zahlen. Heute kauft Serra Verde bei Aquasul nur Drehgelenke und Filter, für etwa 300.000 Reais im Jahr. Aber die 60 Maschinen brauchen auch Hydraulikschläuche und Pumpen. „Das <mark>zusätzliche Umsatzpotenzial</mark> liegt bei 1,5 Millionen Reais pro Jahr“, sagt Frau Costa. Frau Neumann lacht: „Potenzial ist noch kein Umsatz. Aber die Zahl ist interessant.“</p>
+
+  <p>Zum Schluss geht es um den Vertrag. Aquasul hat auch den Liefervertrag vom früheren Lieferanten übernommen, und er läuft am 30. Juni aus. Serra Verde wünscht eine <mark>Vertragsverlängerung</mark> um zwei Jahre, zu den gleichen Preisen. „Verlängern ja, aber mit Schläuchen und Pumpen im Vertrag“, sagt Frau Neumann. „Das ist fast ein neuer Vertrag.“ Frau Albers schreibt bis Mitte März einen Entwurf. Am 4. März fährt Frau Costa zu Serra Verde und bringt die vier richtigen Drehgelenke mit. Das nächste Abstimmungsmeeting ist am Donnerstag, dem 25. März. „Dann wissen wir hoffentlich, ob Serra Verde unterschreibt“, sagt Herr Brandt.</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 12 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso para a intérprete. Várias formas da lista não são idiomáticas ou têm erro; a nota explica por quê. Repare nas armadilhas: Stellungnahme ≠ Gutachten, Reklamation ≠ Beschwerde, Bestellung ≠ Bestellanforderung, übernehmen ≠ erben ≠ beibehalten, Service ≠ Bedienung, Maschinenpark ≠ Maschinensatz, Holzernte (não „Waldernte“), eventuell fehlende (sem declinação), Drehgelenk ≠ Drehdurchführung ≠ Drehverbindung, Unstimmigkeit ≠ Inkonsistenz, Umsatz ≠ Rechnung, verlängern ≠ neuer Vertrag.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>carta com parecer do jurídico</td><td class="de">das Schreiben mit der Stellungnahme der Rechtsabteilung; die Stellungnahme der Rechtsabteilung; ein Schreiben der Rechtsabteilung</td><td class="hinweis">A forma da lista „Schreiben mit Stellungnahme der Rechtsabteilung“ está certa; sem artigos, serve como título ou item de pauta. das Schreiben = carta, ofício (documento formal; der Brief também vale). die Stellungnahme = parecer, posicionamento sobre um caso. das Gutachten / das Rechtsgutachten = parecer formal e longo, de um perito ou de um escritório de advocacia externo: caro e demorado. die Rechtsabteilung = departamento jurídico; der Anwalt / die Anwältin = advogado / advogada. aus Kulanz = por cortesia comercial, sem obrigação legal.</td></tr>
+      <tr><td>enviar a reclamação oficial (documento)</td><td class="de">die offizielle Reklamation schriftlich einreichen; die schriftliche Reklamation schicken; die Mängelrüge schicken</td><td class="hinweis">„Die offizielle Beschwerde (Dokument) einreichen“ (forma da lista) se entende, mas entre empresas, sobre mercadoria ou entrega, a palavra é die Reklamation; a forma jurídica é die Mängelrüge (notificação formal de defeito). die Beschwerde = queixa sobre comportamento ou atendimento (ex.: um funcionário foi grosseiro). einreichen = entregar, protocolar (formal, também em órgãos públicos); schicken / senden = enviar. Cuidado: einrichten = montar, instalar.</td></tr>
+      <tr><td>itens da ordem de compra</td><td class="de">die Positionen der Bestellung; die Bestellpositionen; die bestellten Artikel</td><td class="hinweis">„Bestellartikel“ (forma da lista) se entende, mas soa como nome de campo de sistema; „Kaufauftragartikel“ não existe. die Position = item, linha do pedido (Pos. 10, 20, …); die Bestellung = pedido, ordem de compra (visto pelo cliente); der Auftrag = o mesmo pedido visto pelo fornecedor (Text 4/5). die Artikelnummer = código do produto.</td></tr>
+      <tr><td>herdou a estrutura do antigo fornecedor</td><td class="de">hat die Struktur des früheren Lieferanten übernommen; hat die Strukturen vom alten Lieferanten übernommen</td><td class="hinweis">übernehmen = assumir, adotar, ficar com. „geerbt“ (forma da lista) é coloquial ou metafórico: erben = herdar de uma pessoa falecida; em reunião soa estranho. „beibehalten“ (forma da lista) = manter, por exemplo a própria estrutura: outro sentido. der Lieferant = fornecedor, com declinação n: des / dem / den Lieferanten. früher = anterior; alt também se ouve, mas pode soar como „velho“. die Servicetour = rota de atendimento.</td></tr>
+      <tr><td>atendimento</td><td class="de">der Service; die Betreuung (depende do contexto); der Kundendienst; der Kundenservice</td><td class="hinweis">Pergunte-se que atendimento é. der Service = atendimento em geral (resposta, prazo, assistência); die Betreuung = acompanhamento contínuo, muitas vezes por uma pessoa fixa (Text 10: betreuen); der Kundendienst / Kundenservice = o setor de atendimento, a assistência técnica. der Support (forma da lista) também vale, mas soa quase sempre como suporte técnico, de TI ou hotline. die Dienstleistung (forma da lista) = serviço como produto (ex.: manutenção vendida), não „atendimento“. die Bedienung (forma da lista) = atendimento de garçom ou de loja, ou operação de uma máquina: falso amigo no B2B. rund um die Uhr = 24 horas.</td></tr>
+      <tr><td>conjunto de máquinas</td><td class="de">der Maschinenpark; die Maschinenflotte; die Maschinen</td><td class="hinweis">der Maschinenpark = todas as máquinas de uma empresa. Para máquinas móveis (harvesters, forwarders, caminhões) também se diz die Maschinenflotte. „der Maschinensatz“ (forma da lista) = conjunto de máquinas que funciona como uma unidade (ex.: grupo gerador): raramente é o que se quer dizer. Na dúvida, simples: „die 60 Maschinen des Kunden“.</td></tr>
+      <tr><td>módulos de colheita florestal</td><td class="de">die Module für die Holzernte; die Holzerntemodule; die Harvesteraggregate</td><td class="hinweis">O termo florestal é die Holzernte; „Waldernte“ (forma da lista) não se usa. „Module des Ernteeinsatzes im Wald“ (forma da lista) é longo e pouco idiomático. das Modul, Pl. die Module. der Harvester = colhedora florestal (harvester); der Forwarder = autocarregável (forwarder); der Harvesterkopf / das Harvesteraggregat = cabeçote do harvester. die Forstwirtschaft = setor florestal; das Forstunternehmen = empresa florestal; der Eukalyptus; die Kiefer = pinus (cuidado: der Kiefer = mandíbula).</td></tr>
+      <tr><td>eventual falta de peças</td><td class="de">eventuell fehlende Teile; ein möglicher Teilemangel; ein möglicher Engpass bei Ersatzteilen; der Mangel an Ersatzteilen</td><td class="hinweis">Duas formas da lista têm erro. „eventuelle fehlende Teile“: aqui eventuell é advérbio e modifica fehlend, por isso não se declina: eventuell fehlende Teile. „eventuelle Teileausfall“: der Teileausfall é masculino (seria „ein eventueller Teileausfall“), e der Ausfall = falha, quebra, não falta. eventuell = possível, talvez (aqui não é falso amigo); mas „eventualmente“ no sentido de „às vezes“ = gelegentlich. der Engpass = gargalo, falta temporária; das Ersatzteil = peça de reposição; der Stillstand = máquina parada.</td></tr>
+      <tr><td>pedido de compras das juntas rotativas</td><td class="de">die Bestellung der Drehgelenke; die Drehgelenke bestellen</td><td class="hinweis">Pedido de compra = die Bestellung. No SAP em alemão, die Bestellanforderung (BANF) = requisição de compra interna: ainda não é o pedido de compra. der Bestellschein = o formulário, o papel do pedido. das Drehgelenk, Pl. die Drehgelenke = junta rotativa / giratória da mangueira hidráulica: permite que a conexão gire sem torcer a mangueira. Não confundir: die Drehdurchführung = outra peça, que passa óleo por uma parte que gira continuamente (ex.: o rotator); die Drehverbindung (Kugeldrehverbindung) = rolamento de giro (slewing ring): errado aqui.</td></tr>
+      <tr><td>inconsistência na ordem de compra</td><td class="de">eine Unstimmigkeit in der Bestellung; eine Abweichung in der Bestellung; ein Fehler in der Bestellung</td><td class="hinweis">„Inkonsistenz“ (forma da lista) se entende, mas é linguagem técnica de dados e TI. die Unstimmigkeit = algo não bate; die Abweichung = divergência (ex.: entre pedido e nota fiscal); der Fehler = erro, mais direto. stimmen = estar certo: „Die Menge stimmt nicht.“ = A quantidade não confere.</td></tr>
+      <tr><td>adicional de faturamento (potencial)</td><td class="de">das zusätzliche Umsatzpotenzial; ein möglicher Mehrumsatz; potenzieller Zusatzumsatz</td><td class="hinweis">„zusätzlicher Umsatz (potenziell)“ (forma da lista) está certo como sentido; „Umsatzzusatz“ não existe. Lembrete do Text 8: faturamento = der Umsatz, não die Rechnung (= fatura, nota fiscal). das Potenzial (também Potential); der Mehrumsatz = faturamento a mais. „Potenzial ist noch kein Umsatz“ = potencial ainda não é venda.</td></tr>
+      <tr><td>renovação do contrato</td><td class="de">die Vertragsverlängerung; die Verlängerung des Vertrags; den Vertrag verlängern</td><td class="hinweis">A forma da lista está certa. verlängern = prorrogar, com as mesmas condições ou pequenos ajustes. Contrato novo, com novas condições: einen neuen Vertrag abschließen / die Vertragserneuerung. Compare com o Text 10: der befristete Vertrag läuft aus, wir verlängern ihn nicht. Cuidado: verlangen = exigir; renovieren = reformar (uma casa). der Entwurf = minuta.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-8.html">✏️ Übungen 8</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH, Aquasul, die Reederei Litoral und Serra Verde Florestal existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Das Meeting ist am Donnerstag, dem 25. Februar.", true, ""],
+  ["Frau Albers arbeitet in der Rechtsabteilung von Aquasul.", false, "Sie ist Anwältin in der Rechtsabteilung von Nordlicht."],
+  ["Herr Rocha arbeitet seit Februar in Belo Horizonte.", true, ""],
+  ["Serra Verde hat zusammen 60 Maschinen.", true, ""],
+  ["Serra Verde ist seit vielen Jahren Kunde von Aquasul.", false, "Erst seit Januar; vorher hat Serra Verde bei einem anderen Lieferanten gekauft."],
+  ["Bei Position 20 stand 40 statt 4.", true, ""],
+  ["Aquasul hat Drehgelenke für Harvester geliefert.", false, "Für Forwarder, nicht für Harvester."],
+  ["Der Kunde hat die Reklamation nur am Telefon gemacht.", false, "Er hat sie schriftlich eingereicht: per E-Mail und per Post."],
+  ["Nordlicht zahlt dem Kunden eine Entschädigung.", false, "Nein, aber aus Kulanz liefert Aquasul die richtigen Teile kostenlos."],
+  ["Für diesen Fall braucht Nordlicht kein Gutachten.", true, ""],
+  ["Ein Tag Stillstand kostet Serra Verde 20.000 Reais pro Harvester.", true, ""],
+  ["Serra Verde wünscht eine Vertragsverlängerung um fünf Jahre.", false, "Um zwei Jahre, zu den gleichen Preisen."]
+];
+const MC = [
+  ["Wer ist heute auch im Abstimmungsmeeting dabei?", ["Frau Albers aus der Rechtsabteilung.", "Lucas aus dem Zentrallager.", "Der Einkaufsleiter von Serra Verde."], 0],
+  ["Was erntet Serra Verde?", ["Kaffee und Soja.", "Eukalyptus und Kiefern für die Papierindustrie.", "Zuckerrohr für Ethanol."], 1],
+  ["Warum ist Serra Verde jetzt Kunde von Aquasul?", ["Der frühere Lieferant hat sein Büro in Brasilien geschlossen.", "Aquasul hat Serra Verde auf der Messe getroffen.", "Herr Brandt kennt den Chef."], 0],
+  ["Was hat Aquasul vom früheren Lieferanten übernommen?", ["Die Mitarbeiter und die Büros.", "Die Artikelnummern, die Lagerliste und die Servicetouren.", "Nur die Preise."], 1],
+  ["Wofür ist das Drehgelenk am Harvesterkopf wichtig?", ["Es schneidet das Holz.", "Der Kopf kann sich drehen, und der Schlauch verdreht sich nicht.", "Es zählt die Bäume."], 1],
+  ["Woher kommen die Artikelnummern in der Bestellung?", ["Aus dem neuen Online-Katalog.", "Aus einer alten Liste von 2024.", "Von Herrn Lang."], 1],
+  ["Was macht Aquasul aus Kulanz?", ["Sie zahlt eine Entschädigung für den Stillstand.", "Sie nimmt die 40 Teile zurück und liefert die vier richtigen kostenlos.", "Sie schenkt dem Kunden einen Harvester."], 1],
+  ["Warum braucht Nordlicht kein Gutachten?", ["Ein Gutachten ist lang und teuer; eine Stellungnahme reicht.", "Der Kunde will kein Gutachten.", "Frau Albers hat keine Zeit."], 0],
+  ["Welchen Service bekommt Serra Verde jetzt?", ["Einen neuen Katalog auf Portugiesisch.", "Eine Hotline rund um die Uhr und ab Mai eine feste Betreuung durch Herrn Rocha.", "Neue Harvester zu einem guten Preis."], 1],
+  ["Wann ist das nächste Abstimmungsmeeting?", ["Am 4. März.", "Am 18. März.", "Am 25. März."], 2]
+];
+const GAP = [
+  ["Serra Verde hat einen großen ______: 40 Harvester und 20 Forwarder.", "Maschinenpark"],
+  ["„Aquasul hat die Struktur des früheren ______ übernommen.“", "Lieferanten"],
+  ["Im Januar kam die Bestellung der ______ für die Module für die Holzernte.", "Drehgelenke"],
+  ["Die ______ der Bestellung hatten Artikelnummern aus einer alten Liste.", "Positionen"],
+  ["Aber es gab eine ______ in der Bestellung.", "Unstimmigkeit"],
+  ["Der Einkaufsleiter wollte die offizielle ______ schriftlich einreichen.", "Reklamation"],
+  ["Nordlicht hat das Schreiben mit der ______ der Rechtsabteilung an Serra Verde geschickt.", "Stellungnahme"],
+  ["Aus ______ nimmt Aquasul die 40 Teile zurück.", "Kulanz"],
+  ["„Ein ______ ist lang und teuer.“", "Gutachten"],
+  ["Für eventuell ______ Teile plant Aquasul ein kleines Lager in Curitiba.", "fehlende"],
+  ["„Das zusätzliche ______ liegt bei 1,5 Millionen Reais pro Jahr.“", "Umsatzpotenzial"],
+  ["Serra Verde wünscht eine ______ um zwei Jahre.", "Vertragsverlängerung"]
+];
+const OFFEN = [
+  ["Wer ist Frau Albers?", "Sie ist Anwältin in der Rechtsabteilung von Nordlicht."],
+  ["Wie viele Harvester und wie viele Forwarder hat Serra Verde?", "40 Harvester und 20 Forwarder."],
+  ["Wie viel Zeit hatte Aquasul für den neuen Kunden?", "Nur vier Wochen."],
+  ["Was stand bei Position 20?", "40 statt 4."],
+  ["Wann und wie kam der Brief mit der Reklamation?", "Am 16. Februar, per E-Mail und per Post."],
+  ["Was will der Kunde in der Reklamation?", "Die richtigen Teile sofort und eine Entschädigung für die zwei Tage Stillstand."],
+  ["Was legt Aquasul für eventuell fehlende Teile ins Lager in Curitiba?", "Zehn Drehgelenke und 50 Filter."],
+  ["Wie lange musste Serra Verde beim alten Lieferanten oft auf eine Antwort warten?", "Drei Tage."],
+  ["Was kauft Serra Verde heute bei Aquasul, und für wie viel Geld?", "Drehgelenke und Filter, für etwa 300.000 Reais im Jahr."],
+  ["Was bringt Frau Costa am 4. März zu Serra Verde mit?", "Die vier richtigen Drehgelenke."]
+];
+const ERKL = [
+  ["„Aquasul hat die Struktur des früheren Lieferanten übernommen: seine Artikelnummern, seine Lagerliste und seine Servicetouren.“", "A Aquasul herdou a estrutura do antigo fornecedor: os códigos dos produtos, a lista de estoque e as rotas de atendimento. übernehmen = assumir, adotar (não „erben“)."],
+  ["„Aber es gab eine Unstimmigkeit in der Bestellung. Die Positionen der Bestellung hatten Artikelnummern aus einer alten Liste von 2024.“", "Mas houve uma inconsistência na ordem de compra: os itens do pedido estavam com códigos de uma lista antiga, de 2024."],
+  ["„Er wollte die offizielle Reklamation schriftlich einreichen.“", "Ele quis enviar a reclamação oficial por escrito, como documento formal. Reklamation = reclamação sobre mercadoria ou entrega (não Beschwerde, que é queixa sobre atendimento)."],
+  ["„Ein Gutachten ist lang und teuer. Für diesen Fall reicht eine Stellungnahme.“", "Um parecer formal de perito (laudo) é longo e caro; para este caso basta o parecer, o posicionamento do jurídico."],
+  ["„Aus Kulanz nimmt Aquasul die 40 Teile zurück und liefert die vier richtigen Drehgelenke kostenlos.“", "Por cortesia comercial, sem obrigação legal, a Aquasul aceita a devolução das 40 peças e entrega as quatro juntas rotativas certas sem custo."],
+  ["„Für eventuell fehlende Teile plant Aquasul deshalb ein kleines Lager in Curitiba.“", "Por isso, para uma eventual falta de peças, a Aquasul planeja um pequeno estoque em Curitiba."],
+  ["„Potenzial ist noch kein Umsatz. Aber die Zahl ist interessant.“", "Potencial ainda não é faturamento: o adicional de 1,5 milhão de reais por ano ainda precisa virar venda. Mas o número é interessante."],
+  ["„Verlängern ja, aber mit Schläuchen und Pumpen im Vertrag. Das ist fast ein neuer Vertrag.“", "Renovar o contrato, sim, mas incluindo mangueiras e bombas. Aí já é quase um contrato novo, não só uma prorrogação nas mesmas condições."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>
