@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedro und Alex 2: Oma, Handball und ein Tag am See – Geschichte mit Übungen (A2)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-G])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+<style>
+  .zuordnung select { font-family:system-ui,sans-serif; font-size:.93rem; padding:.3rem .4rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); max-width:100%; }
+  textarea { font:inherit; font-family:system-ui,sans-serif; font-size:.95rem; width:100%; min-height:3.5rem; padding:.4rem .5rem; border:1px solid var(--line); border-radius:6px; resize:vertical; }
+  .note { font-family:system-ui,sans-serif; font-size:.85rem; color:var(--muted); }
+</style>
+<style>
+  .slang { border-bottom:2px dotted var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pedro und Alex 2: Oma, Handball und ein Tag am See</h1>
+  <p>Continuação da história de Pedro e Alex (A2): um passeio por Bremen com a avó, sorvete, handebol, um robô na escola, aulas de reforço entre amigos e um dia no lago com as famílias. Com gírias de adolescentes e palavras de tecnologia.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 A2 – Startseite</a><a href="pedro-und-alex.html">⚽ Teil 1: Zwei Freunde in Bremen</a><a href="gabarito-pedro-und-alex-2.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Pedro und Alex 2: Oma, Handball und ein Tag am See</h2>
+  <p class="pt">Leia a história. As palavras destacadas em amarelo são as palavras novas; as palavras <span class="slang">sublinhadas com pontinhos</span> são gírias de jovens. A aba „Wörter“ traz a tradução e as abas A–G, os exercícios.</p>
+
+  <p>Es ist April. Pedro wohnt jetzt seit neun Monaten in Bremen, und die Stadt gefällt ihm immer besser. Ein Grund ist Oma Helga, die Mutter von Pedros Vater. Sie ist vor zwölf Jahren aus Blumenau nach Bremen gezogen und wohnt in einer kleinen Wohnung an der Weser. Früher hat sie nur ein bisschen Deutsch gesprochen, aber jetzt spricht sie fast perfekt. Oma Helga ist 72 Jahre alt und sehr fit: Sie fährt jeden Tag Fahrrad, hat ein Smartphone und schreibt mehr Nachrichten als Pedro! Pedro hat auch einen kleinen Bruder, Davi. Davi ist zehn Jahre alt und findet alles „mega“.</p>
+
+  <p>An einem Samstag macht Oma Helga mit Pedro einen <mark>Stadtrundgang</mark>. „Du wohnst in Bremen, aber du kennst die Stadt noch gar nicht“, sagt sie. Sie beginnen auf dem Marktplatz. Dort stehen das alte Rathaus und der Roland, eine große Figur aus Stein. „Das Rathaus und der Roland sind die wichtigsten <mark>Sehenswürdigkeiten</mark> von Bremen“, erklärt Oma. Neben dem Rathaus stehen die Bremer Stadtmusikanten: ein Esel, ein Hund, eine Katze und ein Hahn. „Halt die Beine vom Esel fest, das bringt Glück!“, sagt Oma. Dann macht sie ein Selfie mit Pedro und schickt es sofort in den <mark>Gruppenchat</mark> der Familie. „Oma, bitte nicht! Das ist so <span class="slang">cringe</span>!“, ruft Pedro. Oma lacht: „Cringe? Was heißt das denn?“</p>
+
+  <p>Auf dem Marktplatz gibt es noch etwas Lustiges: das „Bremer Loch“. Pedro wirft eine Münze hinein, und aus dem Loch kommen Tiergeräusche: Iah! Wau! Miau! Kikeriki! Pedro filmt alles mit seinem Handy. Danach gehen sie durch die Böttcherstraße. Um zwölf Uhr hören sie dort das Glockenspiel – die Glocken sind aus Porzellan. Im Schnoor, dem ältesten Viertel von Bremen, sind die Gassen so eng, dass zwei Personen kaum nebeneinander gehen können. Nach zwei Stunden sagt Oma: „So, jetzt haben wir uns ein Eis verdient.“</p>
+
+  <p>Die <mark>Eisdiele</mark> ist an der Schlachte, direkt an der Weser. Die Sonne scheint, und viele Leute sitzen draußen. Pedro bestellt zwei <mark>Kugeln</mark>, Mango und Stracciatella, in der Waffel. Oma nimmt ein Spaghettieis: Vanilleeis wie Spaghetti, mit Erdbeersoße und weißer Schokolade. „Spaghettieis ist eine deutsche Erfindung“, sagt Oma. Pedro macht ein Foto und schickt Alex eine Sprachnachricht. Zwei Minuten später antwortet Alex: „<span class="slang">Krass</span>, <span class="slang">Digga</span>! Spaghettieis ist das Beste! Nächstes Mal komme ich mit.“ Oma schüttelt den Kopf: „Digga? Ihr jungen Leute sprecht eine eigene Sprache.“</p>
+
+  <p>In der Schule gibt es nach den Osterferien eine Neuigkeit. Am Nachmittag hat die Schule viele Gruppen für Schüler: Theater, Chor, Robotik und jetzt auch Handball. Die Sportlehrerin, Frau Yilmaz, fragt: „Wer will in die Handball-<mark>AG</mark>?“ Pedro kennt Handball aus dem Sportunterricht in Brasilien, dort heißt es „Handebol“. Alex hat noch nie Handball gespielt, aber er sagt sofort: „Wir sind dabei!“ Auch Jonas aus der 8b kommt mit. Beim Fußball ist er ein Gegner, aber beim Handball sind die drei jetzt in einer Mannschaft. Pedros Woche ist sehr voll: Montag und Donnerstag Handball, Dienstag Fußball beim SV Weserblick, Freitag Jiu-Jitsu. Am Samstag ist kein Training. Dann <span class="slang">chillen</span> Pedro und Alex oder <span class="slang">zocken</span> Fußball auf der Konsole – aber nur zwei Stunden, das ist die Regel von Alex' Mutter.</p>
+
+  <p>Im Mai spielt die Schulmannschaft bei einem Turnier mit sechs Schulen aus Bremen. Alex steht im Tor, denn er ist groß und hat lange Arme. Pedro ist schnell und wirft viele Tore. Im Finale steht es 20:20, und es sind nur noch zehn Sekunden zu spielen. Pedro hat den Ball. Er kann selbst werfen, aber er sieht Jonas frei vor dem Tor. Er passt – und Jonas trifft! 21:20! Die Mannschaft springt und schreit. „<span class="slang">Bro</span>, du hast so viel <span class="slang">Aura</span>!“, sagt Alex zu Jonas. Frau Yilmaz lächelt: „Das war Teamarbeit wie im Lehrbuch.“ Auch beim Fußball und im Jiu-Jitsu läuft es gut: Der SV Weserblick wird am Ende der Saison Dritter, und Alex bekommt den ersten Streifen an seinem weißen Gürtel.</p>
+
+  <p>Pedro und Alex sind auch in der Robotik-AG. Herr Becker, der Physiklehrer, leitet die AG. Für die Projektwoche im Juni bauen Pedro, Alex und Mia aus der 8a einen kleinen <mark>Roboter</mark>. Er soll Müll trennen: Papier nach links, Plastik nach rechts. Eine kleine Kamera erkennt den Müll. Mia druckt die Teile mit dem 3D-Drucker, Pedro baut den Motor ein, und Alex programmiert am Laptop. Manchmal fragen sie eine KI, wenn der Code nicht funktioniert. Aber Herr Becker sagt: „Die KI ist ein Werkzeug. Den Code müsst ihr selbst verstehen!“ Beim ersten Test fährt der Roboter gegen die Wand. „<span class="slang">Alter</span>! Der Roboter will wohl nach Hause“, sagt Alex. Die drei arbeiten jeden Nachmittag weiter und schreiben sich abends im Gruppenchat „Robo-Team“. Am Ende funktioniert alles. Bei der Präsentation klatschen alle, und der Roboter bekommt den zweiten Preis.</p>
+
+  <p>Und das Lernen? Pedro und Alex helfen sich immer noch gegenseitig. Im Juni muss Pedro ein <mark>Referat</mark> in Deutsch halten: zehn Minuten über Blumenau. Alex liest den Text und korrigiert die Artikel. „Der, die, das – das ist für mich das Schwerste!“, sagt Pedro. Alex hat eine Idee: Pedro schreibt die Nomen in drei Farben, blau für der, rot für die und grün für das. Und Alex? Am Abend vor der Mathe-<mark>Klassenarbeit</mark> ruft er Pedro per Video an: „Gleichungen … ich bin total <span class="slang">lost</span>!“ Pedro erklärt ihm alles Schritt für Schritt. „Du hilfst mir in Mathe, und ich helfe dir in Deutsch“, sagt Alex. „Das ist <mark>Nachhilfe</mark> gratis – nicht schlecht, oder?“ Pedro bekommt für sein Referat eine Zwei, und Alex schreibt in der Klassenarbeit auch eine Zwei. „Danke, Bro! Du bist ein <span class="slang">Ehrenmann</span>“, sagt Alex. Im Juli gibt es Zeugnisse: Pedro hat in Deutsch eine Drei und in Mathe eine Eins, und Alex hat in Mathe zum ersten Mal eine Zwei im Zeugnis.</p>
+
+  <p>In den Sommerferien machen die zwei Familien einen <mark>Ausflug</mark> an einen <mark>See</mark> bei Bremen. Oma Helga kommt auch mit. Alle bringen etwas für das Picknick mit: Alex' Mutter macht Kartoffelsalat, Pedros Mutter bringt Pão de Queijo und eine große Wassermelone, und die Väter grillen Würstchen. Es ist 28 Grad. „Zuerst Sonnencreme!“, ruft Pedros Mutter. Aber Davi will nicht warten und läuft sofort ins Wasser.</p>
+
+  <p>Das Wasser ist kalt, aber nach fünf Minuten ist es super. Die drei Jungen schwimmen zu einer kleinen Badeinsel. Dort machen sie einen Wettbewerb: Wer macht die beste Arschbombe? Davi springt mit einem lauten Schrei, und das Wasser spritzt bis zu Oma Helga. Davi gewinnt! Danach gibt es eine Wasserschlacht, und am Strand bauen sie eine Sandburg und spielen Frisbee. Die Handys bleiben fast den ganzen Tag in der Tasche. Nur Davi filmt eine Arschbombe in Zeitlupe. „<span class="slang">Das crazy</span>!“, ruft Alex, als er das Video sieht.</p>
+
+  <p>Am Abend sitzen alle zusammen am Wasser, und die Jungen chillen müde auf der Decke. Alex sagt: „Pedro, weißt du noch? Am ersten Schultag hast du niemanden gekannt.“ Pedro lacht: „Und jetzt habe ich einen besten Freund, eine Handballmannschaft und einen Roboter.“ Oma Helga hat eine Idee: „Morgen gehen wir alle zusammen in die Eisdiele. Ich bezahle!“ „Oma“, sagt Pedro, „du bist ein Ehrenmann!“ Alle lachen. „Ehrenfrau, bitte!“, sagt Oma. „Siehst du? Eure Sprache lerne ich auch.“</p>
+</section>
+
+<section id="woerter">
+  <h2>Wörter</h2>
+  <p class="pt">As 12 palavras principais da história com o artigo e o plural, mais uma dica de uso. Embaixo: gírias, tecnologia e outras palavras úteis do texto.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Dica</th></tr></thead>
+    <tbody>
+      <tr><td>o passeio pela cidade, o city tour</td><td class="de">der Stadtrundgang, die Stadtrundgänge</td><td class="hinweis">einen Stadtrundgang machen = fazer um passeio a pé pela cidade. Com guia: die Stadtführung.</td></tr>
+      <tr><td>o ponto turístico</td><td class="de">die Sehenswürdigkeit, die Sehenswürdigkeiten</td><td class="hinweis">Vem de sehenswert = que vale a pena ver. etwas besichtigen = visitar (um lugar).</td></tr>
+      <tr><td>o grupo (de WhatsApp, de mensagens)</td><td class="de">der Gruppenchat, die Gruppenchats</td><td class="hinweis">der Chat (masculino) → der Gruppenchat. etwas in den Gruppenchat schicken = mandar no grupo.</td></tr>
+      <tr><td>a sorveteria</td><td class="de">die Eisdiele, die Eisdielen</td><td class="hinweis">das Eis = o sorvete (e também o gelo). Eis essen gehen = ir tomar sorvete.</td></tr>
+      <tr><td>a bola (de sorvete)</td><td class="de">die Kugel, die Kugeln</td><td class="hinweis">Zwei Kugeln, bitte! in der Waffel = na casquinha; im Becher = no copinho.</td></tr>
+      <tr><td>a atividade extracurricular (o „clube“ da escola)</td><td class="de">die AG, die AGs</td><td class="hinweis">AG = Arbeitsgemeinschaft. Grupos à tarde na escola: Handball-AG, Robotik-AG, Theater-AG.</td></tr>
+      <tr><td>o robô</td><td class="de">der Roboter, die Roboter</td><td class="hinweis">einen Roboter bauen / programmieren. Plural igual ao singular.</td></tr>
+      <tr><td>a apresentação oral, o seminário</td><td class="de">das Referat, die Referate</td><td class="hinweis">ein Referat halten = apresentar um trabalho oral para a turma.</td></tr>
+      <tr><td>a prova (na escola)</td><td class="de">die Klassenarbeit, die Klassenarbeiten</td><td class="hinweis">eine Klassenarbeit schreiben = fazer uma prova. Mais curta: der Test.</td></tr>
+      <tr><td>a aula de reforço</td><td class="de">die Nachhilfe</td><td class="hinweis">Nachhilfe geben / bekommen. der Nachhilfelehrer = o professor particular. Sem plural.</td></tr>
+      <tr><td>o passeio, a excursão</td><td class="de">der Ausflug, die Ausflüge</td><td class="hinweis">einen Ausflug machen = fazer um passeio (de um dia). der Schulausflug = a excursão da escola.</td></tr>
+      <tr><td>o lago</td><td class="de">der See, die Seen</td><td class="hinweis">Cuidado: der See = o lago; die See = o mar (die Nordsee, die Ostsee). an den See fahren = ir ao lago.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Jugendsprache – gírias de jovens</h3>
+  <p class="pt">Use com amigos, no chat ou no intervalo – não com professores, numa prova ou num e-mail formal.</p>
+  <table>
+    <tbody>
+      <tr><td>que incrível! / que absurdo!</td><td class="de">krass</td><td class="hinweis">Positivo ou negativo, depende da situação: „Krass, du hast gewonnen!“ / „Krass, das ist teuer!“</td></tr>
+      <tr><td>mano, cara</td><td class="de">Digga; Bro; Alter!</td><td class="hinweis">Para chamar um amigo. „Alter!“ sozinho também é espanto: „Alter, was war das?“</td></tr>
+      <tr><td>que vergonha (alheia)!</td><td class="de">cringe</td><td class="hinweis">Palavra do ano dos jovens 2021 (Jugendwort des Jahres). „Das ist so cringe!“</td></tr>
+      <tr><td>perdido, sem entender nada</td><td class="de">lost</td><td class="hinweis">Jugendwort 2020. „Ich bin total lost.“ = Não estou entendendo nada.</td></tr>
+      <tr><td>pessoa gente boa, que ajuda</td><td class="de">der Ehrenmann / die Ehrenfrau</td><td class="hinweis">Jugendwort 2018. Elogio para quem faz algo legal por você.</td></tr>
+      <tr><td>relaxar, ficar de boa</td><td class="de">chillen</td><td class="hinweis">Verbo regular: ich chille, wir haben gechillt.</td></tr>
+      <tr><td>jogar videogame</td><td class="de">zocken</td><td class="hinweis">Fußball auf der Konsole zocken. Também se diz: Videospiele spielen / gamen.</td></tr>
+      <tr><td>presença, carisma, „moral“</td><td class="de">die Aura</td><td class="hinweis">Jugendwort 2024. „Du hast so viel Aura!“ = Você é muito estiloso / impressionante.</td></tr>
+      <tr><td>que loucura! (reação de surpresa)</td><td class="de">Das crazy!</td><td class="hinweis">Jugendwort 2025. Sem verbo: „Das crazy!“ (e não „Das ist crazy“).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Technik – tecnologia</h3>
+  <table>
+    <tbody>
+      <tr><td>o celular</td><td class="de">das Handy, die Handys</td><td class="hinweis">„Handy“ só existe no alemão; em inglês é „mobile phone“. Também: das Smartphone.</td></tr>
+      <tr><td>a mensagem de voz / a mensagem</td><td class="de">die Sprachnachricht / die Nachricht</td><td class="hinweis">jemandem eine Sprachnachricht schicken = mandar um áudio para alguém.</td></tr>
+      <tr><td>tirar uma selfie / filmar</td><td class="de">ein Selfie machen / filmen</td><td class="hinweis">das Selfie (neutro). in Zeitlupe filmen = filmar em câmera lenta.</td></tr>
+      <tr><td>programar / o código</td><td class="de">programmieren / der Code</td><td class="hinweis">am Laptop programmieren. Der Code funktioniert nicht. = O código não funciona.</td></tr>
+      <tr><td>a impressora 3D / imprimir</td><td class="de">der 3D-Drucker / drucken</td><td class="hinweis">Lê-se „drei-de-Drucker“.</td></tr>
+      <tr><td>a IA (inteligência artificial)</td><td class="de">die KI (künstliche Intelligenz)</td><td class="hinweis">Lê-se „ka-i“. eine KI fragen = perguntar a uma IA.</td></tr>
+      <tr><td>o console / a videochamada</td><td class="de">die Konsole / per Video anrufen</td><td class="hinweis">jemanden per Video anrufen = fazer uma videochamada para alguém.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Mais palavras do texto</h3>
+  <table>
+    <tbody>
+      <tr><td>a prefeitura</td><td class="de">das Rathaus, die Rathäuser</td><td class="hinweis">O Rathaus e o Roland de Bremen são Patrimônio Mundial da UNESCO.</td></tr>
+      <tr><td>o burro / dar sorte</td><td class="de">der Esel / Glück bringen</td><td class="hinweis">Die Bremer Stadtmusikanten = Os Músicos de Bremen (conto dos Irmãos Grimm).</td></tr>
+      <tr><td>a viela</td><td class="de">die Gasse, die Gassen</td><td class="hinweis">Rua bem estreita, como no Schnoor.</td></tr>
+      <tr><td>a casquinha</td><td class="de">die Waffel, die Waffeln</td><td class="hinweis">das Spaghettieis = sorvete de baunilha em forma de espaguete, com calda de morango.</td></tr>
+      <tr><td>arremessar / o goleiro</td><td class="de">werfen / der Torwart</td><td class="hinweis">No handebol: ein Tor werfen; no futebol: ein Tor schießen. im Tor stehen = ser o goleiro.</td></tr>
+      <tr><td>a semana de projetos</td><td class="de">die Projektwoche</td><td class="hinweis">Semana sem aulas normais, só com projetos.</td></tr>
+      <tr><td>o boletim</td><td class="de">das Zeugnis, die Zeugnisse</td><td class="hinweis">Lembre: 1 é a melhor nota, 6 a pior.</td></tr>
+      <tr><td>o protetor solar</td><td class="de">die Sonnencreme</td><td class="hinweis">Sonnencreme auftragen = passar protetor.</td></tr>
+      <tr><td>o „bomba“ na água / a guerra de água</td><td class="de">die Arschbombe / die Wasserschlacht</td><td class="hinweis">Arschbombe é a palavra comum (até em competições), mas „Arsch“ sozinho é palavrão.</td></tr>
+      <tr><td>o castelo de areia / fazer churrasco</td><td class="de">die Sandburg / grillen</td><td class="hinweis">Würstchen grillen = assar salsichas na grelha.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <p class="pt">Verdadeiro ou falso? Marque e clique em „Prüfen“.</p>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra certa da caixa. Cada palavra entra uma vez.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Artikel und Bedeutung</h2>
+  <p class="pt">Para cada palavra, escolha o artigo (der/die/das) e a tradução. Só conta ponto se os dois estiverem certos.</p>
+  <table class="zuordnung">
+    <thead><tr><th>Wort</th><th>Artikel</th><th>Bedeutung</th></tr></thead>
+    <tbody id="zu"></tbody>
+  </table>
+  <button onclick="pruefeZu()">Prüfen</button><span class="punkte" id="p-zu"></span>
+  <details><summary>Lösung</summary><ol id="l-zu"></ol></details>
+</section>
+
+<section id="teilE">
+  <h2>E. Jugendsprache: Was bedeutet das?</h2>
+  <p class="pt">Escolha o significado de cada gíria. Releia a frase da história se precisar.</p>
+  <table class="zuordnung">
+    <thead><tr><th>Im Text</th><th>Bedeutung</th></tr></thead>
+    <tbody id="sl"></tbody>
+  </table>
+  <button onclick="pruefeSl()">Prüfen</button><span class="punkte" id="p-sl"></span>
+  <details><summary>Lösung</summary><ol id="l-sl"></ol></details>
+</section>
+
+<section id="teilF">
+  <h2>F. Fragen zum Text</h2>
+  <p class="pt">Responda em alemão com uma frase curta. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilG">
+  <h2>G. Und du?</h2>
+  <p class="pt">Agora fale de você. Escreva 1 ou 2 frases em alemão para cada pergunta. O exemplo mostra uma resposta possível.</p>
+  <div id="du"></div>
+</section>
+
+<div id="gesamt"></div>
+</main>
+<footer>Fiktive Geschichte – die Personen, die Schule und die Vereine sind erfunden. Die Sehenswürdigkeiten in Bremen gibt es wirklich.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Oma Helga wohnt seit zwölf Jahren in Bremen.", true, ""],
+  ["Oma Helga hat kein Smartphone.", false, "Sie hat ein Smartphone und schreibt viele Nachrichten."],
+  ["Der Roland ist eine große Figur aus Stein.", true, ""],
+  ["Pedro findet das Selfie im Gruppenchat super.", false, "Er findet es cringe."],
+  ["Im Bremer Loch hört man Tiergeräusche.", true, ""],
+  ["Oma Helga isst zwei Kugeln Mango und Stracciatella.", false, "Das ist Pedros Eis; Oma nimmt ein Spaghettieis."],
+  ["Pedro kennt Handball aus der Schule in Brasilien.", true, ""],
+  ["Beim Handball spielt Jonas gegen Pedro und Alex.", false, "Die drei sind in einer Mannschaft."],
+  ["Die Schulmannschaft gewinnt das Finale 21:20.", true, ""],
+  ["Beim ersten Test funktioniert der Roboter perfekt.", false, "Er fährt gegen die Wand."],
+  ["Alex korrigiert die Artikel in Pedros Referat.", true, ""],
+  ["Oma Helga bleibt beim Ausflug zu Hause.", false, "Sie kommt mit an den See."]
+];
+const MC = [
+  ["Woher kommt Oma Helga?", ["Aus Blumenau.", "Aus Hamburg.", "Aus Bremen."], 0],
+  ["Was bringt Glück?", ["Ein Selfie mit dem Roland.", "Die Beine vom Esel festhalten.", "Eine Münze in die Weser werfen."], 1],
+  ["Was ist Spaghettieis?", ["Nudeln mit Tomatensoße und Eis.", "Vanilleeis wie Spaghetti, mit Erdbeersoße.", "Ein Eis aus Italien mit Käse."], 1],
+  ["Was antwortet Alex auf Pedros Sprachnachricht?", ["„Das ist so cringe!“", "„Ich bin total lost!“", "„Krass, Digga! Spaghettieis ist das Beste!“"], 2],
+  ["Wann trainiert Pedro Handball?", ["Dienstag und Freitag.", "Montag und Donnerstag.", "Nur am Samstag."], 1],
+  ["Was macht Pedro in den letzten zehn Sekunden des Finales?", ["Er wirft selbst.", "Er passt zu Jonas.", "Er gibt den Ball zu Alex ins Tor."], 1],
+  ["Was soll der Roboter machen?", ["Müll trennen.", "Hausaufgaben machen.", "Fußball spielen."], 0],
+  ["Was sagt Herr Becker über die KI?", ["Die KI macht alles allein.", "Die KI ist ein Werkzeug, aber den Code müsst ihr selbst verstehen.", "Die KI ist in der Schule verboten."], 1],
+  ["Wie lernt Pedro die Artikel?", ["Mit einer App.", "Mit Liedern.", "Er schreibt die Nomen in drei Farben."], 2],
+  ["Wer gewinnt den Wettbewerb am See?", ["Pedro.", "Davi.", "Alex."], 1]
+];
+const GAP = [
+  ["An einem Samstag macht Oma Helga mit Pedro einen ______.", "Stadtrundgang"],
+  ["Das Rathaus und der Roland sind die wichtigsten ______ von Bremen.", "Sehenswürdigkeiten"],
+  ["Oma schickt das Selfie sofort in den ______ der Familie.", "Gruppenchat"],
+  ["Die ______ ist an der Schlachte, direkt an der Weser.", "Eisdiele"],
+  ["Pedro bestellt zwei ______, Mango und Stracciatella.", "Kugeln"],
+  ["Frau Yilmaz fragt: „Wer will in die Handball-______?“", "AG"],
+  ["Für die Projektwoche bauen Pedro, Alex und Mia einen kleinen ______.", "Roboter"],
+  ["Im Juni muss Pedro ein ______ in Deutsch halten.", "Referat"],
+  ["Am Abend vor der Mathe-______ ruft Alex Pedro per Video an.", "Klassenarbeit"],
+  ["„Das ist ______ gratis – nicht schlecht, oder?“", "Nachhilfe"],
+  ["In den Sommerferien machen die zwei Familien einen ______.", "Ausflug"],
+  ["Sie fahren an einen ______ bei Bremen.", "See"]
+];
+const ZU = [
+  ["Stadtrundgang", "der", "passeio pela cidade"],
+  ["Sehenswürdigkeit", "die", "ponto turístico"],
+  ["Gruppenchat", "der", "grupo de mensagens"],
+  ["Eisdiele", "die", "sorveteria"],
+  ["Kugel", "die", "bola de sorvete"],
+  ["AG", "die", "atividade extracurricular"],
+  ["Roboter", "der", "robô"],
+  ["Referat", "das", "apresentação oral"],
+  ["Klassenarbeit", "die", "prova (na escola)"],
+  ["Nachhilfe", "die", "aula de reforço"],
+  ["Ausflug", "der", "passeio, excursão"],
+  ["See", "der", "lago"]
+];
+const SL = [
+  ["„Das ist so cringe!“", "que vergonha alheia"],
+  ["„Krass, Digga!“ – krass", "que incrível"],
+  ["„Krass, Digga!“ – Digga", "mano, cara"],
+  ["Pedro und Alex chillen.", "relaxar, ficar de boa"],
+  ["Sie zocken Fußball auf der Konsole.", "jogar videogame"],
+  ["„Du hast so viel Aura!“", "presença, carisma"],
+  ["„Ich bin total lost!“", "perdido, sem entender nada"],
+  ["„Du bist ein Ehrenmann.“", "pessoa gente boa, que ajuda"],
+  ["„Das crazy!“", "que loucura!"]
+];
+const OFFEN = [
+  ["Wie alt ist Oma Helga?", "Sie ist 72 Jahre alt."],
+  ["Was passiert, wenn Pedro eine Münze in das Bremer Loch wirft?", "Aus dem Loch kommen Tiergeräusche."],
+  ["Wie sind die Gassen im Schnoor?", "Sie sind sehr eng."],
+  ["Was macht Pedro am Dienstag und am Freitag?", "Am Dienstag spielt er Fußball, am Freitag macht er Jiu-Jitsu."],
+  ["Warum steht Alex im Tor?", "Er ist groß und hat lange Arme."],
+  ["Was macht Mia im Robo-Team?", "Sie druckt die Teile mit dem 3D-Drucker."],
+  ["Was bringt Pedros Mutter zum Picknick mit?", "Pão de Queijo und eine große Wassermelone."],
+  ["Was will Oma Helga am nächsten Tag machen?", "Sie will mit allen in die Eisdiele gehen und bezahlen."]
+];
+const DU = [
+  ["Welche Sehenswürdigkeiten gibt es in deiner Stadt?", "In meiner Stadt gibt es eine alte Kirche und einen schönen Park."],
+  ["Welche Eissorte isst du am liebsten?", "Ich esse am liebsten Schokolade und Erdbeere, in der Waffel."],
+  ["Welche AG gibt es an deiner Schule, oder welche AG möchtest du machen?", "Ich möchte gern in eine Robotik-AG gehen."],
+  ["Wie lange benutzt du dein Handy pro Tag? Wofür?", "Ungefähr drei Stunden. Ich schreibe im Gruppenchat und schaue Videos."],
+  ["Was machst du gern mit deiner Familie in den Ferien?", "Wir fahren gern an den Strand, schwimmen und essen zusammen."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const shuffle = a => { const b = a.slice(); for (let i = b.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+let score = {rf:null, mc:null, gap:null, zu:null, sl:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  document.getElementById("kasten").innerHTML = shuffle(GAP.map(g => g[1])).map(w => `<span>${esc(w)}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}" autocomplete="off" spellcheck="false"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${esc(q[1])}</li>`).join("");
+
+  const pts = shuffle(ZU.map(z => z[2]));
+  document.getElementById("zu").innerHTML = ZU.map((z,i) => `<tr><td>${esc(z[0])}</td>
+    <td><select id="za${i}"><option value="">–</option><option>der</option><option>die</option><option>das</option></select></td>
+    <td><select id="zp${i}"><option value="">–</option>${pts.map(p => `<option>${esc(p)}</option>`).join("")}</select></td></tr>`).join("");
+  document.getElementById("l-zu").innerHTML = ZU.map(z => `<li><b>${z[1]} ${esc(z[0])}</b> – ${esc(z[2])}</li>`).join("");
+
+  const bed = shuffle(SL.map(s => s[1]));
+  document.getElementById("sl").innerHTML = SL.map((s,i) => `<tr><td>${esc(s[0])}</td>
+    <td><select id="sb${i}"><option value="">–</option>${bed.map(b => `<option>${esc(b)}</option>`).join("")}</select></td></tr>`).join("");
+  document.getElementById("l-sl").innerHTML = SL.map(s => `<li>${esc(s[0])} – <b>${esc(s[1])}</b></li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Deine Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("du").innerHTML = DU.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <textarea placeholder="Schreib hier …" lang="de"></textarea><details><summary>Beispiel</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const ok = norm(document.getElementById("gin"+i).value)===norm(q[1]); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function pruefeZu() {
+  let p=0; ZU.forEach((z,i) => { const a=document.getElementById("za"+i), b=document.getElementById("zp"+i); const okA = a.value===z[1], okB = b.value===z[2]; mark(a, okA); mark(b, okB); if(okA&&okB)p++; });
+  score.zu=p; document.getElementById("p-zu").textContent = `${p} / ${ZU.length}`; gesamt();
+}
+function pruefeSl() {
+  let p=0; SL.forEach((s,i) => { const b=document.getElementById("sb"+i); const ok = b.value===s[1]; mark(b, ok); if(ok)p++; });
+  score.sl=p; document.getElementById("p-sl").textContent = `${p} / ${SL.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–E): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length+ZU.length+SL.length}`;
+}
+render();
+</script>
+</body>
+</html>
