@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 12: Die Planungssitzung in Curitiba – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 12: Die Planungssitzung in Curitiba</h1>
+  <p>Continuação do Text 11, em nível A2/B1: reunião anual de planejamento, vendedores externos de todo o Brasil, faturamento planejado 2027, cronograma das apresentações, organização do evento, coffee break, contratação de novo gerente comercial, deslocamento para a reunião, visita trimestral do diretor HF da Alemanha, ordenar as apresentações conforme o cronograma, preparação da sala, gerente de vendas, expansão de mercado, captação de novos clientes e participação em feiras 2027.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-11-reklamation.html">📄 Text 11</a><a href="uebungen-9.html">✏️ Übungen 9</a><a href="gabarito-text-12.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Die jährliche Planungssitzung: zwei Tage in Curitiba</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Es ist Mittwoch, der 7. April, 18 Uhr, in Curitiba. Frau Ribeiro, die Assistentin von Frau Costa, ist noch im Büro. Morgen beginnt die <mark>jährliche Planungssitzung Brasilien</mark>: zwei Tage, 18 Personen, 14 Präsentationen. Die <mark>Organisation der Veranstaltung</mark> ist seit Februar ihre Aufgabe: die Flüge, das Hotel, das Essen und die Technik. „Was fehlt noch?“, fragt Frau Costa. Frau Ribeiro schaut auf ihre Liste. „Nur noch die <mark>Vorbereitung des Konferenzraums</mark>. Der Beamer funktioniert, und die Namensschilder liegen auf den Tischen. Aber wir haben 16 Stühle und brauchen 18.“</p>
+
+  <p>Die Sitzung ist vor allem für die <mark>Außendienstmitarbeiter aus ganz Brasilien</mark>. Sie sind fast immer beim Kunden, und nur einmal im Jahr sitzen alle zusammen in einem Raum. Es sind zwölf Personen. Acht sind bei Aquasul angestellt, und vier sind <mark>Handelsvertreter</mark>: Sie sind selbstständig und bekommen nur Provision. Die <mark>Anreise zur Sitzung</mark> ist für manche lang. Frau Dias aus Porto Alegre fliegt nur eine Stunde, aber Herr Nascimento aus Recife braucht fünf Stunden und Herr Souza aus Manaus fast acht, mit Umsteigen in São Paulo. Aquasul bezahlt die Flüge und das Hotel. Um 19 Uhr kommt eine Nachricht von Herrn Souza: Sein Flug ist ausgefallen. Er kommt erst morgen um 13 Uhr an.</p>
+
+  <p>Das ist ein Problem für den <mark>Zeitplan der Präsentationen</mark>. Jeder Außendienstmitarbeiter hat 15 Minuten für seine Region, und Herr Souza präsentiert morgen um 9.30 Uhr. Frau Costa entscheidet schnell: „Er kommt als Letzter dran, um 16 Uhr. Frau Dias präsentiert früher.“ Jetzt stimmt die Reihenfolge auf dem Laptop nicht mehr. „Ich muss <mark>alle Präsentationen nach dem Zeitplan ordnen</mark>“, sagt Frau Ribeiro. „Sonst suchen wir morgen vor allen Leuten die richtige Datei.“ Sie gibt jeder Datei eine neue Nummer: 01, 02, 03 und so weiter bis 14. Drei Präsentationen fehlen noch. Um 21 Uhr ist die letzte da, und Frau Ribeiro geht nach Hause.</p>
+
+  <p>Am Donnerstag um 8.30 Uhr begrüßt Frau Costa alle im Konferenzraum. Auch zwei Gäste aus Bremen sind da: Herr Lang und Herr Vogt. Herr Vogt ist HF-Direktor bei Nordlicht. Das ist der erste <mark>Quartalsbesuch des HF-Direktors aus Deutschland</mark>: Ab jetzt kommt er alle drei Monate nach Brasilien. Er spricht kein Portugiesisch, und die meisten Verkäufer sprechen kein Deutsch. Deshalb sitzt Frau Lima neben ihm, die Dolmetscherin. Dann hat Frau Costa eine gute Nachricht: Am 30. März hat Serra Verde die Vertragsverlängerung unterschrieben, für zwei Jahre, mit Schläuchen und Pumpen im Vertrag.</p>
+
+  <p>Jetzt kommen die Zahlen. 2026 lag der Umsatz von Aquasul bei 10,8 Millionen Reais. Der <mark>geplante Umsatz 2027</mark> liegt bei 13,5 Millionen, das sind 25 Prozent mehr. Frau Neumann ist aus Bremen zugeschaltet und fragt: „Ist das der Plan oder die Prognose?“ – „Der Plan“, antwortet Frau Costa. „Das ist unser Ziel. Die Umsatzprognose vom März liegt bei 12,8 Millionen.“ Es fehlen also 700.000 Reais. Das Geld soll vor allem aus der <mark>Neukundengewinnung</mark> kommen: Jeder Außendienstmitarbeiter soll dieses Jahr fünf neue Kunden gewinnen, zusammen 60. Frau Dias ist skeptisch: „Fünf neue Kunden? Und wer besucht dann die alten?“ Frau Costa hat eine Antwort: Für jeden neuen Kunden gibt es im ersten Jahr mehr Provision, und die Techniker übernehmen einen Teil der Besuche bei den alten Kunden.</p>
+
+  <p>Um 10.30 Uhr ist <mark>Kaffeepause</mark>, 20 Minuten laut Zeitplan. Aber nach 20 Minuten stehen noch alle beim Kaffee und reden. Herr Vogt schaut auf die Uhr: „Der Zeitplan!“ Frau Costa lacht: „Diese Kaffeepause ist auch Arbeit. Hier sprechen die Kollegen über Kunden und Preise, und das geht nur einmal im Jahr.“ Frau Lima ist froh: Auch eine Dolmetscherin braucht eine Pause. Um 14 Uhr kommt Herr Souza direkt vom Flughafen. Um 16 Uhr präsentiert er als Letzter, müde, aber mit guten Zahlen aus Manaus.</p>
+
+  <p>Am Freitag geht es um die Zukunft. Das erste Thema ist die <mark>Markterweiterung</mark>. Aquasul macht heute den größten Teil vom Umsatz im Süden und im Südosten. Im Nordosten arbeitet nur Herr Nascimento, und eine Lieferung von Curitiba nach Recife dauert sechs Tage. „In den Häfen von Recife und Suape gibt es viele Schiffe“, sagt er. „Aber die Kunden wollen nicht sechs Tage auf einen Schlauch warten. Wir brauchen ein Lager in Recife.“ Herr Vogt ist vorsichtig: „Zuerst die Kunden, dann das Lager.“ Am Ende einigen sich alle: Ab August testet Aquasul für ein Jahr ein kleines Lager in Recife. Und Chile? „Chile kommt später“, sagt Frau Costa, „vielleicht 2028.“</p>
+
+  <p>Das zweite Thema auf der Tagesordnung sind die <mark>Messebeteiligungen 2027</mark>. Auf der Liste stehen drei Messen: eine Forstmesse in Santa Catarina im August, die Messe in Belo Horizonte im September und eine Hafenmesse in Recife im Oktober. Jede Messe kostet etwa 150.000 Reais: Stand, Standaufbau, Flüge und Hotel. „Das sind 450.000 Reais“, sagt Frau Neumann. „Zwei Messen sind genug.“ Belo Horizonte bleibt, denn dort kommen die strategischen Kunden. Recife passt zur Markterweiterung. Zur Forstmesse fahren Frau Costa und Herr Rocha nur als Besucher, ohne Stand.</p>
+
+  <p>Der letzte Punkt ist die <mark>Einstellung eines neuen Vertriebsleiters</mark>. Bis jetzt leitet Frau Costa den Vertrieb selbst, neben all ihren anderen Aufgaben. Mit zwölf Verkäufern, 60 neuen Kunden und einem neuen Markt geht das nicht mehr. „Der <mark>Vertriebsleiter</mark> oder die Vertriebsleiterin soll das Team führen, die Kundenbesuche planen und mir jeden Monat die Zahlen zeigen“, sagt Frau Costa. „Start spätestens am 1. Juli.“ Frau Dias fragt: „Können wir uns auch intern bewerben?“ – „Natürlich“, sagt Frau Costa. Um 17 Uhr ist die Sitzung zu Ende, nur 15 Minuten später als geplant. Frau Ribeiro schreibt für nächstes Jahr auf ihre Liste: 18 Stühle. Am 19. April fliegen Frau Costa und Herr Lang nach Houston, und das nächste Abstimmungsmeeting ist am Donnerstag, dem 29. April.</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 15 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso para a intérprete. Algumas formas da lista têm erro ou mudam o sentido; a nota explica por quê. Repare nas armadilhas: Plan ≠ Prognose, Außendienstmitarbeiter ≠ Handelsvertreter, Präsentation ≠ Vorstellung, Zeitplan ≠ Tagesordnung, ordnen ≠ bestellen ≠ befehlen, Vertriebsleiter ≠ Verkäufer ≠ Geschäftsführer, einstellen ≠ vorstellen, Anreise ≠ Versetzung, Quartal ≠ Trimester, Vorbereitung ≠ Zubereitung, Neukundengewinnung ≠ Kundenbindung, e a grafia de Kaffeepause e Messebeteiligung.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>reunião anual de planejamento</td><td class="de">die jährliche Planungssitzung (Brasilien); die Jahresplanungssitzung; das jährliche Planungsmeeting</td><td class="hinweis">A forma da lista está certa. „Brasilien“ sem preposição só funciona como nome do evento; em frase: „die jährliche Planungssitzung für Brasilien“. die Sitzung = reunião com pauta; das Meeting (Text 8/9) é praticamente o mesmo; die Besprechung = reunião menor; die Tagung = encontro grande, muitas vezes de vários dias, com palestras. jährlich = anual (dreijährig = de três anos).</td></tr>
+      <tr><td>vendedores externos de todo o Brasil</td><td class="de">die Außendienstmitarbeiter aus ganz Brasilien; der Außendienst; die Handelsvertreter aus ganz Brasilien (só autônomos)</td><td class="hinweis">„Externe Verkäufer“ (forma da lista) se entende, mas soa como tradução literal. der Außendienstmitarbeiter / die Außendienstmitarbeiterin = empregado que visita clientes; der Außendienst = o setor externo; der Innendienst = o setor interno. „Handelsvertreter“ (forma da lista) não é sinônimo: é o representante comercial autônomo, que não é empregado e trabalha por comissão (die Provision, Text 7). Vale perguntar qual dos dois o orador quer dizer. ganz Brasilien, sem artigo e sem terminação („aus ganzem Brasilien“ está errado).</td></tr>
+      <tr><td>faturamento planejado 2027</td><td class="de">der geplante Umsatz 2027; der Planumsatz 2027; das Umsatzziel 2027</td><td class="hinweis">„Geplanter Umsatz 2027“ (forma da lista) está certo, com a terminação que muda: der geplante Umsatz / ein geplanter Umsatz. „Umsatzprognose 2027“ (forma da lista) é outra coisa: die Prognose = previsão, o que esperamos que aconteça (Text 8); der Plan / das Ziel = o que queremos alcançar. Numa reunião os dois números podem ser diferentes. Lembrete: faturamento = der Umsatz, não die Rechnung (= fatura, nota fiscal).</td></tr>
+      <tr><td>cronograma das apresentações</td><td class="de">der Zeitplan der Präsentationen; der Zeitplan der Vorträge; der Präsentationsplan</td><td class="hinweis">der Zeitplan = cronograma (Text 7). die Präsentation = apresentação, em geral com slides; der Vortrag = palestra, exposição oral: as duas servem. „Präsentationsplan“ (forma da lista) se entende, mas Zeitplan é mais comum. „Zeitplan der Vorstellungen“ (forma da lista) não serve: die Vorstellung = apresentação de pessoas (das Vorstellungsgespräch = entrevista de emprego), sessão de teatro ou ideia. die Tagesordnung = pauta, os temas; der Zeitplan = os horários. die Reihenfolge = ordem, sequência.</td></tr>
+      <tr><td>organização do evento</td><td class="de">die Organisation der Veranstaltung; die Veranstaltungsorganisation; die Veranstaltung organisieren</td><td class="hinweis">As duas formas da lista estão certas; na fala, a com genitivo é mais fácil. die Veranstaltung = evento; das Event também se ouve, mais em marketing. der Veranstalter = organizador. Cuidado: die Verantwortung = responsabilidade soa parecido.</td></tr>
+      <tr><td>coffee break</td><td class="de">die Kaffeepause; die Pause</td><td class="hinweis">„Kaffee Pause“ (forma da lista) está errado: substantivo composto em alemão é uma palavra só. „Wir machen eine Kaffeepause.“ Cuidado: die Kaffeefahrt = excursão de ônibus com venda de produtos, nada a ver com reunião. „Coffee Break“ se entende em empresas internacionais, mas Kaffeepause é o normal.</td></tr>
+      <tr><td>contratação de novo gerente comercial</td><td class="de">die Einstellung eines neuen Vertriebsleiters; einen neuen Vertriebsleiter einstellen; die Einstellung einer neuen Vertriebsleiterin</td><td class="hinweis">A forma da lista está certa, com genitivo: eines neuen Vertriebsleiters. einstellen = contratar (Text 10: Aushilfen eingestellt). die Einstellung tem outros sentidos: atitude, opinião, ajuste de uma máquina; o contexto decide. Cuidado: vorstellen = apresentar uma pessoa.</td></tr>
+      <tr><td>deslocamento para a reunião</td><td class="de">die Anreise zur Sitzung; die Fahrt zur Sitzung; anreisen</td><td class="hinweis">A forma da lista está certa. die Anreise = viagem de ida até um lugar, de avião, carro ou ônibus; die Abreise = partida; die Rückreise = volta. zur = zu der. Não use die Verlagerung (= transferência de produção) nem die Versetzung (= transferência de funcionário, Text 10). ausfallen = ser cancelado: „Der Flug ist ausgefallen.“ die Verspätung = atraso.</td></tr>
+      <tr><td>visita trimestral do diretor HF da Alemanha</td><td class="de">der Quartalsbesuch des HF-Direktors aus Deutschland; der vierteljährliche Besuch des HF-Direktors</td><td class="hinweis">A forma da lista está certa. das Quartal = trimestre em empresas e balanços; das Trimester é de universidade, não de empresa. vierteljährlich = trimestral; alle drei Monate = a cada três meses. des Direktors: genitivo. Siglas se pronunciam letra por letra: „Ha-Ef-Direktor“.</td></tr>
+      <tr><td>ordenar todas as apresentações conforme o cronograma</td><td class="de">alle Präsentationen nach dem Zeitplan ordnen; alle Präsentationen gemäß dem Zeitplan sortieren; in die Reihenfolge des Zeitplans bringen</td><td class="hinweis">„Gemäß dem Präsentationsplan sortieren/ordnen“ (forma da lista) está certo: gemäß pede dativo e é formal, mais de texto escrito; na fala, diga nach dem Zeitplan. ordnen = pôr em ordem; sortieren = classificar. Falsos amigos de „ordenar“: bestellen = encomendar, pedir uma mercadoria; befehlen / anordnen = dar uma ordem.</td></tr>
+      <tr><td>preparação da sala</td><td class="de">die Vorbereitung des Konferenzraums; den Konferenzraum vorbereiten; die Raumvorbereitung</td><td class="hinweis">„Konferenzraum vorbereitung“ (forma da lista) está errado: separado e com minúscula não existe. Use o genitivo („die Vorbereitung des Konferenzraums“) ou o verbo („den Konferenzraum vorbereiten“). Cuidado: die Zubereitung = preparo de comida. der Konferenzraum / der Besprechungsraum = sala de reunião; der Beamer = projetor; das Namensschild = plaquinha com o nome, crachá.</td></tr>
+      <tr><td>gerente de vendas</td><td class="de">der Vertriebsleiter; die Vertriebsleiterin; der Verkaufsleiter</td><td class="hinweis">A forma da lista está certa, e „gerente comercial“ e „gerente de vendas“ costumam virar a mesma palavra em alemão. der Vertrieb = setor comercial, vendas (leiten = dirigir). Não confundir: der Verkäufer = vendedor; der Geschäftsführer = diretor-geral da empresa; der Gebietsleiter = gerente regional.</td></tr>
+      <tr><td>expansão de mercado</td><td class="de">die Markterweiterung; die Marktexpansion; die Erschließung neuer Märkte</td><td class="hinweis">A forma da lista está certa. neue Märkte erschließen = abrir novos mercados (muito usado em reunião); der Markt, Pl. die Märkte; der Marktanteil = participação de mercado. Cuidado: verlängern = prolongar (Text 11), não serve para expansão.</td></tr>
+      <tr><td>captação de novos clientes</td><td class="de">die Neukundengewinnung; neue Kunden gewinnen; die Neukundenakquise</td><td class="hinweis">A forma da lista está certa, em uma palavra só. gewinnen = conquistar, ganhar. die Akquise = prospecção de clientes. O oposto na reunião: die Kundenbindung = fidelização; der Bestandskunde = cliente atual. Cuidado: der Kundenfang é pejorativo („caça a clientes“).</td></tr>
+      <tr><td>participação em feiras 2027</td><td class="de">die Messebeteiligungen 2027; die Teilnahme an Messen 2027; die Messeteilnahme</td><td class="hinweis">„Messenbeteiligung“ (forma da lista) tem erro: nos compostos, die Messe fica sem -n: Messestand, Messehalle, Messebeteiligung. No plural: die Messebeteiligungen (várias feiras). sich an einer Messe beteiligen / an einer Messe teilnehmen = participar de uma feira. die Beteiligung também é participação societária numa empresa. der Standaufbau = montagem do estande (Text 8).</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-9.html">✏️ Übungen 9</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH, Aquasul, die Reederei Litoral und Serra Verde Florestal existieren nicht.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Die Planungssitzung beginnt am Donnerstag, dem 8. April.", true, ""],
+  ["Frau Ribeiro ist die Assistentin von Herrn Brandt.", false, "Sie ist die Assistentin von Frau Costa."],
+  ["Alle zwölf Außendienstmitarbeiter sind bei Aquasul angestellt.", false, "Acht sind angestellt, vier sind selbstständige Handelsvertreter."],
+  ["Der Flug von Herrn Souza ist ausgefallen.", true, ""],
+  ["Herr Vogt kommt ab jetzt alle drei Monate nach Brasilien.", true, ""],
+  ["Herr Vogt spricht gut Portugiesisch.", false, "Er spricht kein Portugiesisch; Frau Lima dolmetscht."],
+  ["Serra Verde hat die Vertragsverlängerung unterschrieben.", true, ""],
+  ["Die Umsatzprognose ist höher als der geplante Umsatz.", false, "Die Prognose liegt bei 12,8 Millionen, der Plan bei 13,5 Millionen."],
+  ["Jeder Außendienstmitarbeiter soll fünf neue Kunden gewinnen.", true, ""],
+  ["Die Kaffeepause dauert genau 20 Minuten.", false, "Nach 20 Minuten stehen noch alle beim Kaffee und reden."],
+  ["Aquasul testet ab August ein kleines Lager in Recife.", true, ""],
+  ["Aquasul macht 2027 drei Messen mit eigenem Stand.", false, "Nur zwei; zur Forstmesse fahren Frau Costa und Herr Rocha ohne Stand."]
+];
+const MC = [
+  ["Was ist seit Februar die Aufgabe von Frau Ribeiro?", ["Die Organisation der Veranstaltung.", "Die Inventur im Zentrallager.", "Die Präsentation von Herrn Vogt."], 0],
+  ["Was fehlt noch im Konferenzraum?", ["Der Beamer.", "Zwei Stühle.", "Die Namensschilder."], 1],
+  ["Was sind Handelsvertreter?", ["Angestellte Verkäufer von Aquasul.", "Techniker, die Kunden besuchen.", "Selbstständige, die nur Provision bekommen."], 2],
+  ["Warum präsentiert Herr Souza als Letzter?", ["Seine Präsentation ist nicht fertig.", "Sein Flug ist ausgefallen.", "Er spricht am längsten."], 1],
+  ["Warum muss Frau Ribeiro die Präsentationen neu ordnen?", ["Die Reihenfolge auf dem Laptop stimmt nicht mehr.", "Der Laptop ist kaputt.", "Frau Neumann möchte das."], 0],
+  ["Wer ist Herr Vogt?", ["Ein Handelsvertreter aus Manaus.", "Der neue Vertriebsleiter.", "Der HF-Direktor bei Nordlicht."], 2],
+  ["Wie viel mehr ist der geplante Umsatz als der Umsatz von 2026?", ["13,5 Prozent.", "25 Prozent.", "700.000 Reais."], 1],
+  ["Was sagt Frau Costa über die lange Kaffeepause?", ["Sie muss kürzer sein.", "Sie kostet zu viel Geld.", "Sie ist auch Arbeit: Die Kollegen sprechen über Kunden und Preise."], 2],
+  ["Warum will Herr Nascimento ein Lager in Recife?", ["Eine Lieferung von Curitiba nach Recife dauert sechs Tage.", "Das Lager in Curitiba ist voll.", "Chile ist nahe bei Recife."], 0],
+  ["Was soll der neue Vertriebsleiter machen?", ["Die Buchhaltung und die Rechnungen.", "Das Team führen, die Kundenbesuche planen und die Zahlen zeigen.", "Den Stand auf der Messe aufbauen."], 1]
+];
+const GAP = [
+  ["Morgen beginnt die jährliche ______ Brasilien.", "Planungssitzung"],
+  ["Die ______ der Veranstaltung ist seit Februar ihre Aufgabe.", "Organisation"],
+  ["„Nur noch die ______ des Konferenzraums.“", "Vorbereitung"],
+  ["Die Sitzung ist vor allem für die ______ aus ganz Brasilien.", "Außendienstmitarbeiter"],
+  ["Acht sind bei Aquasul angestellt, und vier sind ______: Sie sind selbstständig und bekommen nur Provision.", "Handelsvertreter"],
+  ["Die ______ zur Sitzung ist für manche lang.", "Anreise"],
+  ["Das ist ein Problem für den ______ der Präsentationen.", "Zeitplan"],
+  ["„Ich muss alle Präsentationen nach dem Zeitplan ______.“", "ordnen"],
+  ["Das ist der erste ______ des HF-Direktors aus Deutschland.", "Quartalsbesuch"],
+  ["Der ______ Umsatz 2027 liegt bei 13,5 Millionen.", "geplante"],
+  ["Das Geld soll vor allem aus der ______ kommen.", "Neukundengewinnung"],
+  ["Um 10.30 Uhr ist ______, 20 Minuten laut Zeitplan.", "Kaffeepause"],
+  ["Das erste Thema ist die ______.", "Markterweiterung"],
+  ["Das zweite Thema auf der Tagesordnung sind die ______ 2027.", "Messebeteiligungen"],
+  ["Der letzte Punkt ist die ______ eines neuen Vertriebsleiters.", "Einstellung"]
+];
+const OFFEN = [
+  ["Wer ist Frau Ribeiro?", "Sie ist die Assistentin von Frau Costa."],
+  ["Wie viele Personen kommen zur Planungssitzung?", "18 Personen."],
+  ["Wie viele Außendienstmitarbeiter sind angestellt, und wie viele sind Handelsvertreter?", "Acht sind angestellt, vier sind Handelsvertreter."],
+  ["Wann kommt Herr Souza in Curitiba an?", "Erst am Donnerstag um 13 Uhr."],
+  ["Wer ist Frau Lima?", "Sie ist die Dolmetscherin."],
+  ["Wie hoch war der Umsatz von Aquasul 2026?", "10,8 Millionen Reais."],
+  ["Wie viel Geld fehlt zwischen der Prognose und dem Plan?", "700.000 Reais."],
+  ["Wie viele neue Kunden soll das Team zusammen gewinnen?", "60 neue Kunden."],
+  ["Wie viel kostet eine Messe etwa?", "Etwa 150.000 Reais."],
+  ["Wann soll der neue Vertriebsleiter anfangen?", "Spätestens am 1. Juli."]
+];
+const ERKL = [
+  ["„Acht sind bei Aquasul angestellt, und vier sind Handelsvertreter: Sie sind selbstständig und bekommen nur Provision.“", "Oito são funcionários da Aquasul e quatro são representantes comerciais: são autônomos e recebem só comissão. Essa é a diferença entre Außendienstmitarbeiter e Handelsvertreter."],
+  ["„Ich muss alle Präsentationen nach dem Zeitplan ordnen.“", "Preciso colocar todas as apresentações na ordem do cronograma. ordnen = pôr em ordem (não bestellen, que é encomendar)."],
+  ["„Das ist der erste Quartalsbesuch des HF-Direktors aus Deutschland.“", "É a primeira visita trimestral do diretor HF da Alemanha: a partir de agora, ele vem ao Brasil a cada três meses."],
+  ["„Ist das der Plan oder die Prognose?“", "Esse número é o planejado (a meta) ou a previsão? Plan = o que queremos alcançar; Prognose = o que esperamos que aconteça."],
+  ["„Diese Kaffeepause ist auch Arbeit.“", "Este coffee break também é trabalho: aqui os colegas conversam sobre clientes e preços, o que só acontece uma vez por ano."],
+  ["„Zuerst die Kunden, dann das Lager.“", "Primeiro conquistar os clientes, depois abrir o depósito: o Sr. Vogt não quer investir em estoque antes de haver clientes na região."],
+  ["„Das sind 450.000 Reais. Zwei Messen sind genug.“", "São 450 mil reais no total, para três feiras. Participar de duas feiras é suficiente."],
+  ["„Der Vertriebsleiter oder die Vertriebsleiterin soll das Team führen.“", "O gerente ou a gerente de vendas deve liderar a equipe. Vertriebsleiter serve tanto para gerente comercial quanto para gerente de vendas."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>

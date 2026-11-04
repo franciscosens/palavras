@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Übungen 9: Planungssitzung, Außendienst, Umsatz (Wirtschaftsdeutsch A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  /* Übungen */
+  input[type=text], textarea, select { font-family: system-ui, sans-serif; font-size:.95rem; padding:.35rem .5rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); }
+  input[type=text] { width:13rem; max-width:100%; }
+  textarea { width:100%; min-height:4rem; resize:vertical; }
+  button { font-family: system-ui, sans-serif; font-size:.95rem; background:var(--accent); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin-top:.75rem; }
+  button:hover { background:#9a3625; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .ergebnis { font-family: system-ui, sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:1rem; font-family: system-ui, sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  details ul, details ol { margin:.5rem 0 0; padding-left:1.4rem; }
+  details li { margin:.25rem 0; }
+  .wortkasten { font-family: system-ui, sans-serif; background:#fbfaf7; border:1px dashed var(--muted); padding:.6rem .9rem; border-radius:8px; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--card); border:1px solid var(--line); padding:.1rem .5rem; border-radius:999px; }
+  .aufgabe { margin:.75rem 0; padding:.5rem .6rem; border-radius:6px; border-bottom:1px solid var(--line); }
+  .aufgabe p { margin:.2rem 0 .4rem; }
+  .aufgabe label { display:block; padding:.15rem .4rem; border-radius:4px; font-family: system-ui, sans-serif; font-size:.95rem; }
+  .aufgabe .satz { font-size:1.02rem; }
+  .aufgabe .pt-satz { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; }
+  .hinweis { font-family: system-ui, sans-serif; font-size:.85rem; color:var(--muted); }
+  #gesamt { font-family: system-ui, sans-serif; font-size:1.15rem; text-align:center; margin-top:1rem; }
+  td select { max-width:100%; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Übungen 9: Planungssitzung, Außendienst, Umsatz</h1>
+  <p>Exercícios interativos (A2/B1) com o vocabulário do Text 12 – reunião anual de planejamento, vendedores externos de todo o Brasil, faturamento planejado 2027, cronograma das apresentações, organização do evento, coffee break, contratação de novo gerente comercial, deslocamento para a reunião, visita trimestral do diretor HF da Alemanha, ordenar as apresentações conforme o cronograma, preparação da sala, gerente de vendas, expansão de mercado, captação de novos clientes e participação em feiras 2027.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-12-planungssitzung.html">📄 Text 12</a><a href="uebungen-8.html">✏️ Übungen 8</a><a href="gabarito-uebungen-9.html">🖨️ Gabarito</a></nav>
+
+<section id="uebung1">
+  <h2>1. Zuordnung: Artikel + Bedeutung</h2>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <table>
+    <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
+    <tbody id="e1-body"></tbody>
+  </table>
+  <button type="button" id="e1-btn">Prüfen</button><span class="ergebnis" id="e1-erg"></span>
+  <details><summary>Lösung</summary><div id="e1-loesung"></div></details>
+</section>
+
+<section id="uebung2">
+  <h2>2. Lückentext</h2>
+  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). Verbos, particípios e adjetivos também entram. A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
+  <div class="wortkasten" id="e2-kasten"></div>
+  <div id="e2-body"></div>
+  <button type="button" id="e2-btn">Prüfen</button><span class="ergebnis" id="e2-erg"></span>
+  <details><summary>Lösung</summary><ol id="e2-loesung"></ol></details>
+</section>
+
+<section id="uebung3">
+  <h2>3. Welches Wort passt? (Dolmetscher-Entscheidung)</h2>
+  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual formulação alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
+  <div id="e3-body"></div>
+  <button type="button" id="e3-btn">Prüfen</button><span class="ergebnis" id="e3-erg"></span>
+  <details><summary>Lösung</summary><ol id="e3-loesung"></ol></details>
+</section>
+
+<section id="uebung4">
+  <h2>4. Dolmetschen DE → PT</h2>
+  <p class="pt">Um alemão diz a frase na reunião. Escreva a interpretação em português. Não há correção automática – compare com a tradução-modelo em „Lösung“.</p>
+  <div id="e4-body"></div>
+  <details><summary>Lösung</summary><ol id="e4-loesung"></ol></details>
+</section>
+
+<section id="uebung5">
+  <h2>5. Dolmetschen PT → DE</h2>
+  <p class="pt">Um brasileiro diz a frase na reunião. Escreva a interpretação em alemão. Compare depois com o modelo em „Lösung“ (às vezes com uma alternativa).</p>
+  <div id="e5-body"></div>
+  <details><summary>Lösung</summary><ol id="e5-loesung"></ol></details>
+</section>
+
+<section id="uebung6">
+  <h2>6. Hörverstehen-Simulation (Schnellerkennung)</h2>
+  <p class="pt">Leia (ou peça a alguém para ler em voz alta) cada frase uma única vez e marque QUAIS termos da lista aparecem nela como palavra inteira. Pode haver mais de um termo por frase. A frase só conta ponto se a seleção estiver exatamente certa.</p>
+  <div id="e6-body"></div>
+  <button type="button" id="e6-btn">Prüfen</button><span class="ergebnis" id="e6-erg"></span>
+  <details><summary>Lösung</summary><ol id="e6-loesung"></ol></details>
+</section>
+
+<section id="gesamt-sektion">
+  <h2>Gesamtergebnis</h2>
+  <p class="pt">Corrige as Übungen 1, 2, 3 e 6 de uma vez e mostra a pontuação total (as Übungen 4 e 5 são de produção livre).</p>
+  <div style="text-align:center"><button type="button" id="alle-btn">Alle Übungen prüfen</button></div>
+  <p id="gesamt">Gesamt: – / 71</p>
+</section>
+</main>
+<footer>Übungen 9 zum Wirtschaftsdeutsch · Niveau A2/B1 · funktioniert offline</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Daten ---------- */
+  var TERMS = [
+    { t: "Planungssitzung", a: "die", p: "reunião de planejamento" },
+    { t: "Tagung", a: "die", p: "encontro grande, congresso" },
+    { t: "Außendienst", a: "der", p: "setor externo (de vendas)" },
+    { t: "Außendienstmitarbeiter", a: "der", p: "vendedor externo (empregado)" },
+    { t: "Handelsvertreter", a: "der", p: "representante comercial autônomo" },
+    { t: "Umsatz", a: "der", p: "faturamento" },
+    { t: "Prognose", a: "die", p: "previsão" },
+    { t: "Zeitplan", a: "der", p: "cronograma" },
+    { t: "Tagesordnung", a: "die", p: "pauta" },
+    { t: "Präsentation", a: "die", p: "apresentação (com slides)" },
+    { t: "Vortrag", a: "der", p: "palestra" },
+    { t: "Vorstellung", a: "die", p: "apresentação de pessoas; sessão de teatro" },
+    { t: "Reihenfolge", a: "die", p: "ordem, sequência" },
+    { t: "Veranstaltung", a: "die", p: "evento" },
+    { t: "Kaffeepause", a: "die", p: "coffee break" },
+    { t: "Einstellung", a: "die", p: "contratação; atitude" },
+    { t: "Vertrieb", a: "der", p: "setor comercial, vendas" },
+    { t: "Vertriebsleiter", a: "der", p: "gerente de vendas, gerente comercial" },
+    { t: "Anreise", a: "die", p: "deslocamento, viagem de ida" },
+    { t: "Quartal", a: "das", p: "trimestre" },
+    { t: "Konferenzraum", a: "der", p: "sala de reunião" },
+    { t: "Markterweiterung", a: "die", p: "expansão de mercado" },
+    { t: "Marktanteil", a: "der", p: "participação de mercado" },
+    { t: "Neukundengewinnung", a: "die", p: "captação de novos clientes" },
+    { t: "Kundenbindung", a: "die", p: "fidelização de clientes" },
+    { t: "Messebeteiligung", a: "die", p: "participação em feira" }
+  ];
+
+  var GAPS = [
+    { s: "Die jährliche ___ für Brasilien ist im April.", h: "reunião de planejamento", a: ["Planungssitzung", "Planungsmeeting"] },
+    { s: "Frau Ribeiro macht die ___ der Veranstaltung.", h: "organização", a: "Organisation" },
+    { s: "Alle ___ aus ganz Brasilien kommen nach Curitiba.", h: "vendedores externos", a: "Außendienstmitarbeiter" },
+    { s: "Ein ___ ist selbstständig und bekommt nur Provision.", h: "representante autônomo", a: "Handelsvertreter" },
+    { s: "Der ___ Umsatz 2027 liegt bei 13,5 Millionen Reais.", h: "planejado", a: "geplante" },
+    { s: "Die ___ vom März liegt niedriger: 12,8 Millionen Reais.", h: "previsão de faturamento", a: ["Umsatzprognose", "Prognose"] },
+    { s: "Wir müssen den ___ der Präsentationen ändern.", h: "cronograma", a: "Zeitplan" },
+    { s: "Bitte ___ Sie alle Präsentationen nach dem Zeitplan.", h: "ordene", a: ["ordnen", "sortieren"] },
+    { s: "Die ___ ist um 10.30 Uhr, 20 Minuten lang.", h: "coffee break", a: ["Kaffeepause", "Pause"] },
+    { s: "Die ___ zur Sitzung dauert für Herrn Souza fast acht Stunden.", h: "deslocamento", a: "Anreise" },
+    { s: "Der ___ des HF-Direktors ist dieses Mal im April.", h: "visita trimestral", a: "Quartalsbesuch" },
+    { s: "Die ___ des Konferenzraums ist fast fertig.", h: "preparação", a: "Vorbereitung" },
+    { s: "Wir suchen einen neuen ___ für das Team.", h: "gerente de vendas", a: ["Vertriebsleiter", "Verkaufsleiter"] },
+    { s: "Die ___ im Nordosten beginnt mit einem Lager in Recife.", h: "expansão de mercado", a: ["Markterweiterung", "Marktexpansion"] },
+    { s: "Unser Ziel bei der ___ sind 60 neue Kunden.", h: "captação de novos clientes", a: ["Neukundengewinnung", "Neukundenakquise"] },
+    { s: "Die ___ 2027 kosten zusammen 300.000 Reais.", h: "participações em feiras", a: ["Messebeteiligungen", "Messeteilnahmen"] },
+    { s: "Die ___ eines neuen Vertriebsleiters ist für Juli geplant.", h: "contratação", a: "Einstellung" }
+  ];
+
+  var CHOICE = [
+    { q: "„A reunião anual de planejamento é em abril.“", o: ["Die jährliche Planungssitzung ist im April.", "Die jährliche Sitzplanung ist im April.", "Die jährige Planungssitzung ist im April."], c: 0, e: "jährlich = anual. die Sitzplanung = planejamento de assentos; „jährig“ só aparece em compostos (dreijährig = de três anos)." },
+    { q: "„Os vendedores externos de todo o Brasil vêm para Curitiba.“", o: ["Die externen Verkäufer aus ganzem Brasilien kommen nach Curitiba.", "Die Außendienstmitarbeiter aus ganz Brasilien kommen nach Curitiba.", "Die Außenseiter aus ganz Brasilien kommen nach Curitiba."], c: 1, e: "Außendienstmitarbeiter aus ganz Brasilien. „Aus ganzem Brasilien“ está errado (ganz fica sem terminação); der Außenseiter = pessoa excluída, azarão." },
+    { q: "„O representante comercial autônomo recebe só comissão.“", o: ["Der Stellvertreter bekommt nur Provision.", "Der Außendienstmitarbeiter bekommt nur Provision.", "Der Handelsvertreter bekommt nur Provision."], c: 2, e: "Handelsvertreter = autônomo. Außendienstmitarbeiter = empregado com salário; der Stellvertreter = substituto, vice." },
+    { q: "„O faturamento planejado para 2027 é de 13,5 milhões.“", o: ["Der geplante Umsatz 2027 liegt bei 13,5 Millionen.", "Die Umsatzprognose 2027 liegt bei 13,5 Millionen.", "Die geplante Rechnung 2027 liegt bei 13,5 Millionen."], c: 0, e: "Planejado = geplant. Prognose = previsão, outro número; Rechnung = fatura, nota fiscal, não faturamento." },
+    { q: "„Este é o cronograma das apresentações.“", o: ["Das ist der Zeitplan der Vorstellungen.", "Das ist der Stundenplan der Präsentationen.", "Das ist der Zeitplan der Präsentationen."], c: 2, e: "Zeitplan der Präsentationen (ou der Vorträge). Vorstellung = apresentação de pessoas, sessão de teatro; der Stundenplan = horário escolar." },
+    { q: "„Quem cuida da organização do evento?“", o: ["Wer macht die Organisation der Veranstaltung?", "Wer macht die Organisation der Verantwortung?", "Wer macht die Ordnung der Veranstaltung?"], c: 0, e: "die Veranstaltung = evento. die Verantwortung = responsabilidade (soa parecido); die Ordnung = arrumação, regra." },
+    { q: "„Às 10h30 temos o coffee break.“", o: ["Um 10.30 Uhr machen wir eine Kaffee Pause.", "Um 10.30 Uhr machen wir eine Kaffeepause.", "Um 10.30 Uhr machen wir eine Kaffeefahrt."], c: 1, e: "Kaffeepause em uma palavra só. „Kaffee Pause“ separado está errado; die Kaffeefahrt = excursão de ônibus com venda de produtos." },
+    { q: "„Estamos contratando um novo gerente comercial.“", o: ["Wir kontraktieren einen neuen Vertriebsleiter.", "Wir stellen einen neuen Vertriebsleiter ein.", "Wir stellen einen neuen Vertriebsleiter vor."], c: 1, e: "einstellen = contratar. vorstellen = apresentar uma pessoa (soa parecido); „kontraktieren“ não é usado para contratar." },
+    { q: "„O deslocamento para a reunião leva oito horas.“", o: ["Die Verlagerung zur Sitzung dauert acht Stunden.", "Die Versetzung zur Sitzung dauert acht Stunden.", "Die Anreise zur Sitzung dauert acht Stunden."], c: 2, e: "die Anreise = viagem de ida. die Verlagerung = transferência de produção; die Versetzung = transferência de funcionário (Text 10)." },
+    { q: "„A visita trimestral do diretor HF é em abril.“", o: ["Der Trimesterbesuch des HF-Direktors ist im April.", "Der Quartalsbesuch des HF-Direktors ist im April.", "Der Viertelbesuch des HF-Direktors ist im April."], c: 1, e: "das Quartal = trimestre nas empresas; das Trimester é de universidade; „Viertelbesuch“ não existe (vierteljährlich = trimestral)." },
+    { q: "„Ordene todas as apresentações conforme o cronograma.“", o: ["Bestellen Sie alle Präsentationen nach dem Zeitplan.", "Ordnen Sie alle Präsentationen nach dem Zeitplan.", "Befehlen Sie alle Präsentationen nach dem Zeitplan."], c: 1, e: "ordnen = pôr em ordem. bestellen = encomendar; befehlen = dar uma ordem: falsos amigos de „ordenar“." },
+    { q: "„A preparação da sala começa às sete.“", o: ["Die Vorbereitung des Konferenzraums beginnt um sieben.", "Die Konferenzraum vorbereitung beginnt um sieben.", "Die Zubereitung des Konferenzraums beginnt um sieben."], c: 0, e: "die Vorbereitung des Konferenzraums. Separado e com minúscula não existe; die Zubereitung = preparo de comida." },
+    { q: "„O gerente de vendas lidera a equipe.“", o: ["Der Verkäufer führt das Team.", "Der Geschäftsführer führt das Team.", "Der Vertriebsleiter führt das Team."], c: 2, e: "Vertriebsleiter = gerente de vendas. Verkäufer = vendedor; Geschäftsführer = diretor-geral da empresa." },
+    { q: "„A expansão de mercado começa no Nordeste.“", o: ["Die Markterweiterung beginnt im Nordosten.", "Die Marktverlängerung beginnt im Nordosten.", "Die Marktverbreitung beginnt im Nordosten."], c: 0, e: "Markterweiterung (ou Marktexpansion). die Verlängerung = prorrogação; die Verbreitung = difusão, propagação." },
+    { q: "„A captação de novos clientes é a prioridade.“", o: ["Der Kundenfang hat Priorität.", "Die Neukundengewinnung hat Priorität.", "Die Kundenbindung hat Priorität."], c: 1, e: "Neukundengewinnung. Kundenfang é pejorativo; Kundenbindung = fidelização dos clientes atuais, o contrário." },
+    { q: "„As participações em feiras de 2027 custam caro.“", o: ["Die Messenbeteiligungen 2027 sind teuer.", "Die Messebeteiligungen 2027 sind teuer.", "Die Messeverteilungen 2027 sind teuer."], c: 1, e: "Messebeteiligungen, sem -n no meio. „Messenbeteiligung“ está errado; die Verteilung = distribuição." }
+  ];
+
+  var DE_PT = [
+    { de: "„Die jährliche Planungssitzung dauert zwei Tage, und alle Außendienstmitarbeiter kommen.“", pt: "„A reunião anual de planejamento dura dois dias, e todos os vendedores externos vêm.“" },
+    { de: "„Die Handelsvertreter sind selbstständig und bekommen nur Provision.“", pt: "„Os representantes comerciais são autônomos e recebem só comissão.“" },
+    { de: "„Der geplante Umsatz 2027 liegt über der Prognose vom März.“", pt: "„O faturamento planejado para 2027 está acima da previsão de março.“" },
+    { de: "„Der Zeitplan der Präsentationen hat sich geändert: Herr Souza kommt als Letzter dran.“", pt: "„O cronograma das apresentações mudou: o Sr. Souza é o último a apresentar.“" },
+    { de: "„Bitte ordnen Sie alle Präsentationen nach dem Zeitplan.“", pt: "„Por favor, coloque todas as apresentações na ordem do cronograma.“" },
+    { de: "„Die Anreise zur Sitzung dauert für einige Kollegen fast acht Stunden.“", pt: "„Para alguns colegas, o deslocamento para a reunião leva quase oito horas.“" },
+    { de: "„Die Vorbereitung des Konferenzraums ist fertig, nur zwei Stühle fehlen noch.“", pt: "„A preparação da sala está pronta, só faltam duas cadeiras.“" },
+    { de: "„Beim Quartalsbesuch des HF-Direktors sprechen wir über die Zahlen.“", pt: "„Na visita trimestral do diretor HF, vamos falar dos números.“" },
+    { de: "„Die Neukundengewinnung ist wichtig, aber die alten Kunden dürfen wir nicht vergessen.“", pt: "„A captação de novos clientes é importante, mas não podemos esquecer os clientes antigos.“" },
+    { de: "„Wir reduzieren die Messebeteiligungen 2027 von drei auf zwei.“", pt: "„Vamos reduzir as participações em feiras em 2027 de três para duas.“" }
+  ];
+
+  var PT_DE = [
+    { pt: "„A organização do evento está pronta, só falta o coffee break.“", de: "„Die Organisation der Veranstaltung ist fertig, nur die Kaffeepause fehlt noch.“", alt: "„Die Veranstaltung ist organisiert, es fehlt nur noch die Kaffeepause.“" },
+    { pt: "„Os vendedores externos de todo o Brasil chegam hoje à noite.“", de: "„Die Außendienstmitarbeiter aus ganz Brasilien kommen heute Abend an.“", alt: "„Die Außendienstmitarbeiter aus ganz Brasilien reisen heute Abend an.“" },
+    { pt: "„O faturamento planejado para 2027 é de 13,5 milhões de reais.“", de: "„Der geplante Umsatz 2027 liegt bei 13,5 Millionen Reais.“", alt: "„Das Umsatzziel für 2027 sind 13,5 Millionen Reais.“" },
+    { pt: "„O cronograma das apresentações mudou.“", de: "„Der Zeitplan der Präsentationen hat sich geändert.“", alt: "„Wir haben den Zeitplan der Vorträge geändert.“" },
+    { pt: "„Preciso ordenar todas as apresentações conforme o cronograma.“", de: "„Ich muss alle Präsentationen nach dem Zeitplan ordnen.“", alt: "„Ich muss alle Präsentationen gemäß dem Zeitplan sortieren.“" },
+    { pt: "„A empresa paga o deslocamento para a reunião.“", de: "„Die Firma bezahlt die Anreise zur Sitzung.“", alt: "„Die Anreise zur Sitzung bezahlt die Firma.“" },
+    { pt: "„A visita trimestral do diretor HF da Alemanha é em abril.“", de: "„Der Quartalsbesuch des HF-Direktors aus Deutschland ist im April.“", alt: "„Der HF-Direktor aus Deutschland kommt im April zu seinem vierteljährlichen Besuch.“" },
+    { pt: "„Estamos contratando um novo gerente de vendas.“", de: "„Wir stellen einen neuen Vertriebsleiter ein.“", alt: "„Die Einstellung eines neuen Vertriebsleiters läuft gerade.“" },
+    { pt: "„A expansão de mercado depende da captação de novos clientes.“", de: "„Die Markterweiterung hängt von der Neukundengewinnung ab.“", alt: "„Für die Marktexpansion müssen wir neue Kunden gewinnen.“" },
+    { pt: "„As participações em feiras de 2027 custam 300 mil reais.“", de: "„Die Messebeteiligungen 2027 kosten 300.000 Reais.“", alt: "„Die Teilnahme an den Messen 2027 kostet 300.000 Reais.“" }
+  ];
+
+  var HOER = [
+    { s: "„Die jährliche Planungssitzung dauert zwei Tage.“", o: ["jährliche", "Planungssitzung", "Tagung", "Tage"], c: [0, 1, 3] },
+    { s: "„Die Außendienstmitarbeiter und die Handelsvertreter kommen aus ganz Brasilien.“", o: ["Außendienstmitarbeiter", "Handelsvertreter", "Verkäufer", "Brasilien"], c: [0, 1, 3] },
+    { s: "„Der geplante Umsatz liegt über der Prognose.“", o: ["geplante", "Umsatz", "Prognose", "Rechnung"], c: [0, 1, 2] },
+    { s: "„Der Zeitplan der Präsentationen steht auf der Tagesordnung.“", o: ["Zeitplan", "Vorträge", "Präsentationen", "Tagesordnung"], c: [0, 2, 3] },
+    { s: "„Die Organisation der Veranstaltung macht Frau Ribeiro.“", o: ["Organisation", "Veranstaltung", "Event", "Ribeiro"], c: [0, 1, 3] },
+    { s: "„Nach der Kaffeepause geht es mit den Präsentationen weiter.“", o: ["Kaffeepause", "Pause", "Präsentationen", "weiter"], c: [0, 2, 3] },
+    { s: "„Die Einstellung eines neuen Vertriebsleiters ist für Juli geplant.“", o: ["Einstellung", "Vertriebsleiters", "Verkäufers", "Juli"], c: [0, 1, 3] },
+    { s: "„Die Anreise zur Sitzung dauert acht Stunden, die Abreise auch.“", o: ["Anreise", "Abreise", "Sitzung", "Versetzung"], c: [0, 1, 2] },
+    { s: "„Der Quartalsbesuch des HF-Direktors beginnt im Konferenzraum.“", o: ["Quartalsbesuch", "HF-Direktors", "Konferenzraum", "Trimester"], c: [0, 1, 2] },
+    { s: "„Alle Präsentationen nach dem Zeitplan ordnen, nicht nach dem Alphabet.“", o: ["Präsentationen", "Zeitplan", "ordnen", "sortieren"], c: [0, 1, 2] },
+    { s: "„Markterweiterung braucht Neukundengewinnung und auch Kundenbindung.“", o: ["Markterweiterung", "Neukundengewinnung", "Kundenbindung", "Marktanteil"], c: [0, 1, 2] },
+    { s: "„Die Messebeteiligungen 2027 kosten weniger als geplant.“", o: ["Messebeteiligungen", "Messebesucher", "2027", "geplant"], c: [0, 2, 3] }
+  ];
+
+  var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
+  var scores = { e1: null, e2: null, e3: null, e6: null };
+
+  /* ---------- Hilfsfunktionen ---------- */
+  function $(id) { return document.getElementById(id); }
+  function shuffle(arr) {
+    var b = arr.slice(), i, j, tmp;
+    for (i = b.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      tmp = b[i]; b[i] = b[j]; b[j] = tmp;
+    }
+    return b;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function norm(s) { return String(s).trim().replace(/\s+/g, " ").toLowerCase(); }
+  function answers(g) { return Array.isArray(g.a) ? g.a : [g.a]; }
+  function mark(node, ok) {
+    node.classList.remove("richtig", "falsch");
+    node.classList.add(ok ? "richtig" : "falsch");
+  }
+  function showResult(id, ok, max) { $(id).textContent = ok + " / " + max + " richtig"; }
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (b.indexOf(a[i]) === -1) return false; }
+    return true;
+  }
+
+  /* ---------- Übung 1 ---------- */
+  function render1() {
+    var body = $("e1-body");
+    var trans = shuffle(TERMS.map(function (x) { return x.p; }));
+    var html = "";
+    TERMS.forEach(function (x, i) {
+      html += "<tr><td>" + esc(x.t) + "</td>" +
+        "<td><select id=\"e1-art-" + i + "\"><option value=\"\">–</option><option value=\"der\">der</option><option value=\"die\">die</option><option value=\"das\">das</option></select></td>" +
+        "<td><select id=\"e1-pt-" + i + "\"><option value=\"\">–</option>" +
+        trans.map(function (p) { return "<option value=\"" + esc(p) + "\">" + esc(p) + "</option>"; }).join("") +
+        "</select></td></tr>";
+    });
+    body.innerHTML = html;
+    $("e1-loesung").innerHTML = "<ul>" + TERMS.map(function (x) {
+      return "<li><b>" + esc(x.l || (x.a + " " + x.t)) + "</b> – " + esc(x.p) + "</li>";
+    }).join("") + "</ul>";
+  }
+  function check1() {
+    var ok = 0;
+    TERMS.forEach(function (x, i) {
+      var art = $("e1-art-" + i), pt = $("e1-pt-" + i);
+      var a = art.value === x.a, p = pt.value === x.p;
+      mark(art, a); mark(pt, p);
+      if (a && p) ok++;
+    });
+    scores.e1 = ok;
+    showResult("e1-erg", ok, MAX.e1);
+    return ok;
+  }
+
+  /* ---------- Übung 2 ---------- */
+  function render2() {
+    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return answers(g)[0]; }))
+      .map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ");
+    $("e2-body").innerHTML = GAPS.map(function (g, i) {
+      var parts = g.s.split("___");
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(parts[0]) +
+        "<input type=\"text\" id=\"e2-in-" + i + "\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\">" +
+        esc(parts[1]) + " <span class=\"hinweis\">(" + esc(g.h) + ")</span></p></div>";
+    }).join("");
+    $("e2-loesung").innerHTML = GAPS.map(function (g) {
+      var alts = answers(g);
+      return "<li>" + esc(g.s.replace("___", alts[0])) +
+        (alts.length > 1 ? " <span class=\"hinweis\">(auch: " + esc(alts.slice(1).join(", ")) + ")</span>" : "") + "</li>";
+    }).join("");
+  }
+  function check2() {
+    var ok = 0;
+    GAPS.forEach(function (g, i) {
+      var inp = $("e2-in-" + i);
+      var v = norm(inp.value);
+      var r = answers(g).some(function (a) { return norm(a) === v; });
+      mark(inp, r);
+      if (r) ok++;
+    });
+    scores.e2 = ok;
+    showResult("e2-erg", ok, MAX.e2);
+    return ok;
+  }
+
+  /* ---------- Übung 3 ---------- */
+  var choiceOrder = [];
+  function render3() {
+    $("e3-body").innerHTML = CHOICE.map(function (q, i) {
+      var order = shuffle([0, 1, 2]);
+      choiceOrder[i] = order;
+      return "<div class=\"aufgabe\" id=\"e3-frage-" + i + "\"><p class=\"satz\">" + (i + 1) + ". O brasileiro diz: " + esc(q.q) + "</p>" +
+        order.map(function (k) {
+          return "<label id=\"e3-lab-" + i + "-" + k + "\"><input type=\"radio\" name=\"e3-" + i + "\" value=\"" + k + "\"> " + esc(q.o[k]) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e3-loesung").innerHTML = CHOICE.map(function (q) {
+      return "<li>" + esc(q.q) + " → <b>" + esc(q.o[q.c]) + "</b><br><span class=\"hinweis\">" + esc(q.e) + "</span></li>";
+    }).join("");
+  }
+  function check3() {
+    var ok = 0;
+    CHOICE.forEach(function (q, i) {
+      var chosen = document.querySelector("input[name=\"e3-" + i + "\"]:checked");
+      var box = $("e3-frage-" + i);
+      [0, 1, 2].forEach(function (k) { $("e3-lab-" + i + "-" + k).classList.remove("richtig", "falsch"); });
+      if (!chosen) { mark(box, false); return; }
+      box.classList.remove("richtig", "falsch");
+      var r = Number(chosen.value) === q.c;
+      mark($("e3-lab-" + i + "-" + chosen.value), r);
+      if (r) ok++;
+    });
+    scores.e3 = ok;
+    showResult("e3-erg", ok, MAX.e3);
+    return ok;
+  }
+
+  /* ---------- Übung 4 / 5 ---------- */
+  function render4() {
+    $("e4-body").innerHTML = DE_PT.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(x.de) + "</p>" +
+        "<textarea id=\"e4-ta-" + i + "\" placeholder=\"Tradução em português…\"></textarea></div>";
+    }).join("");
+    $("e4-loesung").innerHTML = DE_PT.map(function (x) {
+      return "<li>" + esc(x.de) + "<br>→ <b>" + esc(x.pt) + "</b></li>";
+    }).join("");
+  }
+  function render5() {
+    $("e5-body").innerHTML = PT_DE.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"pt-satz\">" + (i + 1) + ". " + esc(x.pt) + "</p>" +
+        "<textarea id=\"e5-ta-" + i + "\" placeholder=\"Übersetzung auf Deutsch…\" lang=\"de\"></textarea></div>";
+    }).join("");
+    $("e5-loesung").innerHTML = PT_DE.map(function (x) {
+      return "<li>" + esc(x.pt) + "<br>→ <b>" + esc(x.de) + "</b>" +
+        (x.alt ? "<br><span class=\"hinweis\">Alternative: " + esc(x.alt) + "</span>" : "") + "</li>";
+    }).join("");
+  }
+
+  /* ---------- Übung 6 ---------- */
+  function render6() {
+    $("e6-body").innerHTML = HOER.map(function (h, i) {
+      return "<div class=\"aufgabe\" id=\"e6-satz-" + i + "\"><p class=\"satz\">" + (i + 1) + ". " + esc(h.s) + "</p>" +
+        h.o.map(function (opt, j) {
+          return "<label id=\"e6-lab-" + i + "-" + j + "\"><input type=\"checkbox\" id=\"e6-cb-" + i + "-" + j + "\"> " + esc(opt) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e6-loesung").innerHTML = HOER.map(function (h) {
+      return "<li>" + esc(h.s) + "<br>→ <b>" + h.c.map(function (k) { return esc(h.o[k]); }).join(", ") + "</b></li>";
+    }).join("");
+  }
+  function check6() {
+    var ok = 0;
+    HOER.forEach(function (h, i) {
+      var checked = [];
+      h.o.forEach(function (opt, j) {
+        var cb = $("e6-cb-" + i + "-" + j), lab = $("e6-lab-" + i + "-" + j);
+        var should = h.c.indexOf(j) !== -1;
+        lab.classList.remove("richtig", "falsch");
+        if (cb.checked) checked.push(j);
+        if (cb.checked && should) mark(lab, true);
+        else if (cb.checked !== should) mark(lab, false);
+      });
+      if (sameSet(checked, h.c)) ok++;
+    });
+    scores.e6 = ok;
+    showResult("e6-erg", ok, MAX.e6);
+    return ok;
+  }
+
+  /* ---------- Gesamt ---------- */
+  function updateTotal() {
+    var sum = 0, max = 0, key;
+    for (key in MAX) {
+      if (MAX.hasOwnProperty(key)) {
+        max += MAX[key];
+        if (scores[key] !== null) sum += scores[key];
+      }
+    }
+    $("gesamt").textContent = "Gesamt: " + sum + " / " + max;
+  }
+  function checkAll() {
+    check1(); check2(); check3(); check6();
+    updateTotal();
+    $("gesamt").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* ---------- Start ---------- */
+  render1(); render2(); render3(); render4(); render5(); render6();
+  $("e1-btn").addEventListener("click", function () { check1(); updateTotal(); });
+  $("e2-btn").addEventListener("click", function () { check2(); updateTotal(); });
+  $("e3-btn").addEventListener("click", function () { check3(); updateTotal(); });
+  $("e6-btn").addEventListener("click", function () { check6(); updateTotal(); });
+  $("alle-btn").addEventListener("click", checkAll);
+})();
+</script>
+</body>
+</html>
