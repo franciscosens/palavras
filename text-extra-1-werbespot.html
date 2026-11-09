@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Extra 1: Ein Werbespot für den Eistee – Lesetext mit Fragen (A2)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Extra 1: Ein Werbespot für den Eistee</h1>
+  <p>Texto avulso, sem ligação com a história Nordlicht/Aquasul, em nível A2: projeto com agência, comercial, apresentação e Referat, seminário on-line, reunião, organizar, cancelar, pagar, ligar, contrato, assinar, enviar, preparar, combinar horário, contatar, encontrar-se, convite, muito trabalho, cliente, viagem de negócios, parceiros de negócios, a chefe, assumir uma tarefa, urgente, dar conta, precisar e delegar tarefas.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="uebungen-extra-1.html">✏️ Übungen Extra 1</a><a href="gabarito-text-extra-1.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Ein Werbespot für den Eistee: eine Woche bei Lindholm Tee</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Es ist Montag, 8 Uhr, in Hamburg. Julia Berger ist Assistentin bei Lindholm Tee, einer kleinen Teefirma mit 30 Mitarbeitern. Diese Woche hat sie <mark>viel Arbeit</mark>, denn <mark>die Chefin</mark>, Frau Albrecht, ist nicht im Büro. Sie ist auf <mark>Geschäftsreise</mark> in Wien und trifft dort <mark>die Geschäftspartner</mark> aus Österreich. Und gerade jetzt läuft das große <mark>Projekt mit Neumann &amp; Partner</mark>: Die Werbeagentur aus Köln macht einen <mark>Werbespot</mark> für den neuen Eistee von Lindholm. Der Spot soll ab Juni im Fernsehen und im Internet laufen.</p>
+
+  <p>Um halb neun klingelt das Telefon. Frau Albrecht <mark>ruft</mark> aus Wien <mark>an</mark>. Sie hat eine lange Liste und <mark>erteilt</mark> Julia gleich drei <mark>Arbeitsaufträge</mark>: „Erstens: Bitte <mark>organisieren</mark> Sie ein <mark>Meeting</mark> mit Neumann &amp; Partner, am besten am Donnerstag. Zweitens: Die Agentur <mark>braucht</mark> unsere Fotos und das neue Logo. Bitte <mark>senden</mark> Sie ihr die Dateien noch heute. Drittens: Bitte <mark>bereiten</mark> Sie eine kurze <mark>Präsentation</mark> über den Eistee <mark>vor</mark>. Am Donnerstag bin ich wieder im Büro.“</p>
+
+  <p>Julia schreibt alles auf. Dann <mark>kontaktiert</mark> sie Herrn Neumann per E-Mail. Er antwortet schnell: „Donnerstag passt gut. Sollen wir kurz telefonieren und eine Uhrzeit <mark>ausmachen</mark>?“ Sie telefonieren fünf Minuten und machen 14 Uhr aus. Danach schickt Julia eine <mark>Einladung</mark> an alle: an Herrn Neumann, an seine Kollegin Frau Yilmaz und an Frau Albrecht. Am Nachmittag <mark>verschickt</mark> sie auch die Fotos und das Logo an die Agentur.</p>
+
+  <p>Am Dienstag kommt der <mark>Vertrag</mark> von Neumann &amp; Partner. Der Werbespot kostet 45.000 Euro, und der Drehtag ist im Mai. Julia darf den Vertrag nicht <mark>unterschreiben</mark>, das darf nur die Chefin. Also scannt Julia den Vertrag und schickt ihn per E-Mail ins Hotel nach Wien. Am Abend ist er zurück, mit Unterschrift. Am Mittwoch kommt schon die erste Rechnung: 15.000 Euro. Julia gibt sie an die Buchhaltung weiter, und die Buchhaltung soll sie bis Freitag <mark>bezahlen</mark>.</p>
+
+  <p>Eigentlich hat Julia am Mittwoch um 10 Uhr ein <mark>Online-Seminar</mark>: „Social Media für kleine Firmen“. Aber der Tag ist zu voll, und sie muss das Seminar <mark>absagen</mark>. Zum Glück gibt es im Juli einen neuen Termin. Um elf Uhr ruft ein wichtiger <mark>Kunde</mark> an: eine Hotelkette aus Berlin. Sie braucht 200 Kilo Tee bis Freitag. Die Bestellung ist <mark>dringend</mark>, denn am Wochenende gibt es in den Hotels eine große Konferenz.</p>
+
+  <p>Julia schaut auf ihre Liste: die Bestellung für das Hotel, die Präsentation, das Meeting. „Das <mark>schaffe</mark> ich nicht allein“, denkt sie. Sie fragt Tim, den Werkstudenten. Tim studiert Marketing und arbeitet zwei Tage pro Woche bei Lindholm. „Tim, kannst du die Bestellung für das Hotel <mark>übernehmen</mark>?“ Tim sagt ja, aber nur bis Donnerstagmittag. Am Freitag hält er an der Uni ein <mark>Referat</mark>, und das Thema passt genau: „Werbespots für Lebensmittel“. „Darf ich am Donnerstag beim Meeting zuhören?“, fragt er. „Ich frage die Chefin“, sagt Julia.</p>
+
+  <p>Am Donnerstag um elf Uhr ist Frau Albrecht wieder im Büro. Julia zeigt ihr die Präsentation, und die Chefin ist zufrieden. Tim darf beim Meeting zuhören. Dann hat Frau Albrecht noch eine Bitte: „Herr Neumann möchte nach dem Meeting mit uns essen gehen. Aber ich habe um 16 Uhr einen Termin bei der Bank. <mark>Können Sie das bitte übernehmen?</mark>“ Julia lacht: „Essen gehen mit der Agentur? Das übernehme ich gern.“</p>
+
+  <p>Um 14 Uhr <mark>treffen</mark> sich alle im Konferenzraum. Frau Yilmaz zeigt die Idee für den Werbespot: ein heißer Sommertag in Hamburg, eine Radfahrerin an der Elbe und eine kalte Flasche Eistee. Nach 30 Sekunden kommt der Satz: „Lindholm. Kalt ist das neue Heiß.“ Frau Albrecht ist begeistert. Am Abend gehen Julia, Herr Neumann und Frau Yilmaz am Hafen Fisch essen. Und am Freitag bekommt Tim für sein Referat eine Eins. „Viel Arbeit“, sagt Julia am Freitagabend, „aber wir haben alles geschafft.“</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 29 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso. Repare nos verbos separáveis (anrufen, absagen, vorbereiten, ausmachen: „Sie ruft … an“) e nas armadilhas: Präsentation ≠ Referat ≠ Vorstellung, absagen ≠ aussagen, anrufen ≠ einschalten, unterschreiben ≠ abonnieren, vorbereiten ≠ zubereiten, ausmachen ≠ markieren, treffen ≠ finden, Kunde ≠ Klient, Chefin ≠ Köchin, übernehmen ≠ annehmen, schaffen ≠ erschaffen, brauchen ≠ gebrauchen, e a grafia de Online-Seminar.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>projeto com a Neumann &amp; Partner</td><td class="de">das Projekt mit Neumann &amp; Partner; die Zusammenarbeit mit Neumann &amp; Partner</td><td class="hinweis">A forma da lista está certa. das Projekt é neutro. Nome de empresa vai sem artigo („mit Neumann &amp; Partner“), mas com a palavra antes ele aparece: „die Agentur Neumann &amp; Partner“. O &amp; se lê „und“.</td></tr>
+      <tr><td>comercial (filme publicitário)</td><td class="de">der Werbespot; der Spot; die Werbung</td><td class="hinweis">der Werbespot = comercial de TV, rádio ou internet; die Werbung = propaganda em geral; die Werbeagentur = agência de publicidade; der Drehtag = dia de filmagem. Cuidado: „comercial“ como adjetivo é geschäftlich ou kaufmännisch.</td></tr>
+      <tr><td>apresentação (no trabalho)</td><td class="de">die Präsentation; der Vortrag</td><td class="hinweis">No trabalho, diga Präsentation, em geral com slides: eine Präsentation halten / machen / vorbereiten. der Vortrag = palestra. Não é die Vorstellung (= apresentar pessoas, sessão de teatro).</td></tr>
+      <tr><td>seminário, trabalho apresentado (escola, faculdade)</td><td class="de">das Referat; ein Referat halten</td><td class="hinweis">das Referat é da escola e da universidade: o aluno apresenta um tema para a turma. Na empresa, use Präsentation. O verbo é halten: „Tim hält ein Referat.“</td></tr>
+      <tr><td>seminário on-line, webinar</td><td class="de">das Online-Seminar; das Webinar</td><td class="hinweis">„online Seminar“ (forma da lista) está errado: o substantivo composto vai com maiúscula e hífen, das Online-Seminar. an einem Online-Seminar teilnehmen = participar.</td></tr>
+      <tr><td>reunião</td><td class="de">das Meeting; die Besprechung; das Treffen</td><td class="hinweis">das Meeting é comum nas empresas; die Besprechung = reunião de trabalho (um pouco mais formal); das Treffen = encontro, também informal. ein Meeting haben / organisieren.</td></tr>
+      <tr><td>organizar</td><td class="de">organisieren</td><td class="hinweis">Verbo em -ieren: Perfekt sem ge-: „Ich habe das Meeting organisiert.“</td></tr>
+      <tr><td>cancelar, desmarcar</td><td class="de">absagen</td><td class="hinweis">Separável: „Sie sagt das Seminar ab.“ – „Sie hat das Seminar abgesagt.“ absagen = cancelar um compromisso ou convite; stornieren = cancelar pedido ou reserva; kündigen = rescindir contrato. Cuidado: aussagen = depor; abschreiben = copiar.</td></tr>
+      <tr><td>pagar</td><td class="de">bezahlen; zahlen</td><td class="hinweis">„Die Buchhaltung bezahlt die Rechnung.“ – hat bezahlt. bar / mit Karte bezahlen. zahlen também vale.</td></tr>
+      <tr><td>ligar, telefonar</td><td class="de">anrufen; telefonieren</td><td class="hinweis">Separável: „Sie ruft aus Wien an.“ – hat angerufen. anrufen pede acusativo: „Ich rufe Sie an“ („Ich rufe Ihnen an“ está errado). telefonieren mit + dativo. Cuidado: ligar um aparelho = einschalten / anmachen.</td></tr>
+      <tr><td>contrato</td><td class="de">der Vertrag, Pl. die Verträge</td><td class="hinweis">einen Vertrag unterschreiben / schließen. der Kontrakt existe, mas é raro.</td></tr>
+      <tr><td>assinar</td><td class="de">unterschreiben; die Unterschrift</td><td class="hinweis">Perfekt sem ge-: hat unterschrieben. die Unterschrift = assinatura. Cuidado: assinar revista ou serviço = abonnieren.</td></tr>
+      <tr><td>enviar, mandar</td><td class="de">senden; verschicken; schicken</td><td class="hinweis">Os três servem para e-mail, arquivos e cartas. senden → hat gesendet (ou gesandt); verschicken → hat verschickt; schicken é o mais comum na fala. Cuidado: mandar no sentido de dar uma ordem = befehlen.</td></tr>
+      <tr><td>preparar</td><td class="de">vorbereiten</td><td class="hinweis">Separável: „Sie bereitet die Präsentation vor.“ – hat vorbereitet. sich vorbereiten auf + acusativo. Cuidado: zubereiten = preparar comida.</td></tr>
+      <tr><td>combinar, marcar (horário)</td><td class="de">ausmachen; einen Termin vereinbaren</td><td class="hinweis">ausmachen é coloquial, vereinbaren é mais formal. Separável: „Wir machen 14 Uhr aus.“ Outros sentidos: das Licht ausmachen = apagar a luz; „Das macht nichts aus“ = não tem problema.</td></tr>
+      <tr><td>contatar, entrar em contato</td><td class="de">kontaktieren; Kontakt aufnehmen mit; sich melden bei</td><td class="hinweis">hat kontaktiert. Na fala também: „Ich melde mich bei Herrn Neumann.“</td></tr>
+      <tr><td>encontrar(-se), reunir-se</td><td class="de">treffen; sich treffen</td><td class="hinweis">Irregular: er trifft – hat getroffen. jemanden treffen = encontrar alguém; sich treffen = reunir-se („Wir treffen uns um 14 Uhr“). Cuidado: encontrar algo perdido = finden.</td></tr>
+      <tr><td>convite</td><td class="de">die Einladung</td><td class="hinweis">einladen (separável) = convidar. eine Einladung schicken / annehmen. Para reunião, a Einladung é muitas vezes o convite do calendário.</td></tr>
+      <tr><td>muito trabalho</td><td class="de">viel Arbeit</td><td class="hinweis">Aqui die Arbeit é incontável: viel Arbeit, sem terminação. „viele Arbeiten“ = muitos trabalhos (tarefas, obras).</td></tr>
+      <tr><td>o cliente</td><td class="de">der Kunde; die Kundin; die Kunden</td><td class="hinweis">Declinação n: den / dem / des Kunden. Uma empresa cliente também é der Kunde. der Klient = cliente de advogado ou consultor.</td></tr>
+      <tr><td>a viagem de negócios</td><td class="de">die Geschäftsreise; die Dienstreise</td><td class="hinweis">auf Geschäftsreise sein = estar viajando a trabalho. Dienstreise se usa mais em órgãos públicos e empresas grandes. Cuidado: der Betriebsausflug = passeio da empresa.</td></tr>
+      <tr><td>os parceiros de negócios</td><td class="de">die Geschäftspartner (Pl.); der Geschäftspartner; die Geschäftspartnerin</td><td class="hinweis">„Die Geschäftspartner“ (forma da lista) é plural. Singular: der Geschäftspartner (homem), die Geschäftspartnerin (mulher).</td></tr>
+      <tr><td>a chefe</td><td class="de">die Chefin; der Chef</td><td class="hinweis">die Chefin = mulher; der Chef = homem. Cuidado: chef de cozinha = der Koch / die Köchin. Mais formal: die Vorgesetzte.</td></tr>
+      <tr><td>assumir (uma tarefa)</td><td class="de">übernehmen</td><td class="hinweis">Inseparável: ich übernehme – hat übernommen. eine Aufgabe übernehmen; die Kosten übernehmen = arcar com os custos. Cuidado: annehmen = aceitar, supor; überholen = ultrapassar.</td></tr>
+      <tr><td>urgente</td><td class="de">dringend; eilig</td><td class="hinweis">„Die Bestellung ist dringend.“ – eine dringende Bestellung. eilig também: „Es ist eilig.“</td></tr>
+      <tr><td>conseguir, dar conta</td><td class="de">schaffen</td><td class="hinweis">„Das schaffe ich nicht allein.“ – hat geschafft. Outro sentido: schaffen / erschaffen = criar.</td></tr>
+      <tr><td>precisar</td><td class="de">brauchen</td><td class="hinweis">brauchen + acusativo: „Wir brauchen die Fotos.“ Com negação e zu: „Sie brauchen nicht zu kommen“ = não precisa vir. Cuidado: gebrauchen = usar.</td></tr>
+      <tr><td>delegar tarefas, dar ordens de serviço</td><td class="de">Arbeitsaufträge erteilen; Aufgaben verteilen; Aufgaben delegieren</td><td class="hinweis">A forma da lista está certa, mas é formal, mais de texto escrito. Na fala: „Sie gibt Julia drei Aufgaben.“ der Arbeitsauftrag, Pl. die Arbeitsaufträge. Cuidado: teilen = dividir, compartilhar.</td></tr>
+      <tr><td>Pode assumir isso, por favor?</td><td class="de">Können Sie das bitte übernehmen?; Könnten Sie das bitte übernehmen?; Kannst du das bitte übernehmen?</td><td class="hinweis">Na forma da lista faltou o ponto de interrogação. Könnten soa ainda mais educado. Entre colegas que se tratam por du: „Kannst du …?“ (Julia e Tim).</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-extra-1.html">✏️ Übungen Extra 1</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Lindholm Tee und die Agentur Neumann &amp; Partner sind erfunden.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Julia Berger ist die Chefin von Lindholm Tee.", false, "Sie ist Assistentin; die Chefin ist Frau Albrecht."],
+  ["Frau Albrecht ist diese Woche auf Geschäftsreise in Wien.", true, ""],
+  ["Neumann & Partner ist eine Werbeagentur aus Hamburg.", false, "Die Agentur kommt aus Köln."],
+  ["Frau Albrecht ruft am Montag um halb neun an.", true, ""],
+  ["Das Meeting mit der Agentur ist am Donnerstag um 14 Uhr.", true, ""],
+  ["Julia darf den Vertrag unterschreiben.", false, "Das darf nur die Chefin."],
+  ["Der Werbespot kostet 45.000 Euro.", true, ""],
+  ["Julia nimmt am Mittwoch am Online-Seminar teil.", false, "Sie sagt es ab; es gibt im Juli einen neuen Termin."],
+  ["Die Hotelkette braucht 200 Kilo Tee bis Freitag.", true, ""],
+  ["Tim ist der neue Chef von Julia.", false, "Tim ist Werkstudent."],
+  ["Frau Albrecht geht nach dem Meeting mit Herrn Neumann essen.", false, "Sie hat einen Termin bei der Bank; Julia übernimmt das."],
+  ["Tim bekommt für sein Referat eine Eins.", true, ""]
+];
+const MC = [
+  ["Wo arbeitet Julia?", ["In einer Werbeagentur in Köln.", "Bei einer kleinen Teefirma in Hamburg.", "In einem Hotel in Berlin."], 1],
+  ["Wofür macht Neumann & Partner einen Werbespot?", ["Für den neuen Eistee.", "Für ein Hotel in Wien.", "Für eine Bank."], 0],
+  ["Wie viele Arbeitsaufträge erteilt Frau Albrecht am Telefon?", ["Zwei.", "Fünf.", "Drei."], 2],
+  ["Was braucht die Agentur?", ["Die Fotos und das neue Logo.", "Einen neuen Vertrag.", "Eine Hotelkette."], 0],
+  ["Wie machen Julia und Herr Neumann die Uhrzeit aus?", ["Per Brief.", "Am Telefon, in fünf Minuten.", "Im Online-Seminar."], 1],
+  ["Wie bekommt Frau Albrecht den Vertrag in Wien?", ["Per Post.", "Tim bringt ihn nach Wien.", "Julia schickt ihn per E-Mail ins Hotel."], 2],
+  ["Warum sagt Julia das Online-Seminar ab?", ["Der Tag ist zu voll.", "Das Seminar ist zu teuer.", "Die Chefin will es nicht."], 0],
+  ["Warum ist die Bestellung der Hotelkette dringend?", ["Die Hotels haben keinen Tee mehr.", "Am Wochenende gibt es eine große Konferenz.", "Der Preis steigt im Juni."], 1],
+  ["Was ist das Thema von Tims Referat?", ["Social Media für kleine Firmen.", "Tee aus Österreich.", "Werbespots für Lebensmittel."], 2],
+  ["Was zeigt die Idee für den Werbespot?", ["Eine Radfahrerin an der Elbe und kalten Eistee.", "Ein Meeting im Konferenzraum.", "Eine Teefabrik im Winter."], 0]
+];
+const GAP = [
+  ["Diese Woche hat sie ______ Arbeit.", "viel"],
+  ["Sie ist auf ______ in Wien.", "Geschäftsreise"],
+  ["Die Werbeagentur aus Köln macht einen ______ für den neuen Eistee.", "Werbespot"],
+  ["Frau Albrecht ruft aus Wien ______.", "an"],
+  ["Bitte ______ Sie ein Meeting mit Neumann & Partner.", "organisieren"],
+  ["Die Agentur ______ unsere Fotos und das neue Logo.", "braucht"],
+  ["Dann ______ sie Herrn Neumann per E-Mail.", "kontaktiert"],
+  ["Danach schickt Julia eine ______ an alle.", "Einladung"],
+  ["Julia darf den Vertrag nicht ______.", "unterschreiben"],
+  ["Die Buchhaltung soll sie bis Freitag ______.", "bezahlen"],
+  ["Sie muss das Seminar ______.", "absagen"],
+  ["Die Bestellung ist ______.", "dringend"],
+  ["„Das ______ ich nicht allein“, denkt sie.", "schaffe"],
+  ["Am Freitag hält er an der Uni ein ______.", "Referat"],
+  ["Um 14 Uhr ______ sich alle im Konferenzraum.", "treffen"]
+];
+const OFFEN = [
+  ["Wer ist Frau Albrecht?", "Sie ist die Chefin von Julia bei Lindholm Tee."],
+  ["Wo ist Frau Albrecht diese Woche?", "Auf Geschäftsreise in Wien."],
+  ["Woher kommt die Werbeagentur?", "Aus Köln."],
+  ["Wann und wo soll der Werbespot laufen?", "Ab Juni, im Fernsehen und im Internet."],
+  ["An wen schickt Julia die Einladung?", "An Herrn Neumann, Frau Yilmaz und Frau Albrecht."],
+  ["Wie viel kostet die erste Rechnung?", "15.000 Euro."],
+  ["Wann gibt es einen neuen Termin für das Online-Seminar?", "Im Juli."],
+  ["Was studiert Tim?", "Marketing."],
+  ["Warum kann Frau Albrecht nicht mit Herrn Neumann essen gehen?", "Sie hat um 16 Uhr einen Termin bei der Bank."],
+  ["Welcher Satz kommt am Ende vom Werbespot?", "„Lindholm. Kalt ist das neue Heiß.“"]
+];
+const ERKL = [
+  ["„Sie ist auf Geschäftsreise in Wien und trifft dort die Geschäftspartner aus Österreich.“", "Ela está em viagem de negócios em Viena e vai se encontrar lá com os parceiros de negócios da Áustria."],
+  ["„Sie hat eine lange Liste und erteilt Julia gleich drei Arbeitsaufträge.“", "Ela tem uma lista longa e já passa três tarefas para a Julia. erteilen é formal; na fala se diz Aufgaben geben."],
+  ["„Sollen wir kurz telefonieren und eine Uhrzeit ausmachen?“", "Vamos nos falar rapidinho por telefone e combinar um horário? ausmachen = combinar, marcar."],
+  ["„Julia darf den Vertrag nicht unterschreiben, das darf nur die Chefin.“", "A Julia não pode assinar o contrato; só a chefe pode."],
+  ["„Aber der Tag ist zu voll, und sie muss das Seminar absagen.“", "Mas o dia está cheio demais, e ela precisa cancelar o seminário."],
+  ["„Das schaffe ich nicht allein.“", "Não vou dar conta disso sozinha. schaffen = conseguir, dar conta."],
+  ["„Können Sie das bitte übernehmen?“", "A senhora pode assumir isso, por favor? Sie é o tratamento formal; entre colegas: „Kannst du das übernehmen?“"],
+  ["„Viel Arbeit, aber wir haben alles geschafft.“", "Foi muito trabalho, mas conseguimos fazer tudo."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>

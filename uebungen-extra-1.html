@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Übungen Extra 1: Projekt, Termine, Aufgaben (Wirtschaftsdeutsch A2)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  blockquote { margin:0 0 1rem; padding:.75rem 1rem; border-left:3px solid var(--accent); background:#fbfaf7; font-size:1.02rem; }
+  blockquote cite { display:block; margin-top:.4rem; font-style:normal; font-family: system-ui, sans-serif; font-size:.82rem; color:var(--muted); }
+  cite a { color:var(--muted); }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  .memo-head { font-family: system-ui, sans-serif; font-size:.92rem; border-bottom:1px solid var(--line); padding-bottom:.75rem; margin-bottom:1.25rem; }
+  .memo-head div { margin:.15rem 0; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  /* Übungen */
+  input[type=text], textarea, select { font-family: system-ui, sans-serif; font-size:.95rem; padding:.35rem .5rem; border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink); }
+  input[type=text] { width:13rem; max-width:100%; }
+  textarea { width:100%; min-height:4rem; resize:vertical; }
+  button { font-family: system-ui, sans-serif; font-size:.95rem; background:var(--accent); color:#fff; border:none; border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; margin-top:.75rem; }
+  button:hover { background:#9a3625; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .ergebnis { font-family: system-ui, sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:1rem; font-family: system-ui, sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  details ul, details ol { margin:.5rem 0 0; padding-left:1.4rem; }
+  details li { margin:.25rem 0; }
+  .wortkasten { font-family: system-ui, sans-serif; background:#fbfaf7; border:1px dashed var(--muted); padding:.6rem .9rem; border-radius:8px; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--card); border:1px solid var(--line); padding:.1rem .5rem; border-radius:999px; }
+  .aufgabe { margin:.75rem 0; padding:.5rem .6rem; border-radius:6px; border-bottom:1px solid var(--line); }
+  .aufgabe p { margin:.2rem 0 .4rem; }
+  .aufgabe label { display:block; padding:.15rem .4rem; border-radius:4px; font-family: system-ui, sans-serif; font-size:.95rem; }
+  .aufgabe .satz { font-size:1.02rem; }
+  .aufgabe .pt-satz { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; }
+  .hinweis { font-family: system-ui, sans-serif; font-size:.85rem; color:var(--muted); }
+  #gesamt { font-family: system-ui, sans-serif; font-size:1.15rem; text-align:center; margin-top:1rem; }
+  td select { max-width:100%; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Übungen Extra 1: Projekt, Termine, Aufgaben</h1>
+  <p>Exercícios interativos (A2) com o vocabulário do texto avulso „Ein Werbespot für den Eistee“ – projeto com agência, comercial, apresentação e Referat, seminário on-line, reunião, organizar, cancelar, pagar, ligar, contrato, assinar, enviar, preparar, combinar horário, contatar, encontrar-se, convite, muito trabalho, cliente, viagem de negócios, parceiros de negócios, a chefe, assumir uma tarefa, urgente, dar conta, precisar e delegar tarefas.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-extra-1-werbespot.html">📄 Extra 1</a><a href="gabarito-uebungen-extra-1.html">🖨️ Gabarito</a></nav>
+
+<section id="uebung1">
+  <h2>1. Zuordnung: Artikel + Bedeutung</h2>
+  <p class="pt">Para cada substantivo alemão, escolha o artigo correto (der/die/das) e a tradução em português. Cada item só conta ponto se artigo e tradução estiverem certos.</p>
+  <table>
+    <thead><tr><th>Begriff</th><th>Artikel</th><th>Bedeutung (PT-BR)</th></tr></thead>
+    <tbody id="e1-body"></tbody>
+  </table>
+  <button type="button" id="e1-btn">Prüfen</button><span class="ergebnis" id="e1-erg"></span>
+  <details><summary>Lösung</summary><div id="e1-loesung"></div></details>
+</section>
+
+<section id="uebung2">
+  <h2>2. Lückentext</h2>
+  <p class="pt">Complete as frases de reunião com a palavra certa do quadro (Wortkasten). Verbos, particípios e adjetivos também entram. A dica em português entre parênteses indica o sentido. Maiúsculas/minúsculas e espaços extras não são considerados.</p>
+  <div class="wortkasten" id="e2-kasten"></div>
+  <div id="e2-body"></div>
+  <button type="button" id="e2-btn">Prüfen</button><span class="ergebnis" id="e2-erg"></span>
+  <details><summary>Lösung</summary><ol id="e2-loesung"></ol></details>
+</section>
+
+<section id="uebung3">
+  <h2>3. Welches Wort passt? (Dolmetscher-Entscheidung)</h2>
+  <p class="pt">Um brasileiro diz a frase abaixo na reunião. Qual formulação alemã você usaria ao interpretar? Marque exatamente uma opção.</p>
+  <div id="e3-body"></div>
+  <button type="button" id="e3-btn">Prüfen</button><span class="ergebnis" id="e3-erg"></span>
+  <details><summary>Lösung</summary><ol id="e3-loesung"></ol></details>
+</section>
+
+<section id="uebung4">
+  <h2>4. Dolmetschen DE → PT</h2>
+  <p class="pt">Um alemão diz a frase na reunião. Escreva a interpretação em português. Não há correção automática – compare com a tradução-modelo em „Lösung“.</p>
+  <div id="e4-body"></div>
+  <details><summary>Lösung</summary><ol id="e4-loesung"></ol></details>
+</section>
+
+<section id="uebung5">
+  <h2>5. Dolmetschen PT → DE</h2>
+  <p class="pt">Um brasileiro diz a frase na reunião. Escreva a interpretação em alemão. Compare depois com o modelo em „Lösung“ (às vezes com uma alternativa).</p>
+  <div id="e5-body"></div>
+  <details><summary>Lösung</summary><ol id="e5-loesung"></ol></details>
+</section>
+
+<section id="uebung6">
+  <h2>6. Hörverstehen-Simulation (Schnellerkennung)</h2>
+  <p class="pt">Leia (ou peça a alguém para ler em voz alta) cada frase uma única vez e marque QUAIS termos da lista aparecem nela como palavra inteira. Pode haver mais de um termo por frase. A frase só conta ponto se a seleção estiver exatamente certa.</p>
+  <div id="e6-body"></div>
+  <button type="button" id="e6-btn">Prüfen</button><span class="ergebnis" id="e6-erg"></span>
+  <details><summary>Lösung</summary><ol id="e6-loesung"></ol></details>
+</section>
+
+<section id="gesamt-sektion">
+  <h2>Gesamtergebnis</h2>
+  <p class="pt">Corrige as Übungen 1, 2, 3 e 6 de uma vez e mostra a pontuação total (as Übungen 4 e 5 são de produção livre).</p>
+  <div style="text-align:center"><button type="button" id="alle-btn">Alle Übungen prüfen</button></div>
+  <p id="gesamt">Gesamt: – / 70</p>
+</section>
+</main>
+<footer>Übungen Extra 1 zum Wirtschaftsdeutsch · Niveau A2 · funktioniert offline</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Daten ---------- */
+  var TERMS = [
+    { t: "Projekt", a: "das", p: "projeto" },
+    { t: "Werbespot", a: "der", p: "comercial (filme publicitário)" },
+    { t: "Werbeagentur", a: "die", p: "agência de publicidade" },
+    { t: "Präsentation", a: "die", p: "apresentação (no trabalho)" },
+    { t: "Referat", a: "das", p: "trabalho apresentado (escola, faculdade)" },
+    { t: "Online-Seminar", a: "das", p: "seminário on-line" },
+    { t: "Meeting", a: "das", p: "reunião" },
+    { t: "Besprechung", a: "die", p: "reunião de trabalho" },
+    { t: "Vertrag", a: "der", p: "contrato" },
+    { t: "Unterschrift", a: "die", p: "assinatura" },
+    { t: "Rechnung", a: "die", p: "fatura, conta" },
+    { t: "Einladung", a: "die", p: "convite" },
+    { t: "Termin", a: "der", p: "horário marcado, compromisso" },
+    { t: "Arbeit", a: "die", p: "trabalho" },
+    { t: "Arbeitsauftrag", a: "der", p: "ordem de serviço, tarefa" },
+    { t: "Kunde", a: "der", p: "cliente (homem ou empresa)" },
+    { t: "Kundin", a: "die", p: "cliente (mulher)" },
+    { t: "Geschäftsreise", a: "die", p: "viagem de negócios" },
+    { t: "Geschäftspartner", a: "der", p: "parceiro de negócios" },
+    { t: "Chefin", a: "die", p: "chefe (mulher)" },
+    { t: "Chef", a: "der", p: "chefe (homem)" },
+    { t: "Buchhaltung", a: "die", p: "contabilidade" },
+    { t: "Bestellung", a: "die", p: "pedido, encomenda" },
+    { t: "Hotelkette", a: "die", p: "rede de hotéis" }
+  ];
+
+  var GAPS = [
+    { s: "„Können Sie bitte ein Meeting mit der Agentur ___?“", h: "organizar", a: "organisieren" },
+    { s: "„Ich habe das Online-Seminar leider ___.“", h: "cancelei", a: "abgesagt" },
+    { s: "„Die Buchhaltung hat die Rechnung schon ___.“", h: "pagou", a: ["bezahlt", "gezahlt"] },
+    { s: "„Ich rufe Herrn Neumann morgen früh ___.“", h: "ligo para", a: "an" },
+    { s: "„Die Chefin muss den Vertrag noch ___.“", h: "assinar", a: "unterschreiben" },
+    { s: "„Ich habe Ihnen die Fotos gestern ___.“", h: "enviei", a: ["geschickt", "verschickt", "gesendet", "gesandt"] },
+    { s: "„Julia ___ die Präsentation für Donnerstag vor.“", h: "prepara", a: "bereitet" },
+    { s: "„Wollen wir einen Termin ___?“", h: "combinar", a: ["ausmachen", "vereinbaren"] },
+    { s: "„Ich habe die Agentur per E-Mail ___.“", h: "contatei", a: "kontaktiert" },
+    { s: "„Wir ___ uns um 14 Uhr im Konferenzraum.“", h: "nos encontramos", a: "treffen" },
+    { s: "„Danke für die ___ zum Meeting!“", h: "convite", a: "Einladung" },
+    { s: "„Diese Woche habe ich sehr ___ Arbeit.“", h: "muito", a: "viel" },
+    { s: "„Der ___ braucht 200 Kilo Tee bis Freitag.“", h: "cliente", a: "Kunde" },
+    { s: "„Die Chefin ist auf ___ in Wien.“", h: "viagem de negócios", a: ["Geschäftsreise", "Dienstreise"] },
+    { s: "„Können Sie das bitte ___?“", h: "assumir", a: "übernehmen" },
+    { s: "„Das ist ___: Wir brauchen den Tee bis Freitag.“", h: "urgente", a: ["dringend", "eilig"] },
+    { s: "„Das ___ ich heute nicht mehr.“", h: "consigo, dou conta", a: "schaffe" },
+    { s: "„Wir ___ noch das neue Logo.“", h: "precisamos de", a: "brauchen" }
+  ];
+
+  var CHOICE = [
+    { q: "„Ela vai fazer uma apresentação na reunião com o cliente.“", o: ["Sie hält beim Kundenmeeting ein Referat.", "Sie hält beim Kundenmeeting eine Präsentation.", "Sie hält beim Kundenmeeting eine Vorstellung."], c: 1, e: "No trabalho: Präsentation. Referat = trabalho apresentado na escola ou faculdade; Vorstellung = apresentação de pessoas, sessão de teatro." },
+    { q: "„O Tim tem que apresentar um seminário na faculdade.“", o: ["Tim muss an der Uni ein Referat halten.", "Tim muss an der Uni ein Seminar halten.", "Tim muss an der Uni eine Vorstellung halten."], c: 0, e: "Na escola e na faculdade: ein Referat halten. „Ein Seminar halten“ = dar um curso (quem faz é o professor); Vorstellung = apresentação de pessoas." },
+    { q: "„Amanhã vou participar de um seminário on-line.“", o: ["Ich nehme morgen an einem online Seminar teil.", "Ich nehme morgen an einem Online-Seminar teil.", "Ich nehme morgen an einem Online-Seminar Teil."], c: 1, e: "das Online-Seminar, com maiúscula e hífen. „online Seminar“ separado está errado; no verbo teilnehmen, o „teil“ vai com minúscula." },
+    { q: "„Preciso cancelar a reunião de quinta.“", o: ["Ich muss das Meeting am Donnerstag absagen.", "Ich muss das Meeting am Donnerstag aussagen.", "Ich muss das Meeting am Donnerstag abschreiben."], c: 0, e: "absagen = cancelar compromisso. aussagen = depor; abschreiben = copiar, dar baixa." },
+    { q: "„O senhor pode me ligar amanhã?“", o: ["Können Sie mich morgen einschalten?", "Können Sie mir morgen anrufen?", "Können Sie mich morgen anrufen?"], c: 2, e: "anrufen pede acusativo: mich. „mir anrufen“ é um erro comum; einschalten = ligar um aparelho." },
+    { q: "„A chefe ainda precisa assinar o contrato.“", o: ["Die Chefin muss den Vertrag noch abonnieren.", "Die Chefin muss den Vertrag noch unterschreiben.", "Die Chefin muss den Vertrag noch unterschrieben."], c: 1, e: "Com muss vem o infinitivo: unterschreiben. abonnieren = assinar revista; unterschrieben é o particípio (hat unterschrieben)." },
+    { q: "„Já mandei os arquivos para a agência.“", o: ["Ich habe die Dateien schon an die Agentur verschickt.", "Ich habe die Dateien schon an die Agentur befohlen.", "Ich habe die Dateien schon an die Agentur verschicken."], c: 0, e: "Perfekt: habe … verschickt (ou geschickt, gesendet). befehlen = mandar no sentido de dar ordem; „verschicken“ é o infinitivo, não serve aqui." },
+    { q: "„Ela está preparando a apresentação.“", o: ["Sie bereitet die Präsentation zu.", "Sie bereitet die Präsentation vor.", "Sie bereitet die Präsentation an."], c: 1, e: "vorbereiten = preparar. zubereiten = preparar comida; „anbereiten“ não existe." },
+    { q: "„Vamos marcar um horário?“", o: ["Wollen wir eine Uhrzeit markieren?", "Wollen wir eine Uhrzeit ausmachen?", "Wollen wir eine Uhrzeit ausschalten?"], c: 1, e: "ausmachen (ou vereinbaren) = combinar. markieren = marcar com caneta; ausschalten = desligar." },
+    { q: "„Vou encontrar os parceiros de negócios em Viena.“", o: ["Ich finde die Geschäftspartner in Wien.", "Ich treffe die Geschäftspartner in Wien.", "Ich treffe den Geschäftspartner in Wien."], c: 1, e: "treffen = encontrar pessoas; die Geschäftspartner = plural. finden = achar algo perdido; den Geschäftspartner = um parceiro só." },
+    { q: "„O cliente precisa do chá até sexta.“", o: ["Der Klient braucht den Tee bis Freitag.", "Der Kunde braucht den Tee bis Freitag.", "Der Kunde gebraucht den Tee bis Freitag."], c: 1, e: "der Kunde = cliente de empresa. der Klient = cliente de advogado ou consultor; gebrauchen = usar." },
+    { q: "„A chefe está em viagem de negócios.“", o: ["Die Chefin ist auf Geschäftsreise.", "Die Köchin ist auf Geschäftsreise.", "Die Chefin ist auf Betriebsausflug."], c: 0, e: "auf Geschäftsreise sein. die Köchin = chef de cozinha; der Betriebsausflug = passeio da empresa." },
+    { q: "„Estou com muito trabalho esta semana.“", o: ["Ich habe diese Woche viele Arbeit.", "Ich habe diese Woche viel Arbeit.", "Ich habe diese Woche viel Arbeiten."], c: 1, e: "viel Arbeit, sem terminação: Arbeit aqui é incontável." },
+    { q: "„Não vou dar conta disso hoje.“", o: ["Das schaffe ich heute nicht.", "Das erschaffe ich heute nicht.", "Das gebe ich heute nicht."], c: 0, e: "schaffen = conseguir, dar conta. erschaffen = criar; geben = dar, não tem esse sentido." },
+    { q: "„A chefe passa as tarefas da semana.“", o: ["Die Chefin erteilt die Arbeitsaufträge für die Woche.", "Die Chefin teilt die Arbeitsaufträge für die Woche.", "Die Chefin erzählt die Arbeitsaufträge für die Woche."], c: 0, e: "Arbeitsaufträge erteilen (ou Aufgaben verteilen). teilen = dividir, compartilhar; erzählen = contar uma história." },
+    { q: "„A senhora pode assumir isso, por favor?“", o: ["Können Sie das bitte annehmen?", "Können Sie das bitte überholen?", "Können Sie das bitte übernehmen?"], c: 2, e: "übernehmen = assumir uma tarefa. annehmen = aceitar, supor; überholen = ultrapassar." }
+  ];
+
+  var DE_PT = [
+    { de: "„Das Projekt mit Neumann & Partner bringt viel Arbeit.“", pt: "„O projeto com a Neumann & Partner dá muito trabalho.“" },
+    { de: "„Die Agentur dreht den Werbespot im Mai.“", pt: "„A agência vai filmar o comercial em maio.“" },
+    { de: "„Frau Albrecht ist auf Geschäftsreise und trifft die Geschäftspartner in Wien.“", pt: "„A Sra. Albrecht está em viagem de negócios e vai se encontrar com os parceiros em Viena.“" },
+    { de: "„Können Sie bitte ein Meeting für Donnerstag organisieren?“", pt: "„Pode organizar uma reunião para quinta-feira, por favor?“" },
+    { de: "„Ich rufe Sie morgen an, und wir machen einen Termin aus.“", pt: "„Ligo para o senhor amanhã e combinamos um horário.“" },
+    { de: "„Die Einladung habe ich schon an alle verschickt.“", pt: "„Já mandei o convite para todos.“" },
+    { de: "„Leider muss ich das Online-Seminar absagen.“", pt: "„Infelizmente preciso cancelar o seminário on-line.“" },
+    { de: "„Der Kunde braucht die Ware dringend.“", pt: "„O cliente precisa da mercadoria com urgência.“" },
+    { de: "„Die Chefin hat mir drei Arbeitsaufträge erteilt.“", pt: "„A chefe me passou três tarefas.“" },
+    { de: "„Das schaffe ich nicht allein. Kannst du das übernehmen?“", pt: "„Não dou conta disso sozinha. Você pode assumir isso?“" }
+  ];
+
+  var PT_DE = [
+    { pt: "„Preciso preparar uma apresentação para quinta.“", de: "„Ich muss eine Präsentation für Donnerstag vorbereiten.“", alt: "„Für Donnerstag muss ich eine Präsentation vorbereiten.“" },
+    { pt: "„Na sexta, o Tim apresenta um seminário na faculdade.“", de: "„Am Freitag hält Tim an der Uni ein Referat.“", alt: "„Tim hat am Freitag ein Referat an der Uni.“" },
+    { pt: "„A chefe precisa assinar o contrato.“", de: "„Die Chefin muss den Vertrag unterschreiben.“", alt: "„Den Vertrag muss die Chefin unterschreiben.“" },
+    { pt: "„Quem vai pagar a fatura?“", de: "„Wer bezahlt die Rechnung?“", alt: "„Wer zahlt die Rechnung?“" },
+    { pt: "„Vou ligar para o cliente agora.“", de: "„Ich rufe den Kunden jetzt an.“", alt: "„Ich telefoniere jetzt mit dem Kunden.“" },
+    { pt: "„Pode mandar o convite para todos?“", de: "„Können Sie die Einladung an alle schicken?“", alt: "„Können Sie die Einladung an alle verschicken?“" },
+    { pt: "„Vamos combinar um horário para a reunião.“", de: "„Wir machen eine Uhrzeit für das Meeting aus.“", alt: "„Wir vereinbaren einen Termin für die Besprechung.“" },
+    { pt: "„Entrei em contato com a agência ontem.“", de: "„Ich habe die Agentur gestern kontaktiert.“", alt: "„Ich habe mich gestern bei der Agentur gemeldet.“" },
+    { pt: "„O pedido é urgente: o cliente precisa do chá até sexta.“", de: "„Die Bestellung ist dringend: Der Kunde braucht den Tee bis Freitag.“", alt: "„Es ist eilig, der Kunde braucht den Tee bis Freitag.“" },
+    { pt: "„Pode assumir isso, por favor? Eu não dou conta.“", de: "„Können Sie das bitte übernehmen? Ich schaffe das nicht.“", alt: "„Könnten Sie das bitte übernehmen? Das schaffe ich nicht.“" }
+  ];
+
+  var HOER = [
+    { s: "„Das Projekt mit Neumann & Partner ist ein Werbespot.“", o: ["Projekt", "Werbespot", "Werbung", "Partner"], c: [0, 1, 3] },
+    { s: "„Die Chefin ist auf Geschäftsreise in Wien.“", o: ["Chefin", "Chef", "Geschäftsreise", "Wien"], c: [0, 2, 3] },
+    { s: "„Bitte organisieren Sie ein Meeting für Donnerstag.“", o: ["organisieren", "Meeting", "Treffen", "Donnerstag"], c: [0, 1, 3] },
+    { s: "„Ich muss das Online-Seminar leider absagen.“", o: ["Online-Seminar", "Webinar", "absagen", "leider"], c: [0, 2, 3] },
+    { s: "„Der Kunde hat angerufen, die Bestellung ist dringend.“", o: ["Kunde", "angerufen", "anrufen", "dringend"], c: [0, 1, 3] },
+    { s: "„Die Chefin unterschreibt den Vertrag im Hotel.“", o: ["unterschreibt", "Unterschrift", "Vertrag", "Hotel"], c: [0, 2, 3] },
+    { s: "„Die Einladung habe ich an alle verschickt.“", o: ["Einladung", "verschickt", "gesendet", "alle"], c: [0, 1, 3] },
+    { s: "„Julia bereitet die Präsentation vor, Tim das Referat.“", o: ["Präsentation", "Referat", "Vortrag", "Tim"], c: [0, 1, 3] },
+    { s: "„Wir treffen uns um 14 Uhr, das haben wir so ausgemacht.“", o: ["treffen", "ausgemacht", "Termin", "Uhr"], c: [0, 1, 3] },
+    { s: "„Viel Arbeit, aber wir schaffen das.“", o: ["Arbeit", "schaffen", "geschafft", "Viel"], c: [0, 1, 3] },
+    { s: "„Die Chefin erteilt Arbeitsaufträge und braucht die Fotos.“", o: ["erteilt", "Arbeitsaufträge", "braucht", "Aufgaben"], c: [0, 1, 2] },
+    { s: "„Können Sie das bitte übernehmen? Die Geschäftspartner warten.“", o: ["übernehmen", "Geschäftspartner", "Kunden", "bitte"], c: [0, 1, 3] }
+  ];
+
+  var MAX = { e1: TERMS.length, e2: GAPS.length, e3: CHOICE.length, e6: HOER.length };
+  var scores = { e1: null, e2: null, e3: null, e6: null };
+
+  /* ---------- Hilfsfunktionen ---------- */
+  function $(id) { return document.getElementById(id); }
+  function shuffle(arr) {
+    var b = arr.slice(), i, j, tmp;
+    for (i = b.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      tmp = b[i]; b[i] = b[j]; b[j] = tmp;
+    }
+    return b;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function norm(s) { return String(s).trim().replace(/\s+/g, " ").toLowerCase(); }
+  function answers(g) { return Array.isArray(g.a) ? g.a : [g.a]; }
+  function mark(node, ok) {
+    node.classList.remove("richtig", "falsch");
+    node.classList.add(ok ? "richtig" : "falsch");
+  }
+  function showResult(id, ok, max) { $(id).textContent = ok + " / " + max + " richtig"; }
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; i++) { if (b.indexOf(a[i]) === -1) return false; }
+    return true;
+  }
+
+  /* ---------- Übung 1 ---------- */
+  function render1() {
+    var body = $("e1-body");
+    var trans = shuffle(TERMS.map(function (x) { return x.p; }));
+    var html = "";
+    TERMS.forEach(function (x, i) {
+      html += "<tr><td>" + esc(x.t) + "</td>" +
+        "<td><select id=\"e1-art-" + i + "\"><option value=\"\">–</option><option value=\"der\">der</option><option value=\"die\">die</option><option value=\"das\">das</option></select></td>" +
+        "<td><select id=\"e1-pt-" + i + "\"><option value=\"\">–</option>" +
+        trans.map(function (p) { return "<option value=\"" + esc(p) + "\">" + esc(p) + "</option>"; }).join("") +
+        "</select></td></tr>";
+    });
+    body.innerHTML = html;
+    $("e1-loesung").innerHTML = "<ul>" + TERMS.map(function (x) {
+      return "<li><b>" + esc(x.l || (x.a + " " + x.t)) + "</b> – " + esc(x.p) + "</li>";
+    }).join("") + "</ul>";
+  }
+  function check1() {
+    var ok = 0;
+    TERMS.forEach(function (x, i) {
+      var art = $("e1-art-" + i), pt = $("e1-pt-" + i);
+      var a = art.value === x.a, p = pt.value === x.p;
+      mark(art, a); mark(pt, p);
+      if (a && p) ok++;
+    });
+    scores.e1 = ok;
+    showResult("e1-erg", ok, MAX.e1);
+    return ok;
+  }
+
+  /* ---------- Übung 2 ---------- */
+  function render2() {
+    $("e2-kasten").innerHTML = shuffle(GAPS.map(function (g) { return answers(g)[0]; }))
+      .map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ");
+    $("e2-body").innerHTML = GAPS.map(function (g, i) {
+      var parts = g.s.split("___");
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(parts[0]) +
+        "<input type=\"text\" id=\"e2-in-" + i + "\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\">" +
+        esc(parts[1]) + " <span class=\"hinweis\">(" + esc(g.h) + ")</span></p></div>";
+    }).join("");
+    $("e2-loesung").innerHTML = GAPS.map(function (g) {
+      var alts = answers(g);
+      return "<li>" + esc(g.s.replace("___", alts[0])) +
+        (alts.length > 1 ? " <span class=\"hinweis\">(auch: " + esc(alts.slice(1).join(", ")) + ")</span>" : "") + "</li>";
+    }).join("");
+  }
+  function check2() {
+    var ok = 0;
+    GAPS.forEach(function (g, i) {
+      var inp = $("e2-in-" + i);
+      var v = norm(inp.value);
+      var r = answers(g).some(function (a) { return norm(a) === v; });
+      mark(inp, r);
+      if (r) ok++;
+    });
+    scores.e2 = ok;
+    showResult("e2-erg", ok, MAX.e2);
+    return ok;
+  }
+
+  /* ---------- Übung 3 ---------- */
+  var choiceOrder = [];
+  function render3() {
+    $("e3-body").innerHTML = CHOICE.map(function (q, i) {
+      var order = shuffle([0, 1, 2]);
+      choiceOrder[i] = order;
+      return "<div class=\"aufgabe\" id=\"e3-frage-" + i + "\"><p class=\"satz\">" + (i + 1) + ". O brasileiro diz: " + esc(q.q) + "</p>" +
+        order.map(function (k) {
+          return "<label id=\"e3-lab-" + i + "-" + k + "\"><input type=\"radio\" name=\"e3-" + i + "\" value=\"" + k + "\"> " + esc(q.o[k]) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e3-loesung").innerHTML = CHOICE.map(function (q) {
+      return "<li>" + esc(q.q) + " → <b>" + esc(q.o[q.c]) + "</b><br><span class=\"hinweis\">" + esc(q.e) + "</span></li>";
+    }).join("");
+  }
+  function check3() {
+    var ok = 0;
+    CHOICE.forEach(function (q, i) {
+      var chosen = document.querySelector("input[name=\"e3-" + i + "\"]:checked");
+      var box = $("e3-frage-" + i);
+      [0, 1, 2].forEach(function (k) { $("e3-lab-" + i + "-" + k).classList.remove("richtig", "falsch"); });
+      if (!chosen) { mark(box, false); return; }
+      box.classList.remove("richtig", "falsch");
+      var r = Number(chosen.value) === q.c;
+      mark($("e3-lab-" + i + "-" + chosen.value), r);
+      if (r) ok++;
+    });
+    scores.e3 = ok;
+    showResult("e3-erg", ok, MAX.e3);
+    return ok;
+  }
+
+  /* ---------- Übung 4 / 5 ---------- */
+  function render4() {
+    $("e4-body").innerHTML = DE_PT.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"satz\">" + (i + 1) + ". " + esc(x.de) + "</p>" +
+        "<textarea id=\"e4-ta-" + i + "\" placeholder=\"Tradução em português…\"></textarea></div>";
+    }).join("");
+    $("e4-loesung").innerHTML = DE_PT.map(function (x) {
+      return "<li>" + esc(x.de) + "<br>→ <b>" + esc(x.pt) + "</b></li>";
+    }).join("");
+  }
+  function render5() {
+    $("e5-body").innerHTML = PT_DE.map(function (x, i) {
+      return "<div class=\"aufgabe\"><p class=\"pt-satz\">" + (i + 1) + ". " + esc(x.pt) + "</p>" +
+        "<textarea id=\"e5-ta-" + i + "\" placeholder=\"Übersetzung auf Deutsch…\" lang=\"de\"></textarea></div>";
+    }).join("");
+    $("e5-loesung").innerHTML = PT_DE.map(function (x) {
+      return "<li>" + esc(x.pt) + "<br>→ <b>" + esc(x.de) + "</b>" +
+        (x.alt ? "<br><span class=\"hinweis\">Alternative: " + esc(x.alt) + "</span>" : "") + "</li>";
+    }).join("");
+  }
+
+  /* ---------- Übung 6 ---------- */
+  function render6() {
+    $("e6-body").innerHTML = HOER.map(function (h, i) {
+      return "<div class=\"aufgabe\" id=\"e6-satz-" + i + "\"><p class=\"satz\">" + (i + 1) + ". " + esc(h.s) + "</p>" +
+        h.o.map(function (opt, j) {
+          return "<label id=\"e6-lab-" + i + "-" + j + "\"><input type=\"checkbox\" id=\"e6-cb-" + i + "-" + j + "\"> " + esc(opt) + "</label>";
+        }).join("") + "</div>";
+    }).join("");
+    $("e6-loesung").innerHTML = HOER.map(function (h) {
+      return "<li>" + esc(h.s) + "<br>→ <b>" + h.c.map(function (k) { return esc(h.o[k]); }).join(", ") + "</b></li>";
+    }).join("");
+  }
+  function check6() {
+    var ok = 0;
+    HOER.forEach(function (h, i) {
+      var checked = [];
+      h.o.forEach(function (opt, j) {
+        var cb = $("e6-cb-" + i + "-" + j), lab = $("e6-lab-" + i + "-" + j);
+        var should = h.c.indexOf(j) !== -1;
+        lab.classList.remove("richtig", "falsch");
+        if (cb.checked) checked.push(j);
+        if (cb.checked && should) mark(lab, true);
+        else if (cb.checked !== should) mark(lab, false);
+      });
+      if (sameSet(checked, h.c)) ok++;
+    });
+    scores.e6 = ok;
+    showResult("e6-erg", ok, MAX.e6);
+    return ok;
+  }
+
+  /* ---------- Gesamt ---------- */
+  function updateTotal() {
+    var sum = 0, max = 0, key;
+    for (key in MAX) {
+      if (MAX.hasOwnProperty(key)) {
+        max += MAX[key];
+        if (scores[key] !== null) sum += scores[key];
+      }
+    }
+    $("gesamt").textContent = "Gesamt: " + sum + " / " + max;
+  }
+  function checkAll() {
+    check1(); check2(); check3(); check6();
+    updateTotal();
+    $("gesamt").scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /* ---------- Start ---------- */
+  render1(); render2(); render3(); render4(); render5(); render6();
+  $("e1-btn").addEventListener("click", function () { check1(); updateTotal(); });
+  $("e2-btn").addEventListener("click", function () { check2(); updateTotal(); });
+  $("e3-btn").addEventListener("click", function () { check3(); updateTotal(); });
+  $("e6-btn").addEventListener("click", function () { check6(); updateTotal(); });
+  $("alle-btn").addEventListener("click", checkAll);
+})();
+</script>
+</body>
+</html>
