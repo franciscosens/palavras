@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text 13: Drei Kandidaten und ein Formular – Lesetext mit Fragen (A2/B1)</title>
+<style>
+  :root { --bg:#f7f5f0; --card:#fff; --ink:#1f2a37; --muted:#5b6673; --accent:#b8412e; --mark:#fff3b0; --line:#e6e1d6; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: Georgia, "Times New Roman", serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:#fff; padding:2.5rem 1.5rem; }
+  header h1 { margin:0 0 .4rem; font-size:1.9rem; font-weight:normal; }
+  header p { margin:0; color:#c9d1da; font-family: system-ui, sans-serif; font-size:.95rem; }
+  main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  nav { font-family: system-ui, sans-serif; font-size:.9rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; gap:.5rem; }
+  nav a { background:var(--card); border:1px solid var(--line); padding:.3rem .7rem; border-radius:999px; text-decoration:none; color:var(--ink); }
+  nav a:hover { border-color:var(--accent); color:var(--accent); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.5rem 1.75rem; margin-bottom:1.5rem; }
+  section h2 { margin:0 0 .25rem; font-size:1.35rem; color:var(--accent); font-weight:normal; }
+  .pt { font-family: system-ui, sans-serif; color:var(--muted); font-size:.9rem; margin:0 0 1rem; }
+  mark { background:var(--mark); padding:0 .15em; border-radius:3px; font-weight:bold; }
+  footer { text-align:center; font-family: system-ui, sans-serif; color:var(--muted); font-size:.85rem; padding:1rem; }
+  section h3 { font-size:1.05rem; margin:1.4rem 0 .3rem; font-weight:bold; }
+  table { width:100%; border-collapse:collapse; font-family: system-ui, sans-serif; font-size:.93rem; }
+  th, td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--accent); font-weight:normal; }
+  td.de { white-space:normal; min-width:13rem; }
+  td.hinweis { color:var(--muted); font-size:.88rem; }
+</style>
+<style>
+  .lesetext p { font-size:1.08rem; line-height:1.85; margin:0 0 1rem; }
+  .aufgabe { margin:0 0 1rem; padding:.75rem 1rem; border:1px solid var(--line); border-radius:8px; background:#fbfaf7; }
+  .aufgabe p { margin:0 0 .4rem; }
+  .aufgabe label { display:block; margin:.15rem 0; cursor:pointer; }
+  input[type=text] { font:inherit; padding:.3rem .5rem; border:1px solid var(--line); border-radius:6px; width:100%; max-width:520px; }
+  button { font-family:system-ui,sans-serif; background:var(--accent); color:#fff; border:0; border-radius:6px; padding:.5rem 1rem; cursor:pointer; margin-top:.5rem; }
+  .richtig { background:#d7f5dd !important; }
+  .falsch { background:#ffd9d4 !important; }
+  .punkte { font-family:system-ui,sans-serif; font-weight:bold; margin-left:.75rem; }
+  details { margin-top:.75rem; font-family:system-ui,sans-serif; font-size:.92rem; }
+  summary { cursor:pointer; color:var(--accent); }
+  .wortkasten { font-family:system-ui,sans-serif; background:#fff; border:1px dashed var(--accent); border-radius:8px; padding:.6rem .9rem; margin-bottom:1rem; display:flex; flex-wrap:wrap; gap:.4rem .5rem; }
+  .wortkasten span { background:var(--mark); padding:.15rem .5rem; border-radius:4px; }
+  #gesamt { font-family:system-ui,sans-serif; font-size:1.1rem; font-weight:bold; text-align:center; padding:1rem; }
+</style>
+<style>
+  .tabs { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.4rem; background:var(--bg); padding:.6rem 0; margin-bottom:1rem; border-bottom:1px solid var(--line); font-family:system-ui,sans-serif; }
+  .tabs button { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:999px; padding:.4rem .9rem; margin:0; font-size:.9rem; }
+  .tabs button.aktiv { background:var(--accent); color:#fff; border-color:var(--accent); }
+  main > section.tab-hidden { display:none; }
+  .tabnav { display:flex; justify-content:space-between; margin-top:1rem; font-family:system-ui,sans-serif; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const secs = [...main.querySelectorAll(":scope > section")];
+  if (secs.length < 2) return;
+  const bar = document.createElement("div"); bar.className = "tabs";
+  const labels = secs.map(s => { const h = s.querySelector("h2"); let t = h ? h.textContent.trim() : "Teil"; const m = t.match(/^([A-F])\.\s/); if (m) return m[1]; if (s.classList.contains("lesetext")) return "📖 Text"; return t.length > 22 ? t.slice(0,20)+"…" : t; });
+  let cur = 0;
+  function show(i) {
+    cur = i; secs.forEach((s,j) => s.classList.toggle("tab-hidden", j!==i));
+    [...bar.children].forEach((b,j) => b.classList.toggle("aktiv", j===i));
+    window.scrollTo({top: bar.offsetTop - 8, behavior:"smooth"});
+  }
+  secs.forEach((s,i) => { const b = document.createElement("button"); b.textContent = labels[i]; b.onclick = () => show(i); bar.appendChild(b);
+    const nav = document.createElement("div"); nav.className = "tabnav";
+    nav.innerHTML = (i>0 ? `<button class="prev">← ${labels[i-1]}</button>` : "<span></span>") + (i<secs.length-1 ? `<button class="next">${labels[i+1]} →</button>` : "<span></span>");
+    s.appendChild(nav);
+    const p = nav.querySelector(".prev"), n = nav.querySelector(".next");
+    if (p) p.onclick = () => show(i-1); if (n) n.onclick = () => show(i+1);
+  });
+  main.insertBefore(bar, secs[0]);
+  show(0);
+});
+</script>
+</head>
+<body>
+<header>
+  <h1>Text 13: Drei Kandidaten und ein Formular</h1>
+  <p>Continuação do Text 12, em nível A2/B1: formulário padrão (auditoria interna), currículo, vagas em aberto, candidatos, requisito, experiência profissional, minha opinião, com certeza, confraternizações de final de ano, resolver, custo de transferência de filial, lançamentos de sucata, erros de produção, literalmente, lançamentos de frete (CT-e), preparação, apoio, requisitos/especificações, processos, persistência, empenho, empenhado, implementar uma ideia, adquirir experiência, oficina, fábrica/unidade e ferramenta.</p>
+</header>
+<main>
+<nav><a href="index.html">🏠 Startseite</a><a href="text-12-planungssitzung.html">📄 Text 12</a><a href="uebungen-10.html">✏️ Übungen 10</a><a href="gabarito-text-13.html">🖨️ Gabarito</a></nav>
+
+<section class="lesetext">
+  <h2>Drei Kandidaten und ein Formular: Herr Brandt in Curitiba</h2>
+  <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
+
+  <p>Es ist Montag, der 10. Mai. Herr Brandt ist für zwei Wochen in Brasilien, und die ersten Tage ist er in Curitiba. Beim Kaffee im Büro zeigt Frau Costa ihm den Plan: Am Dienstag geht es um das Personal, am Mittwoch um das interne Audit. „Im Moment haben wir zwei <mark>offene Stellen</mark>“, sagt sie. „Wir suchen den neuen Vertriebsleiter für Curitiba und einen Lageristen für das Lager in Recife.“ Für die Stelle als Vertriebsleiter sind 46 Bewerbungen gekommen. Frau Ribeiro hat alle <mark>Lebensläufe</mark> gelesen und eine Tabelle gemacht. Drei <mark>Kandidaten</mark> kommen am Dienstag zum Vorstellungsgespräch. Auch Frau Lima, die Dolmetscherin, ist wieder da, denn die Gespräche sind auf Portugiesisch.</p>
+
+  <p>Die <mark>Voraussetzungen</mark> für die Stelle stehen in der Anzeige: mindestens fünf Jahre <mark>Berufserfahrung</mark> im Vertrieb, Erfahrung mit Industrieprodukten und gutes Englisch. Deutsch ist keine Voraussetzung, aber ein Plus. Die erste Kandidatin kennen alle: Frau Dias aus Porto Alegre. Sie ist seit acht Jahren bei Aquasul im Außendienst und sehr <mark>engagiert</mark>. Letztes Jahr hat sie <mark>eine Idee umgesetzt</mark>: Ihre Kunden können Ersatzteile per WhatsApp bestellen, mit einem Foto vom alten Teil. In ihrer Region sind die Bestellungen um 20 Prozent gestiegen. Aber sie hat noch nie ein Team geleitet.</p>
+
+  <p>Der zweite Kandidat, Herr Moreira, kommt von einem Wettbewerber aus São Paulo. Er hat 15 Jahre Berufserfahrung, und sein Lebenslauf ist perfekt. Die dritte Kandidatin ist Frau Teixeira, 31 Jahre alt, Ingenieurin aus Porto Alegre. Nach dem Studium hat sie zwei Jahre in Deutschland <mark>Erfahrungen gesammelt</mark>, in einem Werk für Landmaschinen bei Stuttgart. Heute verkauft sie Kompressoren, aber erst seit vier Jahren. Eine Voraussetzung erfüllt sie also nicht ganz: Ihr fehlt ein Jahr Berufserfahrung. „Dafür spricht sie Deutsch“, sagt Frau Ribeiro.</p>
+
+  <p>Am Dienstag beginnen die Gespräche. Herr Moreira spricht 40 Minuten, fast nur über sich und seine Erfolge. Herr Brandt fragt: „Wie führen Sie ein Team?“ Herr Moreira lacht und antwortet kurz. Frau Lima zögert eine Sekunde, dann übersetzt sie <mark>wörtlich</mark>: „Ein guter Verkäufer braucht kein Team.“ Frau Teixeira spricht mit Herrn Brandt Deutsch, ohne Dolmetscherin. „Im Vertrieb von Maschinen braucht man <mark>Ausdauer</mark>“, erklärt sie. „Manchmal dauert es zwei Jahre, bis ein Kunde kauft.“ Frau Dias ist nervös, aber ehrlich: „Ich kenne die Kunden, die Produkte und das Team. Nur als Chefin habe ich noch keine Erfahrung. Diese Erfahrung möchte ich jetzt sammeln.“ Herrn Brandt gefällt ihr <mark>Engagement</mark>.</p>
+
+  <p>Am Abend sprechen Frau Costa und Herr Brandt über die drei Kandidaten. „<mark>Meiner Meinung nach</mark> ist Herr Moreira nicht der Richtige“, sagt Herr Brandt. „Er ist ein guter Verkäufer, aber er will kein Team führen.“ Frau Costa ist einverstanden. „Frau Teixeira ist <mark>mit Sicherheit</mark> eine sehr gute Kandidatin“, sagt sie. „Aber meine Meinung kennen Sie: Frau Dias kennt unsere Kunden seit acht Jahren, und die Kollegen respektieren sie.“ Am Ende entscheiden sie zusammen: Frau Dias wird ab 1. Juli Vertriebsleiterin, und Aquasul bezahlt den Umzug von Porto Alegre nach Curitiba. „Dann ist in Porto Alegre eine Stelle im Außendienst frei“, sagt Herr Brandt. „Und Frau Teixeira wohnt in Porto Alegre.“ Frau Costa lacht: „Ich rufe sie am Freitag an.“</p>
+
+  <p>Am Mittwoch geht es um das interne Audit. Aquasul ist schnell gewachsen: die Zentrale in Curitiba, die Niederlassung in Belo Horizonte, das Lager in Paranaguá und bald Recife. Aber viele <mark>Abläufe</mark> stehen nirgends auf Papier. Deshalb hat Frau Costa im März um Hilfe gebeten, und Herr Brandt hat das <mark>Standardformular</mark> von Nordlicht für interne Audits mitgebracht: 60 Fragen, von der Werkstatt bis zur Buchhaltung. Die <mark>Vorbereitung</mark> hat schon im April begonnen: Frau Ribeiro und die Buchhalterin, Frau Santos, haben alle Zahlen gesammelt. Frau Neumann ist aus Bremen zugeschaltet. „Bei Fragen zur Buchhaltung bekommen Sie gerne <mark>Unterstützung</mark> von uns“, sagt sie.</p>
+
+  <p>Die erste Frage ist schwierig: Warum sind die <mark>Schrottbuchungen</mark> im März und April so hoch? In der <mark>Werkstatt</mark> pressen die Mitarbeiter die Armaturen auf die Hydraulikschläuche. Normalerweise verschrotten sie 30 Armaturen im Monat, aber im März und April waren es zusammen 380. Der Werkstattleiter, Herr Kowalski, erklärt: „Zuerst haben wir gedacht, das <mark>Werkzeug</mark> an der Presse ist kaputt. Aber das Werkzeug ist in Ordnung. Es ist ein <mark>Fertigungsfehler</mark>: Die Armaturen sind 0,2 Millimeter zu groß. 320 Armaturen haben diesen Fehler.“ Die Armaturen kommen aus dem <mark>Werk</mark> in Bremen. Herr Brandt telefoniert sofort mit dem Werk, und nach einer Stunde ist das Problem <mark>gelöst</mark>: Nordlicht schickt 320 neue Armaturen und eine Gutschrift. „Aber bitte werfen Sie den Schrott noch nicht weg“, sagt er. „Das Werk braucht zehn Muster.“</p>
+
+  <p>Dann kommen die <mark>Frachtbuchungen</mark>. In Brasilien gibt es für jeden Transport ein CT-e, einen elektronischen Frachtbrief. Nach den <mark>Vorgaben</mark> im Formular braucht jede Frachtbuchung einen Beleg. Aber Frau Santos hat zwölf Frachtbuchungen ohne CT-e gefunden, und drei Transporte sind doppelt gebucht. „Wie kann das passieren?“, fragt Frau Neumann. Die Antwort ist einfach: Die Spedition schickt das CT-e an das Lager und die Rechnung an die Buchhaltung, aber niemand vergleicht die zwei Dokumente. Ab Juni gibt es deshalb einen neuen Ablauf: keine Frachtbuchung ohne CT-e.</p>
+
+  <p>Zwei Fragen sind noch offen. Die erste betrifft die <mark>Kosten für den Standortwechsel</mark> in Belo Horizonte: Im Dezember ist die Niederlassung in eine größere Halle umgezogen, näher bei den Kunden aus dem Bergbau. Geplant waren 150.000 Reais, am Ende waren es 210.000. Herr Pereira erklärt per Video, warum: neue Regale und ein breiteres Tor für die Lkw. Die zweite Frage betrifft die <mark>Weihnachtsfeiern</mark> 2026. Die Kosten stehen in der Buchhaltung unter „Marketing“, denn in Curitiba waren auch Kunden dabei. Nach den Vorgaben von Nordlicht sind Weihnachtsfeiern aber Personalkosten. „Das ist nur eine Umbuchung, kein großes Problem“, sagt Frau Neumann.</p>
+
+  <p>Am Donnerstag fliegt Herr Brandt nach Belo Horizonte. Das Ergebnis des internen Audits: 52 von 60 Fragen sind in Ordnung, und acht Punkte muss Aquasul bis August verbessern. „Das Formular ist ein gutes Werkzeug“, sagt Frau Costa. „Jetzt sehen wir unsere Abläufe schwarz auf weiß.“ Am Freitag ruft sie Frau Dias und Frau Teixeira an, und beide sagen Ja. Jetzt ist nur noch eine Stelle offen: der Lagerist in Recife. Das nächste Abstimmungsmeeting ist am Donnerstag, dem 27. Mai.</p>
+</section>
+
+<section id="wortschatz">
+  <h2>Wortschatz</h2>
+  <p class="pt">Os 27 termos com a forma principal (a primeira) e as variantes aceitas, mais uma nota de uso para a intérprete. Algumas formas da lista têm erro ou mudam o sentido; a nota explica por quê. Repare nas armadilhas: Lebenslauf ≠ Curriculum, Kandidat ≠ Bewerber, Voraussetzung ≠ Vorgabe, mit Sicherheit ≠ sicherlich, lösen ≠ beschließen, Standortwechsel ≠ Versetzung ≠ Umlagerung, Schrott ≠ Ausschuss, Buchung (lançamento) ≠ Buchung (reserva), wörtlich ≠ buchstäblich, Werkstatt ≠ Workshop, Werk ≠ Arbeit, e a grafia de Ausdauer e Produktionsfehler.</p>
+  <table>
+    <thead><tr><th>Português</th><th>Deutsch</th><th>Nota de uso</th></tr></thead>
+    <tbody>
+      <tr><td>formulário padrão (auditoria interna)</td><td class="de">das Standardformular (für das interne Audit); das Formblatt; die Vorlage</td><td class="hinweis">A forma da lista está certa. das Formular ausfüllen = preencher o formulário (erfüllen = cumprir uma exigência). das interne Audit = a auditoria interna, o evento; die interne Revision = o setor de auditoria interna numa empresa grande. die Vorlage / das Template = modelo (Text 6: die Auditvorlage).</td></tr>
+      <tr><td>currículo</td><td class="de">der Lebenslauf; der CV</td><td class="hinweis">A forma da lista está certa. Plural: die Lebensläufe. Falso amigo: das Curriculum é o currículo escolar, a grade de um curso (= der Lehrplan). die Bewerbung = candidatura (o conjunto de carta, currículo e certificados); das Anschreiben = carta de apresentação; das Zeugnis = certificado, carta de referência.</td></tr>
+      <tr><td>vagas em aberto</td><td class="de">die offenen Stellen; die freie Stelle; die Stellenanzeige (o anúncio)</td><td class="hinweis">A forma da lista está certa. die Stelle = vaga, posto de trabalho. eine Stelle ausschreiben = abrir, publicar uma vaga; eine Stelle besetzen = preencher a vaga. Cuidado: vaga de estacionamento = der Parkplatz; vaga num curso = der Platz.</td></tr>
+      <tr><td>candidatos</td><td class="de">die Kandidaten / Kandidatinnen; die Bewerber / Bewerberinnen</td><td class="hinweis">A forma da lista está certa, mas no RH o normal é der Bewerber: todos que mandaram currículo. der Kandidat se usa mais para quem está na seleção final (die engere Wahl) e em eleições. sich um eine Stelle bewerben = candidatar-se a uma vaga; das Vorstellungsgespräch = entrevista de emprego (Text 12).</td></tr>
+      <tr><td>requisito</td><td class="de">die Voraussetzung; die Anforderung</td><td class="hinweis">A forma da lista está certa. die Voraussetzung = condição que a pessoa precisa cumprir („Fünf Jahre Berufserfahrung sind Voraussetzung“); eine Voraussetzung erfüllen = cumprir um requisito. die Anforderung = exigência do cargo (das Anforderungsprofil = perfil da vaga). Não confundir com die Vorgabe, mais abaixo.</td></tr>
+      <tr><td>experiência profissional</td><td class="de">die Berufserfahrung</td><td class="hinweis">A forma da lista está certa, normalmente no singular: „zehn Jahre Berufserfahrung im Vertrieb“. die Führungserfahrung = experiência de liderança. Ver também Erfahrungen sammeln.</td></tr>
+      <tr><td>minha opinião</td><td class="de">meine Meinung; meiner Meinung nach; ich bin der Meinung, dass …</td><td class="hinweis">„Meine Meinung“ (forma da lista) está certa como substantivo: „Meine Meinung kennen Sie.“ Para começar uma frase, use „Meiner Meinung nach …“, em dativo e com o verbo logo depois: „Meiner Meinung nach ist das zu teuer.“ „In meiner Meinung“ é decalque do inglês e está errado. Na fala, mais simples: Ich finde … / Ich denke …</td></tr>
+      <tr><td>com certeza</td><td class="de">mit Sicherheit; sicherlich; auf jeden Fall; bestimmt</td><td class="hinweis">As formas da lista estão certas, mas não têm a mesma força. mit Sicherheit = com toda a certeza. sicherlich costuma ser mais fraco, quase uma suposição: „Er kommt sicherlich“ = ele deve vir. Como resposta curta („Com certeza!“), o natural é „Auf jeden Fall!“ ou „Klar!“. Cuidado: die Sicherheit também é segurança (die Arbeitssicherheit).</td></tr>
+      <tr><td>confraternizações de final de ano</td><td class="de">die Weihnachtsfeiern; die Jahresabschlussfeier; die Weihnachtsfeier der Firma</td><td class="hinweis">A forma da lista está certa; plural die Weihnachtsfeiern. Na Alemanha a festa de fim de ano da empresa quase sempre se chama Weihnachtsfeier, mesmo sem nada religioso. Jahresabschlussfeier é a opção neutra, mas cuidado: der Jahresabschluss sozinho é o balanço anual da contabilidade, e numa auditoria isso confunde.</td></tr>
+      <tr><td>resolver</td><td class="de">lösen; ein Problem lösen; klären</td><td class="hinweis">A forma da lista está certa: „Das Problem ist gelöst.“ die Lösung = solução. klären = esclarecer uma dúvida ou uma questão. Armadilha para a intérprete: „resolver“ também é decidir („resolvemos abrir um depósito“) = beschließen / sich entscheiden, não lösen. auflösen = dissolver, desfazer (uma empresa, um contrato).</td></tr>
+      <tr><td>custo de transferência de filial</td><td class="de">die Kosten für den Standortwechsel (der Niederlassung); die Umzugskosten der Niederlassung</td><td class="hinweis">„Kosten für den Standortwechsel“ (forma da lista) está certa quando a filial muda de endereço, como no texto. „Niederlassungswechsel“ (forma da lista) não se usa. Se em português for transferência de mercadoria entre filiais (nota de transferência), o termo é die Umlagerung zwischen Niederlassungen; se for transferência de funcionário, die Versetzung (Text 10). Vale perguntar o que o orador quer dizer.</td></tr>
+      <tr><td>lançamentos de sucata</td><td class="de">die Schrottbuchungen; die Buchung von Schrott; die Verschrottung buchen</td><td class="hinweis">As formas da lista estão certas; Schrottbuchungen em uma palavra só. der Schrott = sucata, material sem valor; verschrotten = sucatear. der Ausschuss (forma da lista) = refugo, peças com defeito da produção, mas der Ausschuss também é comissão, comitê! die Buchung = lançamento contábil, mas também reserva (die Hotelbuchung): o contexto decide.</td></tr>
+      <tr><td>erros de produção</td><td class="de">die Fertigungsfehler; die Produktionsfehler</td><td class="hinweis">As duas formas estão certas, mas „produktionsfehler“ (forma da lista) precisa de maiúscula: todo substantivo alemão começa com letra maiúscula. Fertigung soa mais técnico (fábrica, oficina). Não confundir: der Bedienfehler = erro de operação, de quem usa a máquina; der Mangel = defeito no sentido jurídico (garantia).</td></tr>
+      <tr><td>literalmente</td><td class="de">wörtlich; buchstäblich</td><td class="hinweis">A forma da lista está certa no sentido de palavra por palavra: „Er hat wörtlich gesagt …“, „wörtlich übersetzen“. Para a intérprete, o contrário é sinngemäß (pelo sentido). Quando „literalmente“ é só reforço („estou literalmente morto“), wörtlich não serve: use buchstäblich ou simplesmente total / echt.</td></tr>
+      <tr><td>lançamentos de frete (CT-e)</td><td class="de">die Frachtbuchungen; die Buchung der Frachtkosten; das CT-e (der elektronische Frachtbrief)</td><td class="hinweis">„Frachtbuchungen“ (forma da lista) está certa na contabilidade, mas na logística „eine Fracht buchen“ é reservar um transporte; na dúvida, diga die Buchung der Frachtkosten. „Transportbuchungen“ (forma da lista) se entende, mas é menos comum. O CT-e não existe na Alemanha: explique como der elektronische Frachtbrief (der Frachtbrief = conhecimento de transporte). die Spedition = transportadora; der Beleg = comprovante.</td></tr>
+      <tr><td>preparação</td><td class="de">die Vorbereitung; sich vorbereiten auf (+ Akk.)</td><td class="hinweis">A forma da lista está certa: „die Vorbereitung auf das Audit“, com auf. Cuidado: die Zubereitung = preparo de comida (Text 12).</td></tr>
+      <tr><td>apoio</td><td class="de">die Unterstützung; unterstützen</td><td class="hinweis">A forma da lista está certa: „Wir brauchen Unterstützung bei der Buchhaltung.“ jemanden unterstützen = apoiar alguém. Cuidado: der Support = suporte técnico (TI); die Unterhaltung = conversa, entretenimento.</td></tr>
+      <tr><td>requisitos / especificações</td><td class="de">die Vorgaben; die Anforderungen; die Spezifikationen</td><td class="hinweis">A forma da lista está certa. die Vorgaben = regras, metas ou especificações definidas por alguém acima (matriz, cliente, lei): „nach den Vorgaben von Nordlicht“. Especificação técnica de um produto: die Spezifikation, die technischen Daten. Requisito de uma pessoa para uma vaga: die Voraussetzung.</td></tr>
+      <tr><td>processos / procedimentos</td><td class="de">die Abläufe; die Prozesse; das Verfahren</td><td class="hinweis">A forma da lista está certa; der Ablauf = sequência de passos (Text 10). Cuidado: der Prozess também é processo judicial, e das Verfahren também é procedimento jurídico; no escritório, Abläufe é o mais seguro. Abläufe aufschreiben = documentar processos (abschreiben = copiar; depreciar, na contabilidade).</td></tr>
+      <tr><td>resistência / persistência</td><td class="de">die Ausdauer</td><td class="hinweis">„Audauer“ (forma da lista) tem um erro de digitação: Ausdauer (aus + dauern = durar) = persistência, perseverança, fôlego. Resistência à pressão no trabalho: die Belastbarkeit, muito usada em anúncios de vaga. Resistência a uma mudança: der Widerstand.</td></tr>
+      <tr><td>empenho</td><td class="de">das Engagement; der Einsatz</td><td class="hinweis">A forma da lista está certa; é neutro (das) e tem pronúncia francesa, parecida com „angajemã“. der Einsatz = empenho, dedicação. Não é o „engajamento“ das redes sociais (= die Interaktion, die Reichweite).</td></tr>
+      <tr><td>empenhado</td><td class="de">engagiert; sich engagieren für</td><td class="hinweis">A forma da lista está certa: „Sie ist sehr engagiert.“ sich für etwas engagieren = empenhar-se por algo. Cuidado: comprometido no sentido de noivo é verlobt.</td></tr>
+      <tr><td>implementar uma ideia</td><td class="de">eine Idee umsetzen; die Umsetzung</td><td class="hinweis">A forma da lista está certa; no meio da frase, „eine“ com minúscula. umsetzen é separável: „Sie setzt die Idee um“, „Sie hat die Idee umgesetzt“. implementieren se usa mais para software. Cuidado: der Umsatz (faturamento) vem da mesma raiz, mas é outra palavra.</td></tr>
+      <tr><td>adquirir experiência</td><td class="de">Erfahrungen sammeln; Erfahrung gewinnen</td><td class="hinweis">A forma da lista está certa, quase sempre no plural: „Ich habe im Ausland viele Erfahrungen gesammelt.“ sammeln = juntar, colecionar. Não use kaufen; erwerben (= adquirir) existe, mas é formal.</td></tr>
+      <tr><td>a oficina</td><td class="de">die Werkstatt; die Werkstätten (Pl.)</td><td class="hinweis">„Die Werkstatt“ (forma da lista) está certa para oficina de conserto, manutenção ou montagem. Mas „o workshop“ (forma da lista) não é Werkstatt: der Workshop em alemão é o mesmo que em português, um seminário prático. der Werkstattleiter = chefe da oficina.</td></tr>
+      <tr><td>fábrica / unidade / obra</td><td class="de">das Werk; die Werke (Pl.)</td><td class="hinweis">A forma da lista está certa. das Werk = fábrica, unidade de produção („das Werk in Bremen“) e também obra (das Kunstwerk). Para „trabalho“ no sentido de emprego ou tarefa, use die Arbeit. ab Werk = preço na fábrica, sem frete.</td></tr>
+      <tr><td>ferramenta / instrumento</td><td class="de">das Werkzeug; die Werkzeuge (Pl.)</td><td class="hinweis">A forma da lista está certa, também em sentido figurado: „Das Formular ist ein gutes Werkzeug.“ das Instrument é mais instrumento musical ou de medição (das Messinstrument); em TI também se ouve das Tool. Werk, Werkstatt e Werkzeug vêm da mesma raiz.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="teilA">
+  <h2>A. Richtig oder falsch?</h2>
+  <div id="rf"></div>
+  <button onclick="pruefeRF()">Prüfen</button><span class="punkte" id="p-rf"></span>
+  <details><summary>Lösung</summary><ol id="l-rf"></ol></details>
+</section>
+
+<section id="teilB">
+  <h2>B. Was ist richtig?</h2>
+  <p class="pt">Múltipla escolha – só uma resposta é correta.</p>
+  <div id="mc"></div>
+  <button onclick="pruefeMC()">Prüfen</button><span class="punkte" id="p-mc"></span>
+  <details><summary>Lösung</summary><ol id="l-mc"></ol></details>
+</section>
+
+<section id="teilC">
+  <h2>C. Welches Wort passt?</h2>
+  <p class="pt">Complete com a palavra do texto. Use a caixa de palavras.</p>
+  <div class="wortkasten" id="kasten"></div>
+  <div id="gap"></div>
+  <button onclick="pruefeGap()">Prüfen</button><span class="punkte" id="p-gap"></span>
+  <details><summary>Lösung</summary><ol id="l-gap"></ol></details>
+</section>
+
+<section id="teilD">
+  <h2>D. Antworten Sie mit einem kurzen Satz</h2>
+  <p class="pt">Responda em alemão. Compare com a resposta-modelo.</p>
+  <div id="offen"></div>
+</section>
+
+<section id="teilE">
+  <h2>E. Erklären Sie auf Portugiesisch</h2>
+  <p class="pt">Como intérprete, explique em português para a diretora brasileira o que estas frases do texto significam.</p>
+  <div id="erkl"></div>
+</section>
+
+<div id="gesamt"></div>
+<nav><a href="uebungen-10.html">✏️ Übungen 10</a></nav>
+</main>
+<footer>Fiktiver Lesetext – Nordlicht GmbH und Aquasul existieren nicht; alle Personen sind erfunden.</footer>
+
+<script>
+"use strict";
+const RF = [
+  ["Aquasul hat im Moment zwei offene Stellen.", true, ""],
+  ["Für die Stelle als Vertriebsleiter sind 46 Bewerbungen gekommen.", true, ""],
+  ["Deutsch ist eine Voraussetzung für die Stelle.", false, "Deutsch ist keine Voraussetzung, aber ein Plus."],
+  ["Frau Dias hat schon oft ein Team geleitet.", false, "Sie hat noch nie ein Team geleitet."],
+  ["Frau Teixeira hat zwei Jahre in Deutschland gearbeitet.", true, ""],
+  ["Frau Teixeira hat genug Berufserfahrung im Vertrieb.", false, "Erst vier Jahre; fünf Jahre sind Voraussetzung."],
+  ["Frau Lima übersetzt die Antwort von Herrn Moreira wörtlich.", true, ""],
+  ["Herr Brandt möchte Herrn Moreira als Vertriebsleiter.", false, "Für ihn ist Herr Moreira nicht der Richtige."],
+  ["Das Werkzeug an der Presse war kaputt.", false, "Das Werkzeug ist in Ordnung; es ist ein Fertigungsfehler bei den Armaturen."],
+  ["Nordlicht schickt 320 neue Armaturen und eine Gutschrift.", true, ""],
+  ["Alle Frachtbuchungen haben ein CT-e.", false, "Frau Santos hat zwölf Frachtbuchungen ohne CT-e gefunden."],
+  ["Nach den Vorgaben von Nordlicht sind Weihnachtsfeiern Personalkosten.", true, ""]
+];
+const MC = [
+  ["Was hat Frau Ribeiro mit den Lebensläufen gemacht?", ["Sie hat alle gelesen und eine Tabelle gemacht.", "Sie hat alle nach Bremen geschickt.", "Sie hat nur zehn gelesen."], 0],
+  ["Welche Idee hat Frau Dias umgesetzt?", ["Ein neues Lager in Porto Alegre.", "Ihre Kunden bestellen Ersatzteile per WhatsApp.", "Einen Messestand in Porto Alegre."], 1],
+  ["Wo hat Frau Teixeira Erfahrungen gesammelt?", ["Bei einem Wettbewerber in São Paulo.", "Bei Nordlicht in Bremen.", "In einem Werk für Landmaschinen bei Stuttgart."], 2],
+  ["Warum braucht Frau Teixeira keine Dolmetscherin?", ["Sie spricht Deutsch.", "Herr Brandt spricht Portugiesisch.", "Das Gespräch ist auf Englisch."], 0],
+  ["Was sagt Frau Teixeira über den Vertrieb von Maschinen?", ["Man braucht vor allem ein großes Team.", "Man braucht Ausdauer; manchmal dauert es zwei Jahre.", "Die Kunden kaufen sehr schnell."], 1],
+  ["Wer wird ab 1. Juli Vertriebsleiterin?", ["Frau Teixeira.", "Frau Ribeiro.", "Frau Dias."], 2],
+  ["Warum hat Herr Brandt das Standardformular mitgebracht?", ["Ein Kunde aus dem Bergbau will ein Audit machen.", "Viele Abläufe bei Aquasul stehen nirgends auf Papier.", "Der Steuerberater braucht es."], 1],
+  ["Warum waren die Schrottbuchungen im März und April so hoch?", ["Wegen eines Fertigungsfehlers bei den Armaturen.", "Die Mitarbeiter in der Werkstatt waren neu.", "Die Presse war kaputt."], 0],
+  ["Warum gibt es Frachtbuchungen ohne CT-e?", ["Die Spedition schickt nie ein CT-e.", "Das CT-e geht an das Lager, die Rechnung an die Buchhaltung, und niemand vergleicht sie.", "Frau Santos war im Urlaub."], 1],
+  ["Wie viel hat der Standortwechsel in Belo Horizonte am Ende gekostet?", ["150.000 Reais.", "60.000 Reais.", "210.000 Reais."], 2]
+];
+const GAP = [
+  ["„Im Moment haben wir zwei offene ______“, sagt sie.", "Stellen"],
+  ["Frau Ribeiro hat alle ______ gelesen und eine Tabelle gemacht.", "Lebensläufe"],
+  ["Drei ______ kommen am Dienstag zum Vorstellungsgespräch.", "Kandidaten"],
+  ["Die ______ für die Stelle stehen in der Anzeige.", "Voraussetzungen"],
+  ["Er hat 15 Jahre ______, und sein Lebenslauf ist perfekt.", "Berufserfahrung"],
+  ["Sie ist seit acht Jahren bei Aquasul im Außendienst und sehr ______.", "engagiert"],
+  ["Letztes Jahr hat sie eine Idee ______.", "umgesetzt"],
+  ["Nach dem Studium hat sie zwei Jahre in Deutschland Erfahrungen ______.", "gesammelt"],
+  ["Frau Lima zögert eine Sekunde, dann übersetzt sie ______.", "wörtlich"],
+  ["„Im Vertrieb von Maschinen braucht man ______“, erklärt sie.", "Ausdauer"],
+  ["Herrn Brandt gefällt ihr ______.", "Engagement"],
+  ["Herr Brandt hat das ______ von Nordlicht für interne Audits mitgebracht.", "Standardformular"],
+  ["Warum sind die ______ im März und April so hoch?", "Schrottbuchungen"],
+  ["Es ist ein ______: Die Armaturen sind 0,2 Millimeter zu groß.", "Fertigungsfehler"],
+  ["Nach den ______ im Formular braucht jede Frachtbuchung einen Beleg.", "Vorgaben"]
+];
+const OFFEN = [
+  ["Wie lange ist Herr Brandt in Brasilien?", "Zwei Wochen."],
+  ["Welche zwei Stellen sind am Montag offen?", "Vertriebsleiter in Curitiba und Lagerist in Recife."],
+  ["Wie viele Bewerbungen sind für die Stelle als Vertriebsleiter gekommen?", "46 Bewerbungen."],
+  ["Wie viele Jahre Berufserfahrung im Vertrieb braucht man für die Stelle?", "Mindestens fünf Jahre."],
+  ["Woher kommt Herr Moreira?", "Von einem Wettbewerber aus São Paulo."],
+  ["Was hat Herr Moreira gesagt? (Frau Lima übersetzt wörtlich.)", "„Ein guter Verkäufer braucht kein Team.“"],
+  ["Wer ist Herr Kowalski?", "Er ist der Werkstattleiter."],
+  ["Wie viele Armaturen hat die Werkstatt im März und April verschrottet?", "Zusammen 380."],
+  ["Was ist ein CT-e?", "Ein elektronischer Frachtbrief in Brasilien."],
+  ["Welche Stelle ist am Ende noch offen?", "Der Lagerist in Recife."]
+];
+const ERKL = [
+  ["„Deutsch ist keine Voraussetzung, aber ein Plus.“", "Falar alemão não é requisito para a vaga, mas conta a favor. Voraussetzung = requisito, condição."],
+  ["„Letztes Jahr hat sie eine Idee umgesetzt.“", "No ano passado ela implementou uma ideia, ou seja, colocou a ideia em prática: os clientes pedem peças por WhatsApp. umsetzen = pôr em prática."],
+  ["„Dann übersetzt sie wörtlich: ‚Ein guter Verkäufer braucht kein Team.‘“", "Ela traduz literalmente, palavra por palavra: „um bom vendedor não precisa de equipe“. A intérprete hesita porque a frase é ruim para o candidato, mas traduz com fidelidade."],
+  ["„Diese Erfahrung möchte ich jetzt sammeln.“", "É essa experiência (como chefe, de liderança) que eu quero adquirir agora. Erfahrungen sammeln = adquirir experiência."],
+  ["„Meiner Meinung nach ist Herr Moreira nicht der Richtige.“", "Na minha opinião, o Sr. Moreira não é a pessoa certa para a vaga."],
+  ["„Zuerst haben wir gedacht, das Werkzeug an der Presse ist kaputt.“", "No começo achamos que a ferramenta da prensa estava quebrada. Mas a ferramenta está em ordem: o problema é um erro de produção nas conexões, que vêm da fábrica em Bremen."],
+  ["„Ab Juni gibt es deshalb einen neuen Ablauf: keine Frachtbuchung ohne CT-e.“", "Por isso, a partir de junho há um novo procedimento: nenhum lançamento de frete sem CT-e."],
+  ["„Das ist nur eine Umbuchung, kein großes Problem.“", "É só um lançamento de reclassificação (passar o valor de uma conta para outra), não é um problema grande: os custos das confraternizações saem de marketing e vão para despesas com pessoal."]
+];
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
+const alts = g => [].concat(g[1]);
+let score = {rf:null, mc:null, gap:null};
+
+function render() {
+  document.getElementById("rf").innerHTML = RF.map((q,i) => `<div class="aufgabe" id="rf${i}"><p>${i+1}. ${esc(q[0])}</p>
+    <label><input type="radio" name="rf${i}" value="1"> richtig</label><label><input type="radio" name="rf${i}" value="0"> falsch</label></div>`).join("");
+  document.getElementById("l-rf").innerHTML = RF.map(q => `<li><b>${q[1]?"richtig":"falsch"}</b>${q[2]?" – "+esc(q[2]):""}</li>`).join("");
+
+  document.getElementById("mc").innerHTML = MC.map((q,i) => `<div class="aufgabe" id="mc${i}"><p>${i+1}. ${esc(q[0])}</p>
+    ${q[1].map((o,j) => `<label><input type="radio" name="mc${i}" value="${j}"> ${esc(o)}</label>`).join("")}</div>`).join("");
+  document.getElementById("l-mc").innerHTML = MC.map(q => `<li>${esc(q[1][q[2]])}</li>`).join("");
+
+  const words = GAP.map(g => alts(g)[0]).sort(() => Math.random()-.5);
+  document.getElementById("kasten").innerHTML = words.map(w => `<span>${w}</span>`).join("");
+  document.getElementById("gap").innerHTML = GAP.map((q,i) => `<div class="aufgabe" id="gap${i}"><p>${i+1}. ${esc(q[0])}</p><input type="text" id="gin${i}"></div>`).join("");
+  document.getElementById("l-gap").innerHTML = GAP.map(q => `<li>${alts(q)[0]}</li>`).join("");
+
+  document.getElementById("offen").innerHTML = OFFEN.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Ihre Antwort …"><details><summary>Musterantwort</summary>${esc(q[1])}</details></div>`).join("");
+
+  document.getElementById("erkl").innerHTML = ERKL.map((q,i) => `<div class="aufgabe"><p>${i+1}. ${esc(q[0])}</p>
+    <input type="text" placeholder="Explicação em português …"><details><summary>Resposta-modelo</summary>${esc(q[1])}</details></div>`).join("");
+}
+function mark(el, ok) { el.classList.remove("richtig","falsch"); el.classList.add(ok?"richtig":"falsch"); }
+function pruefeRF() {
+  let p=0; RF.forEach((q,i) => { const sel=document.querySelector(`input[name=rf${i}]:checked`); const ok = !!sel && (sel.value==="1")===q[1]; if(ok)p++; mark(document.getElementById("rf"+i), ok); });
+  score.rf=p; document.getElementById("p-rf").textContent = `${p} / ${RF.length}`; gesamt();
+}
+function pruefeMC() {
+  let p=0; MC.forEach((q,i) => { const sel=document.querySelector(`input[name=mc${i}]:checked`); const ok = !!sel && +sel.value===q[2]; if(ok)p++; mark(document.getElementById("mc"+i), ok); });
+  score.mc=p; document.getElementById("p-mc").textContent = `${p} / ${MC.length}`; gesamt();
+}
+function pruefeGap() {
+  let p=0; GAP.forEach((q,i) => { const v = norm(document.getElementById("gin"+i).value); const ok = alts(q).some(a => norm(a)===v); if(ok)p++; mark(document.getElementById("gap"+i), ok); });
+  score.gap=p; document.getElementById("p-gap").textContent = `${p} / ${GAP.length}`; gesamt();
+}
+function gesamt() {
+  const done = Object.values(score).filter(v => v!==null); if(!done.length) return;
+  document.getElementById("gesamt").textContent = `Gesamt (A–C): ${done.reduce((a,b)=>a+b,0)} / ${RF.length+MC.length+GAP.length}`;
+}
+render();
+</script>
+</body>
+</html>
