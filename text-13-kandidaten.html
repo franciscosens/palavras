@@ -87,6 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
   <h2>Drei Kandidaten und ein Formular: Herr Brandt in Curitiba</h2>
   <p class="pt">Leia o texto. As palavras destacadas são os termos-chave; a aba „Wortschatz“ traz as notas de uso e as abas A–E, as perguntas.</p>
 
+  <p>Am Donnerstag, dem 29. April, gibt es zuerst das Abstimmungsmeeting per Video. Seit Ende März ist in Deutschland Sommerzeit, deshalb beginnt es um 14 Uhr deutscher Zeit schon um 9 Uhr in Curitiba. Frau Costa und Herr Lang berichten von der Reise nach Houston: Der Kunde ist zufrieden und startet im Juli mit sechs von zwölf Schiffen. Aquasul macht die Erfassung der Schlauchleitungen und die Schulung, ein Partner in Houston macht die Montage. Herr Pereira hat auch eine Neuigkeit: Die Niederlassung in Belo Horizonte ist am 20. April in eine größere Halle umgezogen, näher bei den Kunden aus dem Bergbau. Und Herr Rocha kommt am 3. Mai zurück nach Curitiba. Ab dann betreut er Serra Verde. „Sehr gut“, sagt Herr Brandt. „Dann sehe ich Sie alle im Mai.“</p>
+
   <p>Es ist Montag, der 10. Mai. Herr Brandt ist für zwei Wochen in Brasilien, und die ersten Tage ist er in Curitiba. Beim Kaffee im Büro zeigt Frau Costa ihm den Plan: Am Dienstag geht es um das Personal, am Mittwoch um das interne Audit. „Im Moment haben wir zwei <mark>offene Stellen</mark>“, sagt sie. „Wir suchen den neuen Vertriebsleiter für Curitiba und einen Lageristen für das Lager in Recife.“ Für die Stelle als Vertriebsleiter sind 46 Bewerbungen gekommen. Frau Ribeiro hat alle <mark>Lebensläufe</mark> gelesen und eine Tabelle gemacht. Drei <mark>Kandidaten</mark> kommen am Dienstag zum Vorstellungsgespräch. Auch Frau Lima, die Dolmetscherin, ist wieder da, denn die Gespräche sind auf Portugiesisch.</p>
 
   <p>Die <mark>Voraussetzungen</mark> für die Stelle stehen in der Anzeige: mindestens fünf Jahre <mark>Berufserfahrung</mark> im Vertrieb, Erfahrung mit Industrieprodukten und gutes Englisch. Deutsch ist keine Voraussetzung, aber ein Plus. Die erste Kandidatin kennen alle: Frau Dias aus Porto Alegre. Sie ist seit acht Jahren bei Aquasul im Außendienst und sehr <mark>engagiert</mark>. Letztes Jahr hat sie <mark>eine Idee umgesetzt</mark>: Ihre Kunden können Ersatzteile per WhatsApp bestellen, mit einem Foto vom alten Teil. In ihrer Region sind die Bestellungen um 20 Prozent gestiegen. Aber sie hat noch nie ein Team geleitet.</p>
@@ -103,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <p>Dann kommen die <mark>Frachtbuchungen</mark>. In Brasilien gibt es für jeden Transport ein CT-e, einen elektronischen Frachtbrief. Nach den <mark>Vorgaben</mark> im Formular braucht jede Frachtbuchung einen Beleg. Aber Frau Santos hat zwölf Frachtbuchungen ohne CT-e gefunden, und drei Transporte sind doppelt gebucht. „Wie kann das passieren?“, fragt Frau Neumann. Die Antwort ist einfach: Die Spedition schickt das CT-e an das Lager und die Rechnung an die Buchhaltung, aber niemand vergleicht die zwei Dokumente. Ab Juni gibt es deshalb einen neuen Ablauf: keine Frachtbuchung ohne CT-e.</p>
 
-  <p>Zwei Fragen sind noch offen. Die erste betrifft die <mark>Kosten für den Standortwechsel</mark> in Belo Horizonte: Im Dezember ist die Niederlassung in eine größere Halle umgezogen, näher bei den Kunden aus dem Bergbau. Geplant waren 150.000 Reais, am Ende waren es 210.000. Herr Pereira erklärt per Video, warum: neue Regale und ein breiteres Tor für die Lkw. Die zweite Frage betrifft die <mark>Weihnachtsfeiern</mark> 2026. Die Kosten stehen in der Buchhaltung unter „Marketing“, denn in Curitiba waren auch Kunden dabei. Nach den Vorgaben von Nordlicht sind Weihnachtsfeiern aber Personalkosten. „Das ist nur eine Umbuchung, kein großes Problem“, sagt Frau Neumann.</p>
+  <p>Zwei Fragen sind noch offen. Die erste betrifft die <mark>Kosten für den Standortwechsel</mark> in Belo Horizonte: Für den Umzug im April waren 150.000 Reais geplant, am Ende waren es 210.000. Herr Pereira erklärt per Video, warum: neue Regale und ein breiteres Tor für die Lkw. Die zweite Frage betrifft die <mark>Weihnachtsfeiern</mark> 2026. Die Kosten stehen in der Buchhaltung unter „Marketing“, denn in Curitiba waren auch Kunden dabei. Nach den Vorgaben im Standardformular sind Weihnachtsfeiern aber Personalkosten. „Das ist nur eine Umbuchung, kein großes Problem“, sagt Frau Neumann.</p>
 
   <p>Am Donnerstag fliegt Herr Brandt nach Belo Horizonte. Das Ergebnis des internen Audits: 52 von 60 Fragen sind in Ordnung, und acht Punkte muss Aquasul bis August verbessern. „Das Formular ist ein gutes Werkzeug“, sagt Frau Costa. „Jetzt sehen wir unsere Abläufe schwarz auf weiß.“ Am Freitag ruft sie Frau Dias und Frau Teixeira an, und beide sagen Ja. Jetzt ist nur noch eine Stelle offen: der Lagerist in Recife. Das nächste Abstimmungsmeeting ist am Donnerstag, dem 27. Mai.</p>
 </section>
@@ -190,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 "use strict";
 const RF = [
   ["Aquasul hat im Moment zwei offene Stellen.", true, ""],
-  ["Für die Stelle als Vertriebsleiter sind 46 Bewerbungen gekommen.", true, ""],
+  ["Der Kunde in Houston startet im Juli mit allen zwölf Schiffen.", false, "Er startet mit sechs von zwölf Schiffen."],
   ["Deutsch ist eine Voraussetzung für die Stelle.", false, "Deutsch ist keine Voraussetzung, aber ein Plus."],
   ["Frau Dias hat schon oft ein Team geleitet.", false, "Sie hat noch nie ein Team geleitet."],
   ["Frau Teixeira hat zwei Jahre in Deutschland gearbeitet.", true, ""],
@@ -200,7 +202,7 @@ const RF = [
   ["Das Werkzeug an der Presse war kaputt.", false, "Das Werkzeug ist in Ordnung; es ist ein Fertigungsfehler bei den Armaturen."],
   ["Nordlicht schickt 320 neue Armaturen und eine Gutschrift.", true, ""],
   ["Alle Frachtbuchungen haben ein CT-e.", false, "Frau Santos hat zwölf Frachtbuchungen ohne CT-e gefunden."],
-  ["Nach den Vorgaben von Nordlicht sind Weihnachtsfeiern Personalkosten.", true, ""]
+  ["Nach den Vorgaben im Standardformular sind Weihnachtsfeiern Personalkosten.", true, ""]
 ];
 const MC = [
   ["Was hat Frau Ribeiro mit den Lebensläufen gemacht?", ["Sie hat alle gelesen und eine Tabelle gemacht.", "Sie hat alle nach Bremen geschickt.", "Sie hat nur zehn gelesen."], 0],
@@ -212,7 +214,7 @@ const MC = [
   ["Warum hat Herr Brandt das Standardformular mitgebracht?", ["Ein Kunde aus dem Bergbau will ein Audit machen.", "Viele Abläufe bei Aquasul stehen nirgends auf Papier.", "Der Steuerberater braucht es."], 1],
   ["Warum waren die Schrottbuchungen im März und April so hoch?", ["Wegen eines Fertigungsfehlers bei den Armaturen.", "Die Mitarbeiter in der Werkstatt waren neu.", "Die Presse war kaputt."], 0],
   ["Warum gibt es Frachtbuchungen ohne CT-e?", ["Die Spedition schickt nie ein CT-e.", "Das CT-e geht an das Lager, die Rechnung an die Buchhaltung, und niemand vergleicht sie.", "Frau Santos war im Urlaub."], 1],
-  ["Wie viel hat der Standortwechsel in Belo Horizonte am Ende gekostet?", ["150.000 Reais.", "60.000 Reais.", "210.000 Reais."], 2]
+  ["Wie viel hat der Standortwechsel in Belo Horizonte im April am Ende gekostet?", ["150.000 Reais.", "60.000 Reais.", "210.000 Reais."], 2]
 ];
 const GAP = [
   ["„Im Moment haben wir zwei offene ______“, sagt sie.", "Stellen"],
@@ -232,7 +234,7 @@ const GAP = [
   ["Nach den ______ im Formular braucht jede Frachtbuchung einen Beleg.", "Vorgaben"]
 ];
 const OFFEN = [
-  ["Wie lange ist Herr Brandt in Brasilien?", "Zwei Wochen."],
+  ["Wann kommt Herr Rocha zurück nach Curitiba, und wen betreut er dann?", "Am 3. Mai; dann betreut er Serra Verde."],
   ["Welche zwei Stellen sind am Montag offen?", "Vertriebsleiter in Curitiba und Lagerist in Recife."],
   ["Wie viele Bewerbungen sind für die Stelle als Vertriebsleiter gekommen?", "46 Bewerbungen."],
   ["Wie viele Jahre Berufserfahrung im Vertrieb braucht man für die Stelle?", "Mindestens fünf Jahre."],
